@@ -1013,7 +1013,7 @@ App.data.nl = {
         { w: 'de haven', t: 'гавань', ex: 'De schepen liggen in de haven.', tex: 'Корабли в гавани.' },
         { w: 'het kasteel', t: 'замок', ex: 'We hebben een oud kasteel bezocht.', tex: 'Мы посетили старый замок.' },
         { w: 'de straat', t: 'улица', ex: 'Ik woon in een rustige straat.', tex: 'Я живу на тихой улице.' },
-        { w: 'de laan', t: 'проспект', ex: 'De winkel bevindt zich aan een brede laan.', tex: 'Магазин находится на Пятом проспекте.' },
+        { w: 'de laan', t: 'проспект', ex: 'De winkel bevindt zich aan de Vijfde Laan.', tex: 'Магазин находится на Пятом проспекте.' },
         { w: 'de buurt', t: 'район', ex: 'Dit is een veilige buurt.', tex: 'Это безопасный район.' },
         { w: 'het centrum', t: 'центр города', ex: 'We gaan vanavond naar het centrum.', tex: 'Сегодня вечером мы едем в центр города.' },
         { w: 'de voorstad', t: 'пригород', ex: 'Zij wonen in een rustige voorstad.', tex: 'Они живут в тихом пригороде.' },
@@ -1879,7 +1879,7 @@ App.data.nl = {
     {
       id: 'adjectives', name: 'Прилагательные и противоположности', words: [
         { w: 'hoog', t: 'высокий', ex: 'Die boom is erg hoog.', tex: 'Это дерево очень высокое.' },
-        { w: 'klein', t: 'низкий', ex: 'Hij is klein.', tex: 'Он невысокого роста.' },
+        { w: 'klein van stuk', t: 'низкий', ex: 'Hij is klein van stuk.', tex: 'Он невысокого роста.' },
         { w: 'lang', t: 'длинный', ex: 'De weg is lang.', tex: 'Дорога длинная.' },
         { w: 'breed', t: 'широкий', ex: 'De rivier is breed.', tex: 'Река широкая.' },
         { w: 'smal', t: 'узкий', ex: 'De straat is smal.', tex: 'Улица узкая.' },

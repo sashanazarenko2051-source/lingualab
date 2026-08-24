@@ -888,7 +888,7 @@ App.data.sk = {
       { w: 'nájom', t: 'аренда', ex: 'Nájom za tento byt je vysoký.', tex: 'Аренда за эту квартиру высокая.' },
       { w: 'hypotéka', t: 'ипотека', ex: 'Splácame našu hypotéku.', tex: 'Мы выплачиваем ипотеку.' }
     ] },
-    { id: 'transport', name: 'Doprava', words: [
+    { id: 'transport', name: 'Транспорт', words: [
       { w: 'bicykel', t: 'велосипед', ex: 'Jazdím na bicykli do práce.', tex: 'Я езжу на велосипеде на работу.' },
       { w: 'motorka', t: 'мотоцикл', ex: 'Má rýchlu motorku.', tex: 'У него быстрый мотоцикл.' },
       { w: 'metro', t: 'метро', ex: 'Išli sme metrom do centra.', tex: 'Мы поехали на метро в центр.' },
@@ -950,7 +950,7 @@ App.data.sk = {
       { w: 'nadjazd', t: 'эстакада', ex: 'Diaľnica vedie pod nadjazdom.', tex: 'Шоссе проходит под эстакадой.' },
       { w: 'podjazd', t: 'подземный переход', ex: 'Použi podjazd, aby si bezpečne prešiel cez cestu.', tex: 'Используй подземный переход, чтобы безопасно перейти дорогу.' }
     ] },
-    { id: 'places', name: 'Mesto a miesta', words: [
+    { id: 'places', name: 'Город и места', words: [
       { w: 'banka', t: 'банк', ex: 'Musím ísť do banky.', tex: 'Мне нужно в банк.' },
       { w: 'pošta', t: 'почта', ex: 'Pošta je zatvorená.', tex: 'Почта закрыта.' },
       { w: 'lekáreň', t: 'аптека', ex: 'Je tu blízko lekáreň?', tex: 'Здесь рядом есть аптека?' },
@@ -1012,7 +1012,7 @@ App.data.sk = {
       { w: 'vodopád', t: 'водопад', ex: 'Vybrali sme sa na túru, aby sme videli vodopád.', tex: 'Мы пошли в поход, чтобы увидеть водопад.' },
       { w: 'maják', t: 'маяк', ex: 'Maják vedie lode v noci.', tex: 'Маяк направляет корабли ночью.' }
     ] },
-    { id: 'shopping', name: 'Nakupovanie a obchody', words: [
+    { id: 'shopping', name: 'Покупки и магазины', words: [
       { w: 'cena', t: 'цена', ex: 'Cena je príliš vysoká.', tex: 'Цена слишком высокая.' },
       { w: 'zľava', t: 'скидка', ex: 'Je dnes zľava?', tex: 'Сегодня есть скидка?' },
       { w: 'hotovosť', t: 'наличные', ex: 'Zaplatím v hotovosti.', tex: 'Я заплачу наличными.' },
@@ -1074,7 +1074,7 @@ App.data.sk = {
       { w: 'impulzívny nákup', t: 'импульсивная покупка', ex: 'Tá bunda bola impulzívny nákup.', tex: 'Эта куртка была импульсивной покупкой.' },
       { w: 'nákupný maniak', t: 'шопоголик', ex: 'Moja sestra je skutočný nákupný maniak.', tex: 'Моя сестра настоящий шопоголик.' }
     ] },
-    { id: 'technology', name: 'Technológie', words: [
+    { id: 'technology', name: 'Технологии', words: [
       { w: 'internet', t: 'интернет', ex: 'Internet je veľmi pomalý.', tex: 'Интернет очень медленный.' },
       { w: 'webová stránka', t: 'сайт', ex: 'Našiel som túto webovú stránku včera.', tex: 'Я нашёл этот сайт вчера.' },
       { w: 'e-mail', t: 'электронная почта', ex: 'Pošli mi e-mail.', tex: 'Отправь мне письмо на почту.' },
@@ -1136,7 +1136,7 @@ App.data.sk = {
       { w: 'kybernetická bezpečnosť', t: 'кибербезопасность', ex: 'Firma investuje do kybernetickej bezpečnosti.', tex: 'Компания инвестирует в кибербезопасность.' },
       { w: 'umelá inteligencia', t: 'искусственный интеллект', ex: 'Umelá inteligencia mení náš život.', tex: 'Искусственный интеллект меняет нашу жизнь.' }
     ] },
-    { id: 'sport', name: 'Šport a záľuby', words: [
+    { id: 'sport', name: 'Спорт и хобби', words: [
       { w: 'futbal', t: 'футбол', ex: 'Hrá futbal každý víkend.', tex: 'Он играет в футбол каждые выходные.' },
       { w: 'basketbal', t: 'баскетбол', ex: 'Miluje basketbal.', tex: 'Она любит баскетбол.' },
       { w: 'tenis', t: 'теннис', ex: 'Hráme tenis v nedeľu.', tex: 'Мы играем в теннис по воскресеньям.' },
@@ -1198,7 +1198,7 @@ App.data.sk = {
       { w: 'penalta', t: 'пенальти', ex: 'Rozhodca nariadil penaltu.', tex: 'Судья назначил пенальти.' },
       { w: 'strečing', t: 'растяжка', ex: 'Strečing pred cvičením predchádza zraneniam.', tex: 'Растяжка перед тренировкой предотвращает травмы.' }
     ] },
-    { id: 'nature', name: 'Príroda a zvieratá', words: [
+    { id: 'nature', name: 'Природа и животные', words: [
       { w: 'pes', t: 'собака', ex: 'Môj pes rád beháva.', tex: 'Моя собака любит бегать.' },
       { w: 'mačka', t: 'кошка', ex: 'Mačka spí na gauči.', tex: 'Кошка спит на диване.' },
       { w: 'vták', t: 'птица', ex: 'Vonku spieva vták.', tex: 'Птица поёт на улице.' },
@@ -1260,7 +1260,7 @@ App.data.sk = {
       { w: 'prirodzené prostredie', t: 'среда обитания', ex: 'Toto je prirodzené prostredie medveďov.', tex: 'Это естественная среда обитания медведей.' },
       { w: 'druh', t: 'вид (биологический)', ex: 'Tento druh takmer vyhynul.', tex: 'Этот вид почти вымер.' }
     ] },
-    { id: 'health', name: 'Zdravie a medicína', words: [
+    { id: 'health', name: 'Здоровье и медицина', words: [
       { w: 'choroba', t: 'болезнь', ex: 'Vyliečil sa z choroby.', tex: 'Он выздоровел от болезни.' },
       { w: 'liek', t: 'лекарство', ex: 'Užívaj tento liek dvakrát denne.', tex: 'Принимай это лекарство дважды в день.' },
       { w: 'bolesť', t: 'боль', ex: 'Mám bolesť chrbta.', tex: 'У меня боль в спине.' },
@@ -1322,7 +1322,7 @@ App.data.sk = {
       { w: 'epidémia', t: 'эпидемия', ex: 'Epidémia sa rozšírila po celej krajine.', tex: 'Эпидемия распространилась по всей стране.' },
       { w: 'pohoda', t: 'самочувствие', ex: 'Cvičenie zlepšuje celkovú pohodu.', tex: 'Физические упражнения улучшают общее самочувствие.' }
     ] },
-    { id: 'education', name: 'Vzdelávanie', words: [
+    { id: 'education', name: 'Образование', words: [
       { w: 'hodina', t: 'урок', ex: 'Hodina bola zaujímavá.', tex: 'Урок был интересным.' },
       { w: 'domáca úloha', t: 'домашнее задание', ex: 'Dnes mám veľa domácich úloh.', tex: 'У меня сегодня много домашнего задания.' },
       { w: 'skúška', t: 'экзамен', ex: 'Skúška je budúci týždeň.', tex: 'Экзамен на следующей неделе.' },
@@ -1384,7 +1384,7 @@ App.data.sk = {
       { w: 'dochádzka', t: 'посещаемость', ex: 'Učiteľ kontroluje dochádzku každý deň.', tex: 'Учитель проверяет посещаемость каждый день.' },
       { w: 'plagiátorstvo', t: 'плагиат', ex: 'Plagiátorstvo je prísne zakázané.', tex: 'Плагиат строго запрещён.' }
     ] },
-    { id: 'finance', name: 'Peniaze a financie', words: [
+    { id: 'finance', name: 'Деньги и финансы', words: [
       { w: 'peniaze', t: 'деньги', ex: 'Nemám dosť peňazí.', tex: 'У меня недостаточно денег.' },
       { w: 'minca', t: 'монета', ex: 'Našiel som mincu na ulici.', tex: 'Я нашёл монету на улице.' },
       { w: 'bankovka', t: 'купюра', ex: 'Zaplatil veľkou bankovkou.', tex: 'Он расплатился крупной купюрой.' },
@@ -1446,7 +1446,7 @@ App.data.sk = {
       { w: 'podvod', t: 'мошенничество', ex: 'Obvinili ho z finančného podvodu.', tex: 'Его обвинили в финансовом мошенничестве.' },
       { w: 'kryptomena', t: 'криптовалюта', ex: 'Veľa ľudí investuje do kryptomeny.', tex: 'Многие люди инвестируют в криптовалюту.' }
     ] },
-    { id: 'restaurant', name: 'V reštaurácii', words: [
+    { id: 'restaurant', name: 'В ресторане', words: [
       { w: 'jedálny lístok', t: 'меню', ex: 'Môžem vidieť jedálny lístok?', tex: 'Можно посмотреть меню?' },
       { w: 'účet', t: 'счёт', ex: 'Môžeme dostať účet, prosím?', tex: 'Можно счёт, пожалуйста?' },
       { w: 'prepitné', t: 'чаевые', ex: 'Nechali sme dobré prepitné.', tex: 'Мы оставили хорошие чаевые.' },

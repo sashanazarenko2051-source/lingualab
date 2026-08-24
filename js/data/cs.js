@@ -308,7 +308,7 @@ App.data.cs = {
       { w: 'východ', t: 'выход на посадку', ex: 'Východ se na poslední chvíli změnil.', tex: 'Выход на посадку изменили в последнюю минуту.' },
       { w: 'odbavení', t: 'регистрация', ex: 'Odbavení končí čtyřicet minut před odletem.', tex: 'Регистрация заканчивается за сорок минут до вылета.' },
       { w: 'výdej zavazadel', t: 'выдача багажа', ex: 'Čekali jsme hodinu u výdeje zavazadel.', tex: 'Мы прождали час у выдачи багажа.' },
-      { w: 'terminál', t: 'терминал', ex: 'Mezinárodní lety odlétají z terminálu dvě.', tex: 'Международные рейсы вылетают из второго терминала.' },
+      { w: 'terminál', t: 'терминал', ex: 'Mezinárodní lety odlétají z terminálu dva.', tex: 'Международные рейсы вылетают из второго терминала.' },
       { w: 'mezipřistání', t: 'пересадка', ex: 'Máme třihodinové mezipřistání v Paříži.', tex: 'У нас трёхчасовая пересадка в Париже.' },
       { w: 'navazující let', t: 'стыковочный рейс', ex: 'Málem jsem zmeškal navazující let.', tex: 'Я чуть не опоздал на стыковочный рейс.' },
       { w: 'jednosměrná letenka', t: 'билет в один конец', ex: 'Koupil si jednosměrnou letenku do Berlína.', tex: 'Он купил билет в один конец до Берлина.' },

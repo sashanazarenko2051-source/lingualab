@@ -1270,7 +1270,7 @@ App.data.no = {
         { w: 'tre', t: 'дерево', ex: 'Dette treet er veldig gammelt.', tex: 'Это дерево очень старое.' },
         { w: 'blomst', t: 'цветок', ex: 'Hun ga meg en blomst.', tex: 'Она подарила мне цветок.' },
         { w: 'gress', t: 'трава', ex: 'Gresset er grønt.', tex: 'Трава зелёная.' },
-        { w: 'ocean', t: 'океан', ex: 'Oceanet er dypt.', tex: 'Океан глубокий.' },
+        { w: 'hav', t: 'океан', ex: 'Havet er dypt.', tex: 'Океан глубокий.' },
         { w: 'øy', t: 'остров', ex: 'De bor på en liten øy.', tex: 'Они живут на маленьком острове.' },
         { w: 'ørken', t: 'пустыня', ex: 'Ørkenen er veldig varm.', tex: 'В пустыне очень жарко.' },
         { w: 'insekt', t: 'насекомое', ex: 'Dette insektet er ufarlig.', tex: 'Это насекомое безобидное.' },
@@ -1454,7 +1454,7 @@ App.data.no = {
       id: 'finance', name: 'Деньги и финансы',
       words: [
         { w: 'penger', t: 'деньги', ex: 'Jeg har ikke nok penger.', tex: 'У меня недостаточно денег.' },
-        { w: 'mynt', t: 'монета', ex: 'Jeg fant et mynt på gaten.', tex: 'Я нашёл монету на улице.' },
+        { w: 'mynt', t: 'монета', ex: 'Jeg fant en mynt på gaten.', tex: 'Я нашёл монету на улице.' },
         { w: 'seddel', t: 'купюра', ex: 'Han betalte med en stor seddel.', tex: 'Он расплатился крупной купюрой.' },
         { w: 'lån', t: 'кредит', ex: 'De tok opp et lån.', tex: 'Они взяли кредит.' },
         { w: 'gjeld', t: 'долг', ex: 'Hun betalte ned gjelden sin.', tex: 'Она погасила свой долг.' },
