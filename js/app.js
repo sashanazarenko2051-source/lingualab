@@ -62,7 +62,7 @@ function initTopbar() {
   const sel = document.getElementById('lang-switch');
   sel.setAttribute('aria-label', App.t('aria_learning_lang'));
   sel.innerHTML = App.LANG_ORDER.map(code => {
-    return `<option value="${code}">${App.ui.langName(code)}</option>`;
+    return `<option value="${code}">${App.data[code].flag} ${App.ui.langName(code)}</option>`;
   }).join('');
   sel.value = App.storage.getCurrentLang();
   sel.addEventListener('change', () => {
@@ -76,7 +76,7 @@ function initTopbar() {
     // Interface-language picker always shows each language's OWN name for itself,
     // so it stays findable no matter which UI language is currently active.
     const selfName = (App.LANG_NAMES[code] && App.LANG_NAMES[code][code]) || App.data[code].name;
-    return `<option value="${code}">${selfName}</option>`;
+    return `<option value="${code}">${App.data[code].flag} ${selfName}</option>`;
   }).join('');
   uiSel.value = App.storage.getUILang();
   uiSel.addEventListener('change', () => {
