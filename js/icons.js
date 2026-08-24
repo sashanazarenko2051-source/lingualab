@@ -266,13 +266,31 @@ App.TTS_LANG = {
   bg: 'bg-BG', hr: 'hr-HR', sr: 'sr-RS', el: 'el-GR', fi: 'fi-FI', hu: 'hu-HU'
 };
 
+let _ttsVoices = [];
+if ('speechSynthesis' in window) {
+  const loadVoices = () => { _ttsVoices = speechSynthesis.getVoices(); };
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+
 App.speak = function (text, langCode) {
   if (!('speechSynthesis' in window)) return;
-  try {
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = App.TTS_LANG[langCode] || 'en-US';
-    u.rate = 0.9;
-    speechSynthesis.speak(u);
-  } catch (e) { /* no TTS voice available — silently skip */ }
+  const lang = App.TTS_LANG[langCode] || 'en-US';
+
+  try { speechSynthesis.cancel(); } catch (e) { /* ignore */ }
+
+  // Android Chrome silently drops speak() calls made right after cancel();
+  // a short delay works around it. See crbug.com/835426.
+  setTimeout(() => {
+    try {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = lang;
+      u.rate = 0.9;
+      const voices = _ttsVoices.length ? _ttsVoices : speechSynthesis.getVoices();
+      const short = lang.split('-')[0];
+      const voice = voices.find(v => v.lang === lang) || voices.find(v => v.lang && v.lang.split('-')[0] === short);
+      if (voice) u.voice = voice;
+      speechSynthesis.speak(u);
+    } catch (e) { /* no TTS voice available — silently skip */ }
+  }, 80);
 };
