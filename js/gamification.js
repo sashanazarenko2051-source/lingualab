@@ -67,6 +67,8 @@ App.gamification = (function () {
     const level = levelForXP(state.stats.xp);
     const leveledUp = level > prevLevel;
 
+    App.storage.addWeeklyXP(amount);
+
     const newAchievements = [];
     ACHIEVEMENTS.forEach(a => {
       if (!state.stats.achievements.includes(a.id) && a.check(state)) {
@@ -76,6 +78,7 @@ App.gamification = (function () {
     });
 
     App.storage.save();
+    if (App.cloud && App.cloud.scheduleSync) App.cloud.scheduleSync();
     return { leveledUp, level, xp: state.stats.xp, newAchievements };
   }
 

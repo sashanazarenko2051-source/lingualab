@@ -109,7 +109,20 @@ App.I18N = {
     mascot_tip_5: 'Ошибки — это часть обучения 😊',
     mascot_tip_6: 'Попробуй произнести слово вслух! 🔊',
     mascot_tip_7: 'Регулярность важнее интенсивности 📅',
-    mascot_tip_8: 'Я в тебя верю! Вперёд 🎉'
+    mascot_tip_8: 'Я в тебя верю! Вперёд 🎉',
+    nav_leaderboard: '🏆 Рейтинг',
+    profile_edit_title: 'Твой профиль',
+    profile_name_label: 'Имя',
+    profile_name_placeholder: 'Твоё имя',
+    profile_default_name: 'Ученик',
+    profile_cancel: 'Отмена',
+    profile_save: 'Сохранить',
+    lb_title: 'Недельный рейтинг',
+    lb_subtitle: 'Соревнуйся с другими учениками твоего уровня — обновляется каждый понедельник',
+    lb_not_configured: 'Рейтинг ещё не настроен',
+    lb_loading: 'Загрузка…',
+    lb_empty: 'На этой неделе тут пока никого — стань первым!',
+    lb_error: 'Не удалось загрузить рейтинг. Попробуй позже'
   },
 
   en: {
@@ -217,7 +230,20 @@ App.I18N = {
     mascot_tip_5: 'Mistakes are part of learning 😊',
     mascot_tip_6: 'Try saying the word out loud! 🔊',
     mascot_tip_7: 'Consistency beats intensity 📅',
-    mascot_tip_8: 'I believe in you! Let\'s go 🎉'
+    mascot_tip_8: 'I believe in you! Let\'s go 🎉',
+    nav_leaderboard: '🏆 Leaderboard',
+    profile_edit_title: 'Your profile',
+    profile_name_label: 'Name',
+    profile_name_placeholder: 'Your name',
+    profile_default_name: 'Learner',
+    profile_cancel: 'Cancel',
+    profile_save: 'Save',
+    lb_title: 'Weekly Leaderboard',
+    lb_subtitle: 'Compete with other learners at your level — resets every Monday',
+    lb_not_configured: 'Leaderboard isn\'t set up yet',
+    lb_loading: 'Loading…',
+    lb_empty: 'No one here yet this week — be the first!',
+    lb_error: 'Couldn\'t load the leaderboard. Try again later'
   },
 
   de: {
@@ -325,7 +351,20 @@ App.I18N = {
     mascot_tip_5: 'Fehler gehören zum Lernen dazu 😊',
     mascot_tip_6: 'Versuch, das Wort laut auszusprechen! 🔊',
     mascot_tip_7: 'Beständigkeit schlägt Intensität 📅',
-    mascot_tip_8: 'Ich glaube an dich! Auf geht\'s 🎉'
+    mascot_tip_8: 'Ich glaube an dich! Auf geht\'s 🎉',
+    nav_leaderboard: '🏆 Bestenliste',
+    profile_edit_title: 'Dein Profil',
+    profile_name_label: 'Name',
+    profile_name_placeholder: 'Dein Name',
+    profile_default_name: 'Lernende(r)',
+    profile_cancel: 'Abbrechen',
+    profile_save: 'Speichern',
+    lb_title: 'Wöchentliche Bestenliste',
+    lb_subtitle: 'Tritt gegen andere Lernende auf deinem Niveau an — wird jeden Montag zurückgesetzt',
+    lb_not_configured: 'Die Bestenliste ist noch nicht eingerichtet',
+    lb_loading: 'Lädt…',
+    lb_empty: 'Diese Woche ist hier noch niemand — sei der Erste!',
+    lb_error: 'Bestenliste konnte nicht geladen werden. Versuch es später erneut'
   },
 
   nl: {
@@ -433,7 +472,20 @@ App.I18N = {
     mascot_tip_5: 'Fouten horen bij het leren 😊',
     mascot_tip_6: 'Probeer het woord hardop te zeggen! 🔊',
     mascot_tip_7: 'Regelmaat wint het van intensiteit 📅',
-    mascot_tip_8: 'Ik geloof in je! Kom op 🎉'
+    mascot_tip_8: 'Ik geloof in je! Kom op 🎉',
+    nav_leaderboard: '🏆 Ranglijst',
+    profile_edit_title: 'Jouw profiel',
+    profile_name_label: 'Naam',
+    profile_name_placeholder: 'Jouw naam',
+    profile_default_name: 'Leerling',
+    profile_cancel: 'Annuleren',
+    profile_save: 'Opslaan',
+    lb_title: 'Wekelijkse ranglijst',
+    lb_subtitle: 'Strijd tegen andere leerlingen op jouw niveau — wordt elke maandag gereset',
+    lb_not_configured: 'De ranglijst is nog niet ingesteld',
+    lb_loading: 'Laden…',
+    lb_empty: 'Deze week is hier nog niemand — wees de eerste!',
+    lb_error: 'Kon de ranglijst niet laden. Probeer het later opnieuw'
   },
 
   sv: {
@@ -541,7 +593,20 @@ App.I18N = {
     mascot_tip_5: 'Misstag är en del av lärandet 😊',
     mascot_tip_6: 'Försök säga ordet högt! 🔊',
     mascot_tip_7: 'Regelbundenhet slår intensitet 📅',
-    mascot_tip_8: 'Jag tror på dig! Kör igång 🎉'
+    mascot_tip_8: 'Jag tror på dig! Kör igång 🎉',
+    nav_leaderboard: '🏆 Topplista',
+    profile_edit_title: 'Din profil',
+    profile_name_label: 'Namn',
+    profile_name_placeholder: 'Ditt namn',
+    profile_default_name: 'Elev',
+    profile_cancel: 'Avbryt',
+    profile_save: 'Spara',
+    lb_title: 'Veckans topplista',
+    lb_subtitle: 'Tävla mot andra elever på din nivå — återställs varje måndag',
+    lb_not_configured: 'Topplistan är inte inställd än',
+    lb_loading: 'Laddar…',
+    lb_empty: 'Ingen här än denna vecka — bli den första!',
+    lb_error: 'Kunde inte ladda topplistan. Försök igen senare'
   },
 
   no: {
@@ -649,7 +714,20 @@ App.I18N = {
     mascot_tip_5: 'Feil er en del av læringen 😊',
     mascot_tip_6: 'Prøv å si ordet høyt! 🔊',
     mascot_tip_7: 'Jevnhet slår intensitet 📅',
-    mascot_tip_8: 'Jeg tror på deg! Sett i gang 🎉'
+    mascot_tip_8: 'Jeg tror på deg! Sett i gang 🎉',
+    nav_leaderboard: '🏆 Ledertavle',
+    profile_edit_title: 'Profilen din',
+    profile_name_label: 'Navn',
+    profile_name_placeholder: 'Navnet ditt',
+    profile_default_name: 'Elev',
+    profile_cancel: 'Avbryt',
+    profile_save: 'Lagre',
+    lb_title: 'Ukens ledertavle',
+    lb_subtitle: 'Konkurrer mot andre elever på ditt nivå — nullstilles hver mandag',
+    lb_not_configured: 'Ledertavlen er ikke satt opp ennå',
+    lb_loading: 'Laster…',
+    lb_empty: 'Ingen her ennå denne uken — bli den første!',
+    lb_error: 'Kunne ikke laste ledertavlen. Prøv igjen senere'
   },
 
   da: {
@@ -757,7 +835,20 @@ App.I18N = {
     mascot_tip_5: 'Fejl er en del af at lære 😊',
     mascot_tip_6: 'Prøv at sige ordet højt! 🔊',
     mascot_tip_7: 'Regelmæssighed slår intensitet 📅',
-    mascot_tip_8: 'Jeg tror på dig! Kom så 🎉'
+    mascot_tip_8: 'Jeg tror på dig! Kom så 🎉',
+    nav_leaderboard: '🏆 Ranglisten',
+    profile_edit_title: 'Din profil',
+    profile_name_label: 'Navn',
+    profile_name_placeholder: 'Dit navn',
+    profile_default_name: 'Elev',
+    profile_cancel: 'Annuller',
+    profile_save: 'Gem',
+    lb_title: 'Ugens rangliste',
+    lb_subtitle: 'Konkurrer mod andre elever på dit niveau — nulstilles hver mandag',
+    lb_not_configured: 'Ranglisten er ikke sat op endnu',
+    lb_loading: 'Indlæser…',
+    lb_empty: 'Ingen her endnu denne uge — bliv den første!',
+    lb_error: 'Kunne ikke indlæse ranglisten. Prøv igen senere'
   },
 
   fr: {
@@ -865,7 +956,20 @@ App.I18N = {
     mascot_tip_5: 'Les erreurs font partie de l\'apprentissage 😊',
     mascot_tip_6: 'Essaie de dire le mot à voix haute ! 🔊',
     mascot_tip_7: 'La régularité l\'emporte sur l\'intensité 📅',
-    mascot_tip_8: 'Je crois en toi ! Allez 🎉'
+    mascot_tip_8: 'Je crois en toi ! Allez 🎉',
+    nav_leaderboard: '🏆 Classement',
+    profile_edit_title: 'Ton profil',
+    profile_name_label: 'Nom',
+    profile_name_placeholder: 'Ton nom',
+    profile_default_name: 'Apprenant',
+    profile_cancel: 'Annuler',
+    profile_save: 'Enregistrer',
+    lb_title: 'Classement hebdomadaire',
+    lb_subtitle: 'Affronte d\'autres apprenants de ton niveau — réinitialisé chaque lundi',
+    lb_not_configured: 'Le classement n\'est pas encore configuré',
+    lb_loading: 'Chargement…',
+    lb_empty: 'Personne ici cette semaine — sois le premier !',
+    lb_error: 'Impossible de charger le classement. Réessaie plus tard'
   },
 
   es: {
@@ -973,7 +1077,20 @@ App.I18N = {
     mascot_tip_5: 'Los errores son parte del aprendizaje 😊',
     mascot_tip_6: '¡Intenta decir la palabra en voz alta! 🔊',
     mascot_tip_7: 'La constancia gana a la intensidad 📅',
-    mascot_tip_8: '¡Creo en ti! Vamos 🎉'
+    mascot_tip_8: '¡Creo en ti! Vamos 🎉',
+    nav_leaderboard: '🏆 Clasificación',
+    profile_edit_title: 'Tu perfil',
+    profile_name_label: 'Nombre',
+    profile_name_placeholder: 'Tu nombre',
+    profile_default_name: 'Estudiante',
+    profile_cancel: 'Cancelar',
+    profile_save: 'Guardar',
+    lb_title: 'Clasificación semanal',
+    lb_subtitle: 'Compite con otros estudiantes de tu nivel — se reinicia cada lunes',
+    lb_not_configured: 'La clasificación aún no está configurada',
+    lb_loading: 'Cargando…',
+    lb_empty: '¡Nadie por aquí esta semana — sé el primero!',
+    lb_error: 'No se pudo cargar la clasificación. Inténtalo más tarde'
   },
 
   it: {
@@ -1081,7 +1198,20 @@ App.I18N = {
     mascot_tip_5: 'Gli errori fanno parte dell\'apprendimento 😊',
     mascot_tip_6: 'Prova a dire la parola ad alta voce! 🔊',
     mascot_tip_7: 'La costanza batte l\'intensità 📅',
-    mascot_tip_8: 'Credo in te! Andiamo 🎉'
+    mascot_tip_8: 'Credo in te! Andiamo 🎉',
+    nav_leaderboard: '🏆 Classifica',
+    profile_edit_title: 'Il tuo profilo',
+    profile_name_label: 'Nome',
+    profile_name_placeholder: 'Il tuo nome',
+    profile_default_name: 'Studente',
+    profile_cancel: 'Annulla',
+    profile_save: 'Salva',
+    lb_title: 'Classifica settimanale',
+    lb_subtitle: 'Sfida altri studenti del tuo livello — si azzera ogni lunedì',
+    lb_not_configured: 'La classifica non è ancora configurata',
+    lb_loading: 'Caricamento…',
+    lb_empty: 'Nessuno qui questa settimana — sii il primo!',
+    lb_error: 'Impossibile caricare la classifica. Riprova più tardi'
   },
 
   pt: {
@@ -1189,7 +1319,20 @@ App.I18N = {
     mascot_tip_5: 'Os erros fazem parte do aprendizado 😊',
     mascot_tip_6: 'Tenta dizer a palavra em voz alta! 🔊',
     mascot_tip_7: 'A constância vence a intensidade 📅',
-    mascot_tip_8: 'Acredito em ti! Vamos lá 🎉'
+    mascot_tip_8: 'Acredito em ti! Vamos lá 🎉',
+    nav_leaderboard: '🏆 Classificação',
+    profile_edit_title: 'O teu perfil',
+    profile_name_label: 'Nome',
+    profile_name_placeholder: 'O teu nome',
+    profile_default_name: 'Aluno',
+    profile_cancel: 'Cancelar',
+    profile_save: 'Guardar',
+    lb_title: 'Classificação semanal',
+    lb_subtitle: 'Compete com outros alunos do teu nível — reinicia todas as segundas-feiras',
+    lb_not_configured: 'A classificação ainda não está configurada',
+    lb_loading: 'A carregar…',
+    lb_empty: 'Ainda ninguém aqui esta semana — sê o primeiro!',
+    lb_error: 'Não foi possível carregar a classificação. Tenta mais tarde'
   },
 
   ro: {
@@ -1297,7 +1440,20 @@ App.I18N = {
     mascot_tip_5: 'Greșelile fac parte din învățare 😊',
     mascot_tip_6: 'Încearcă să spui cuvântul cu voce tare! 🔊',
     mascot_tip_7: 'Constanța bate intensitatea 📅',
-    mascot_tip_8: 'Cred în tine! Hai să începem 🎉'
+    mascot_tip_8: 'Cred în tine! Hai să începem 🎉',
+    nav_leaderboard: '🏆 Clasament',
+    profile_edit_title: 'Profilul tău',
+    profile_name_label: 'Nume',
+    profile_name_placeholder: 'Numele tău',
+    profile_default_name: 'Cursant',
+    profile_cancel: 'Anulează',
+    profile_save: 'Salvează',
+    lb_title: 'Clasament săptămânal',
+    lb_subtitle: 'Concurează cu alți cursanți de nivelul tău — se resetează în fiecare luni',
+    lb_not_configured: 'Clasamentul nu este încă configurat',
+    lb_loading: 'Se încarcă…',
+    lb_empty: 'Nimeni aici săptămâna asta — fii primul!',
+    lb_error: 'Clasamentul nu a putut fi încărcat. Încearcă din nou mai târziu'
   },
 
   hr: {
@@ -1405,7 +1561,20 @@ App.I18N = {
     mascot_tip_5: 'Pogreške su dio učenja 😊',
     mascot_tip_6: 'Pokušaj izgovoriti riječ naglas! 🔊',
     mascot_tip_7: 'Dosljednost pobjeđuje intenzitet 📅',
-    mascot_tip_8: 'Vjerujem u tebe! Idemo 🎉'
+    mascot_tip_8: 'Vjerujem u tebe! Idemo 🎉',
+    nav_leaderboard: '🏆 Ljestvica',
+    profile_edit_title: 'Tvoj profil',
+    profile_name_label: 'Ime',
+    profile_name_placeholder: 'Tvoje ime',
+    profile_default_name: 'Učenik',
+    profile_cancel: 'Odustani',
+    profile_save: 'Spremi',
+    lb_title: 'Tjedna ljestvica',
+    lb_subtitle: 'Natječi se s drugim učenicima tvoje razine — resetira se svaki ponedjeljak',
+    lb_not_configured: 'Ljestvica još nije postavljena',
+    lb_loading: 'Učitavanje…',
+    lb_empty: 'Ovog tjedna ovdje još nikoga nema — budi prvi!',
+    lb_error: 'Ljestvicu nije moguće učitati. Pokušaj kasnije'
   },
 
   sr: {
@@ -1513,7 +1682,20 @@ App.I18N = {
     mascot_tip_5: 'Грешке су део учења 😊',
     mascot_tip_6: 'Покушај да изговориш реч наглас! 🔊',
     mascot_tip_7: 'Доследност побеђује интензитет 📅',
-    mascot_tip_8: 'Верујем у тебе! Идемо 🎉'
+    mascot_tip_8: 'Верујем у тебе! Идемо 🎉',
+    nav_leaderboard: '🏆 Ранг листа',
+    profile_edit_title: 'Твој профил',
+    profile_name_label: 'Име',
+    profile_name_placeholder: 'Твоје име',
+    profile_default_name: 'Ученик',
+    profile_cancel: 'Откажи',
+    profile_save: 'Сачувај',
+    lb_title: 'Недељна ранг листа',
+    lb_subtitle: 'Такмичи се са другим ученицима твог нивоа — ресетује се сваког понедељка',
+    lb_not_configured: 'Ранг листа још није подешена',
+    lb_loading: 'Учитавање…',
+    lb_empty: 'Ове недеље овде још нема никог — буди први!',
+    lb_error: 'Ранг листа се није учитала. Покушај касније'
   },
 
   el: {
@@ -1621,7 +1803,20 @@ App.I18N = {
     mascot_tip_5: 'Τα λάθη είναι μέρος της μάθησης 😊',
     mascot_tip_6: 'Δοκίμασε να πεις τη λέξη δυνατά! 🔊',
     mascot_tip_7: 'Η συνέπεια νικά την ένταση 📅',
-    mascot_tip_8: 'Πιστεύω σε σένα! Πάμε 🎉'
+    mascot_tip_8: 'Πιστεύω σε σένα! Πάμε 🎉',
+    nav_leaderboard: '🏆 Κατάταξη',
+    profile_edit_title: 'Το προφίλ σου',
+    profile_name_label: 'Όνομα',
+    profile_name_placeholder: 'Το όνομά σου',
+    profile_default_name: 'Μαθητής',
+    profile_cancel: 'Ακύρωση',
+    profile_save: 'Αποθήκευση',
+    lb_title: 'Εβδομαδιαία κατάταξη',
+    lb_subtitle: 'Ανταγωνίσου με άλλους μαθητές του επιπέδου σου — μηδενίζεται κάθε Δευτέρα',
+    lb_not_configured: 'Η κατάταξη δεν έχει ρυθμιστεί ακόμα',
+    lb_loading: 'Φόρτωση…',
+    lb_empty: 'Κανείς εδώ ακόμα αυτή την εβδομάδα — γίνε ο πρώτος!',
+    lb_error: 'Δεν ήταν δυνατή η φόρτωση της κατάταξης. Δοκίμασε ξανά αργότερα'
   },
 
   fi: {
@@ -1729,7 +1924,20 @@ App.I18N = {
     mascot_tip_5: 'Virheet kuuluvat oppimiseen 😊',
     mascot_tip_6: 'Kokeile sanoa sana ääneen! 🔊',
     mascot_tip_7: 'Säännöllisyys voittaa tehokkuuden 📅',
-    mascot_tip_8: 'Uskon sinuun! Mennään 🎉'
+    mascot_tip_8: 'Uskon sinuun! Mennään 🎉',
+    nav_leaderboard: '🏆 Tulostaulu',
+    profile_edit_title: 'Profiilisi',
+    profile_name_label: 'Nimi',
+    profile_name_placeholder: 'Nimesi',
+    profile_default_name: 'Oppija',
+    profile_cancel: 'Peruuta',
+    profile_save: 'Tallenna',
+    lb_title: 'Viikon tulostaulu',
+    lb_subtitle: 'Kilpaile muiden samalla tasolla olevien oppijoiden kanssa — nollautuu joka maanantai',
+    lb_not_configured: 'Tulostaulua ei ole vielä otettu käyttöön',
+    lb_loading: 'Ladataan…',
+    lb_empty: 'Täällä ei ole vielä ketään tällä viikolla — ole ensimmäinen!',
+    lb_error: 'Tulostaulua ei voitu ladata. Yritä myöhemmin uudelleen'
   },
 
   hu: {
@@ -1837,7 +2045,20 @@ App.I18N = {
     mascot_tip_5: 'A hibák a tanulás részei 😊',
     mascot_tip_6: 'Próbáld hangosan kimondani a szót! 🔊',
     mascot_tip_7: 'A rendszeresség fontosabb, mint az intenzitás 📅',
-    mascot_tip_8: 'Hiszek benned! Gyerünk 🎉'
+    mascot_tip_8: 'Hiszek benned! Gyerünk 🎉',
+    nav_leaderboard: '🏆 Ranglista',
+    profile_edit_title: 'A profilod',
+    profile_name_label: 'Név',
+    profile_name_placeholder: 'A neved',
+    profile_default_name: 'Tanuló',
+    profile_cancel: 'Mégse',
+    profile_save: 'Mentés',
+    lb_title: 'Heti ranglista',
+    lb_subtitle: 'Versenyezz más, hasonló szinten lévő tanulókkal — minden hétfőn nullázódik',
+    lb_not_configured: 'A ranglista még nincs beállítva',
+    lb_loading: 'Betöltés…',
+    lb_empty: 'Ezen a héten még senki sincs itt — legyél te az első!',
+    lb_error: 'Nem sikerült betölteni a ranglistát. Próbáld újra később'
   },
 
   pl: {
@@ -1945,7 +2166,20 @@ App.I18N = {
     mascot_tip_5: 'Błędy są częścią nauki 😊',
     mascot_tip_6: 'Spróbuj powiedzieć słowo na głos! 🔊',
     mascot_tip_7: 'Regularność liczy się bardziej niż intensywność 📅',
-    mascot_tip_8: 'Wierzę w ciebie! Do dzieła 🎉'
+    mascot_tip_8: 'Wierzę w ciebie! Do dzieła 🎉',
+    nav_leaderboard: '🏆 Ranking',
+    profile_edit_title: 'Twój profil',
+    profile_name_label: 'Imię',
+    profile_name_placeholder: 'Twoje imię',
+    profile_default_name: 'Uczeń',
+    profile_cancel: 'Anuluj',
+    profile_save: 'Zapisz',
+    lb_title: 'Tygodniowy ranking',
+    lb_subtitle: 'Rywalizuj z innymi uczniami na twoim poziomie — resetuje się w każdy poniedziałek',
+    lb_not_configured: 'Ranking nie jest jeszcze skonfigurowany',
+    lb_loading: 'Wczytywanie…',
+    lb_empty: 'W tym tygodniu nie ma tu jeszcze nikogo — bądź pierwszy!',
+    lb_error: 'Nie udało się wczytać rankingu. Spróbuj ponownie później'
   },
 
   cs: {
@@ -2053,7 +2287,20 @@ App.I18N = {
     mascot_tip_5: 'Chyby jsou součástí učení 😊',
     mascot_tip_6: 'Zkus říct slovo nahlas! 🔊',
     mascot_tip_7: 'Pravidelnost je důležitější než intenzita 📅',
-    mascot_tip_8: 'Věřím ti! Jdeme na to 🎉'
+    mascot_tip_8: 'Věřím ti! Jdeme na to 🎉',
+    nav_leaderboard: '🏆 Žebříček',
+    profile_edit_title: 'Tvůj profil',
+    profile_name_label: 'Jméno',
+    profile_name_placeholder: 'Tvoje jméno',
+    profile_default_name: 'Student',
+    profile_cancel: 'Zrušit',
+    profile_save: 'Uložit',
+    lb_title: 'Týdenní žebříček',
+    lb_subtitle: 'Soutěž s dalšími studenty tvé úrovně — resetuje se každé pondělí',
+    lb_not_configured: 'Žebříček ještě není nastaven',
+    lb_loading: 'Načítání…',
+    lb_empty: 'Tento týden tu ještě nikdo není — buď první!',
+    lb_error: 'Žebříček se nepodařilo načíst. Zkus to později'
   },
 
   sk: {
@@ -2161,7 +2408,20 @@ App.I18N = {
     mascot_tip_5: 'Chyby sú súčasťou učenia 😊',
     mascot_tip_6: 'Skús povedať slovo nahlas! 🔊',
     mascot_tip_7: 'Pravidelnosť je dôležitejšia než intenzita 📅',
-    mascot_tip_8: 'Verím ti! Poďme na to 🎉'
+    mascot_tip_8: 'Verím ti! Poďme na to 🎉',
+    nav_leaderboard: '🏆 Rebríček',
+    profile_edit_title: 'Tvoj profil',
+    profile_name_label: 'Meno',
+    profile_name_placeholder: 'Tvoje meno',
+    profile_default_name: 'Študent',
+    profile_cancel: 'Zrušiť',
+    profile_save: 'Uložiť',
+    lb_title: 'Týždenný rebríček',
+    lb_subtitle: 'Súťaž s ďalšími študentmi tvojej úrovne — resetuje sa každý pondelok',
+    lb_not_configured: 'Rebríček ešte nie je nastavený',
+    lb_loading: 'Načítava sa…',
+    lb_empty: 'Tento týždeň tu ešte nikto nie je — buď prvý!',
+    lb_error: 'Rebríček sa nepodarilo načítať. Skús to neskôr'
   },
 
   uk: {
@@ -2269,7 +2529,20 @@ App.I18N = {
     mascot_tip_5: 'Помилки — частина навчання 😊',
     mascot_tip_6: 'Спробуй промовити слово вголос! 🔊',
     mascot_tip_7: 'Регулярність важливіша за інтенсивність 📅',
-    mascot_tip_8: 'Я в тебе вірю! Вперед 🎉'
+    mascot_tip_8: 'Я в тебе вірю! Вперед 🎉',
+    nav_leaderboard: '🏆 Рейтинг',
+    profile_edit_title: 'Твій профіль',
+    profile_name_label: 'Ім\'я',
+    profile_name_placeholder: 'Твоє ім\'я',
+    profile_default_name: 'Учень',
+    profile_cancel: 'Скасувати',
+    profile_save: 'Зберегти',
+    lb_title: 'Тижневий рейтинг',
+    lb_subtitle: 'Змагайся з іншими учнями твого рівня — оновлюється щопонеділка',
+    lb_not_configured: 'Рейтинг ще не налаштовано',
+    lb_loading: 'Завантаження…',
+    lb_empty: 'Цього тижня тут ще нікого немає — стань першим!',
+    lb_error: 'Не вдалося завантажити рейтинг. Спробуй пізніше'
   },
 
   bg: {
@@ -2377,7 +2650,20 @@ App.I18N = {
     mascot_tip_5: 'Грешките са част от ученето 😊',
     mascot_tip_6: 'Опитай да кажеш думата на глас! 🔊',
     mascot_tip_7: 'Постоянството побеждава интензивността 📅',
-    mascot_tip_8: 'Вярвам в теб! Хайде 🎉'
+    mascot_tip_8: 'Вярвам в теб! Хайде 🎉',
+    nav_leaderboard: '🏆 Класация',
+    profile_edit_title: 'Твоят профил',
+    profile_name_label: 'Име',
+    profile_name_placeholder: 'Твоето име',
+    profile_default_name: 'Ученик',
+    profile_cancel: 'Отказ',
+    profile_save: 'Запази',
+    lb_title: 'Седмична класация',
+    lb_subtitle: 'Съревновавай се с други ученици на твоето ниво — нулира се всеки понеделник',
+    lb_not_configured: 'Класацията все още не е настроена',
+    lb_loading: 'Зареждане…',
+    lb_empty: 'Тази седмица тук все още няма никого — бъди първи!',
+    lb_error: 'Класацията не можа да се зареди. Опитай по-късно'
   }
 };
 

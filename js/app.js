@@ -50,7 +50,10 @@ function initTopbar() {
   document.title = App.t('app_title');
 
   const nav = document.getElementById('nav');
-  nav.innerHTML = `<button data-view="dashboard">${App.t('nav_home')}</button>`;
+  nav.innerHTML = `
+    <button data-view="dashboard">${App.t('nav_home')}</button>
+    <button data-view="leaderboard">${App.t('nav_leaderboard')}</button>
+  `;
   nav.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => App.router.go(btn.dataset.view));
   });
@@ -58,6 +61,11 @@ function initTopbar() {
   const brand = document.querySelector('.brand');
   brand.style.cursor = 'pointer';
   brand.addEventListener('click', () => App.router.go('dashboard'));
+
+  const avatarBtn = document.getElementById('topbar-avatar-btn');
+  avatarBtn.title = App.t('profile_edit_title');
+  avatarBtn.addEventListener('click', () => App.profile.openEditor());
+  App.profile.renderTopbarBadge();
 
   initLangDropdown({
     ddId: 'lang-dd', btnId: 'lang-dd-btn', listId: 'lang-dd-list',
@@ -140,4 +148,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initTopbar();
   const startView = App.views[location.hash.slice(1)] ? location.hash.slice(1) : 'dashboard';
   App.router.go(startView);
+  if (!App.storage.hasProfile()) App.profile.openEditor();
 });

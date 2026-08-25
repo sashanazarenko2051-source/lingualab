@@ -17,19 +17,6 @@ const LEVEL_GROUPS = [
   { code: 'A2', from: 16, to: 33 },
   { code: 'B1', from: 33, to: 34 }
 ];
-const LEVEL_WORD_THRESHOLDS = [
-  { code: 'A0', min: 0 },
-  { code: 'A1', min: 500 },
-  { code: 'A2', min: 1000 },
-  { code: 'B1', min: 2000 }
-];
-
-function levelForWordCount(masteredWords) {
-  let level = LEVEL_WORD_THRESHOLDS[0].code;
-  LEVEL_WORD_THRESHOLDS.forEach(t => { if (masteredWords >= t.min) level = t.code; });
-  return level;
-}
-
 App.views.course = {
   render(root) {
     const code = App.storage.getCurrentLang();
@@ -38,7 +25,7 @@ App.views.course = {
     const mastered = words.filter(w => App.srs.isMastered(w.id)).length;
     const pct = words.length ? Math.round((mastered / words.length) * 100) : 0;
     const accent = `var(--slot-${lang.slot})`;
-    const level = levelForWordCount(mastered);
+    const level = App.levels.forWordCount(mastered);
 
     root.innerHTML = `
       <div class="panel">
