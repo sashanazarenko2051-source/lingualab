@@ -142,8 +142,16 @@ button { background: none; }
   width: var(--avatar-size, 40px); height: var(--avatar-size, 40px); border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--avatar-color, var(--brand-1)) 45%, var(--surface-2)), color-mix(in srgb, var(--avatar-color, var(--brand-1)) 14%, var(--surface-2)) 75%);
   border: 2px solid var(--avatar-color, var(--brand-1));
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--avatar-color, var(--brand-1)) 18%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--avatar-color, var(--brand-1)) 25%, transparent),
+    0 0 calc(var(--avatar-size, 40px) * 0.35) calc(var(--avatar-size, 40px) * 0.08) color-mix(in srgb, var(--avatar-color, var(--brand-1)) 65%, transparent),
+    0 0 calc(var(--avatar-size, 40px) * 0.7) calc(var(--avatar-size, 40px) * 0.14) color-mix(in srgb, var(--avatar-color, var(--brand-1)) 35%, transparent);
   font-size: calc(var(--avatar-size, 40px) * 0.55); line-height: 1;
+  animation: avatarGlowPulse 2.6s ease-in-out infinite;
+}
+@keyframes avatarGlowPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.18); }
 }
 .avatar-badge-emoji { display: block; }
 .avatar-flag-badge {
