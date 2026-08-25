@@ -1,11 +1,16 @@
 window.App = window.App || {};
 App.views = App.views || {};
 
+// Exam pass threshold: correct-answer percentage needed to mark a category "passed".
+const EXAM_PASS_PCT = 80;
+
 App.views.quiz = {
   render(root) {
     const code = App.storage.getCurrentLang();
     const categoryId = App.session.quizCategory;
+    const isExam = !!App.session.examMode;
     App.session.quizCategory = null;
+    App.session.examMode = false;
 
     const pool = buildPool(code, categoryId);
     if (pool.length < 4) {
@@ -13,8 +18,8 @@ App.views.quiz = {
       return;
     }
 
-    const questions = buildQuestions(pool);
-    const state = { questions, index: 0, correct: 0, answered: false, categoryId };
+    const questions = buildQuestions(pool, isExam ? pool.length : 10);
+    const state = { questions, index: 0, correct: 0, answered: false, categoryId, isExam, code };
     renderQuestion(root, state);
   }
 };
@@ -32,8 +37,8 @@ function shuffle(arr) {
   return a;
 }
 
-function buildQuestions(pool) {
-  const shuffled = shuffle(pool).slice(0, Math.min(10, pool.length));
+function buildQuestions(pool, count) {
+  const shuffled = shuffle(pool).slice(0, Math.min(count, pool.length));
   return shuffled.map(word => {
     const others = pool.filter(w => w.id !== word.id);
     const distractors = shuffle(others).slice(0, 3);
@@ -62,7 +67,7 @@ function renderQuestion(root, state) {
   root.innerHTML = `
     <div class="flashcard-topbar" style="max-width:560px">
       <button class="back-btn" id="back-to-course" title="${App.t('back_btn_title')}">${App.t('back_btn')}</button>
-      <div class="quiz-progress" style="margin:0">${state.index + 1} / ${state.questions.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
+      <div class="quiz-progress" style="margin:0">${state.isExam ? '🎓 ' : ''}${state.index + 1} / ${state.questions.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
     </div>
     ${q.type === 'choice'
       ? `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_translation')}</div>`
@@ -117,14 +122,30 @@ function findNextCategory(categoryId) {
 function renderResult(root, state) {
   const pct = Math.round((state.correct / state.questions.length) * 100);
   const next = findNextCategory(state.categoryId);
+  let examBanner = '';
+
+  if (state.isExam) {
+    const passed = pct >= EXAM_PASS_PCT;
+    if (passed) App.storage.setExamPassed(state.code, state.categoryId);
+    examBanner = `
+      <div class="exam-banner ${passed ? 'exam-pass' : 'exam-fail'}">
+        ${passed ? '🎓 ' + App.t('exam_result_pass') : App.t('exam_result_fail', { pct: EXAM_PASS_PCT })}
+      </div>
+    `;
+    if (passed) { App.effects.confetti(); App.effects.levelUp(); }
+  }
+
   root.innerHTML = `
     <div class="quiz-result">
+      ${examBanner}
       <div class="quiz-result-score">${pct}%</div>
       <div>${App.t('fc_correct_of', { correct: state.correct, total: state.questions.length })}</div>
       <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px; align-items:center">
         ${next ? `<button class="quiz-next" id="to-next" style="padding:14px 32px; font-size:15px">${App.t('quiz_next_topic', { name: App.ui.categoryName(next.id, next.name) })}</button>` : ''}
         <div style="display:flex; gap:10px">
-          <button class="action-card" data-go="quiz" style="display:inline-flex">${App.t('fc_again')}</button>
+          ${state.isExam
+            ? `<button class="action-card" id="exam-again" style="display:inline-flex">${App.t('fc_again')}</button>`
+            : `<button class="action-card" data-go="quiz" style="display:inline-flex">${App.t('fc_again')}</button>`}
           <button class="action-card" data-go="course" style="display:inline-flex">${App.t('quiz_course')}</button>
           <button class="action-card" data-go="dashboard" style="display:inline-flex">${App.t('fc_home')}</button>
         </div>
@@ -134,6 +155,11 @@ function renderResult(root, state) {
   root.querySelector('#to-next')?.addEventListener('click', () => {
     App.session.flashcardsCategory = next.id;
     App.router.go('flashcards');
+  });
+  root.querySelector('#exam-again')?.addEventListener('click', () => {
+    App.session.quizCategory = state.categoryId;
+    App.session.examMode = true;
+    App.router.go('quiz');
   });
   root.querySelectorAll('[data-go]').forEach(btn => {
     btn.addEventListener('click', () => App.router.go(btn.dataset.go));

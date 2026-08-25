@@ -9,7 +9,7 @@ App.storage = (function () {
       uiLang: 'ru',
       srs: {},
       session: { flashcardsCategory: null, quizCategory: null },
-      stats: { streak: 0, lastActiveDate: null, history: {}, xp: 0, achievements: [] },
+      stats: { streak: 0, lastActiveDate: null, history: {}, xp: 0, achievements: [], exams: {} },
       lastLesson: null
     };
   }
@@ -25,7 +25,10 @@ App.storage = (function () {
         uiLang: parsed.uiLang || d.uiLang,
         srs: parsed.srs || {},
         session: Object.assign({}, d.session, parsed.session),
-        stats: Object.assign({}, d.stats, parsed.stats, { history: (parsed.stats && parsed.stats.history) || {} }),
+        stats: Object.assign({}, d.stats, parsed.stats, {
+          history: (parsed.stats && parsed.stats.history) || {},
+          exams: (parsed.stats && parsed.stats.exams) || {}
+        }),
         lastLesson: parsed.lastLesson || null
       };
     } catch (e) {
@@ -94,6 +97,14 @@ App.storage = (function () {
     getLastLesson() { return state.lastLesson; },
     setLastLesson(lang, categoryId, categoryName) {
       state.lastLesson = { lang, categoryId, categoryName };
+      save();
+    },
+    isExamPassed(code, categoryId) {
+      return !!(state.stats.exams[code] && state.stats.exams[code][categoryId]);
+    },
+    setExamPassed(code, categoryId) {
+      state.stats.exams[code] = state.stats.exams[code] || {};
+      state.stats.exams[code][categoryId] = true;
       save();
     }
   };

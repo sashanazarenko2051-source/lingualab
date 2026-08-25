@@ -58,14 +58,23 @@ function renderPath(root, code, lang, accent) {
     const done = s.pct >= 100;
     const side = i % 2 === 0 ? 'left' : 'right';
     const icon = App.CATEGORY_ICONS[s.cat.id] || '📘';
+    const examPassed = App.storage.isExamPassed(code, s.cat.id);
     return `
       <div class="skill-node-row side-${side}">
         <button class="skill-node ${done ? 'done' : ''}" data-cat="${s.cat.id}"
           style="--node-accent:${accent}">
           <span class="skill-node-icon">${icon}</span>
           <svg class="skill-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="skill-ring-track"/><circle cx="22" cy="22" r="19" class="skill-ring-fill" style="stroke:${accent}; stroke-dasharray:${Math.round(119.4 * s.pct / 100)} 119.4"/></svg>
+          ${examPassed ? `<span class="skill-node-exam-badge" title="${App.t('course_exam_passed')}">🎓</span>` : ''}
         </button>
-        <div class="skill-node-label">${App.ui.categoryName(s.cat.id, s.cat.name)}<br><span class="skill-node-meta">${s.mastered}/${s.total}</span></div>
+        <div class="skill-node-label">
+          ${App.ui.categoryName(s.cat.id, s.cat.name)}<br>
+          <span class="skill-node-meta">${s.mastered}/${s.total}</span>
+          <button class="skill-node-exam-link ${examPassed ? 'passed' : ''}" data-exam="${s.cat.id}"
+            title="${examPassed ? App.t('course_exam_passed') : App.t('course_exam_need', { pct: 80 })}">
+            ${examPassed ? '✅ ' + App.t('course_exam_passed') : '🎓 ' + App.t('course_exam_btn')}
+          </button>
+        </div>
       </div>
     `;
   }).join('');
@@ -86,6 +95,14 @@ function renderPath(root, code, lang, accent) {
     btn.addEventListener('click', () => {
       App.session.flashcardsCategory = btn.dataset.cat;
       App.router.go('flashcards');
+    });
+  });
+  el.querySelectorAll('[data-exam]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      App.session.quizCategory = btn.dataset.exam;
+      App.session.examMode = true;
+      App.router.go('quiz');
     });
   });
   el.querySelector('[data-dlg]')?.addEventListener('click', () => App.router.go('dialogues'));

@@ -88,7 +88,14 @@ App.I18N = {
     ach_level_10: '10 уровень',
     ach_polyglot_3: '3 языка одновременно',
     dash_lang_total: 'Всего слов в языке',
-    dash_lang_c2_hint: 'Примерно столько слов нужно знать для свободного владения (уровень C2) — по общим оценкам лингвистов'
+    dash_lang_c2_hint: 'Примерно столько слов нужно знать для свободного владения (уровень C2) — по общим оценкам лингвистов',
+
+
+    course_exam_btn: 'Экзамен',
+    course_exam_passed: 'Сдан',
+    course_exam_need: 'Нужно {{pct}}% правильных для сдачи',
+    exam_result_pass: 'Экзамен сдан!',
+    exam_result_fail: 'Экзамен не сдан (нужно {{pct}}%) — попробуй ещё раз'
   },
 
   en: {
@@ -175,7 +182,14 @@ App.I18N = {
     ach_level_10: 'Level 10',
     ach_polyglot_3: '3 languages at once',
     dash_lang_total: 'Total words in this language',
-    dash_lang_c2_hint: 'Roughly how many words are needed for fluent (C2-level) command of the language, per common linguistic estimates'
+    dash_lang_c2_hint: 'Roughly how many words are needed for fluent (C2-level) command of the language, per common linguistic estimates',
+
+
+    course_exam_btn: 'Exam',
+    course_exam_passed: 'Passed',
+    course_exam_need: 'Need {{pct}}% correct to pass',
+    exam_result_pass: 'Exam passed!',
+    exam_result_fail: 'Exam not passed (need {{pct}}%) — try again'
   },
 
   de: {
@@ -262,7 +276,14 @@ App.I18N = {
     ach_level_10: 'Level 10',
     ach_polyglot_3: '3 Sprachen gleichzeitig',
     dash_lang_total: 'Wörter insgesamt in dieser Sprache',
-    dash_lang_c2_hint: 'Etwa so viele Wörter braucht man laut gängigen Schätzungen für fließende Beherrschung (Niveau C2)'
+    dash_lang_c2_hint: 'Etwa so viele Wörter braucht man laut gängigen Schätzungen für fließende Beherrschung (Niveau C2)',
+
+
+    course_exam_btn: 'Prüfung',
+    course_exam_passed: 'Bestanden',
+    course_exam_need: '{{pct}}% richtig nötig zum Bestehen',
+    exam_result_pass: 'Prüfung bestanden!',
+    exam_result_fail: 'Prüfung nicht bestanden (benötigt {{pct}}%) — versuch es noch einmal'
   },
 
   nl: {
@@ -349,7 +370,14 @@ App.I18N = {
     ach_level_10: 'Level 10',
     ach_polyglot_3: '3 talen tegelijk',
     dash_lang_total: 'Totaal aantal woorden in deze taal',
-    dash_lang_c2_hint: 'Ongeveer zoveel woorden zijn nodig voor vloeiende beheersing (niveau C2), volgens gangbare schattingen'
+    dash_lang_c2_hint: 'Ongeveer zoveel woorden zijn nodig voor vloeiende beheersing (niveau C2), volgens gangbare schattingen',
+
+
+    course_exam_btn: 'Examen',
+    course_exam_passed: 'Geslaagd',
+    course_exam_need: '{{pct}}% goed nodig om te slagen',
+    exam_result_pass: 'Examen gehaald!',
+    exam_result_fail: 'Examen niet gehaald (nodig: {{pct}}%) — probeer opnieuw'
   },
 
   sv: {
@@ -436,7 +464,14 @@ App.I18N = {
     ach_level_10: 'Nivå 10',
     ach_polyglot_3: '3 språk samtidigt',
     dash_lang_total: 'Totalt antal ord i detta språk',
-    dash_lang_c2_hint: 'Ungefär så många ord behövs för flytande behärskning (nivå C2), enligt vanliga uppskattningar'
+    dash_lang_c2_hint: 'Ungefär så många ord behövs för flytande behärskning (nivå C2), enligt vanliga uppskattningar',
+
+
+    course_exam_btn: 'Prov',
+    course_exam_passed: 'Godkänt',
+    course_exam_need: '{{pct}}% rätt krävs för godkänt',
+    exam_result_pass: 'Provet godkänt!',
+    exam_result_fail: 'Provet ej godkänt (kräver {{pct}}%) — försök igen'
   },
 
   no: {
@@ -523,7 +558,14 @@ App.I18N = {
     ach_level_10: 'Nivå 10',
     ach_polyglot_3: '3 språk samtidig',
     dash_lang_total: 'Totalt antall ord i dette språket',
-    dash_lang_c2_hint: 'Omtrent så mange ord trengs for flytende beherskelse (nivå C2), ifølge vanlige anslag'
+    dash_lang_c2_hint: 'Omtrent så mange ord trengs for flytende beherskelse (nivå C2), ifølge vanlige anslag',
+
+
+    course_exam_btn: 'Eksamen',
+    course_exam_passed: 'Bestått',
+    course_exam_need: '{{pct}}% riktige kreves for å bestå',
+    exam_result_pass: 'Eksamen bestått!',
+    exam_result_fail: 'Eksamen ikke bestått (krever {{pct}}%) — prøv igjen'
   },
 
   da: {
@@ -610,7 +652,14 @@ App.I18N = {
     ach_level_10: 'Niveau 10',
     ach_polyglot_3: '3 sprog samtidig',
     dash_lang_total: 'Samlet antal ord på dette sprog',
-    dash_lang_c2_hint: 'Cirka så mange ord kræves for flydende beherskelse (niveau C2), ifølge almindelige skøn'
+    dash_lang_c2_hint: 'Cirka så mange ord kræves for flydende beherskelse (niveau C2), ifølge almindelige skøn',
+
+
+    course_exam_btn: 'Eksamen',
+    course_exam_passed: 'Bestået',
+    course_exam_need: '{{pct}}% rigtige kræves for at bestå',
+    exam_result_pass: 'Eksamen bestået!',
+    exam_result_fail: 'Eksamen ikke bestået (kræver {{pct}}%) — prøv igen'
   },
 
   fr: {
@@ -697,7 +746,14 @@ App.I18N = {
     ach_level_10: 'Niveau 10',
     ach_polyglot_3: '3 langues à la fois',
     dash_lang_total: 'Total de mots dans cette langue',
-    dash_lang_c2_hint: 'Il faut environ ce nombre de mots pour une maîtrise courante (niveau C2), selon les estimations courantes'
+    dash_lang_c2_hint: 'Il faut environ ce nombre de mots pour une maîtrise courante (niveau C2), selon les estimations courantes',
+
+
+    course_exam_btn: 'Examen',
+    course_exam_passed: 'Réussi',
+    course_exam_need: '{{pct}} % de bonnes réponses requis pour réussir',
+    exam_result_pass: 'Examen réussi !',
+    exam_result_fail: 'Examen non réussi (il faut {{pct}} %) — réessaie'
   },
 
   es: {
@@ -784,7 +840,14 @@ App.I18N = {
     ach_level_10: 'Nivel 10',
     ach_polyglot_3: '3 idiomas a la vez',
     dash_lang_total: 'Total de palabras en este idioma',
-    dash_lang_c2_hint: 'Aproximadamente esa cantidad de palabras se necesita para un dominio fluido (nivel C2), según estimaciones habituales'
+    dash_lang_c2_hint: 'Aproximadamente esa cantidad de palabras se necesita para un dominio fluido (nivel C2), según estimaciones habituales',
+
+
+    course_exam_btn: 'Examen',
+    course_exam_passed: 'Aprobado',
+    course_exam_need: 'Se necesita {{pct}}% de aciertos para aprobar',
+    exam_result_pass: '¡Examen aprobado!',
+    exam_result_fail: 'Examen no aprobado (se necesita {{pct}}%) — inténtalo de nuevo'
   },
 
   it: {
@@ -871,7 +934,14 @@ App.I18N = {
     ach_level_10: 'Livello 10',
     ach_polyglot_3: '3 lingue insieme',
     dash_lang_total: 'Totale parole in questa lingua',
-    dash_lang_c2_hint: 'Circa questo numero di parole serve per una padronanza fluente (livello C2), secondo le stime comuni'
+    dash_lang_c2_hint: 'Circa questo numero di parole serve per una padronanza fluente (livello C2), secondo le stime comuni',
+
+
+    course_exam_btn: 'Esame',
+    course_exam_passed: 'Superato',
+    course_exam_need: 'Serve il {{pct}}% di risposte corrette per superarlo',
+    exam_result_pass: 'Esame superato!',
+    exam_result_fail: 'Esame non superato (serve {{pct}}%) — riprova'
   },
 
   pt: {
@@ -958,7 +1028,14 @@ App.I18N = {
     ach_level_10: 'Nível 10',
     ach_polyglot_3: '3 idiomas ao mesmo tempo',
     dash_lang_total: 'Total de palavras neste idioma',
-    dash_lang_c2_hint: 'Aproximadamente esta quantidade de palavras é necessária para o domínio fluente (nível C2), segundo estimativas comuns'
+    dash_lang_c2_hint: 'Aproximadamente esta quantidade de palavras é necessária para o domínio fluente (nível C2), segundo estimativas comuns',
+
+
+    course_exam_btn: 'Exame',
+    course_exam_passed: 'Aprovado',
+    course_exam_need: 'Precisa de {{pct}}% de acertos para passar',
+    exam_result_pass: 'Exame aprovado!',
+    exam_result_fail: 'Exame não aprovado (precisa de {{pct}}%) — tenta novamente'
   },
 
   ro: {
@@ -1045,7 +1122,14 @@ App.I18N = {
     ach_level_10: 'Nivelul 10',
     ach_polyglot_3: '3 limbi simultan',
     dash_lang_total: 'Total cuvinte în această limbă',
-    dash_lang_c2_hint: 'Aproximativ atâtea cuvinte sunt necesare pentru o stăpânire fluentă (nivel C2), conform estimărilor uzuale'
+    dash_lang_c2_hint: 'Aproximativ atâtea cuvinte sunt necesare pentru o stăpânire fluentă (nivel C2), conform estimărilor uzuale',
+
+
+    course_exam_btn: 'Examen',
+    course_exam_passed: 'Promovat',
+    course_exam_need: 'Este nevoie de {{pct}}% răspunsuri corecte pentru a promova',
+    exam_result_pass: 'Examen promovat!',
+    exam_result_fail: 'Examen nepromovat (este nevoie de {{pct}}%) — încearcă din nou'
   },
 
   hr: {
@@ -1132,7 +1216,14 @@ App.I18N = {
     ach_level_10: 'Razina 10',
     ach_polyglot_3: '3 jezika istovremeno',
     dash_lang_total: 'Ukupno riječi u ovom jeziku',
-    dash_lang_c2_hint: 'Otprilike toliko riječi je potrebno za tečno vladanje (razina C2), prema uobičajenim procjenama'
+    dash_lang_c2_hint: 'Otprilike toliko riječi je potrebno za tečno vladanje (razina C2), prema uobičajenim procjenama',
+
+
+    course_exam_btn: 'Ispit',
+    course_exam_passed: 'Položeno',
+    course_exam_need: 'Potrebno je {{pct}}% točnih odgovora za polaganje',
+    exam_result_pass: 'Ispit položen!',
+    exam_result_fail: 'Ispit nije položen (potrebno {{pct}}%) — pokušaj ponovno'
   },
 
   sr: {
@@ -1219,7 +1310,14 @@ App.I18N = {
     ach_level_10: 'Ниво 10',
     ach_polyglot_3: '3 језика истовремено',
     dash_lang_total: 'Укупно речи у овом језику',
-    dash_lang_c2_hint: 'Отприлике толико речи је потребно за течно владање (ниво Ц2), према уобичајеним проценама'
+    dash_lang_c2_hint: 'Отприлике толико речи је потребно за течно владање (ниво Ц2), према уобичајеним проценама',
+
+
+    course_exam_btn: 'Испит',
+    course_exam_passed: 'Положен',
+    course_exam_need: 'Потребно је {{pct}}% тачних одговора за полагање',
+    exam_result_pass: 'Испит положен!',
+    exam_result_fail: 'Испит није положен (потребно {{pct}}%) — покушај поново'
   },
 
   el: {
@@ -1306,7 +1404,14 @@ App.I18N = {
     ach_level_10: 'Επίπεδο 10',
     ach_polyglot_3: '3 γλώσσες ταυτόχρονα',
     dash_lang_total: 'Σύνολο λέξεων σε αυτή τη γλώσσα',
-    dash_lang_c2_hint: 'Περίπου τόσες λέξεις χρειάζονται για άπταιστη χρήση (επίπεδο C2), σύμφωνα με συνήθεις εκτιμήσεις'
+    dash_lang_c2_hint: 'Περίπου τόσες λέξεις χρειάζονται για άπταιστη χρήση (επίπεδο C2), σύμφωνα με συνήθεις εκτιμήσεις',
+
+
+    course_exam_btn: 'Εξέταση',
+    course_exam_passed: 'Επιτυχία',
+    course_exam_need: 'Χρειάζεται {{pct}}% σωστές απαντήσεις για επιτυχία',
+    exam_result_pass: 'Πέρασες την εξέταση!',
+    exam_result_fail: 'Δεν πέρασες την εξέταση (χρειάζεται {{pct}}%) — δοκίμασε ξανά'
   },
 
   fi: {
@@ -1393,7 +1498,14 @@ App.I18N = {
     ach_level_10: 'Taso 10',
     ach_polyglot_3: '3 kieltä yhtä aikaa',
     dash_lang_total: 'Sanoja yhteensä tällä kielellä',
-    dash_lang_c2_hint: 'Suunnilleen näin monta sanaa tarvitaan sujuvaan hallintaan (taso C2) yleisten arvioiden mukaan'
+    dash_lang_c2_hint: 'Suunnilleen näin monta sanaa tarvitaan sujuvaan hallintaan (taso C2) yleisten arvioiden mukaan',
+
+
+    course_exam_btn: 'Koe',
+    course_exam_passed: 'Läpäisty',
+    course_exam_need: 'Läpäisyyn tarvitaan {{pct}} % oikein',
+    exam_result_pass: 'Koe läpäisty!',
+    exam_result_fail: 'Koetta ei läpäisty (tarvitaan {{pct}} %) — yritä uudelleen'
   },
 
   hu: {
@@ -1480,7 +1592,14 @@ App.I18N = {
     ach_level_10: '10. szint',
     ach_polyglot_3: '3 nyelv egyszerre',
     dash_lang_total: 'Szavak összesen ezen a nyelven',
-    dash_lang_c2_hint: 'Nagyjából ennyi szóra van szükség a folyékony nyelvtudáshoz (C2 szint), a szokásos becslések szerint'
+    dash_lang_c2_hint: 'Nagyjából ennyi szóra van szükség a folyékony nyelvtudáshoz (C2 szint), a szokásos becslések szerint',
+
+
+    course_exam_btn: 'Vizsga',
+    course_exam_passed: 'Sikeres',
+    course_exam_need: '{{pct}}% helyes válasz szükséges a sikerhez',
+    exam_result_pass: 'Sikeres vizsga!',
+    exam_result_fail: 'Sikertelen vizsga ({{pct}}% szükséges) — próbáld újra'
   },
 
   pl: {
@@ -1567,7 +1686,14 @@ App.I18N = {
     ach_level_10: 'Poziom 10',
     ach_polyglot_3: '3 języki naraz',
     dash_lang_total: 'Łącznie słów w tym języku',
-    dash_lang_c2_hint: 'Mniej więcej tyle słów potrzeba do biegłego posługiwania się językiem (poziom C2), według typowych szacunków'
+    dash_lang_c2_hint: 'Mniej więcej tyle słów potrzeba do biegłego posługiwania się językiem (poziom C2), według typowych szacunków',
+
+
+    course_exam_btn: 'Egzamin',
+    course_exam_passed: 'Zdany',
+    course_exam_need: 'Potrzeba {{pct}}% poprawnych odpowiedzi, aby zdać',
+    exam_result_pass: 'Egzamin zdany!',
+    exam_result_fail: 'Egzamin niezdany (potrzeba {{pct}}%) — spróbuj ponownie'
   },
 
   cs: {
@@ -1654,7 +1780,14 @@ App.I18N = {
     ach_level_10: 'Úroveň 10',
     ach_polyglot_3: '3 jazyky najednou',
     dash_lang_total: 'Celkem slov v tomto jazyce',
-    dash_lang_c2_hint: 'Přibližně tolik slov je potřeba pro plynulé ovládnutí jazyka (úroveň C2), podle běžných odhadů'
+    dash_lang_c2_hint: 'Přibližně tolik slov je potřeba pro plynulé ovládnutí jazyka (úroveň C2), podle běžných odhadů',
+
+
+    course_exam_btn: 'Zkouška',
+    course_exam_passed: 'Složeno',
+    course_exam_need: 'Ke složení je potřeba {{pct}}% správných odpovědí',
+    exam_result_pass: 'Zkouška složena!',
+    exam_result_fail: 'Zkouška nesložena (potřeba {{pct}}%) — zkus to znovu'
   },
 
   sk: {
@@ -1741,7 +1874,14 @@ App.I18N = {
     ach_level_10: 'Úroveň 10',
     ach_polyglot_3: '3 jazyky naraz',
     dash_lang_total: 'Celkom slov v tomto jazyku',
-    dash_lang_c2_hint: 'Približne toľko slov je potrebných na plynulé ovládanie jazyka (úroveň C2), podľa bežných odhadov'
+    dash_lang_c2_hint: 'Približne toľko slov je potrebných na plynulé ovládanie jazyka (úroveň C2), podľa bežných odhadov',
+
+
+    course_exam_btn: 'Skúška',
+    course_exam_passed: 'Zložená',
+    course_exam_need: 'Na zloženie je potrebných {{pct}}% správnych odpovedí',
+    exam_result_pass: 'Skúška zložená!',
+    exam_result_fail: 'Skúška nezložená (potrebných {{pct}}%) — skús to znova'
   },
 
   uk: {
@@ -1828,7 +1968,14 @@ App.I18N = {
     ach_level_10: 'Рівень 10',
     ach_polyglot_3: '3 мови одночасно',
     dash_lang_total: 'Всього слів у цій мові',
-    dash_lang_c2_hint: 'Приблизно стільки слів потрібно для вільного володіння (рівень C2), за поширеними оцінками'
+    dash_lang_c2_hint: 'Приблизно стільки слів потрібно для вільного володіння (рівень C2), за поширеними оцінками',
+
+
+    course_exam_btn: 'Іспит',
+    course_exam_passed: 'Складено',
+    course_exam_need: 'Потрібно {{pct}}% правильних відповідей для складання',
+    exam_result_pass: 'Іспит складено!',
+    exam_result_fail: 'Іспит не складено (потрібно {{pct}}%) — спробуй ще раз'
   },
 
   bg: {
@@ -1915,7 +2062,14 @@ App.I18N = {
     ach_level_10: 'Ниво 10',
     ach_polyglot_3: '3 езика едновременно',
     dash_lang_total: 'Общо думи в този език',
-    dash_lang_c2_hint: 'Приблизно толкова думи са нужни за свободно владеене (ниво C2), според обичайните оценки'
+    dash_lang_c2_hint: 'Приблизно толкова думи са нужни за свободно владеене (ниво C2), според обичайните оценки',
+
+
+    course_exam_btn: 'Изпит',
+    course_exam_passed: 'Издържан',
+    course_exam_need: 'Нужни са {{pct}}% верни отговори за издържане',
+    exam_result_pass: 'Изпитът е издържан!',
+    exam_result_fail: 'Изпитът не е издържан (нужни {{pct}}%) — опитай отново'
   }
 };
 
