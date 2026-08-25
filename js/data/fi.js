@@ -404,13 +404,13 @@ App.data.fi = {
     },
     {
       id: 'time', name: 'Дни и время', words: [
-        { w: 'maanantai', t: 'понедельник', ex: '', tex: '' },
-        { w: 'tiistai', t: 'вторник', ex: '', tex: '' },
-        { w: 'keskiviikko', t: 'среда', ex: '', tex: '' },
-        { w: 'torstai', t: 'четверг', ex: '', tex: '' },
-        { w: 'perjantai', t: 'пятница', ex: '', tex: '' },
-        { w: 'lauantai', t: 'суббота', ex: '', tex: '' },
-        { w: 'sunnuntai', t: 'воскресенье', ex: '', tex: '' },
+        { w: 'maanantai', t: 'понедельник', ex: 'Minulla on kokous maanantaina.', tex: 'В понедельник у меня встреча.' },
+        { w: 'tiistai', t: 'вторник', ex: 'Hänellä on joogatunti tiistaina.', tex: 'Во вторник у неё занятие по йоге.' },
+        { w: 'keskiviikko', t: 'среда', ex: 'Siivoamme talon joka keskiviikko.', tex: 'Мы убираем дом каждую среду.' },
+        { w: 'torstai', t: 'четверг', ex: 'Kirjasto on suljettu torstaisin.', tex: 'По четвергам библиотека закрыта.' },
+        { w: 'perjantai', t: 'пятница', ex: 'Syödään illallista perjantaina.', tex: 'Давай поужинаем в пятницу.' },
+        { w: 'lauantai', t: 'суббота', ex: 'Nukumme pitkään lauantaisin.', tex: 'По субботам мы спим подольше.' },
+        { w: 'sunnuntai', t: 'воскресенье', ex: 'Perhe kokoontuu lounaalle sunnuntaisin.', tex: 'По воскресеньям семья собирается на обед.' },
         { w: 'tänään', t: 'сегодня', ex: 'Olen vapaa tänään.', tex: 'Я свободен сегодня.' },
         { w: 'huomenna', t: 'завтра', ex: 'Nähdään huomenna.', tex: 'Увидимся завтра.' },
         { w: 'eilen', t: 'вчера', ex: 'Eilen satoi.', tex: 'Вчера шёл дождь.' },
@@ -1876,7 +1876,7 @@ App.data.fi = {
     },
     {
       id: 'adjectives', name: 'Прилагательные и противоположности', words: [
-        { w: 'pitkä', t: 'высокий', ex: 'Tuo puu on hyvin pitkä.', tex: 'Это дерево очень высокое.' },
+        { w: 'korkea', t: 'высокий', ex: 'Tuo puu on hyvin korkea.', tex: 'Это дерево очень высокое.' },
         { w: 'lyhyt', t: 'низкий', ex: 'Hän on lyhyt.', tex: 'Он невысокого роста.' },
         { w: 'pitkä', t: 'длинный', ex: 'Tie on pitkä.', tex: 'Дорога длинная.' },
         { w: 'leveä', t: 'широкий', ex: 'Joki on leveä.', tex: 'Река широкая.' },
