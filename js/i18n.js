@@ -122,7 +122,19 @@ App.I18N = {
     lb_not_configured: 'Рейтинг ещё не настроен',
     lb_loading: 'Загрузка…',
     lb_empty: 'На этой неделе тут пока никого — стань первым!',
-    lb_error: 'Не удалось загрузить рейтинг. Попробуй позже'
+    lb_error: 'Не удалось загрузить рейтинг. Попробуй позже',
+    profile_animal_label: 'Животное',
+    profile_bg_pattern_label: 'Фон',
+    profile_animal_color_label: 'Цвет животного',
+    profile_bg_color_label: 'Цвет фона',
+    profile_outline_color_label: 'Цвет контура',
+    bgp_solid: 'Свой цвет',
+    bgp_forest: 'Лес',
+    bgp_sky: 'Небо',
+    bgp_sunset: 'Закат',
+    bgp_ocean: 'Океан',
+    bgp_space: 'Космос',
+    bgp_meadow: 'Луг'
   },
 
   en: {
@@ -243,7 +255,19 @@ App.I18N = {
     lb_not_configured: 'Leaderboard isn\'t set up yet',
     lb_loading: 'Loading…',
     lb_empty: 'No one here yet this week — be the first!',
-    lb_error: 'Couldn\'t load the leaderboard. Try again later'
+    lb_error: 'Couldn\'t load the leaderboard. Try again later',
+    profile_animal_label: 'Animal',
+    profile_bg_pattern_label: 'Background',
+    profile_animal_color_label: 'Animal color',
+    profile_bg_color_label: 'Background color',
+    profile_outline_color_label: 'Outline color',
+    bgp_solid: 'Custom color',
+    bgp_forest: 'Forest',
+    bgp_sky: 'Sky',
+    bgp_sunset: 'Sunset',
+    bgp_ocean: 'Ocean',
+    bgp_space: 'Space',
+    bgp_meadow: 'Meadow'
   },
 
   de: {
@@ -364,7 +388,19 @@ App.I18N = {
     lb_not_configured: 'Die Bestenliste ist noch nicht eingerichtet',
     lb_loading: 'Lädt…',
     lb_empty: 'Diese Woche ist hier noch niemand — sei der Erste!',
-    lb_error: 'Bestenliste konnte nicht geladen werden. Versuch es später erneut'
+    lb_error: 'Bestenliste konnte nicht geladen werden. Versuch es später erneut',
+    profile_animal_label: 'Tier',
+    profile_bg_pattern_label: 'Hintergrund',
+    profile_animal_color_label: 'Tierfarbe',
+    profile_bg_color_label: 'Hintergrundfarbe',
+    profile_outline_color_label: 'Umrissfarbe',
+    bgp_solid: 'Eigene Farbe',
+    bgp_forest: 'Wald',
+    bgp_sky: 'Himmel',
+    bgp_sunset: 'Sonnenuntergang',
+    bgp_ocean: 'Ozean',
+    bgp_space: 'Weltraum',
+    bgp_meadow: 'Wiese'
   },
 
   nl: {
@@ -485,7 +521,19 @@ App.I18N = {
     lb_not_configured: 'De ranglijst is nog niet ingesteld',
     lb_loading: 'Laden…',
     lb_empty: 'Deze week is hier nog niemand — wees de eerste!',
-    lb_error: 'Kon de ranglijst niet laden. Probeer het later opnieuw'
+    lb_error: 'Kon de ranglijst niet laden. Probeer het later opnieuw',
+    profile_animal_label: 'Dier',
+    profile_bg_pattern_label: 'Achtergrond',
+    profile_animal_color_label: 'Dierkleur',
+    profile_bg_color_label: 'Achtergrondkleur',
+    profile_outline_color_label: 'Contourkleur',
+    bgp_solid: 'Eigen kleur',
+    bgp_forest: 'Bos',
+    bgp_sky: 'Lucht',
+    bgp_sunset: 'Zonsondergang',
+    bgp_ocean: 'Oceaan',
+    bgp_space: 'Ruimte',
+    bgp_meadow: 'Weide'
   },
 
   sv: {
@@ -606,7 +654,19 @@ App.I18N = {
     lb_not_configured: 'Topplistan är inte inställd än',
     lb_loading: 'Laddar…',
     lb_empty: 'Ingen här än denna vecka — bli den första!',
-    lb_error: 'Kunde inte ladda topplistan. Försök igen senare'
+    lb_error: 'Kunde inte ladda topplistan. Försök igen senare',
+    profile_animal_label: 'Djur',
+    profile_bg_pattern_label: 'Bakgrund',
+    profile_animal_color_label: 'Djurfärg',
+    profile_bg_color_label: 'Bakgrundsfärg',
+    profile_outline_color_label: 'Konturfärg',
+    bgp_solid: 'Egen färg',
+    bgp_forest: 'Skog',
+    bgp_sky: 'Himmel',
+    bgp_sunset: 'Solnedgång',
+    bgp_ocean: 'Hav',
+    bgp_space: 'Rymden',
+    bgp_meadow: 'Äng'
   },
 
   no: {
@@ -727,7 +787,19 @@ App.I18N = {
     lb_not_configured: 'Ledertavlen er ikke satt opp ennå',
     lb_loading: 'Laster…',
     lb_empty: 'Ingen her ennå denne uken — bli den første!',
-    lb_error: 'Kunne ikke laste ledertavlen. Prøv igjen senere'
+    lb_error: 'Kunne ikke laste ledertavlen. Prøv igjen senere',
+    profile_animal_label: 'Dyr',
+    profile_bg_pattern_label: 'Bakgrunn',
+    profile_animal_color_label: 'Dyrefarge',
+    profile_bg_color_label: 'Bakgrunnsfarge',
+    profile_outline_color_label: 'Omrissfarge',
+    bgp_solid: 'Egen farge',
+    bgp_forest: 'Skog',
+    bgp_sky: 'Himmel',
+    bgp_sunset: 'Solnedgang',
+    bgp_ocean: 'Hav',
+    bgp_space: 'Verdensrommet',
+    bgp_meadow: 'Eng'
   },
 
   da: {
@@ -848,7 +920,19 @@ App.I18N = {
     lb_not_configured: 'Ranglisten er ikke sat op endnu',
     lb_loading: 'Indlæser…',
     lb_empty: 'Ingen her endnu denne uge — bliv den første!',
-    lb_error: 'Kunne ikke indlæse ranglisten. Prøv igen senere'
+    lb_error: 'Kunne ikke indlæse ranglisten. Prøv igen senere',
+    profile_animal_label: 'Dyr',
+    profile_bg_pattern_label: 'Baggrund',
+    profile_animal_color_label: 'Dyrefarve',
+    profile_bg_color_label: 'Baggrundsfarve',
+    profile_outline_color_label: 'Omridsfarve',
+    bgp_solid: 'Egen farve',
+    bgp_forest: 'Skov',
+    bgp_sky: 'Himmel',
+    bgp_sunset: 'Solnedgang',
+    bgp_ocean: 'Hav',
+    bgp_space: 'Rummet',
+    bgp_meadow: 'Eng'
   },
 
   fr: {
@@ -969,7 +1053,19 @@ App.I18N = {
     lb_not_configured: 'Le classement n\'est pas encore configuré',
     lb_loading: 'Chargement…',
     lb_empty: 'Personne ici cette semaine — sois le premier !',
-    lb_error: 'Impossible de charger le classement. Réessaie plus tard'
+    lb_error: 'Impossible de charger le classement. Réessaie plus tard',
+    profile_animal_label: 'Animal',
+    profile_bg_pattern_label: 'Arrière-plan',
+    profile_animal_color_label: 'Couleur de l\'animal',
+    profile_bg_color_label: 'Couleur de fond',
+    profile_outline_color_label: 'Couleur du contour',
+    bgp_solid: 'Couleur personnalisée',
+    bgp_forest: 'Forêt',
+    bgp_sky: 'Ciel',
+    bgp_sunset: 'Coucher de soleil',
+    bgp_ocean: 'Océan',
+    bgp_space: 'Espace',
+    bgp_meadow: 'Prairie'
   },
 
   es: {
@@ -1090,7 +1186,19 @@ App.I18N = {
     lb_not_configured: 'La clasificación aún no está configurada',
     lb_loading: 'Cargando…',
     lb_empty: '¡Nadie por aquí esta semana — sé el primero!',
-    lb_error: 'No se pudo cargar la clasificación. Inténtalo más tarde'
+    lb_error: 'No se pudo cargar la clasificación. Inténtalo más tarde',
+    profile_animal_label: 'Animal',
+    profile_bg_pattern_label: 'Fondo',
+    profile_animal_color_label: 'Color del animal',
+    profile_bg_color_label: 'Color de fondo',
+    profile_outline_color_label: 'Color del contorno',
+    bgp_solid: 'Color personalizado',
+    bgp_forest: 'Bosque',
+    bgp_sky: 'Cielo',
+    bgp_sunset: 'Atardecer',
+    bgp_ocean: 'Océano',
+    bgp_space: 'Espacio',
+    bgp_meadow: 'Pradera'
   },
 
   it: {
@@ -1211,7 +1319,19 @@ App.I18N = {
     lb_not_configured: 'La classifica non è ancora configurata',
     lb_loading: 'Caricamento…',
     lb_empty: 'Nessuno qui questa settimana — sii il primo!',
-    lb_error: 'Impossibile caricare la classifica. Riprova più tardi'
+    lb_error: 'Impossibile caricare la classifica. Riprova più tardi',
+    profile_animal_label: 'Animale',
+    profile_bg_pattern_label: 'Sfondo',
+    profile_animal_color_label: 'Colore dell\'animale',
+    profile_bg_color_label: 'Colore di sfondo',
+    profile_outline_color_label: 'Colore del contorno',
+    bgp_solid: 'Colore personalizzato',
+    bgp_forest: 'Foresta',
+    bgp_sky: 'Cielo',
+    bgp_sunset: 'Tramonto',
+    bgp_ocean: 'Oceano',
+    bgp_space: 'Spazio',
+    bgp_meadow: 'Prato'
   },
 
   pt: {
@@ -1332,7 +1452,19 @@ App.I18N = {
     lb_not_configured: 'A classificação ainda não está configurada',
     lb_loading: 'A carregar…',
     lb_empty: 'Ainda ninguém aqui esta semana — sê o primeiro!',
-    lb_error: 'Não foi possível carregar a classificação. Tenta mais tarde'
+    lb_error: 'Não foi possível carregar a classificação. Tenta mais tarde',
+    profile_animal_label: 'Animal',
+    profile_bg_pattern_label: 'Fundo',
+    profile_animal_color_label: 'Cor do animal',
+    profile_bg_color_label: 'Cor de fundo',
+    profile_outline_color_label: 'Cor do contorno',
+    bgp_solid: 'Cor personalizada',
+    bgp_forest: 'Floresta',
+    bgp_sky: 'Céu',
+    bgp_sunset: 'Pôr do sol',
+    bgp_ocean: 'Oceano',
+    bgp_space: 'Espaço',
+    bgp_meadow: 'Prado'
   },
 
   ro: {
@@ -1453,7 +1585,19 @@ App.I18N = {
     lb_not_configured: 'Clasamentul nu este încă configurat',
     lb_loading: 'Se încarcă…',
     lb_empty: 'Nimeni aici săptămâna asta — fii primul!',
-    lb_error: 'Clasamentul nu a putut fi încărcat. Încearcă din nou mai târziu'
+    lb_error: 'Clasamentul nu a putut fi încărcat. Încearcă din nou mai târziu',
+    profile_animal_label: 'Animal',
+    profile_bg_pattern_label: 'Fundal',
+    profile_animal_color_label: 'Culoarea animalului',
+    profile_bg_color_label: 'Culoarea fundalului',
+    profile_outline_color_label: 'Culoarea conturului',
+    bgp_solid: 'Culoare personalizată',
+    bgp_forest: 'Pădure',
+    bgp_sky: 'Cer',
+    bgp_sunset: 'Apus',
+    bgp_ocean: 'Ocean',
+    bgp_space: 'Spațiu',
+    bgp_meadow: 'Pajiște'
   },
 
   hr: {
@@ -1574,7 +1718,19 @@ App.I18N = {
     lb_not_configured: 'Ljestvica još nije postavljena',
     lb_loading: 'Učitavanje…',
     lb_empty: 'Ovog tjedna ovdje još nikoga nema — budi prvi!',
-    lb_error: 'Ljestvicu nije moguće učitati. Pokušaj kasnije'
+    lb_error: 'Ljestvicu nije moguće učitati. Pokušaj kasnije',
+    profile_animal_label: 'Životinja',
+    profile_bg_pattern_label: 'Pozadina',
+    profile_animal_color_label: 'Boja životinje',
+    profile_bg_color_label: 'Boja pozadine',
+    profile_outline_color_label: 'Boja obruba',
+    bgp_solid: 'Vlastita boja',
+    bgp_forest: 'Šuma',
+    bgp_sky: 'Nebo',
+    bgp_sunset: 'Zalazak sunca',
+    bgp_ocean: 'Ocean',
+    bgp_space: 'Svemir',
+    bgp_meadow: 'Livada'
   },
 
   sr: {
@@ -1695,7 +1851,19 @@ App.I18N = {
     lb_not_configured: 'Ранг листа још није подешена',
     lb_loading: 'Учитавање…',
     lb_empty: 'Ове недеље овде још нема никог — буди први!',
-    lb_error: 'Ранг листа се није учитала. Покушај касније'
+    lb_error: 'Ранг листа се није учитала. Покушај касније',
+    profile_animal_label: 'Животиња',
+    profile_bg_pattern_label: 'Позадина',
+    profile_animal_color_label: 'Боја животиње',
+    profile_bg_color_label: 'Боја позадине',
+    profile_outline_color_label: 'Боја обруба',
+    bgp_solid: 'Сопствена боја',
+    bgp_forest: 'Шума',
+    bgp_sky: 'Небо',
+    bgp_sunset: 'Залазак сунца',
+    bgp_ocean: 'Океан',
+    bgp_space: 'Свемир',
+    bgp_meadow: 'Ливада'
   },
 
   el: {
@@ -1816,7 +1984,19 @@ App.I18N = {
     lb_not_configured: 'Η κατάταξη δεν έχει ρυθμιστεί ακόμα',
     lb_loading: 'Φόρτωση…',
     lb_empty: 'Κανείς εδώ ακόμα αυτή την εβδομάδα — γίνε ο πρώτος!',
-    lb_error: 'Δεν ήταν δυνατή η φόρτωση της κατάταξης. Δοκίμασε ξανά αργότερα'
+    lb_error: 'Δεν ήταν δυνατή η φόρτωση της κατάταξης. Δοκίμασε ξανά αργότερα',
+    profile_animal_label: 'Ζώο',
+    profile_bg_pattern_label: 'Φόντο',
+    profile_animal_color_label: 'Χρώμα ζώου',
+    profile_bg_color_label: 'Χρώμα φόντου',
+    profile_outline_color_label: 'Χρώμα περιγράμματος',
+    bgp_solid: 'Δικό σου χρώμα',
+    bgp_forest: 'Δάσος',
+    bgp_sky: 'Ουρανός',
+    bgp_sunset: 'Ηλιοβασίλεμα',
+    bgp_ocean: 'Ωκεανός',
+    bgp_space: 'Διάστημα',
+    bgp_meadow: 'Λιβάδι'
   },
 
   fi: {
@@ -1937,7 +2117,19 @@ App.I18N = {
     lb_not_configured: 'Tulostaulua ei ole vielä otettu käyttöön',
     lb_loading: 'Ladataan…',
     lb_empty: 'Täällä ei ole vielä ketään tällä viikolla — ole ensimmäinen!',
-    lb_error: 'Tulostaulua ei voitu ladata. Yritä myöhemmin uudelleen'
+    lb_error: 'Tulostaulua ei voitu ladata. Yritä myöhemmin uudelleen',
+    profile_animal_label: 'Eläin',
+    profile_bg_pattern_label: 'Tausta',
+    profile_animal_color_label: 'Eläimen väri',
+    profile_bg_color_label: 'Taustaväri',
+    profile_outline_color_label: 'Ääriviivan väri',
+    bgp_solid: 'Oma väri',
+    bgp_forest: 'Metsä',
+    bgp_sky: 'Taivas',
+    bgp_sunset: 'Auringonlasku',
+    bgp_ocean: 'Valtameri',
+    bgp_space: 'Avaruus',
+    bgp_meadow: 'Niitty'
   },
 
   hu: {
@@ -2058,7 +2250,19 @@ App.I18N = {
     lb_not_configured: 'A ranglista még nincs beállítva',
     lb_loading: 'Betöltés…',
     lb_empty: 'Ezen a héten még senki sincs itt — legyél te az első!',
-    lb_error: 'Nem sikerült betölteni a ranglistát. Próbáld újra később'
+    lb_error: 'Nem sikerült betölteni a ranglistát. Próbáld újra később',
+    profile_animal_label: 'Állat',
+    profile_bg_pattern_label: 'Háttér',
+    profile_animal_color_label: 'Állat színe',
+    profile_bg_color_label: 'Háttérszín',
+    profile_outline_color_label: 'Körvonal színe',
+    bgp_solid: 'Egyéni szín',
+    bgp_forest: 'Erdő',
+    bgp_sky: 'Ég',
+    bgp_sunset: 'Naplemente',
+    bgp_ocean: 'Óceán',
+    bgp_space: 'Világűr',
+    bgp_meadow: 'Rét'
   },
 
   pl: {
@@ -2179,7 +2383,19 @@ App.I18N = {
     lb_not_configured: 'Ranking nie jest jeszcze skonfigurowany',
     lb_loading: 'Wczytywanie…',
     lb_empty: 'W tym tygodniu nie ma tu jeszcze nikogo — bądź pierwszy!',
-    lb_error: 'Nie udało się wczytać rankingu. Spróbuj ponownie później'
+    lb_error: 'Nie udało się wczytać rankingu. Spróbuj ponownie później',
+    profile_animal_label: 'Zwierzę',
+    profile_bg_pattern_label: 'Tło',
+    profile_animal_color_label: 'Kolor zwierzęcia',
+    profile_bg_color_label: 'Kolor tła',
+    profile_outline_color_label: 'Kolor obrysu',
+    bgp_solid: 'Własny kolor',
+    bgp_forest: 'Las',
+    bgp_sky: 'Niebo',
+    bgp_sunset: 'Zachód słońca',
+    bgp_ocean: 'Ocean',
+    bgp_space: 'Kosmos',
+    bgp_meadow: 'Łąka'
   },
 
   cs: {
@@ -2300,7 +2516,19 @@ App.I18N = {
     lb_not_configured: 'Žebříček ještě není nastaven',
     lb_loading: 'Načítání…',
     lb_empty: 'Tento týden tu ještě nikdo není — buď první!',
-    lb_error: 'Žebříček se nepodařilo načíst. Zkus to později'
+    lb_error: 'Žebříček se nepodařilo načíst. Zkus to později',
+    profile_animal_label: 'Zvíře',
+    profile_bg_pattern_label: 'Pozadí',
+    profile_animal_color_label: 'Barva zvířete',
+    profile_bg_color_label: 'Barva pozadí',
+    profile_outline_color_label: 'Barva obrysu',
+    bgp_solid: 'Vlastní barva',
+    bgp_forest: 'Les',
+    bgp_sky: 'Obloha',
+    bgp_sunset: 'Západ slunce',
+    bgp_ocean: 'Oceán',
+    bgp_space: 'Vesmír',
+    bgp_meadow: 'Louka'
   },
 
   sk: {
@@ -2421,7 +2649,19 @@ App.I18N = {
     lb_not_configured: 'Rebríček ešte nie je nastavený',
     lb_loading: 'Načítava sa…',
     lb_empty: 'Tento týždeň tu ešte nikto nie je — buď prvý!',
-    lb_error: 'Rebríček sa nepodarilo načítať. Skús to neskôr'
+    lb_error: 'Rebríček sa nepodarilo načítať. Skús to neskôr',
+    profile_animal_label: 'Zviera',
+    profile_bg_pattern_label: 'Pozadie',
+    profile_animal_color_label: 'Farba zvieraťa',
+    profile_bg_color_label: 'Farba pozadia',
+    profile_outline_color_label: 'Farba obrysu',
+    bgp_solid: 'Vlastná farba',
+    bgp_forest: 'Les',
+    bgp_sky: 'Obloha',
+    bgp_sunset: 'Západ slnka',
+    bgp_ocean: 'Oceán',
+    bgp_space: 'Vesmír',
+    bgp_meadow: 'Lúka'
   },
 
   uk: {
@@ -2542,7 +2782,19 @@ App.I18N = {
     lb_not_configured: 'Рейтинг ще не налаштовано',
     lb_loading: 'Завантаження…',
     lb_empty: 'Цього тижня тут ще нікого немає — стань першим!',
-    lb_error: 'Не вдалося завантажити рейтинг. Спробуй пізніше'
+    lb_error: 'Не вдалося завантажити рейтинг. Спробуй пізніше',
+    profile_animal_label: 'Тварина',
+    profile_bg_pattern_label: 'Фон',
+    profile_animal_color_label: 'Колір тварини',
+    profile_bg_color_label: 'Колір фону',
+    profile_outline_color_label: 'Колір контуру',
+    bgp_solid: 'Свій колір',
+    bgp_forest: 'Ліс',
+    bgp_sky: 'Небо',
+    bgp_sunset: 'Захід сонця',
+    bgp_ocean: 'Океан',
+    bgp_space: 'Космос',
+    bgp_meadow: 'Луг'
   },
 
   bg: {
@@ -2663,7 +2915,19 @@ App.I18N = {
     lb_not_configured: 'Класацията все още не е настроена',
     lb_loading: 'Зареждане…',
     lb_empty: 'Тази седмица тук все още няма никого — бъди първи!',
-    lb_error: 'Класацията не можа да се зареди. Опитай по-късно'
+    lb_error: 'Класацията не можа да се зареди. Опитай по-късно',
+    profile_animal_label: 'Животно',
+    profile_bg_pattern_label: 'Фон',
+    profile_animal_color_label: 'Цвят на животното',
+    profile_bg_color_label: 'Цвят на фона',
+    profile_outline_color_label: 'Цвят на контура',
+    bgp_solid: 'Собствен цвят',
+    bgp_forest: 'Гора',
+    bgp_sky: 'Небе',
+    bgp_sunset: 'Залез',
+    bgp_ocean: 'Океан',
+    bgp_space: 'Космос',
+    bgp_meadow: 'Ливада'
   }
 };
 

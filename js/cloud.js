@@ -36,7 +36,9 @@ App.cloud = (function () {
     if (!configured || !uid || !db) return Promise.resolve();
     const week = App.storage.isoWeekKey(new Date());
     return db.collection('users').doc(uid).set({
-      uid, name: profile.name, animal: profile.animal, color: profile.color,
+      uid, name: profile.name, animal: profile.animal,
+      animalColor: profile.animalColor, bgColor: profile.bgColor,
+      outlineColor: profile.outlineColor, bgPattern: profile.bgPattern,
       level, weeklyXP, week,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
@@ -49,6 +51,7 @@ App.cloud = (function () {
     syncTimer = setTimeout(() => {
       syncTimer = null;
       onReady(() => {
+        if (App.profile) App.profile.ensureProfile();
         const profile = App.storage.getProfile();
         if (!profile || !profile.name) return;
         const level = App.levels.forCurrentLang();

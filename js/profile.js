@@ -4,16 +4,28 @@ App.profile = (function () {
   const ANIMALS = ['wolf', 'fox', 'cat', 'dog', 'owl', 'panda', 'koala', 'lion',
     'tiger', 'rabbit', 'hamster', 'raccoon', 'frog', 'monkey', 'unicorn', 'penguin',
     'bear', 'elephant', 'pig', 'cow', 'sheep', 'deer', 'squirrel', 'turtle',
-    'chick', 'dragon', 'bee', 'butterfly', 'octopus', 'dolphin'];
+    'chick', 'dragon', 'bee', 'butterfly', 'octopus', 'dolphin',
+    'bird', 'eagle', 'parrot', 'fish', 'shark', 'whale', 'crab', 'ladybug', 'spider',
+    'chicken', 'duck', 'swan', 'peacock', 'horse', 'zebra', 'hippo', 'gorilla',
+    'sloth', 'otter', 'hedgehog', 'goat', 'llama'];
 
   const ANIMAL_EMOJI = {
     wolf: '🐺', fox: '🦊', cat: '🐱', dog: '🐶', owl: '🦉', panda: '🐼', koala: '🐨', lion: '🦁',
     tiger: '🐯', rabbit: '🐰', hamster: '🐹', raccoon: '🦝', frog: '🐸', monkey: '🐵', unicorn: '🦄', penguin: '🐧',
     bear: '🐻', elephant: '🐘', pig: '🐷', cow: '🐮', sheep: '🐑', deer: '🦌', squirrel: '🐿️', turtle: '🐢',
-    chick: '🐤', dragon: '🐉', bee: '🐝', butterfly: '🦋', octopus: '🐙', dolphin: '🐬'
+    chick: '🐤', dragon: '🐉', bee: '🐝', butterfly: '🦋', octopus: '🐙', dolphin: '🐬',
+    bird: '🐦', eagle: '🦅', parrot: '🦜', fish: '🐟', shark: '🦈', whale: '🐳', crab: '🦀', ladybug: '🐞', spider: '🕷️',
+    chicken: '🐔', duck: '🦆', swan: '🦢', peacock: '🦚', horse: '🐴', zebra: '🦓', hippo: '🦛', gorilla: '🦍',
+    sloth: '🦥', otter: '🦦', hedgehog: '🦔', goat: '🐐', llama: '🦙'
   };
 
-  const COLORS = ['#00e5ff', '#b829ff', '#39ff9d', '#ffcf3f', '#ff3d6e', '#ff8a3d', '#4dd0ff', '#a3ff4d'];
+  const COLORS = [
+    '#00e5ff', '#0088ff', '#4dd0ff', '#39ff9d', '#00c46a', '#a3ff4d',
+    '#ffcf3f', '#ff8a3d', '#ff3d6e', '#ff0044', '#b829ff', '#8b5cf6',
+    '#ff2ec4', '#ffffff', '#8a95a6', '#6b4226'
+  ];
+
+  const BG_PATTERNS = ['solid', 'forest', 'sky', 'sunset', 'ocean', 'space', 'meadow'];
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -41,16 +53,35 @@ App.profile = (function () {
     return `sepia(1) saturate(6) hue-rotate(${rotate}deg) brightness(1.05)`;
   }
 
+  // Old profiles only had a single `color` field; fold that into all three
+  // new slots so avatars saved before this update still render correctly.
+  function normalize(p) {
+    p = p || {};
+    const legacy = p.color || COLORS[0];
+    return {
+      name: p.name || '',
+      animal: p.animal || 'wolf',
+      animalColor: p.animalColor || legacy,
+      bgColor: p.bgColor || legacy,
+      outlineColor: p.outlineColor || legacy,
+      bgPattern: BG_PATTERNS.includes(p.bgPattern) ? p.bgPattern : 'solid'
+    };
+  }
+
   function avatarBadgeHtml(profile, size) {
     size = size || 40;
-    const emoji = ANIMAL_EMOJI[profile && profile.animal] || ANIMAL_EMOJI.wolf;
-    const color = (profile && profile.color) || COLORS[0];
-    return `<span class="avatar-badge" style="--avatar-size:${size}px; --avatar-color:${color}"><span class="avatar-badge-emoji" style="filter:${tintFilter(color)}">${emoji}</span></span>`;
+    const p = normalize(profile);
+    const emoji = ANIMAL_EMOJI[p.animal] || ANIMAL_EMOJI.wolf;
+    const patternClass = p.bgPattern !== 'solid' ? ` avatar-bg-${p.bgPattern}` : '';
+    const bgStyle = p.bgPattern === 'solid'
+      ? `background: radial-gradient(circle at 35% 30%, color-mix(in srgb, ${p.bgColor} 45%, var(--surface-2)), color-mix(in srgb, ${p.bgColor} 14%, var(--surface-2)) 75%);`
+      : '';
+    return `<span class="avatar-badge${patternClass}" style="--avatar-size:${size}px; --avatar-color:${p.outlineColor}; ${bgStyle}"><span class="avatar-badge-emoji" style="filter:${tintFilter(p.animalColor)}">${emoji}</span></span>`;
   }
 
   function ensureProfile() {
     const p = App.storage.getProfile();
-    if (!p || !p.animal) App.storage.setProfile({ animal: 'wolf', color: COLORS[0] });
+    if (!p || !p.animal || !p.animalColor) App.storage.setProfile(normalize(p));
   }
 
   function renderTopbarBadge() {
@@ -60,10 +91,14 @@ App.profile = (function () {
     btn.innerHTML = avatarBadgeHtml(App.storage.getProfile(), 32);
   }
 
+  function colorRowHtml(idPrefix, current) {
+    return COLORS.map(c => `<button type="button" class="profile-color-opt ${c === current ? 'active' : ''}" data-role="${idPrefix}" data-color="${c}" style="--c:${c}"></button>`).join('');
+  }
+
   function openEditor(onSave) {
     ensureProfile();
     const p = App.storage.getProfile();
-    let draft = Object.assign({}, p);
+    let draft = normalize(p);
 
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
@@ -71,15 +106,29 @@ App.profile = (function () {
       <div class="modal-card">
         <h3>${App.t('profile_edit_title')}</h3>
         <label class="profile-name-label">${App.t('profile_name_label')}
-          <input type="text" id="profile-name-input" maxlength="18" value="${escapeHtml(p.name || '')}" placeholder="${escapeHtml(App.t('profile_name_placeholder'))}">
+          <input type="text" id="profile-name-input" maxlength="18" value="${escapeHtml(draft.name)}" placeholder="${escapeHtml(App.t('profile_name_placeholder'))}">
         </label>
         <div class="profile-preview" id="profile-preview">${avatarBadgeHtml(draft, 72)}</div>
+
+        <div class="profile-section-label">${App.t('profile_animal_label')}</div>
         <div class="profile-animal-grid" id="profile-animal-grid">
           ${ANIMALS.map(a => `<button type="button" class="profile-animal-opt ${a === draft.animal ? 'active' : ''}" data-animal="${a}">${ANIMAL_EMOJI[a]}</button>`).join('')}
         </div>
-        <div class="profile-color-row" id="profile-color-row">
-          ${COLORS.map(c => `<button type="button" class="profile-color-opt ${c === draft.color ? 'active' : ''}" data-color="${c}" style="--c:${c}"></button>`).join('')}
+
+        <div class="profile-section-label">${App.t('profile_bg_pattern_label')}</div>
+        <div class="profile-pattern-row" id="profile-pattern-row">
+          ${BG_PATTERNS.map(pat => `<button type="button" class="profile-pattern-opt avatar-bg-${pat === 'solid' ? 'solid' : pat} ${pat === draft.bgPattern ? 'active' : ''}" data-pattern="${pat}" title="${App.t('bgp_' + pat)}"></button>`).join('')}
         </div>
+
+        <div class="profile-section-label">${App.t('profile_animal_color_label')}</div>
+        <div class="profile-color-row" id="profile-color-row-animal">${colorRowHtml('animal', draft.animalColor)}</div>
+
+        <div class="profile-section-label" id="profile-bg-color-label">${App.t('profile_bg_color_label')}</div>
+        <div class="profile-color-row" id="profile-color-row-bg">${colorRowHtml('bg', draft.bgColor)}</div>
+
+        <div class="profile-section-label">${App.t('profile_outline_color_label')}</div>
+        <div class="profile-color-row" id="profile-color-row-outline">${colorRowHtml('outline', draft.outlineColor)}</div>
+
         <div class="profile-modal-actions">
           <button class="action-card" id="profile-cancel" style="display:inline-flex">${App.t('profile_cancel')}</button>
           <button class="action-card" id="profile-save" style="display:inline-flex">${App.t('profile_save')}</button>
@@ -88,18 +137,39 @@ App.profile = (function () {
     `;
     document.body.appendChild(overlay);
 
+    function updateBgColorRowVisibility() {
+      const isSolid = draft.bgPattern === 'solid';
+      overlay.querySelector('#profile-bg-color-label').style.display = isSolid ? '' : 'none';
+      overlay.querySelector('#profile-color-row-bg').style.display = isSolid ? '' : 'none';
+    }
+
     function refreshPreview() {
       overlay.querySelector('#profile-preview').innerHTML = avatarBadgeHtml(draft, 72);
       overlay.querySelectorAll('.profile-animal-opt').forEach(b => b.classList.toggle('active', b.dataset.animal === draft.animal));
-      overlay.querySelectorAll('.profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.color));
+      overlay.querySelectorAll('.profile-pattern-opt').forEach(b => b.classList.toggle('active', b.dataset.pattern === draft.bgPattern));
+      overlay.querySelectorAll('#profile-color-row-animal .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.animalColor));
+      overlay.querySelectorAll('#profile-color-row-bg .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.bgColor));
+      overlay.querySelectorAll('#profile-color-row-outline .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.outlineColor));
+      updateBgColorRowVisibility();
     }
 
     overlay.querySelectorAll('.profile-animal-opt').forEach(btn => {
       btn.addEventListener('click', () => { draft.animal = btn.dataset.animal; refreshPreview(); });
     });
-    overlay.querySelectorAll('.profile-color-opt').forEach(btn => {
-      btn.addEventListener('click', () => { draft.color = btn.dataset.color; refreshPreview(); });
+    overlay.querySelectorAll('.profile-pattern-opt').forEach(btn => {
+      btn.addEventListener('click', () => { draft.bgPattern = btn.dataset.pattern; refreshPreview(); });
     });
+    overlay.querySelectorAll('.profile-color-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const role = btn.dataset.role;
+        if (role === 'animal') draft.animalColor = btn.dataset.color;
+        else if (role === 'bg') draft.bgColor = btn.dataset.color;
+        else if (role === 'outline') draft.outlineColor = btn.dataset.color;
+        refreshPreview();
+      });
+    });
+
+    updateBgColorRowVisibility();
 
     function close() { overlay.remove(); }
     overlay.querySelector('#profile-cancel').addEventListener('click', close);
@@ -116,5 +186,5 @@ App.profile = (function () {
     });
   }
 
-  return { ANIMALS, ANIMAL_EMOJI, COLORS, avatarBadgeHtml, ensureProfile, renderTopbarBadge, openEditor };
+  return { ANIMALS, ANIMAL_EMOJI, COLORS, BG_PATTERNS, avatarBadgeHtml, ensureProfile, renderTopbarBadge, openEditor };
 })();
