@@ -51,17 +51,24 @@ body {
   animation: blobDrift 24s ease-in-out infinite;
 }
 /* Moving blueprint-grid overlay, separated into its own layer so its color
-   can cycle (hue-rotate) independently of the drifting glow blobs above. */
+   can cycle (hue-rotate) independently of the drifting glow blobs above.
+   Each tile gets a diagonal light/dark sweep (embossed-panel illusion) plus
+   a sparse glowing accent cell every few tiles, echoing a lit isometric-cube
+   pattern without needing any image assets. */
 body::before {
   content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
-    linear-gradient(rgba(0,229,255,.14) 1px, transparent 1px) 0 0 / 42px 42px,
-    linear-gradient(90deg, rgba(0,229,255,.14) 1px, transparent 1px) 0 0 / 42px 42px;
+    radial-gradient(8px 8px at 21px 21px, rgba(57,255,157,.95) 0%, transparent 70%) 0 0 / 168px 168px,
+    radial-gradient(8px 8px at 21px 21px, rgba(0,229,255,.85) 0%, transparent 70%) 84px 84px / 168px 168px,
+    linear-gradient(135deg, rgba(255,255,255,.22) 0%, transparent 48%) 0 0 / 42px 42px,
+    linear-gradient(315deg, rgba(0,0,0,.6) 0%, transparent 48%) 0 0 / 42px 42px,
+    linear-gradient(rgba(0,229,255,.26) 1px, transparent 1px) 0 0 / 42px 42px,
+    linear-gradient(90deg, rgba(0,229,255,.26) 1px, transparent 1px) 0 0 / 42px 42px;
   animation: gridSlide 22s linear infinite, gridShimmer 12s linear infinite;
 }
 @keyframes gridSlide {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 42px 42px, 42px 42px; }
+  0% { background-position: 0 0, 84px 84px, 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 168px 168px, 252px 252px, 42px 42px, 42px 42px, 42px 42px, 42px 42px; }
 }
 @keyframes gridShimmer {
   0% { filter: hue-rotate(0deg) saturate(3.5); }
