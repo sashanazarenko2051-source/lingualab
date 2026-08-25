@@ -255,7 +255,12 @@ App.CATEGORY_ICONS = {
   transport: '🚌', places: '🏛️', shopping: '🛍️', technology: '💻', sport: '⚽',
   nature: '🌿', health: '🏥', education: '📚', finance: '💰', restaurant: '🍴',
   daily: '⏰', communication: '📞', celebrations: '🎉', countries: '🌍', seasons: '🍂',
-  adjectives: '📏', verbs2: '🔁', kitchen: '🍳', materials: '🧰', music: '🎵'
+  adjectives: '📏', verbs2: '🔁', kitchen: '🍳', materials: '🧰', music: '🎵',
+
+  // Czech-only bonus categories (cs.js has these in addition to the 34 shared ones).
+  law_society: '⚖️', geography: '🗺️', numbers2: '➗', character: '🎭', body2: '👤',
+  animals2: '🐾', professions2: '🛠️', house2: '🛋️', school2: '🏫', travel2: '🧳',
+  environment: '♻️', shapes: '📐', computer2: '🖥️', religion: '🙏', clothing2: '👗'
 };
 
 // BCP-47 tags for the Web Speech API (used for pronunciation playback).
