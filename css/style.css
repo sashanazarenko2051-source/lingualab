@@ -551,7 +551,7 @@ button { background: none; }
 .wolf-leg-r { animation: legSwingR 1.1s ease-in-out infinite; }
 .wolf-arm-l { animation: armSwingL 1.3s ease-in-out infinite; }
 .wolf-arm-r { animation: armSwingR 1.3s ease-in-out infinite; }
-.wolf-tail-grp { transform-origin: 85% 15%; animation: mascotTailWag 1.5s ease-in-out infinite; }
+.wolf-tail-grp { transform-origin: 0% 100%; animation: mascotTailWag 1.5s ease-in-out infinite; }
 .wolf-eye { transform-origin: 50% 50%; animation: wolfBlink 4.2s ease-in-out infinite; }
 @keyframes mascotIdle {
   0%, 100% { transform: translateY(0) scaleY(1); }

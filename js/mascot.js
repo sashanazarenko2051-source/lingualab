@@ -16,26 +16,32 @@ App.mascot = (function () {
           <stop offset="0" stop-color="#959fb0"/><stop offset="1" stop-color="#6b7688"/>
         </linearGradient>
       </defs>
-      <g class="wolf-tail-grp"><path d="M74 66 Q94 58 90 40 Q88 56 72 62 Z" fill="#4b5364"/></g>
-      <g class="wolf-leg-l"><rect x="32" y="90" width="14" height="26" rx="7" fill="#4b5364"/><ellipse cx="39" cy="118" rx="9" ry="5" fill="#363d4a"/></g>
-      <g class="wolf-leg-r"><rect x="54" y="90" width="14" height="26" rx="7" fill="#4b5364"/><ellipse cx="61" cy="118" rx="9" ry="5" fill="#363d4a"/></g>
-      <ellipse cx="50" cy="68" rx="27" ry="26" fill="url(#wolfBodyGrad)"/>
-      <ellipse cx="50" cy="76" rx="15" ry="14" fill="#d7dde3"/>
-      <g class="wolf-arm-l"><rect x="16" y="58" width="11" height="24" rx="5.5" fill="#4b5364"/><ellipse cx="21.5" cy="84" rx="6" ry="5" fill="#363d4a"/></g>
-      <g class="wolf-arm-r"><rect x="73" y="58" width="11" height="24" rx="5.5" fill="#4b5364"/><ellipse cx="78.5" cy="84" rx="6" ry="5" fill="#363d4a"/></g>
-      <polygon points="28,20 34,2 43,23" fill="#565f70"/>
-      <polygon points="72,20 66,2 57,23" fill="#565f70"/>
-      <polygon points="30,18 34,7 40,20" fill="#cfd6de"/>
-      <polygon points="70,18 66,7 60,20" fill="#cfd6de"/>
-      <circle cx="50" cy="32" r="23" fill="url(#wolfHeadGrad)"/>
-      <ellipse cx="34" cy="38" rx="4" ry="2.5" fill="#ff8fab" opacity=".5"/>
-      <ellipse cx="66" cy="38" rx="4" ry="2.5" fill="#ff8fab" opacity=".5"/>
-      <ellipse cx="50" cy="40" rx="13" ry="10" fill="#d7dde3"/>
-      <g class="wolf-eye"><circle cx="41" cy="28" r="3" fill="#23272f"/></g>
-      <g class="wolf-eye"><circle cx="59" cy="28" r="3" fill="#23272f"/></g>
-      <ellipse cx="50" cy="37" rx="3.4" ry="2.4" fill="#23272f"/>
-      <path d="M50 39 Q46 45 41 42" stroke="#23272f" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-      <path d="M50 39 Q54 45 59 42" stroke="#23272f" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <g class="wolf-tail-grp">
+        <path d="M70,64 C82,60 92,50 94,32 C99,48 92,62 78,68 C75,67 72,65 70,64 Z" fill="url(#wolfBodyGrad)" stroke="#2b303f" stroke-width="2.2" stroke-linejoin="round"/>
+        <ellipse cx="91" cy="34" rx="5.5" ry="4.5" fill="#f2f1ee"/>
+      </g>
+      <g class="wolf-leg-l"><rect x="32" y="90" width="14" height="26" rx="7" fill="#4b5364" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="39" cy="118" rx="9" ry="5" fill="#363d4a" stroke="#2b303f" stroke-width="1.8"/></g>
+      <g class="wolf-leg-r"><rect x="54" y="90" width="14" height="26" rx="7" fill="#4b5364" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="61" cy="118" rx="9" ry="5" fill="#363d4a" stroke="#2b303f" stroke-width="1.8"/></g>
+      <ellipse cx="50" cy="68" rx="27" ry="26" fill="url(#wolfBodyGrad)" stroke="#2b303f" stroke-width="2.2"/>
+      <ellipse cx="50" cy="77" rx="15" ry="13" fill="#d7dde3"/>
+      <g class="wolf-arm-l"><rect x="16" y="58" width="11" height="24" rx="5.5" fill="#4b5364" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="21.5" cy="84" rx="6" ry="5" fill="#363d4a" stroke="#2b303f" stroke-width="1.8"/></g>
+      <g class="wolf-arm-r"><rect x="73" y="58" width="11" height="24" rx="5.5" fill="#4b5364" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="78.5" cy="84" rx="6" ry="5" fill="#363d4a" stroke="#2b303f" stroke-width="1.8"/></g>
+      <path d="M27,49 Q50,59 73,49 L73,56 Q50,66 27,56 Z" fill="#00c8dc" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M63,57 L70,57 L67,69 Z" fill="#00a5b9" stroke="#2b303f" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M27,22 C25,10 29,2 35,2 C41,3 43,12 42,23 C37,17 31,17 27,22 Z" fill="#565f70" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M73,22 C75,10 71,2 65,2 C59,3 57,12 58,23 C63,17 69,17 73,22 Z" fill="#565f70" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M29,19 C29,12 31,7 35,7 C38,8 39,13 38,18 C35,15 32,15 29,19 Z" fill="#cfd6de"/>
+      <path d="M71,19 C71,12 69,7 65,7 C62,8 61,13 62,18 C65,15 68,15 71,19 Z" fill="#cfd6de"/>
+      <circle cx="50" cy="32" r="23" fill="url(#wolfHeadGrad)" stroke="#2b303f" stroke-width="2.2"/>
+      <ellipse cx="39" cy="21" rx="3.5" ry="2" fill="#ffffff" opacity=".22"/>
+      <ellipse cx="34" cy="39" rx="4" ry="2.5" fill="#ff8fab" opacity=".55"/>
+      <ellipse cx="66" cy="39" rx="4" ry="2.5" fill="#ff8fab" opacity=".55"/>
+      <ellipse cx="50" cy="41" rx="13" ry="10" fill="#d7dde3" stroke="#2b303f" stroke-width="1.8"/>
+      <g class="wolf-eye"><circle cx="41" cy="28" r="3" fill="#23272f"/><circle cx="42.2" cy="26.8" r="1" fill="#fff" opacity=".85"/></g>
+      <g class="wolf-eye"><circle cx="59" cy="28" r="3" fill="#23272f"/><circle cx="60.2" cy="26.8" r="1" fill="#fff" opacity=".85"/></g>
+      <ellipse cx="50" cy="38" rx="3.6" ry="2.5" fill="#23272f"/>
+      <path d="M50 40 Q46 46 41 43" stroke="#23272f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M50 40 Q54 46 59 43" stroke="#23272f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
     </svg>
   `;
 
