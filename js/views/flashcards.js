@@ -64,6 +64,17 @@ function buildOptions(word, pool) {
   return shuffle([word, ...distractors]);
 }
 
+function peekCardHtml(id, word, code) {
+  if (!word) return `<div class="flashcard-peek flashcard-peek-empty"></div>`;
+  const meaning = App.words.localizedMeaning(word);
+  return `
+    <button class="flashcard-peek" id="${id}">
+      <div class="peek-icon">${word.icon}</div>
+      <div class="peek-word">${meaning.w}</div>
+    </button>
+  `;
+}
+
 function renderCard(root, state) {
   const word = state.words[state.index];
   const lang = App.data[state.code];
@@ -73,8 +84,8 @@ function renderCard(root, state) {
   const meaning = App.words.localizedMeaning(word);
   let answered = false;
 
-  const hasPrev = state.index > 0;
-  const hasNext = state.index < state.words.length - 1;
+  const prevWord = state.index > 0 ? state.words[state.index - 1] : null;
+  const nextWord = state.index < state.words.length - 1 ? state.words[state.index + 1] : null;
 
   root.innerHTML = `
     <div class="flashcard-wrap">
@@ -85,7 +96,7 @@ function renderCard(root, state) {
       </div>
 
       <div class="flashcard-stage">
-        <button class="card-nav-btn" id="prev-card" ${hasPrev ? '' : 'disabled'}>‹</button>
+        ${peekCardHtml('prev-card', prevWord, state.code)}
         <div class="flashcard" style="border-color:${accent}; cursor:default">
           <div class="flashcard-category">${App.ui.flagChip(state.code)} ${App.ui.categoryName(word.categoryId, word.categoryName)} · ${App.t('fc_how_to_say')} ${App.ui.langName(state.code).toLowerCase()}?</div>
           <div class="flashcard-icon-row">
@@ -97,7 +108,7 @@ function renderCard(root, state) {
           ${word.ex ? `<div class="flashcard-example" id="ex" style="display:none">${word.ex}</div>` : ''}
           ${meaning.ex ? `<div class="flashcard-example" id="tex" style="display:none">${meaning.ex}</div>` : ''}
         </div>
-        <button class="card-nav-btn" id="next-card" ${hasNext ? '' : 'disabled'}>›</button>
+        ${peekCardHtml('next-card', nextWord, state.code)}
       </div>
 
       <div class="quiz-options word-options" id="options">
@@ -113,13 +124,13 @@ function renderCard(root, state) {
 
   root.querySelector('#back-to-course').addEventListener('click', () => App.router.go('course'));
 
-  root.querySelector('#prev-card').addEventListener('click', () => {
+  root.querySelector('#prev-card')?.addEventListener('click', () => {
     if (state.index === 0) return;
     state.index -= 1;
     renderCard(root, state);
   });
 
-  root.querySelector('#next-card').addEventListener('click', () => {
+  root.querySelector('#next-card')?.addEventListener('click', () => {
     if (state.index >= state.words.length - 1) return;
     state.index += 1;
     renderCard(root, state);
