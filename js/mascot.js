@@ -1,9 +1,9 @@
 window.App = window.App || {};
 
-// A small floating mascot (owl) that reacts to your progress and offers
+// A small floating mascot (wolf) that reacts to your progress and offers
 // rotating tips — click it to hear something new, Duolingo-style.
 App.mascot = (function () {
-  const CHAR = '🦉';
+  const CHAR = '🐺';
 
   const TIP_KEYS = [
     'mascot_tip_1', 'mascot_tip_2', 'mascot_tip_3', 'mascot_tip_4',
