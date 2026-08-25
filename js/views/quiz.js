@@ -8,6 +8,11 @@ const EXAM_PASS_PCT = 80;
 // words) — sitting through a thousand questions isn't realistic, so level
 // exams sample a random 60-question cross-section instead of literally everything.
 const EXAM_MAX_QUESTIONS = 60;
+const MAX_HEARTS = 5;
+
+function heartsHtml(hearts) {
+  return Array.from({ length: MAX_HEARTS }, (_, i) => i < hearts ? '❤️' : '🖤').join('');
+}
 
 App.views.quiz = {
   render(root) {
@@ -31,7 +36,7 @@ App.views.quiz = {
     }
 
     const questions = buildQuestions(pool, isExam ? Math.min(pool.length, EXAM_MAX_QUESTIONS) : 10);
-    const state = { questions, index: 0, correct: 0, answered: false, categoryId, isExam, code, examLevel, examCategoryIds };
+    const state = { questions, index: 0, correct: 0, answered: false, categoryId, isExam, code, examLevel, examCategoryIds, hearts: MAX_HEARTS, combo: 0 };
     renderQuestion(root, state);
   }
 };
@@ -81,6 +86,7 @@ function renderQuestion(root, state) {
       <button class="back-btn" id="back-to-course" title="${App.t('back_btn_title')}">${App.t('back_btn')}</button>
       <div class="quiz-progress" style="margin:0">${state.isExam ? '🎓' + (state.examLevel ? ' ' + state.examLevel : '') + ' · ' : ''}${state.index + 1} / ${state.questions.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
     </div>
+    <div class="hearts-row" style="max-width:560px" title="${App.t('hearts_title')}">${heartsHtml(state.hearts)}${state.combo >= 2 ? `<span class="combo-badge">🔥${state.combo}</span>` : ''}</div>
     ${q.type === 'choice'
       ? `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_translation')}</div>`
       : `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_missing')}</div>`}
@@ -110,6 +116,20 @@ function renderQuestion(root, state) {
       isCorrect ? App.effects.correct() : App.effects.wrong();
       App.effects.celebrate(App.gamification.grade(isCorrect));
 
+      if (isCorrect) {
+        state.combo += 1;
+        const bonus = App.gamification.comboBonus(state.combo);
+        if (bonus) {
+          App.effects.comboToast(state.combo);
+          App.effects.celebrate(bonus);
+        }
+      } else {
+        state.combo = 0;
+        state.hearts = Math.max(0, state.hearts - 1);
+        App.effects.heartLoss();
+        root.querySelector('.hearts-row')?.classList.add('shake');
+      }
+
       setTimeout(() => {
         state.index += 1;
         if (state.index >= state.questions.length) {
@@ -135,6 +155,13 @@ function renderResult(root, state) {
   const pct = Math.round((state.correct / state.questions.length) * 100);
   const next = findNextCategory(state.categoryId);
   let examBanner = '';
+
+  if (pct === 100) {
+    setTimeout(() => {
+      App.effects.perfectToast();
+      App.effects.celebrate(App.gamification.perfectLessonBonus());
+    }, 300);
+  }
 
   if (state.isExam) {
     const examKey = state.examLevel || state.categoryId;

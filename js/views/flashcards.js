@@ -1,6 +1,14 @@
 window.App = window.App || {};
 App.views = App.views || {};
 
+// Hearts are per-lesson stakes, Duolingo-style — but this app never hard-locks
+// progress, so running out just shows an encouraging toast instead of stopping you.
+const MAX_HEARTS = 5;
+
+function heartsHtml(hearts) {
+  return Array.from({ length: MAX_HEARTS }, (_, i) => i < hearts ? '❤️' : '🖤').join('');
+}
+
 App.views.flashcards = {
   render(root) {
     const code = App.storage.getCurrentLang();
@@ -21,7 +29,7 @@ App.views.flashcards = {
     }
 
     const pool = categoryId ? App.words.byCategory(code, categoryId) : App.words.allWords(code);
-    const state = { words, pool, index: 0, code, categoryId, correct: 0, repeats: {} };
+    const state = { words, pool, index: 0, code, categoryId, correct: 0, repeats: {}, hearts: MAX_HEARTS, combo: 0 };
     renderCard(root, state);
   }
 };
@@ -94,6 +102,7 @@ function renderCard(root, state) {
         <div class="flashcard-progress-track"><div class="flashcard-progress-fill" style="width:${pct}%; background:${accent}"></div></div>
         <div class="flashcard-progress-num">${state.index + 1} / ${state.words.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
       </div>
+      <div class="hearts-row" id="hearts-row" title="${App.t('hearts_title')}">${heartsHtml(state.hearts)}${state.combo >= 2 ? `<span class="combo-badge">🔥${state.combo}</span>` : ''}</div>
 
       <div class="flashcard-stage">
         ${peekCardHtml('prev-card', prevWord, state.code)}
@@ -159,7 +168,19 @@ function renderCard(root, state) {
       isCorrect ? App.effects.correct() : App.effects.wrong();
       App.effects.celebrate(App.gamification.grade(isCorrect));
 
-      if (!isCorrect) {
+      if (isCorrect) {
+        state.combo += 1;
+        const bonus = App.gamification.comboBonus(state.combo);
+        if (bonus) {
+          App.effects.comboToast(state.combo);
+          App.effects.celebrate(bonus);
+        }
+      } else {
+        state.combo = 0;
+        state.hearts = Math.max(0, state.hearts - 1);
+        App.effects.heartLoss();
+        root.querySelector('#hearts-row').classList.add('shake');
+
         const seen = state.repeats[word.id] || 0;
         if (seen < 2) {
           state.repeats[word.id] = seen + 1;
@@ -182,6 +203,12 @@ function renderCard(root, state) {
 
 function renderResult(root, state) {
   const pct = Math.round((state.correct / state.words.length) * 100);
+  if (pct === 100) {
+    setTimeout(() => {
+      App.effects.perfectToast();
+      App.effects.celebrate(App.gamification.perfectLessonBonus());
+    }, 300);
+  }
   root.innerHTML = `
     <div class="quiz-result">
       <div class="quiz-result-score">${pct}%</div>

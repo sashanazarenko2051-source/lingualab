@@ -57,14 +57,13 @@ App.gamification = (function () {
     return entry ? entry.reviews : 0;
   }
 
-  // Call once per graded answer. Returns what changed so the UI can celebrate it.
-  function grade(correct) {
+  function addXP(amount) {
     const state = App.storage.state;
     state.stats.xp = state.stats.xp || 0;
     state.stats.achievements = state.stats.achievements || [];
 
     const prevLevel = levelForXP(state.stats.xp);
-    state.stats.xp += correct ? XP_CORRECT : XP_WRONG;
+    state.stats.xp += amount;
     const level = levelForXP(state.stats.xp);
     const leveledUp = level > prevLevel;
 
@@ -80,10 +79,33 @@ App.gamification = (function () {
     return { leveledUp, level, xp: state.stats.xp, newAchievements };
   }
 
+  // Call once per graded answer. Returns what changed so the UI can celebrate it.
+  function grade(correct) {
+    return addXP(correct ? XP_CORRECT : XP_WRONG);
+  }
+
+  // Combo bonus: every 3 correct answers in a row within a lesson earns extra
+  // XP (Duolingo-style streak-within-a-lesson reward). Returns null if `combo`
+  // isn't a milestone, otherwise the bonus XP awarded plus the usual grade() result.
+  const COMBO_STEP = 3;
+  const COMBO_BONUS_XP = 5;
+  function comboBonus(combo) {
+    if (combo < COMBO_STEP || combo % COMBO_STEP !== 0) return null;
+    return Object.assign({ bonusXP: COMBO_BONUS_XP, combo }, addXP(COMBO_BONUS_XP));
+  }
+
+  const PERFECT_BONUS_XP = 25;
+  function perfectLessonBonus() {
+    return Object.assign({ bonusXP: PERFECT_BONUS_XP }, addXP(PERFECT_BONUS_XP));
+  }
+
   return {
     DAILY_GOAL,
     ACHIEVEMENTS,
     grade,
+    addXP,
+    comboBonus,
+    perfectLessonBonus,
     levelForXP,
     xpForLevel,
     xpProgress,

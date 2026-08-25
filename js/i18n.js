@@ -96,7 +96,10 @@ App.I18N = {
     course_exam_need: 'Нужно {{pct}}% правильных для сдачи',
     exam_result_pass: 'Экзамен сдан!',
     exam_result_fail: 'Экзамен не сдан (нужно {{pct}}%) — попробуй ещё раз',
-    course_level_exam_label: 'Экзамен уровня {{level}}'
+    course_level_exam_label: 'Экзамен уровня {{level}}',
+    hearts_title: 'Жизни в этом уроке',
+    toast_combo: 'Комбо ×{{combo}}!',
+    toast_perfect: 'Идеально! Бонус за урок без ошибок'
   },
 
   en: {
@@ -191,7 +194,10 @@ App.I18N = {
     course_exam_need: 'Need {{pct}}% correct to pass',
     exam_result_pass: 'Exam passed!',
     exam_result_fail: 'Exam not passed (need {{pct}}%) — try again',
-    course_level_exam_label: 'Level {{level}} exam'
+    course_level_exam_label: 'Level {{level}} exam',
+    hearts_title: 'Hearts in this lesson',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfect! Bonus for a flawless lesson'
   },
 
   de: {
@@ -286,7 +292,10 @@ App.I18N = {
     course_exam_need: '{{pct}}% richtig nötig zum Bestehen',
     exam_result_pass: 'Prüfung bestanden!',
     exam_result_fail: 'Prüfung nicht bestanden (benötigt {{pct}}%) — versuch es noch einmal',
-    course_level_exam_label: 'Prüfung Niveau {{level}}'
+    course_level_exam_label: 'Prüfung Niveau {{level}}',
+    hearts_title: 'Herzen in dieser Lektion',
+    toast_combo: 'Kombo x{{combo}}!',
+    toast_perfect: 'Perfekt! Bonus für eine fehlerfreie Lektion'
   },
 
   nl: {
@@ -381,7 +390,10 @@ App.I18N = {
     course_exam_need: '{{pct}}% goed nodig om te slagen',
     exam_result_pass: 'Examen gehaald!',
     exam_result_fail: 'Examen niet gehaald (nodig: {{pct}}%) — probeer opnieuw',
-    course_level_exam_label: 'Examen niveau {{level}}'
+    course_level_exam_label: 'Examen niveau {{level}}',
+    hearts_title: 'Levens in deze les',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfect! Bonus voor een foutloze les'
   },
 
   sv: {
@@ -476,7 +488,10 @@ App.I18N = {
     course_exam_need: '{{pct}}% rätt krävs för godkänt',
     exam_result_pass: 'Provet godkänt!',
     exam_result_fail: 'Provet ej godkänt (kräver {{pct}}%) — försök igen',
-    course_level_exam_label: 'Prov nivå {{level}}'
+    course_level_exam_label: 'Prov nivå {{level}}',
+    hearts_title: 'Liv i denna lektion',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfekt! Bonus för en felfri lektion'
   },
 
   no: {
@@ -571,7 +586,10 @@ App.I18N = {
     course_exam_need: '{{pct}}% riktige kreves for å bestå',
     exam_result_pass: 'Eksamen bestått!',
     exam_result_fail: 'Eksamen ikke bestått (krever {{pct}}%) — prøv igjen',
-    course_level_exam_label: 'Eksamen nivå {{level}}'
+    course_level_exam_label: 'Eksamen nivå {{level}}',
+    hearts_title: 'Liv i denne leksjonen',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfekt! Bonus for en feilfri leksjon'
   },
 
   da: {
@@ -666,7 +684,10 @@ App.I18N = {
     course_exam_need: '{{pct}}% rigtige kræves for at bestå',
     exam_result_pass: 'Eksamen bestået!',
     exam_result_fail: 'Eksamen ikke bestået (kræver {{pct}}%) — prøv igen',
-    course_level_exam_label: 'Eksamen niveau {{level}}'
+    course_level_exam_label: 'Eksamen niveau {{level}}',
+    hearts_title: 'Liv i denne lektion',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfekt! Bonus for en fejlfri lektion'
   },
 
   fr: {
@@ -761,7 +782,10 @@ App.I18N = {
     course_exam_need: '{{pct}} % de bonnes réponses requis pour réussir',
     exam_result_pass: 'Examen réussi !',
     exam_result_fail: 'Examen non réussi (il faut {{pct}} %) — réessaie',
-    course_level_exam_label: 'Examen niveau {{level}}'
+    course_level_exam_label: 'Examen niveau {{level}}',
+    hearts_title: 'Vies dans cette leçon',
+    toast_combo: 'Combo x{{combo}} !',
+    toast_perfect: 'Parfait ! Bonus pour une leçon sans faute'
   },
 
   es: {
@@ -856,7 +880,10 @@ App.I18N = {
     course_exam_need: 'Se necesita {{pct}}% de aciertos para aprobar',
     exam_result_pass: '¡Examen aprobado!',
     exam_result_fail: 'Examen no aprobado (se necesita {{pct}}%) — inténtalo de nuevo',
-    course_level_exam_label: 'Examen de nivel {{level}}'
+    course_level_exam_label: 'Examen de nivel {{level}}',
+    hearts_title: 'Vidas en esta lección',
+    toast_combo: '¡Combo x{{combo}}!',
+    toast_perfect: '¡Perfecto! Bono por una lección sin errores'
   },
 
   it: {
@@ -951,7 +978,10 @@ App.I18N = {
     course_exam_need: 'Serve il {{pct}}% di risposte corrette per superarlo',
     exam_result_pass: 'Esame superato!',
     exam_result_fail: 'Esame non superato (serve {{pct}}%) — riprova',
-    course_level_exam_label: 'Esame di livello {{level}}'
+    course_level_exam_label: 'Esame di livello {{level}}',
+    hearts_title: 'Vite in questa lezione',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfetto! Bonus per una lezione senza errori'
   },
 
   pt: {
@@ -1046,7 +1076,10 @@ App.I18N = {
     course_exam_need: 'Precisa de {{pct}}% de acertos para passar',
     exam_result_pass: 'Exame aprovado!',
     exam_result_fail: 'Exame não aprovado (precisa de {{pct}}%) — tenta novamente',
-    course_level_exam_label: 'Exame de nível {{level}}'
+    course_level_exam_label: 'Exame de nível {{level}}',
+    hearts_title: 'Vidas nesta lição',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfeito! Bónus por uma lição sem erros'
   },
 
   ro: {
@@ -1141,7 +1174,10 @@ App.I18N = {
     course_exam_need: 'Este nevoie de {{pct}}% răspunsuri corecte pentru a promova',
     exam_result_pass: 'Examen promovat!',
     exam_result_fail: 'Examen nepromovat (este nevoie de {{pct}}%) — încearcă din nou',
-    course_level_exam_label: 'Examen de nivel {{level}}'
+    course_level_exam_label: 'Examen de nivel {{level}}',
+    hearts_title: 'Vieți în această lecție',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfect! Bonus pentru o lecție fără greșeli'
   },
 
   hr: {
@@ -1236,7 +1272,10 @@ App.I18N = {
     course_exam_need: 'Potrebno je {{pct}}% točnih odgovora za polaganje',
     exam_result_pass: 'Ispit položen!',
     exam_result_fail: 'Ispit nije položen (potrebno {{pct}}%) — pokušaj ponovno',
-    course_level_exam_label: 'Ispit razine {{level}}'
+    course_level_exam_label: 'Ispit razine {{level}}',
+    hearts_title: 'Životi u ovoj lekciji',
+    toast_combo: 'Kombo x{{combo}}!',
+    toast_perfect: 'Savršeno! Bonus za lekciju bez pogrešaka'
   },
 
   sr: {
@@ -1331,7 +1370,10 @@ App.I18N = {
     course_exam_need: 'Потребно је {{pct}}% тачних одговора за полагање',
     exam_result_pass: 'Испит положен!',
     exam_result_fail: 'Испит није положен (потребно {{pct}}%) — покушај поново',
-    course_level_exam_label: 'Испит нивоа {{level}}'
+    course_level_exam_label: 'Испит нивоа {{level}}',
+    hearts_title: 'Животи у овој лекцији',
+    toast_combo: 'Комбо x{{combo}}!',
+    toast_perfect: 'Савршено! Бонус за лекцију без грешака'
   },
 
   el: {
@@ -1426,7 +1468,10 @@ App.I18N = {
     course_exam_need: 'Χρειάζεται {{pct}}% σωστές απαντήσεις για επιτυχία',
     exam_result_pass: 'Πέρασες την εξέταση!',
     exam_result_fail: 'Δεν πέρασες την εξέταση (χρειάζεται {{pct}}%) — δοκίμασε ξανά',
-    course_level_exam_label: 'Εξέταση επιπέδου {{level}}'
+    course_level_exam_label: 'Εξέταση επιπέδου {{level}}',
+    hearts_title: 'Ζωές σε αυτό το μάθημα',
+    toast_combo: 'Κόμπο x{{combo}}!',
+    toast_perfect: 'Τέλεια! Μπόνους για μάθημα χωρίς λάθη'
   },
 
   fi: {
@@ -1521,7 +1566,10 @@ App.I18N = {
     course_exam_need: 'Läpäisyyn tarvitaan {{pct}} % oikein',
     exam_result_pass: 'Koe läpäisty!',
     exam_result_fail: 'Koetta ei läpäisty (tarvitaan {{pct}} %) — yritä uudelleen',
-    course_level_exam_label: 'Tason {{level}} koe'
+    course_level_exam_label: 'Tason {{level}} koe',
+    hearts_title: 'Elämät tässä oppitunnissa',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Täydellistä! Bonus virheettömästä oppitunnista'
   },
 
   hu: {
@@ -1616,7 +1664,10 @@ App.I18N = {
     course_exam_need: '{{pct}}% helyes válasz szükséges a sikerhez',
     exam_result_pass: 'Sikeres vizsga!',
     exam_result_fail: 'Sikertelen vizsga ({{pct}}% szükséges) — próbáld újra',
-    course_level_exam_label: '{{level}} szintű vizsga'
+    course_level_exam_label: '{{level}} szintű vizsga',
+    hearts_title: 'Életek ebben a leckében',
+    toast_combo: 'Kombó x{{combo}}!',
+    toast_perfect: 'Tökéletes! Bónusz a hibátlan leckéért'
   },
 
   pl: {
@@ -1711,7 +1762,10 @@ App.I18N = {
     course_exam_need: 'Potrzeba {{pct}}% poprawnych odpowiedzi, aby zdać',
     exam_result_pass: 'Egzamin zdany!',
     exam_result_fail: 'Egzamin niezdany (potrzeba {{pct}}%) — spróbuj ponownie',
-    course_level_exam_label: 'Egzamin poziomu {{level}}'
+    course_level_exam_label: 'Egzamin poziomu {{level}}',
+    hearts_title: 'Życia w tej lekcji',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfekcyjnie! Bonus za lekcję bez błędów'
   },
 
   cs: {
@@ -1806,7 +1860,10 @@ App.I18N = {
     course_exam_need: 'Ke složení je potřeba {{pct}}% správných odpovědí',
     exam_result_pass: 'Zkouška složena!',
     exam_result_fail: 'Zkouška nesložena (potřeba {{pct}}%) — zkus to znovu',
-    course_level_exam_label: 'Zkouška úrovně {{level}}'
+    course_level_exam_label: 'Zkouška úrovně {{level}}',
+    hearts_title: 'Životy v této lekci',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfektní! Bonus za lekci bez chyb'
   },
 
   sk: {
@@ -1901,7 +1958,10 @@ App.I18N = {
     course_exam_need: 'Na zloženie je potrebných {{pct}}% správnych odpovedí',
     exam_result_pass: 'Skúška zložená!',
     exam_result_fail: 'Skúška nezložená (potrebných {{pct}}%) — skús to znova',
-    course_level_exam_label: 'Skúška úrovne {{level}}'
+    course_level_exam_label: 'Skúška úrovne {{level}}',
+    hearts_title: 'Životy v tejto lekcii',
+    toast_combo: 'Combo x{{combo}}!',
+    toast_perfect: 'Perfektné! Bonus za lekciu bez chýb'
   },
 
   uk: {
@@ -1996,7 +2056,10 @@ App.I18N = {
     course_exam_need: 'Потрібно {{pct}}% правильних відповідей для складання',
     exam_result_pass: 'Іспит складено!',
     exam_result_fail: 'Іспит не складено (потрібно {{pct}}%) — спробуй ще раз',
-    course_level_exam_label: 'Іспит рівня {{level}}'
+    course_level_exam_label: 'Іспит рівня {{level}}',
+    hearts_title: 'Життя в цьому уроці',
+    toast_combo: 'Комбо x{{combo}}!',
+    toast_perfect: 'Ідеально! Бонус за урок без помилок'
   },
 
   bg: {
@@ -2091,7 +2154,10 @@ App.I18N = {
     course_exam_need: 'Нужни са {{pct}}% верни отговори за издържане',
     exam_result_pass: 'Изпитът е издържан!',
     exam_result_fail: 'Изпитът не е издържан (нужни {{pct}}%) — опитай отново',
-    course_level_exam_label: 'Изпит за ниво {{level}}'
+    course_level_exam_label: 'Изпит за ниво {{level}}',
+    hearts_title: 'Животи в този урок',
+    toast_combo: 'Комбо x{{combo}}!',
+    toast_perfect: 'Перфектно! Бонус за урок без грешки'
   }
 };
 

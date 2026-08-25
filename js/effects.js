@@ -39,6 +39,9 @@ App.effects = (function () {
   function wrong() { tone([220, 180], 0.14, 'triangle'); }
   function levelUp() { tone([523, 659, 784, 1047], 0.11, 'sine'); }
   function achievement() { tone([784, 988, 1175], 0.12, 'sine'); }
+  function heartLoss() { tone([300, 220], 0.1, 'sawtooth'); }
+  function combo() { tone([659, 988], 0.09, 'sine'); }
+  function perfect() { tone([659, 831, 988, 1245, 1568], 0.1, 'sine'); }
 
   function ensureLayer() {
     let el = document.getElementById('fx-layer');
@@ -95,5 +98,19 @@ App.effects = (function () {
     });
   }
 
-  return { correct, wrong, levelUp, achievement, toast, confetti, celebrate };
+  function comboToast(comboCount) {
+    combo();
+    toast(`🔥 <b>${App.t('toast_combo', { combo: comboCount })}</b>`, 'fx-toast-combo');
+  }
+
+  function perfectToast() {
+    perfect();
+    confetti();
+    toast(`💯 <b>${App.t('toast_perfect')}</b>`, 'fx-toast-perfect');
+  }
+
+  return {
+    correct, wrong, levelUp, achievement, heartLoss, combo, perfect,
+    toast, confetti, celebrate, comboToast, perfectToast
+  };
 })();
