@@ -156,6 +156,8 @@ function renderCard(root, state) {
 
       App.speak(word.w, state.code);
       App.srs.grade(word.id, isCorrect ? 4 : 1);
+      isCorrect ? App.effects.correct() : App.effects.wrong();
+      App.effects.celebrate(App.gamification.grade(isCorrect));
 
       if (!isCorrect) {
         const seen = state.repeats[word.id] || 0;

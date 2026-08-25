@@ -66,7 +66,27 @@ App.I18N = {
     stats_all_langs: 'Все языки',
 
     tooltip_reviews_correct: '{{reviews}} повторений, {{correct}} верно',
-    tooltip_date_reviews: '{{date}}: {{reviews}} повторений'
+    tooltip_date_reviews: '{{date}}: {{reviews}} повторений',
+
+
+    dash_level: 'Уровень',
+    dash_daily_goal: 'Дневная цель',
+    dash_daily_goal_progress: '{{done}}/{{goal}} сегодня',
+    dash_achievements: 'Достижения',
+    dash_xp_to_next: '{{current}}/{{needed}} опыта',
+    toast_level_up: 'Новый уровень!',
+    toast_level_up_sub: 'Уровень {{level}}',
+    toast_achievement: 'Достижение получено!',
+    ach_first_word: 'Первое слово',
+    ach_streak_3: '3 дня подряд',
+    ach_streak_7: 'Неделя подряд',
+    ach_streak_30: 'Месяц подряд',
+    ach_words_50: '50 слов освоено',
+    ach_words_200: '200 слов освоено',
+    ach_words_1000: '1000 слов освоено',
+    ach_level_5: '5 уровень',
+    ach_level_10: '10 уровень',
+    ach_polyglot_3: '3 языка одновременно'
   },
 
   en: {
@@ -131,7 +151,27 @@ App.I18N = {
     stats_all_langs: 'All languages',
 
     tooltip_reviews_correct: '{{reviews}} reviews, {{correct}} correct',
-    tooltip_date_reviews: '{{date}}: {{reviews}} reviews'
+    tooltip_date_reviews: '{{date}}: {{reviews}} reviews',
+
+
+    dash_level: 'Level',
+    dash_daily_goal: 'Daily goal',
+    dash_daily_goal_progress: '{{done}}/{{goal}} today',
+    dash_achievements: 'Achievements',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Level up!',
+    toast_level_up_sub: 'Level {{level}}',
+    toast_achievement: 'Achievement unlocked!',
+    ach_first_word: 'First word',
+    ach_streak_3: '3-day streak',
+    ach_streak_7: '7-day streak',
+    ach_streak_30: '30-day streak',
+    ach_words_50: '50 words mastered',
+    ach_words_200: '200 words mastered',
+    ach_words_1000: '1000 words mastered',
+    ach_level_5: 'Level 5',
+    ach_level_10: 'Level 10',
+    ach_polyglot_3: '3 languages at once'
   },
 
   de: {
@@ -196,7 +236,27 @@ App.I18N = {
     stats_all_langs: 'Alle Sprachen',
 
     tooltip_reviews_correct: '{{reviews}} Wiederholungen, {{correct}} richtig',
-    tooltip_date_reviews: '{{date}}: {{reviews}} Wiederholungen'
+    tooltip_date_reviews: '{{date}}: {{reviews}} Wiederholungen',
+
+
+    dash_level: 'Level',
+    dash_daily_goal: 'Tagesziel',
+    dash_daily_goal_progress: '{{done}}/{{goal}} heute',
+    dash_achievements: 'Erfolge',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Level-Aufstieg!',
+    toast_level_up_sub: 'Level {{level}}',
+    toast_achievement: 'Erfolg freigeschaltet!',
+    ach_first_word: 'Erstes Wort',
+    ach_streak_3: '3 Tage in Folge',
+    ach_streak_7: '7 Tage in Folge',
+    ach_streak_30: '30 Tage in Folge',
+    ach_words_50: '50 Wörter gemeistert',
+    ach_words_200: '200 Wörter gemeistert',
+    ach_words_1000: '1000 Wörter gemeistert',
+    ach_level_5: 'Level 5',
+    ach_level_10: 'Level 10',
+    ach_polyglot_3: '3 Sprachen gleichzeitig'
   },
 
   nl: {
@@ -261,7 +321,27 @@ App.I18N = {
     stats_all_langs: 'Alle talen',
 
     tooltip_reviews_correct: '{{reviews}} herhalingen, {{correct}} goed',
-    tooltip_date_reviews: '{{date}}: {{reviews}} herhalingen'
+    tooltip_date_reviews: '{{date}}: {{reviews}} herhalingen',
+
+
+    dash_level: 'Level',
+    dash_daily_goal: 'Dagelijks doel',
+    dash_daily_goal_progress: '{{done}}/{{goal}} vandaag',
+    dash_achievements: 'Prestaties',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Level omhoog!',
+    toast_level_up_sub: 'Level {{level}}',
+    toast_achievement: 'Prestatie ontgrendeld!',
+    ach_first_word: 'Eerste woord',
+    ach_streak_3: '3 dagen op rij',
+    ach_streak_7: '7 dagen op rij',
+    ach_streak_30: '30 dagen op rij',
+    ach_words_50: '50 woorden onder de knie',
+    ach_words_200: '200 woorden onder de knie',
+    ach_words_1000: '1000 woorden onder de knie',
+    ach_level_5: 'Level 5',
+    ach_level_10: 'Level 10',
+    ach_polyglot_3: '3 talen tegelijk'
   },
 
   sv: {
@@ -326,7 +406,27 @@ App.I18N = {
     stats_all_langs: 'Alla språk',
 
     tooltip_reviews_correct: '{{reviews}} repetitioner, {{correct}} rätt',
-    tooltip_date_reviews: '{{date}}: {{reviews}} repetitioner'
+    tooltip_date_reviews: '{{date}}: {{reviews}} repetitioner',
+
+
+    dash_level: 'Nivå',
+    dash_daily_goal: 'Dagligt mål',
+    dash_daily_goal_progress: '{{done}}/{{goal}} idag',
+    dash_achievements: 'Prestationer',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Nivå upp!',
+    toast_level_up_sub: 'Nivå {{level}}',
+    toast_achievement: 'Prestation upplåst!',
+    ach_first_word: 'Första ordet',
+    ach_streak_3: '3 dagar i rad',
+    ach_streak_7: '7 dagar i rad',
+    ach_streak_30: '30 dagar i rad',
+    ach_words_50: '50 ord behärskade',
+    ach_words_200: '200 ord behärskade',
+    ach_words_1000: '1000 ord behärskade',
+    ach_level_5: 'Nivå 5',
+    ach_level_10: 'Nivå 10',
+    ach_polyglot_3: '3 språk samtidigt'
   },
 
   no: {
@@ -391,7 +491,27 @@ App.I18N = {
     stats_all_langs: 'Alle språk',
 
     tooltip_reviews_correct: '{{reviews}} gjennomganger, {{correct}} riktige',
-    tooltip_date_reviews: '{{date}}: {{reviews}} gjennomganger'
+    tooltip_date_reviews: '{{date}}: {{reviews}} gjennomganger',
+
+
+    dash_level: 'Nivå',
+    dash_daily_goal: 'Daglig mål',
+    dash_daily_goal_progress: '{{done}}/{{goal}} i dag',
+    dash_achievements: 'Prestasjoner',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Nivå opp!',
+    toast_level_up_sub: 'Nivå {{level}}',
+    toast_achievement: 'Prestasjon låst opp!',
+    ach_first_word: 'Første ord',
+    ach_streak_3: '3 dager på rad',
+    ach_streak_7: '7 dager på rad',
+    ach_streak_30: '30 dager på rad',
+    ach_words_50: '50 ord mestret',
+    ach_words_200: '200 ord mestret',
+    ach_words_1000: '1000 ord mestret',
+    ach_level_5: 'Nivå 5',
+    ach_level_10: 'Nivå 10',
+    ach_polyglot_3: '3 språk samtidig'
   },
 
   da: {
@@ -456,7 +576,27 @@ App.I18N = {
     stats_all_langs: 'Alle sprog',
 
     tooltip_reviews_correct: '{{reviews}} gennemgange, {{correct}} rigtige',
-    tooltip_date_reviews: '{{date}}: {{reviews}} gennemgange'
+    tooltip_date_reviews: '{{date}}: {{reviews}} gennemgange',
+
+
+    dash_level: 'Niveau',
+    dash_daily_goal: 'Dagligt mål',
+    dash_daily_goal_progress: '{{done}}/{{goal}} i dag',
+    dash_achievements: 'Præstationer',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Niveau op!',
+    toast_level_up_sub: 'Niveau {{level}}',
+    toast_achievement: 'Præstation låst op!',
+    ach_first_word: 'Første ord',
+    ach_streak_3: '3 dage i træk',
+    ach_streak_7: '7 dage i træk',
+    ach_streak_30: '30 dage i træk',
+    ach_words_50: '50 ord mestret',
+    ach_words_200: '200 ord mestret',
+    ach_words_1000: '1000 ord mestret',
+    ach_level_5: 'Niveau 5',
+    ach_level_10: 'Niveau 10',
+    ach_polyglot_3: '3 sprog samtidig'
   },
 
   fr: {
@@ -521,7 +661,27 @@ App.I18N = {
     stats_all_langs: 'Toutes les langues',
 
     tooltip_reviews_correct: '{{reviews}} révisions, {{correct}} correctes',
-    tooltip_date_reviews: '{{date}} : {{reviews}} révisions'
+    tooltip_date_reviews: '{{date}} : {{reviews}} révisions',
+
+
+    dash_level: 'Niveau',
+    dash_daily_goal: 'Objectif quotidien',
+    dash_daily_goal_progress: '{{done}}/{{goal}} aujourd\'hui',
+    dash_achievements: 'Succès',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Niveau supérieur !',
+    toast_level_up_sub: 'Niveau {{level}}',
+    toast_achievement: 'Succès débloqué !',
+    ach_first_word: 'Premier mot',
+    ach_streak_3: '3 jours consécutifs',
+    ach_streak_7: '7 jours consécutifs',
+    ach_streak_30: '30 jours consécutifs',
+    ach_words_50: '50 mots maîtrisés',
+    ach_words_200: '200 mots maîtrisés',
+    ach_words_1000: '1000 mots maîtrisés',
+    ach_level_5: 'Niveau 5',
+    ach_level_10: 'Niveau 10',
+    ach_polyglot_3: '3 langues à la fois'
   },
 
   es: {
@@ -586,7 +746,27 @@ App.I18N = {
     stats_all_langs: 'Todos los idiomas',
 
     tooltip_reviews_correct: '{{reviews}} repasos, {{correct}} correctas',
-    tooltip_date_reviews: '{{date}}: {{reviews}} repasos'
+    tooltip_date_reviews: '{{date}}: {{reviews}} repasos',
+
+
+    dash_level: 'Nivel',
+    dash_daily_goal: 'Meta diaria',
+    dash_daily_goal_progress: '{{done}}/{{goal}} hoy',
+    dash_achievements: 'Logros',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: '¡Subiste de nivel!',
+    toast_level_up_sub: 'Nivel {{level}}',
+    toast_achievement: '¡Logro desbloqueado!',
+    ach_first_word: 'Primera palabra',
+    ach_streak_3: '3 días seguidos',
+    ach_streak_7: '7 días seguidos',
+    ach_streak_30: '30 días seguidos',
+    ach_words_50: '50 palabras dominadas',
+    ach_words_200: '200 palabras dominadas',
+    ach_words_1000: '1000 palabras dominadas',
+    ach_level_5: 'Nivel 5',
+    ach_level_10: 'Nivel 10',
+    ach_polyglot_3: '3 idiomas a la vez'
   },
 
   it: {
@@ -651,7 +831,27 @@ App.I18N = {
     stats_all_langs: 'Tutte le lingue',
 
     tooltip_reviews_correct: '{{reviews}} ripassi, {{correct}} corrette',
-    tooltip_date_reviews: '{{date}}: {{reviews}} ripassi'
+    tooltip_date_reviews: '{{date}}: {{reviews}} ripassi',
+
+
+    dash_level: 'Livello',
+    dash_daily_goal: 'Obiettivo giornaliero',
+    dash_daily_goal_progress: '{{done}}/{{goal}} oggi',
+    dash_achievements: 'Obiettivi raggiunti',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Livello superiore!',
+    toast_level_up_sub: 'Livello {{level}}',
+    toast_achievement: 'Obiettivo sbloccato!',
+    ach_first_word: 'Prima parola',
+    ach_streak_3: '3 giorni consecutivi',
+    ach_streak_7: '7 giorni consecutivi',
+    ach_streak_30: '30 giorni consecutivi',
+    ach_words_50: '50 parole apprese',
+    ach_words_200: '200 parole apprese',
+    ach_words_1000: '1000 parole apprese',
+    ach_level_5: 'Livello 5',
+    ach_level_10: 'Livello 10',
+    ach_polyglot_3: '3 lingue insieme'
   },
 
   pt: {
@@ -716,7 +916,27 @@ App.I18N = {
     stats_all_langs: 'Todos os idiomas',
 
     tooltip_reviews_correct: '{{reviews}} revisões, {{correct}} corretas',
-    tooltip_date_reviews: '{{date}}: {{reviews}} revisões'
+    tooltip_date_reviews: '{{date}}: {{reviews}} revisões',
+
+
+    dash_level: 'Nível',
+    dash_daily_goal: 'Meta diária',
+    dash_daily_goal_progress: '{{done}}/{{goal}} hoje',
+    dash_achievements: 'Conquistas',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Subiu de nível!',
+    toast_level_up_sub: 'Nível {{level}}',
+    toast_achievement: 'Conquista desbloqueada!',
+    ach_first_word: 'Primeira palavra',
+    ach_streak_3: '3 dias seguidos',
+    ach_streak_7: '7 dias seguidos',
+    ach_streak_30: '30 dias seguidos',
+    ach_words_50: '50 palavras dominadas',
+    ach_words_200: '200 palavras dominadas',
+    ach_words_1000: '1000 palavras dominadas',
+    ach_level_5: 'Nível 5',
+    ach_level_10: 'Nível 10',
+    ach_polyglot_3: '3 idiomas ao mesmo tempo'
   },
 
   ro: {
@@ -781,7 +1001,27 @@ App.I18N = {
     stats_all_langs: 'Toate limbile',
 
     tooltip_reviews_correct: '{{reviews}} repetări, {{correct}} corecte',
-    tooltip_date_reviews: '{{date}}: {{reviews}} repetări'
+    tooltip_date_reviews: '{{date}}: {{reviews}} repetări',
+
+
+    dash_level: 'Nivel',
+    dash_daily_goal: 'Obiectiv zilnic',
+    dash_daily_goal_progress: '{{done}}/{{goal}} azi',
+    dash_achievements: 'Realizări',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Nivel nou!',
+    toast_level_up_sub: 'Nivelul {{level}}',
+    toast_achievement: 'Realizare deblocată!',
+    ach_first_word: 'Primul cuvânt',
+    ach_streak_3: '3 zile consecutive',
+    ach_streak_7: '7 zile consecutive',
+    ach_streak_30: '30 de zile consecutive',
+    ach_words_50: '50 de cuvinte stăpânite',
+    ach_words_200: '200 de cuvinte stăpânite',
+    ach_words_1000: '1000 de cuvinte stăpânite',
+    ach_level_5: 'Nivelul 5',
+    ach_level_10: 'Nivelul 10',
+    ach_polyglot_3: '3 limbi simultan'
   },
 
   hr: {
@@ -846,7 +1086,27 @@ App.I18N = {
     stats_all_langs: 'Svi jezici',
 
     tooltip_reviews_correct: '{{reviews}} ponavljanja, {{correct}} točno',
-    tooltip_date_reviews: '{{date}}: {{reviews}} ponavljanja'
+    tooltip_date_reviews: '{{date}}: {{reviews}} ponavljanja',
+
+
+    dash_level: 'Razina',
+    dash_daily_goal: 'Dnevni cilj',
+    dash_daily_goal_progress: '{{done}}/{{goal}} danas',
+    dash_achievements: 'Postignuća',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Nova razina!',
+    toast_level_up_sub: 'Razina {{level}}',
+    toast_achievement: 'Postignuće otključano!',
+    ach_first_word: 'Prva riječ',
+    ach_streak_3: '3 dana zaredom',
+    ach_streak_7: '7 dana zaredom',
+    ach_streak_30: '30 dana zaredom',
+    ach_words_50: '50 naučenih riječi',
+    ach_words_200: '200 naučenih riječi',
+    ach_words_1000: '1000 naučenih riječi',
+    ach_level_5: 'Razina 5',
+    ach_level_10: 'Razina 10',
+    ach_polyglot_3: '3 jezika istovremeno'
   },
 
   sr: {
@@ -911,7 +1171,27 @@ App.I18N = {
     stats_all_langs: 'Сви језици',
 
     tooltip_reviews_correct: '{{reviews}} понављања, {{correct}} тачно',
-    tooltip_date_reviews: '{{date}}: {{reviews}} понављања'
+    tooltip_date_reviews: '{{date}}: {{reviews}} понављања',
+
+
+    dash_level: 'Ниво',
+    dash_daily_goal: 'Дневни циљ',
+    dash_daily_goal_progress: '{{done}}/{{goal}} данас',
+    dash_achievements: 'Достигнућа',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Нови ниво!',
+    toast_level_up_sub: 'Ниво {{level}}',
+    toast_achievement: 'Достигнуће откључано!',
+    ach_first_word: 'Прва реч',
+    ach_streak_3: '3 дана заредом',
+    ach_streak_7: '7 дана заредом',
+    ach_streak_30: '30 дана заредом',
+    ach_words_50: '50 научених речи',
+    ach_words_200: '200 научених речи',
+    ach_words_1000: '1000 научених речи',
+    ach_level_5: 'Ниво 5',
+    ach_level_10: 'Ниво 10',
+    ach_polyglot_3: '3 језика истовремено'
   },
 
   el: {
@@ -976,7 +1256,27 @@ App.I18N = {
     stats_all_langs: 'Όλες οι γλώσσες',
 
     tooltip_reviews_correct: '{{reviews}} επαναλήψεις, {{correct}} σωστές',
-    tooltip_date_reviews: '{{date}}: {{reviews}} επαναλήψεις'
+    tooltip_date_reviews: '{{date}}: {{reviews}} επαναλήψεις',
+
+
+    dash_level: 'Επίπεδο',
+    dash_daily_goal: 'Καθημερινός στόχος',
+    dash_daily_goal_progress: '{{done}}/{{goal}} σήμερα',
+    dash_achievements: 'Επιτεύγματα',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Νέο επίπεδο!',
+    toast_level_up_sub: 'Επίπεδο {{level}}',
+    toast_achievement: 'Επίτευγμα ξεκλειδώθηκε!',
+    ach_first_word: 'Πρώτη λέξη',
+    ach_streak_3: '3 ημέρες σερί',
+    ach_streak_7: '7 ημέρες σερί',
+    ach_streak_30: '30 ημέρες σερί',
+    ach_words_50: '50 λέξεις μαθημένες',
+    ach_words_200: '200 λέξεις μαθημένες',
+    ach_words_1000: '1000 λέξεις μαθημένες',
+    ach_level_5: 'Επίπεδο 5',
+    ach_level_10: 'Επίπεδο 10',
+    ach_polyglot_3: '3 γλώσσες ταυτόχρονα'
   },
 
   fi: {
@@ -1041,7 +1341,27 @@ App.I18N = {
     stats_all_langs: 'Kaikki kielet',
 
     tooltip_reviews_correct: '{{reviews}} kertausta, {{correct}} oikein',
-    tooltip_date_reviews: '{{date}}: {{reviews}} kertausta'
+    tooltip_date_reviews: '{{date}}: {{reviews}} kertausta',
+
+
+    dash_level: 'Taso',
+    dash_daily_goal: 'Päivätavoite',
+    dash_daily_goal_progress: '{{done}}/{{goal}} tänään',
+    dash_achievements: 'Saavutukset',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Uusi taso!',
+    toast_level_up_sub: 'Taso {{level}}',
+    toast_achievement: 'Saavutus avattu!',
+    ach_first_word: 'Ensimmäinen sana',
+    ach_streak_3: '3 päivää putkeen',
+    ach_streak_7: '7 päivää putkeen',
+    ach_streak_30: '30 päivää putkeen',
+    ach_words_50: '50 sanaa opittu',
+    ach_words_200: '200 sanaa opittu',
+    ach_words_1000: '1000 sanaa opittu',
+    ach_level_5: 'Taso 5',
+    ach_level_10: 'Taso 10',
+    ach_polyglot_3: '3 kieltä yhtä aikaa'
   },
 
   hu: {
@@ -1106,7 +1426,27 @@ App.I18N = {
     stats_all_langs: 'Minden nyelv',
 
     tooltip_reviews_correct: '{{reviews}} ismétlés, {{correct}} helyes',
-    tooltip_date_reviews: '{{date}}: {{reviews}} ismétlés'
+    tooltip_date_reviews: '{{date}}: {{reviews}} ismétlés',
+
+
+    dash_level: 'Szint',
+    dash_daily_goal: 'Napi cél',
+    dash_daily_goal_progress: '{{done}}/{{goal}} ma',
+    dash_achievements: 'Eredmények',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Szintlépés!',
+    toast_level_up_sub: '{{level}}. szint',
+    toast_achievement: 'Eredmény feloldva!',
+    ach_first_word: 'Első szó',
+    ach_streak_3: '3 egymást követő nap',
+    ach_streak_7: '7 egymást követő nap',
+    ach_streak_30: '30 egymást követő nap',
+    ach_words_50: '50 elsajátított szó',
+    ach_words_200: '200 elsajátított szó',
+    ach_words_1000: '1000 elsajátított szó',
+    ach_level_5: '5. szint',
+    ach_level_10: '10. szint',
+    ach_polyglot_3: '3 nyelv egyszerre'
   },
 
   pl: {
@@ -1171,7 +1511,27 @@ App.I18N = {
     stats_all_langs: 'Wszystkie języki',
 
     tooltip_reviews_correct: '{{reviews}} powtórek, {{correct}} poprawnie',
-    tooltip_date_reviews: '{{date}}: {{reviews}} powtórek'
+    tooltip_date_reviews: '{{date}}: {{reviews}} powtórek',
+
+
+    dash_level: 'Poziom',
+    dash_daily_goal: 'Dzienny cel',
+    dash_daily_goal_progress: '{{done}}/{{goal}} dzisiaj',
+    dash_achievements: 'Osiągnięcia',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Nowy poziom!',
+    toast_level_up_sub: 'Poziom {{level}}',
+    toast_achievement: 'Osiągnięcie odblokowane!',
+    ach_first_word: 'Pierwsze słowo',
+    ach_streak_3: '3 dni z rzędu',
+    ach_streak_7: '7 dni z rzędu',
+    ach_streak_30: '30 dni z rzędu',
+    ach_words_50: '50 opanowanych słów',
+    ach_words_200: '200 opanowanych słów',
+    ach_words_1000: '1000 opanowanych słów',
+    ach_level_5: 'Poziom 5',
+    ach_level_10: 'Poziom 10',
+    ach_polyglot_3: '3 języki naraz'
   },
 
   cs: {
@@ -1236,7 +1596,27 @@ App.I18N = {
     stats_all_langs: 'Všechny jazyky',
 
     tooltip_reviews_correct: '{{reviews}} opakování, {{correct}} správně',
-    tooltip_date_reviews: '{{date}}: {{reviews}} opakování'
+    tooltip_date_reviews: '{{date}}: {{reviews}} opakování',
+
+
+    dash_level: 'Úroveň',
+    dash_daily_goal: 'Denní cíl',
+    dash_daily_goal_progress: '{{done}}/{{goal}} dnes',
+    dash_achievements: 'Úspěchy',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Nová úroveň!',
+    toast_level_up_sub: 'Úroveň {{level}}',
+    toast_achievement: 'Úspěch odemčen!',
+    ach_first_word: 'První slovo',
+    ach_streak_3: '3 dny v řadě',
+    ach_streak_7: '7 dní v řadě',
+    ach_streak_30: '30 dní v řadě',
+    ach_words_50: '50 zvládnutých slov',
+    ach_words_200: '200 zvládnutých slov',
+    ach_words_1000: '1000 zvládnutých slov',
+    ach_level_5: 'Úroveň 5',
+    ach_level_10: 'Úroveň 10',
+    ach_polyglot_3: '3 jazyky najednou'
   },
 
   sk: {
@@ -1301,7 +1681,27 @@ App.I18N = {
     stats_all_langs: 'Všetky jazyky',
 
     tooltip_reviews_correct: '{{reviews}} opakovaní, {{correct}} správne',
-    tooltip_date_reviews: '{{date}}: {{reviews}} opakovaní'
+    tooltip_date_reviews: '{{date}}: {{reviews}} opakovaní',
+
+
+    dash_level: 'Úroveň',
+    dash_daily_goal: 'Denný cieľ',
+    dash_daily_goal_progress: '{{done}}/{{goal}} dnes',
+    dash_achievements: 'Úspechy',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Nová úroveň!',
+    toast_level_up_sub: 'Úroveň {{level}}',
+    toast_achievement: 'Úspech odomknutý!',
+    ach_first_word: 'Prvé slovo',
+    ach_streak_3: '3 dni v rade',
+    ach_streak_7: '7 dní v rade',
+    ach_streak_30: '30 dní v rade',
+    ach_words_50: '50 zvládnutých slov',
+    ach_words_200: '200 zvládnutých slov',
+    ach_words_1000: '1000 zvládnutých slov',
+    ach_level_5: 'Úroveň 5',
+    ach_level_10: 'Úroveň 10',
+    ach_polyglot_3: '3 jazyky naraz'
   },
 
   uk: {
@@ -1366,7 +1766,27 @@ App.I18N = {
     stats_all_langs: 'Усі мови',
 
     tooltip_reviews_correct: '{{reviews}} повторень, {{correct}} правильно',
-    tooltip_date_reviews: '{{date}}: {{reviews}} повторень'
+    tooltip_date_reviews: '{{date}}: {{reviews}} повторень',
+
+
+    dash_level: 'Рівень',
+    dash_daily_goal: 'Денна ціль',
+    dash_daily_goal_progress: '{{done}}/{{goal}} сьогодні',
+    dash_achievements: 'Досягнення',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Новий рівень!',
+    toast_level_up_sub: 'Рівень {{level}}',
+    toast_achievement: 'Досягнення розблоковано!',
+    ach_first_word: 'Перше слово',
+    ach_streak_3: '3 дні поспіль',
+    ach_streak_7: '7 днів поспіль',
+    ach_streak_30: '30 днів поспіль',
+    ach_words_50: '50 слів засвоєно',
+    ach_words_200: '200 слів засвоєно',
+    ach_words_1000: '1000 слів засвоєно',
+    ach_level_5: 'Рівень 5',
+    ach_level_10: 'Рівень 10',
+    ach_polyglot_3: '3 мови одночасно'
   },
 
   bg: {
@@ -1431,7 +1851,27 @@ App.I18N = {
     stats_all_langs: 'Всички езици',
 
     tooltip_reviews_correct: '{{reviews}} повторения, {{correct}} правилно',
-    tooltip_date_reviews: '{{date}}: {{reviews}} повторения'
+    tooltip_date_reviews: '{{date}}: {{reviews}} повторения',
+
+
+    dash_level: 'Ниво',
+    dash_daily_goal: 'Дневна цел',
+    dash_daily_goal_progress: '{{done}}/{{goal}} днес',
+    dash_achievements: 'Постижения',
+    dash_xp_to_next: '{{current}}/{{needed}} XP',
+    toast_level_up: 'Ново ниво!',
+    toast_level_up_sub: 'Ниво {{level}}',
+    toast_achievement: 'Постижение отключено!',
+    ach_first_word: 'Първа дума',
+    ach_streak_3: '3 дни подред',
+    ach_streak_7: '7 дни подред',
+    ach_streak_30: '30 дни подред',
+    ach_words_50: '50 усвоени думи',
+    ach_words_200: '200 усвоени думи',
+    ach_words_1000: '1000 усвоени думи',
+    ach_level_5: 'Ниво 5',
+    ach_level_10: 'Ниво 10',
+    ach_polyglot_3: '3 езика едновременно'
   }
 };
 

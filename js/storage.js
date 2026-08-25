@@ -9,7 +9,7 @@ App.storage = (function () {
       uiLang: 'ru',
       srs: {},
       session: { flashcardsCategory: null, quizCategory: null },
-      stats: { streak: 0, lastActiveDate: null, history: {} },
+      stats: { streak: 0, lastActiveDate: null, history: {}, xp: 0, achievements: [] },
       lastLesson: null
     };
   }

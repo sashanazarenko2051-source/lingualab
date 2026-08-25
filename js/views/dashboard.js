@@ -18,6 +18,15 @@ App.views.dashboard = {
 
       <section class="stat-row" id="stat-row"></section>
 
+      <section class="panel">
+        <div class="level-row" id="level-row"></div>
+      </section>
+
+      <section class="panel">
+        <h3>${App.t('dash_daily_goal')}</h3>
+        <div class="daily-goal-row" id="daily-goal-row"></div>
+      </section>
+
       <section class="actions-row">
         <button class="action-card" data-go="course">
           <span class="action-icon">🎓</span>
@@ -35,11 +44,19 @@ App.views.dashboard = {
         <h3>${App.t('dash_activity_7d')}</h3>
         <div class="minichart" id="minichart"></div>
       </section>
+
+      <section class="panel">
+        <h3>${App.t('dash_achievements')}</h3>
+        <div class="achievements-row" id="achievements-row"></div>
+      </section>
     `;
 
     renderLangGroups(root, currentLang, '');
     renderStatRow(root, currentLang);
+    renderLevelRow(root);
+    renderDailyGoal(root);
     renderMiniChart(root);
+    renderAchievements(root);
 
     root.querySelector('#lang-search').addEventListener('input', (e) => {
       renderLangGroups(root, App.storage.getCurrentLang(), e.target.value.trim().toLowerCase());
@@ -153,5 +170,42 @@ function renderMiniChart(root) {
         <div class="minichart-label">${dow}</div>
       </div>
     `;
+  }).join('');
+}
+
+function renderLevelRow(root) {
+  const row = root.querySelector('#level-row');
+  const xp = App.storage.state.stats.xp || 0;
+  const progress = App.gamification.xpProgress(xp);
+  const pct = progress.needed ? Math.round((progress.current / progress.needed) * 100) : 100;
+
+  row.innerHTML = `
+    <div class="level-badge">${progress.level}</div>
+    <div class="level-info">
+      <div class="level-title">${App.t('dash_level')} ${progress.level}</div>
+      <div class="xp-track"><div class="xp-fill" style="width:${pct}%"></div></div>
+      <div class="xp-label">${App.t('dash_xp_to_next', { current: progress.current, needed: progress.needed })}</div>
+    </div>
+  `;
+}
+
+function renderDailyGoal(root) {
+  const row = root.querySelector('#daily-goal-row');
+  const goal = App.gamification.DAILY_GOAL;
+  const done = App.gamification.todayCount(App.storage.state);
+  const pct = Math.min(100, Math.round((done / goal) * 100));
+
+  row.innerHTML = `
+    <div class="daily-goal-ring" style="--pct:${pct}" data-label="${Math.min(done, goal)}/${goal}"></div>
+    <div class="daily-goal-text">${App.t('dash_daily_goal_progress', { done, goal })}</div>
+  `;
+}
+
+function renderAchievements(root) {
+  const el = root.querySelector('#achievements-row');
+  const unlocked = App.storage.state.stats.achievements || [];
+  el.innerHTML = App.gamification.ACHIEVEMENTS.map(a => {
+    const isUnlocked = unlocked.includes(a.id);
+    return `<div class="ach-badge ${isUnlocked ? 'unlocked' : 'locked'}" title="${App.t(a.titleKey)}">${a.icon}</div>`;
   }).join('');
 }

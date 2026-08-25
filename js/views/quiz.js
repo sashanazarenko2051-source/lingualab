@@ -90,6 +90,8 @@ function renderQuestion(root, state) {
       });
 
       App.srs.grade(q.word.id, isCorrect ? 4 : 1);
+      isCorrect ? App.effects.correct() : App.effects.wrong();
+      App.effects.celebrate(App.gamification.grade(isCorrect));
 
       setTimeout(() => {
         state.index += 1;
