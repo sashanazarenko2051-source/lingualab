@@ -216,9 +216,21 @@ button { background: none; }
 .flag-no { background: linear-gradient(to bottom, transparent 43%, #002868 43% 53%, transparent 53%), linear-gradient(to right, transparent 35%, #002868 35% 41%, transparent 41%), linear-gradient(to bottom, transparent 38%, #fff 38% 58%, transparent 58%), linear-gradient(to right, transparent 30%, #fff 30% 46%, transparent 46%), #BA0C2F; }
 .flag-da { background: linear-gradient(to bottom, transparent 38%, #fff 38% 58%, transparent 58%), linear-gradient(to right, transparent 30%, #fff 30% 46%, transparent 46%), #C60C30; }
 .flag-fr { background: linear-gradient(to right, #0055A4 0 33%, #fff 33% 66%, #EF4135 66%); }
-.flag-es { background: linear-gradient(to bottom, #AA151B 0 25%, #F1BF00 25% 75%, #AA151B 75%); }
+.flag-es { position: relative; overflow: hidden; background: linear-gradient(to bottom, #AA151B 0 25%, #F1BF00 25% 75%, #AA151B 75%); }
+.flag-es::before {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 22%; height: 44%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #AD1519 0 50%, #F1BF00 50%);
+  border: 1px solid #6b0f13; border-radius: 1px;
+}
 .flag-it { background: linear-gradient(to right, #009246 0 33%, #fff 33% 66%, #CE2B37 66%); }
-.flag-pt { background: linear-gradient(to right, #046A38 0 40%, #DA291C 40%); }
+.flag-pt { position: relative; overflow: hidden; background: linear-gradient(to right, #046A38 0 40%, #DA291C 40%); }
+.flag-pt::before {
+  content: ''; position: absolute; left: 40%; top: 50%; width: 28%; height: 56%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #F1BF00 0 55%, #DA291C 55% 82%, #F1BF00 82%);
+  border-radius: 50%; box-shadow: 0 0 0 1px #F1BF00;
+}
 .flag-ro { background: linear-gradient(to right, #002B7F 0 33%, #FCD116 33% 66%, #CE1126 66%); }
 .flag-pl { background: linear-gradient(to bottom, #fff 0 50%, #DC143C 50%); }
 .flag-cs { position: relative; overflow: hidden; background: linear-gradient(to bottom, #fff 0 50%, #D7141A 50%); }
@@ -249,7 +261,17 @@ button { background: none; }
   content: ''; position: absolute; left: 16%; top: 22%; width: 22%; height: 56%;
   background: #C6363C; border: 2px solid #F5C500; border-radius: 3px 3px 40% 40% / 3px 3px 30% 30%;
 }
-.flag-el { background: linear-gradient(to bottom, #0D5EAF 0 20%, #fff 20% 40%, #0D5EAF 40% 60%, #fff 60% 80%, #0D5EAF 80%); }
+.flag-el {
+  position: relative; overflow: hidden;
+  background: repeating-linear-gradient(to bottom, #0D5EAF 0 11.111%, #fff 11.111% 22.222%);
+}
+.flag-el::before {
+  content: ''; position: absolute; left: 0; top: 0; width: 44%; height: 55.556%;
+  background:
+    linear-gradient(to bottom, transparent 38%, #fff 38% 62%, transparent 62%),
+    linear-gradient(to right, transparent 38%, #fff 38% 62%, transparent 62%),
+    #0D5EAF;
+}
 .flag-fi { background: linear-gradient(to bottom, transparent 38%, #002F6C 38% 58%, transparent 58%), linear-gradient(to right, transparent 30%, #002F6C 30% 46%, transparent 46%), #fff; }
 .flag-hu { background: linear-gradient(to bottom, #CE2939 0 33%, #fff 33% 66%, #477050 66%); }
 
