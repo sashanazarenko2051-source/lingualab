@@ -150,7 +150,7 @@ button { background: none; }
   position: absolute; right: -6%; bottom: -6%; width: 42%; height: 30%;
   border-radius: 3px; border: 2px solid var(--surface); overflow: hidden; box-sizing: content-box;
 }
-.avatar-flag-badge .flag-chip { width: 100%; height: 100%; border-radius: 0; box-shadow: none; }
+.avatar-flag-badge .flag-chip { display: block; width: 100%; height: 100%; border-radius: 0; box-shadow: none; }
 
 .avatar-bg-forest {
   background:
@@ -249,6 +249,135 @@ button { background: none; }
 }
 .avatar-bg-rainbow {
   background: linear-gradient(135deg, #ff3d6e 0%, #ff8a3d 16%, #ffcf3f 32%, #39ff9d 48%, #4dd0ff 64%, #0088ff 80%, #b829ff 100%);
+}
+.avatar-bg-jungle {
+  background:
+    radial-gradient(20% 16% at 22% 30%, #2e7d4f 55%, transparent 58%),
+    radial-gradient(22% 18% at 62% 22%, #1f5c3a 55%, transparent 58%),
+    radial-gradient(18% 15% at 78% 55%, #2e7d4f 55%, transparent 58%),
+    radial-gradient(20% 17% at 30% 78%, #1f5c3a 55%, transparent 58%),
+    linear-gradient(180deg, #123420 0%, #0c2517 100%);
+}
+.avatar-bg-waterfall {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.35) 0 4%, transparent 4% 10%),
+    linear-gradient(180deg, #bfe9ff 0%, #59b6dd 60%, #cdeffb 100%);
+}
+.avatar-bg-cave {
+  background:
+    radial-gradient(10% 16% at 25% 6%, #4a4038 60%, transparent 64%),
+    radial-gradient(8% 14% at 50% 4%, #3a3128 60%, transparent 64%),
+    radial-gradient(10% 16% at 75% 6%, #4a4038 60%, transparent 64%),
+    linear-gradient(180deg, #1c1712 0%, #3a2f26 100%);
+}
+.avatar-bg-candy {
+  background:
+    radial-gradient(3% 3% at 25% 30%, #fff 100%, transparent),
+    radial-gradient(3% 3% at 60% 20%, #4dd0ff 100%, transparent),
+    radial-gradient(3% 3% at 40% 55%, #ffcf3f 100%, transparent),
+    radial-gradient(3% 3% at 75% 60%, #39ff9d 100%, transparent),
+    radial-gradient(3% 3% at 55% 80%, #fff 100%, transparent),
+    linear-gradient(180deg, #ffd6ec 0%, #ff9ecf 100%);
+}
+.avatar-bg-galaxy {
+  background:
+    radial-gradient(2% 2% at 20% 20%, #fff 100%, transparent),
+    radial-gradient(1.6% 1.6% at 65% 15%, #fff 100%, transparent),
+    radial-gradient(2% 2% at 80% 55%, #fff 100%, transparent),
+    radial-gradient(30% 24% at 35% 60%, rgba(255,61,110,.55) 50%, transparent 60%),
+    radial-gradient(28% 22% at 65% 40%, rgba(0,229,255,.45) 50%, transparent 60%),
+    linear-gradient(180deg, #1a0b33 0%, #3a1259 60%, #1a0b33 100%);
+}
+.avatar-bg-coral {
+  background:
+    radial-gradient(14% 20% at 30% 90%, #ff8a65 55%, transparent 58%),
+    radial-gradient(12% 18% at 55% 96%, #ff6f91 55%, transparent 58%),
+    radial-gradient(14% 20% at 75% 88%, #ffb347 55%, transparent 58%),
+    linear-gradient(180deg, #a0e9ff 0%, #1e93a8 100%);
+}
+.avatar-bg-autumn {
+  background:
+    radial-gradient(3% 3% at 25% 30%, #ffcf3f 100%, transparent),
+    radial-gradient(3% 3% at 60% 20%, #ff8a3d 100%, transparent),
+    radial-gradient(3% 3% at 45% 55%, #d62612 100%, transparent),
+    radial-gradient(3% 3% at 75% 65%, #ffcf3f 100%, transparent),
+    linear-gradient(180deg, #f3b768 0%, #c9662e 100%);
+}
+.avatar-bg-spring {
+  background:
+    radial-gradient(3% 3% at 30% 25%, #fff 100%, transparent),
+    radial-gradient(3% 3% at 55% 35%, #ffb3d9 100%, transparent),
+    radial-gradient(3% 3% at 70% 20%, #fff 100%, transparent),
+    linear-gradient(180deg, #eaffe0 0%, #b8f2c2 100%);
+}
+.avatar-bg-neon {
+  background:
+    radial-gradient(22% 20% at 30% 35%, rgba(0,229,255,.7) 50%, transparent 60%),
+    radial-gradient(22% 20% at 70% 65%, rgba(255,46,196,.7) 50%, transparent 60%),
+    linear-gradient(180deg, #0a0a1a 0%, #150a2a 100%);
+}
+.avatar-bg-beach {
+  background:
+    radial-gradient(10% 10% at 75% 22%, #fff3b0 60%, transparent 64%),
+    linear-gradient(180deg, #8fd3ff 0%, #8fd3ff 55%, #f2d59b 55% 100%);
+}
+.avatar-bg-rain {
+  background:
+    repeating-linear-gradient(100deg, rgba(210,230,255,.4) 0 2%, transparent 2% 10%),
+    linear-gradient(180deg, #6b7f99 0%, #3d4c63 100%);
+}
+.avatar-bg-storm {
+  background:
+    radial-gradient(18% 16% at 55% 45%, rgba(255,255,255,.5) 40%, transparent 55%),
+    radial-gradient(20% 14% at 30% 70%, #2b2f3d 55%, transparent 60%),
+    radial-gradient(22% 16% at 68% 75%, #3a3f52 55%, transparent 60%),
+    linear-gradient(180deg, #4a4f63 0%, #23262f 100%);
+}
+.avatar-bg-blossom {
+  background:
+    radial-gradient(3% 3% at 25% 25%, #fff 100%, transparent),
+    radial-gradient(3% 3% at 55% 35%, #ffc2dd 100%, transparent),
+    radial-gradient(3% 3% at 40% 60%, #fff 100%, transparent),
+    radial-gradient(3% 3% at 72% 55%, #ffc2dd 100%, transparent),
+    radial-gradient(3% 3% at 60% 80%, #fff 100%, transparent),
+    linear-gradient(180deg, #ffe3f0 0%, #ffb6d9 100%);
+}
+.avatar-bg-bamboo {
+  background:
+    repeating-linear-gradient(90deg, #3f8a53 0 14%, #2f6b3f 14% 18%),
+    linear-gradient(180deg, #eaffe6 0%, #3f8a53 40%);
+}
+.avatar-bg-icecave {
+  background:
+    repeating-linear-gradient(115deg, rgba(255,255,255,.35) 0 6%, transparent 6% 16%),
+    linear-gradient(180deg, #d8f3ff 0%, #7fc9e8 60%, #2f7ea8 100%);
+}
+.avatar-bg-campfire {
+  background:
+    radial-gradient(14% 14% at 50% 68%, #ffcf3f 40%, transparent 50%),
+    radial-gradient(20% 18% at 50% 72%, rgba(255,138,61,.6) 45%, transparent 55%),
+    linear-gradient(180deg, #0c1330 0%, #1c2a4a 100%);
+}
+.avatar-bg-underwater {
+  background:
+    radial-gradient(2% 2% at 30% 70%, rgba(255,255,255,.6) 100%, transparent),
+    radial-gradient(1.6% 1.6% at 45% 55%, rgba(255,255,255,.6) 100%, transparent),
+    radial-gradient(2% 2% at 60% 75%, rgba(255,255,255,.6) 100%, transparent),
+    radial-gradient(1.6% 1.6% at 70% 40%, rgba(255,255,255,.6) 100%, transparent),
+    linear-gradient(180deg, #0a3d5c 0%, #072338 100%);
+}
+.avatar-bg-tropical {
+  background:
+    radial-gradient(16% 12% at 30% 25%, #1fae6b 55%, transparent 58%),
+    radial-gradient(14% 10% at 55% 18%, #17c98a 55%, transparent 58%),
+    linear-gradient(180deg, #bdf7e6 0%, #17a67a 100%);
+}
+.avatar-bg-checker {
+  background-image: conic-gradient(#00e5ff 90deg, #0d1526 90deg 180deg, #00e5ff 180deg 270deg, #0d1526 270deg);
+  background-size: 30% 30%;
+}
+.avatar-bg-stripes {
+  background: repeating-linear-gradient(45deg, #ff3d6e 0 12%, #ffcf3f 12% 24%, #4dd0ff 24% 36%, #39ff9d 36% 48%);
 }
 
 .profile-section-label {

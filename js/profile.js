@@ -26,7 +26,10 @@ App.profile = (function () {
   ];
 
   const BG_PATTERNS = ['solid', 'forest', 'sky', 'sunset', 'ocean', 'space', 'meadow',
-    'mountain', 'desert', 'snow', 'volcano', 'city', 'rainbow'];
+    'mountain', 'desert', 'snow', 'volcano', 'city', 'rainbow',
+    'jungle', 'waterfall', 'cave', 'candy', 'galaxy', 'coral', 'autumn', 'spring',
+    'neon', 'beach', 'rain', 'storm', 'blossom', 'bamboo', 'icecave', 'campfire',
+    'underwater', 'tropical', 'checker', 'stripes'];
 
   // Flag badge reuses the app's existing CSS-drawn language flags — no new
   // art needed. Read lazily (App.LANG_ORDER isn't defined yet when this file
