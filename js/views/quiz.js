@@ -9,11 +9,6 @@ App.views = App.views || {};
 
 // Exam pass threshold: correct-answer percentage needed to mark a category "passed".
 const EXAM_PASS_PCT = 80;
-// A single-category exam already covers every word in that category (60 max).
-// Level exams pool together several categories (A2 alone is 17 × 60 = 1020
-// words) — sitting through a thousand questions isn't realistic, so level
-// exams sample a random 60-question cross-section instead of literally everything.
-const EXAM_MAX_QUESTIONS = 60;
 const MAX_HEARTS = 5;
 
 function heartsHtml(hearts) {
@@ -41,7 +36,7 @@ App.views.quiz = {
       return;
     }
 
-    const questions = buildQuestions(pool, isExam ? Math.min(pool.length, EXAM_MAX_QUESTIONS) : 10);
+    const questions = buildQuestions(pool, isExam ? pool.length : 10);
     const state = { questions, index: 0, correct: 0, answered: false, categoryId, isExam, code, examLevel, examCategoryIds, hearts: MAX_HEARTS, combo: 0 };
     renderQuestion(root, state);
   }
