@@ -79,13 +79,15 @@ body::before {
   0% { filter: hue-rotate(0deg) saturate(1.15); }
   100% { filter: hue-rotate(360deg) saturate(1.15); }
 }
-/* A soft colored spotlight that drifts across the cube texture, screen-
-   blended so it visibly brightens whatever faces it passes over — the
-   moving lit patch from the reference image. */
+/* A soft colored spotlight that drifts across the cube texture — the
+   moving lit patch from the reference image. Plain alpha-blended radial
+   gradient (NOT mix-blend-mode: screen) — blend modes on a fixed-position
+   layer caused a visible rectangular rendering artifact in Chromium/
+   WebView2 (a hard-edged patch instead of a soft circular glow), so this
+   sticks to a normal translucent overlay instead. */
 body::after {
   content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(circle 380px at 50% 50%, rgba(57,255,157,.4), rgba(0,229,255,.18) 45%, transparent 72%) no-repeat;
-  mix-blend-mode: screen;
+  background: radial-gradient(circle 380px at 50% 50%, rgba(57,255,157,.28), rgba(0,229,255,.14) 45%, transparent 72%) no-repeat;
   animation: spotlightDrift 19s ease-in-out infinite;
 }
 @keyframes spotlightDrift {
