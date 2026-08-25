@@ -20,12 +20,18 @@ App.profile = (function () {
   };
 
   const COLORS = [
-    '#00e5ff', '#0088ff', '#4dd0ff', '#39ff9d', '#00c46a', '#a3ff4d',
-    '#ffcf3f', '#ff8a3d', '#ff3d6e', '#ff0044', '#b829ff', '#8b5cf6',
-    '#ff2ec4', '#ffffff', '#8a95a6', '#6b4226'
+    '#00e5ff', '#0088ff', '#0ea5e9', '#4dd0ff', '#39ff9d', '#00c46a', '#22c55e', '#a3ff4d',
+    '#ffcf3f', '#eab308', '#ff8a3d', '#f97316', '#ff3d6e', '#ff0044', '#ec4899', '#ff2ec4',
+    '#b829ff', '#8b5cf6', '#7c3aed', '#0d9488', '#ffffff', '#8a95a6', '#6b4226', '#000000'
   ];
 
-  const BG_PATTERNS = ['solid', 'forest', 'sky', 'sunset', 'ocean', 'space', 'meadow'];
+  const BG_PATTERNS = ['solid', 'forest', 'sky', 'sunset', 'ocean', 'space', 'meadow',
+    'mountain', 'desert', 'snow', 'volcano', 'city', 'rainbow'];
+
+  // Flag badge reuses the app's existing CSS-drawn language flags — no new
+  // art needed. Read lazily (App.LANG_ORDER isn't defined yet when this file
+  // loads, since app.js loads later) rather than cached at module init time.
+  function flagList() { return App.LANG_ORDER || []; }
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -64,7 +70,8 @@ App.profile = (function () {
       animalColor: p.animalColor || legacy,
       bgColor: p.bgColor || legacy,
       outlineColor: p.outlineColor || legacy,
-      bgPattern: BG_PATTERNS.includes(p.bgPattern) ? p.bgPattern : 'solid'
+      bgPattern: BG_PATTERNS.includes(p.bgPattern) ? p.bgPattern : 'solid',
+      flag: p.flag || null
     };
   }
 
@@ -76,7 +83,8 @@ App.profile = (function () {
     const bgStyle = p.bgPattern === 'solid'
       ? `background: radial-gradient(circle at 35% 30%, color-mix(in srgb, ${p.bgColor} 45%, var(--surface-2)), color-mix(in srgb, ${p.bgColor} 14%, var(--surface-2)) 75%);`
       : '';
-    return `<span class="avatar-badge${patternClass}" style="--avatar-size:${size}px; --avatar-color:${p.outlineColor}; ${bgStyle}"><span class="avatar-badge-emoji" style="filter:${tintFilter(p.animalColor)}">${emoji}</span></span>`;
+    const flagBadge = p.flag ? `<span class="avatar-flag-badge">${App.ui.flagChip(p.flag)}</span>` : '';
+    return `<span class="avatar-badge${patternClass}" style="--avatar-size:${size}px; --avatar-color:${p.outlineColor}; ${bgStyle}"><span class="avatar-badge-emoji" style="filter:${tintFilter(p.animalColor)}">${emoji}</span>${flagBadge}</span>`;
   }
 
   function ensureProfile() {
@@ -129,6 +137,12 @@ App.profile = (function () {
         <div class="profile-section-label">${App.t('profile_outline_color_label')}</div>
         <div class="profile-color-row" id="profile-color-row-outline">${colorRowHtml('outline', draft.outlineColor)}</div>
 
+        <div class="profile-section-label">${App.t('profile_flag_label')}</div>
+        <div class="profile-flag-row" id="profile-flag-row">
+          <button type="button" class="profile-flag-opt profile-flag-none ${!draft.flag ? 'active' : ''}" data-flag="">✕</button>
+          ${flagList().map(code => `<button type="button" class="profile-flag-opt ${code === draft.flag ? 'active' : ''}" data-flag="${code}">${App.ui.flagChip(code)}</button>`).join('')}
+        </div>
+
         <div class="profile-modal-actions">
           <button class="action-card" id="profile-cancel" style="display:inline-flex">${App.t('profile_cancel')}</button>
           <button class="action-card" id="profile-save" style="display:inline-flex">${App.t('profile_save')}</button>
@@ -150,6 +164,7 @@ App.profile = (function () {
       overlay.querySelectorAll('#profile-color-row-animal .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.animalColor));
       overlay.querySelectorAll('#profile-color-row-bg .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.bgColor));
       overlay.querySelectorAll('#profile-color-row-outline .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.outlineColor));
+      overlay.querySelectorAll('.profile-flag-opt').forEach(b => b.classList.toggle('active', b.dataset.flag === (draft.flag || '')));
       updateBgColorRowVisibility();
     }
 
@@ -167,6 +182,9 @@ App.profile = (function () {
         else if (role === 'outline') draft.outlineColor = btn.dataset.color;
         refreshPreview();
       });
+    });
+    overlay.querySelectorAll('.profile-flag-opt').forEach(btn => {
+      btn.addEventListener('click', () => { draft.flag = btn.dataset.flag || null; refreshPreview(); });
     });
 
     updateBgColorRowVisibility();

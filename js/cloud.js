@@ -38,7 +38,7 @@ App.cloud = (function () {
     return db.collection('users').doc(uid).set({
       uid, name: profile.name, animal: profile.animal,
       animalColor: profile.animalColor, bgColor: profile.bgColor,
-      outlineColor: profile.outlineColor, bgPattern: profile.bgPattern,
+      outlineColor: profile.outlineColor, bgPattern: profile.bgPattern, flag: profile.flag || null,
       level, weeklyXP, week,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });

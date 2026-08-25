@@ -134,7 +134,8 @@ App.I18N = {
     bgp_sunset: 'Закат',
     bgp_ocean: 'Океан',
     bgp_space: 'Космос',
-    bgp_meadow: 'Луг'
+    bgp_meadow: 'Луг',
+    profile_flag_label: 'Флаг'
   },
 
   en: {
@@ -267,7 +268,8 @@ App.I18N = {
     bgp_sunset: 'Sunset',
     bgp_ocean: 'Ocean',
     bgp_space: 'Space',
-    bgp_meadow: 'Meadow'
+    bgp_meadow: 'Meadow',
+    profile_flag_label: 'Flag'
   },
 
   de: {
@@ -400,7 +402,8 @@ App.I18N = {
     bgp_sunset: 'Sonnenuntergang',
     bgp_ocean: 'Ozean',
     bgp_space: 'Weltraum',
-    bgp_meadow: 'Wiese'
+    bgp_meadow: 'Wiese',
+    profile_flag_label: 'Flagge'
   },
 
   nl: {
@@ -533,7 +536,8 @@ App.I18N = {
     bgp_sunset: 'Zonsondergang',
     bgp_ocean: 'Oceaan',
     bgp_space: 'Ruimte',
-    bgp_meadow: 'Weide'
+    bgp_meadow: 'Weide',
+    profile_flag_label: 'Vlag'
   },
 
   sv: {
@@ -666,7 +670,8 @@ App.I18N = {
     bgp_sunset: 'Solnedgång',
     bgp_ocean: 'Hav',
     bgp_space: 'Rymden',
-    bgp_meadow: 'Äng'
+    bgp_meadow: 'Äng',
+    profile_flag_label: 'Flagga'
   },
 
   no: {
@@ -799,7 +804,8 @@ App.I18N = {
     bgp_sunset: 'Solnedgang',
     bgp_ocean: 'Hav',
     bgp_space: 'Verdensrommet',
-    bgp_meadow: 'Eng'
+    bgp_meadow: 'Eng',
+    profile_flag_label: 'Flagg'
   },
 
   da: {
@@ -932,7 +938,8 @@ App.I18N = {
     bgp_sunset: 'Solnedgang',
     bgp_ocean: 'Hav',
     bgp_space: 'Rummet',
-    bgp_meadow: 'Eng'
+    bgp_meadow: 'Eng',
+    profile_flag_label: 'Flag'
   },
 
   fr: {
@@ -1065,7 +1072,8 @@ App.I18N = {
     bgp_sunset: 'Coucher de soleil',
     bgp_ocean: 'Océan',
     bgp_space: 'Espace',
-    bgp_meadow: 'Prairie'
+    bgp_meadow: 'Prairie',
+    profile_flag_label: 'Drapeau'
   },
 
   es: {
@@ -1198,7 +1206,8 @@ App.I18N = {
     bgp_sunset: 'Atardecer',
     bgp_ocean: 'Océano',
     bgp_space: 'Espacio',
-    bgp_meadow: 'Pradera'
+    bgp_meadow: 'Pradera',
+    profile_flag_label: 'Bandera'
   },
 
   it: {
@@ -1331,7 +1340,8 @@ App.I18N = {
     bgp_sunset: 'Tramonto',
     bgp_ocean: 'Oceano',
     bgp_space: 'Spazio',
-    bgp_meadow: 'Prato'
+    bgp_meadow: 'Prato',
+    profile_flag_label: 'Bandiera'
   },
 
   pt: {
@@ -1464,7 +1474,8 @@ App.I18N = {
     bgp_sunset: 'Pôr do sol',
     bgp_ocean: 'Oceano',
     bgp_space: 'Espaço',
-    bgp_meadow: 'Prado'
+    bgp_meadow: 'Prado',
+    profile_flag_label: 'Bandeira'
   },
 
   ro: {
@@ -1597,7 +1608,8 @@ App.I18N = {
     bgp_sunset: 'Apus',
     bgp_ocean: 'Ocean',
     bgp_space: 'Spațiu',
-    bgp_meadow: 'Pajiște'
+    bgp_meadow: 'Pajiște',
+    profile_flag_label: 'Steag'
   },
 
   hr: {
@@ -1730,7 +1742,8 @@ App.I18N = {
     bgp_sunset: 'Zalazak sunca',
     bgp_ocean: 'Ocean',
     bgp_space: 'Svemir',
-    bgp_meadow: 'Livada'
+    bgp_meadow: 'Livada',
+    profile_flag_label: 'Zastava'
   },
 
   sr: {
@@ -1863,7 +1876,8 @@ App.I18N = {
     bgp_sunset: 'Залазак сунца',
     bgp_ocean: 'Океан',
     bgp_space: 'Свемир',
-    bgp_meadow: 'Ливада'
+    bgp_meadow: 'Ливада',
+    profile_flag_label: 'Застава'
   },
 
   el: {
@@ -1996,7 +2010,8 @@ App.I18N = {
     bgp_sunset: 'Ηλιοβασίλεμα',
     bgp_ocean: 'Ωκεανός',
     bgp_space: 'Διάστημα',
-    bgp_meadow: 'Λιβάδι'
+    bgp_meadow: 'Λιβάδι',
+    profile_flag_label: 'Σημαία'
   },
 
   fi: {
@@ -2129,7 +2144,8 @@ App.I18N = {
     bgp_sunset: 'Auringonlasku',
     bgp_ocean: 'Valtameri',
     bgp_space: 'Avaruus',
-    bgp_meadow: 'Niitty'
+    bgp_meadow: 'Niitty',
+    profile_flag_label: 'Lippu'
   },
 
   hu: {
@@ -2262,7 +2278,8 @@ App.I18N = {
     bgp_sunset: 'Naplemente',
     bgp_ocean: 'Óceán',
     bgp_space: 'Világűr',
-    bgp_meadow: 'Rét'
+    bgp_meadow: 'Rét',
+    profile_flag_label: 'Zászló'
   },
 
   pl: {
@@ -2395,7 +2412,8 @@ App.I18N = {
     bgp_sunset: 'Zachód słońca',
     bgp_ocean: 'Ocean',
     bgp_space: 'Kosmos',
-    bgp_meadow: 'Łąka'
+    bgp_meadow: 'Łąka',
+    profile_flag_label: 'Flaga'
   },
 
   cs: {
@@ -2528,7 +2546,8 @@ App.I18N = {
     bgp_sunset: 'Západ slunce',
     bgp_ocean: 'Oceán',
     bgp_space: 'Vesmír',
-    bgp_meadow: 'Louka'
+    bgp_meadow: 'Louka',
+    profile_flag_label: 'Vlajka'
   },
 
   sk: {
@@ -2661,7 +2680,8 @@ App.I18N = {
     bgp_sunset: 'Západ slnka',
     bgp_ocean: 'Oceán',
     bgp_space: 'Vesmír',
-    bgp_meadow: 'Lúka'
+    bgp_meadow: 'Lúka',
+    profile_flag_label: 'Vlajka'
   },
 
   uk: {
@@ -2794,7 +2814,8 @@ App.I18N = {
     bgp_sunset: 'Захід сонця',
     bgp_ocean: 'Океан',
     bgp_space: 'Космос',
-    bgp_meadow: 'Луг'
+    bgp_meadow: 'Луг',
+    profile_flag_label: 'Прапор'
   },
 
   bg: {
@@ -2927,7 +2948,8 @@ App.I18N = {
     bgp_sunset: 'Залез',
     bgp_ocean: 'Океан',
     bgp_space: 'Космос',
-    bgp_meadow: 'Ливада'
+    bgp_meadow: 'Ливада',
+    profile_flag_label: 'Флаг'
   }
 };
 
