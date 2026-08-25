@@ -1,6 +1,12 @@
 window.App = window.App || {};
 App.views = App.views || {};
 
+// Wrapped in an IIFE so MAX_HEARTS/heartsHtml/shuffle/renderResult etc. stay
+// private to this file — classic <script> tags share one global scope, and a
+// same-named top-level const/function in another view file (e.g. quiz.js)
+// would otherwise collide with (or silently override) this one.
+(function () {
+
 // Hearts are per-lesson stakes, Duolingo-style — but this app never hard-locks
 // progress, so running out just shows an encouraging toast instead of stopping you.
 const MAX_HEARTS = 5;
@@ -231,3 +237,5 @@ function renderResult(root, state) {
     btn.addEventListener('click', () => App.router.go(btn.dataset.go));
   });
 }
+
+})();

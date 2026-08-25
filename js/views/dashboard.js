@@ -1,6 +1,11 @@
 window.App = window.App || {};
 App.views = App.views || {};
 
+// Wrapped in an IIFE so this file's top-level helpers stay private — classic
+// <script> tags share one global scope, and a same-named helper in another
+// view file would otherwise silently collide with (or override) this one.
+(function () {
+
 App.views.dashboard = {
   render(root) {
     const currentLang = App.storage.getCurrentLang();
@@ -219,3 +224,5 @@ function renderAchievements(root) {
     return `<div class="ach-badge ${isUnlocked ? 'unlocked' : 'locked'}" title="${App.t(a.titleKey)}">${a.icon}</div>`;
   }).join('');
 }
+
+})();

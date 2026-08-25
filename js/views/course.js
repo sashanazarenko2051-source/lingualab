@@ -1,6 +1,11 @@
 window.App = window.App || {};
 App.views = App.views || {};
 
+// Wrapped in an IIFE so this file's top-level helpers stay private — classic
+// <script> tags share one global scope, and a same-named helper in another
+// view file would otherwise silently collide with (or override) this one.
+(function () {
+
 // The 34 shared categories are grouped into CEFR levels by cumulative word
 // count, using commonly-cited vocabulary-size benchmarks per level (A0: ~500
 // words, A1: ~1000, A2: ~2000, B1: ~2000-3500). At 60 words/category that's:
@@ -184,3 +189,5 @@ function renderPath(root, code, lang, accent) {
   });
   el.querySelector('[data-dlg]')?.addEventListener('click', () => App.router.go('dialogues'));
 }
+
+})();

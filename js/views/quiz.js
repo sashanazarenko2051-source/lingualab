@@ -1,6 +1,12 @@
 window.App = window.App || {};
 App.views = App.views || {};
 
+// Wrapped in an IIFE so these top-level consts/functions stay private to this
+// file — classic <script> tags share one global scope, and a same-named
+// top-level const/function in another view file (e.g. flashcards.js) would
+// otherwise collide with (or silently override) this one.
+(function () {
+
 // Exam pass threshold: correct-answer percentage needed to mark a category "passed".
 const EXAM_PASS_PCT = 80;
 // A single-category exam already covers every word in that category (60 max).
@@ -210,3 +216,5 @@ function renderResult(root, state) {
     btn.addEventListener('click', () => App.router.go(btn.dataset.go));
   });
 }
+
+})();
