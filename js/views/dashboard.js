@@ -114,11 +114,15 @@ function renderLangGroups(root, currentLang, filter) {
   });
 }
 
+// Rough, commonly-cited linguistic benchmark for CEFR C2 (fluent/near-native)
+// vocabulary size — not computed from app data, just a reference point shown
+// in the third badge's tooltip so learners can gauge how far 2000ish words go.
+const C2_VOCAB_ESTIMATE = '8–10k';
+
 function langCardHtml(code, currentLang) {
   const lang = App.data[code];
   const words = App.words.allWords(code);
   const mastered = words.filter(w => App.srs.isMastered(w.id)).length;
-  const started = words.filter(w => !App.srs.isNew(w.id)).length;
   const total = words.length;
   const pct = total ? Math.round((mastered / total) * 100) : 0;
   const active = code === currentLang ? 'active' : '';
@@ -129,8 +133,8 @@ function langCardHtml(code, currentLang) {
       <span class="lang-progress"><span class="lang-progress-fill" style="width:${pct}%"></span></span>
       <span class="lang-meta-row">
         <span title="${App.t('dash_stat_mastered')}">✅ ${mastered}</span>
-        <span title="${App.t('dash_lang_started')}">📥 ${started}</span>
         <span title="${App.t('dash_lang_total')}">📚 ${total}</span>
+        <span title="${App.t('dash_lang_c2_hint')}">🎓 ${C2_VOCAB_ESTIMATE}</span>
       </span>
     </button>
   `;

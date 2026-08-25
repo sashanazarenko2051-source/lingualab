@@ -87,10 +87,8 @@ App.I18N = {
     ach_level_5: '5 уровень',
     ach_level_10: '10 уровень',
     ach_polyglot_3: '3 языка одновременно',
-
-
-    dash_lang_started: 'Начато изучение',
-    dash_lang_total: 'Всего слов в языке'
+    dash_lang_total: 'Всего слов в языке',
+    dash_lang_c2_hint: 'Примерно столько слов нужно знать для свободного владения (уровень C2) — по общим оценкам лингвистов'
   },
 
   en: {
@@ -176,10 +174,8 @@ App.I18N = {
     ach_level_5: 'Level 5',
     ach_level_10: 'Level 10',
     ach_polyglot_3: '3 languages at once',
-
-
-    dash_lang_started: 'Words started',
-    dash_lang_total: 'Total words in this language'
+    dash_lang_total: 'Total words in this language',
+    dash_lang_c2_hint: 'Roughly how many words are needed for fluent (C2-level) command of the language, per common linguistic estimates'
   },
 
   de: {
@@ -265,10 +261,8 @@ App.I18N = {
     ach_level_5: 'Level 5',
     ach_level_10: 'Level 10',
     ach_polyglot_3: '3 Sprachen gleichzeitig',
-
-
-    dash_lang_started: 'Begonnene Wörter',
-    dash_lang_total: 'Wörter insgesamt in dieser Sprache'
+    dash_lang_total: 'Wörter insgesamt in dieser Sprache',
+    dash_lang_c2_hint: 'Etwa so viele Wörter braucht man laut gängigen Schätzungen für fließende Beherrschung (Niveau C2)'
   },
 
   nl: {
@@ -354,10 +348,8 @@ App.I18N = {
     ach_level_5: 'Level 5',
     ach_level_10: 'Level 10',
     ach_polyglot_3: '3 talen tegelijk',
-
-
-    dash_lang_started: 'Begonnen woorden',
-    dash_lang_total: 'Totaal aantal woorden in deze taal'
+    dash_lang_total: 'Totaal aantal woorden in deze taal',
+    dash_lang_c2_hint: 'Ongeveer zoveel woorden zijn nodig voor vloeiende beheersing (niveau C2), volgens gangbare schattingen'
   },
 
   sv: {
@@ -443,10 +435,8 @@ App.I18N = {
     ach_level_5: 'Nivå 5',
     ach_level_10: 'Nivå 10',
     ach_polyglot_3: '3 språk samtidigt',
-
-
-    dash_lang_started: 'Påbörjade ord',
-    dash_lang_total: 'Totalt antal ord i detta språk'
+    dash_lang_total: 'Totalt antal ord i detta språk',
+    dash_lang_c2_hint: 'Ungefär så många ord behövs för flytande behärskning (nivå C2), enligt vanliga uppskattningar'
   },
 
   no: {
@@ -532,10 +522,8 @@ App.I18N = {
     ach_level_5: 'Nivå 5',
     ach_level_10: 'Nivå 10',
     ach_polyglot_3: '3 språk samtidig',
-
-
-    dash_lang_started: 'Påbegynte ord',
-    dash_lang_total: 'Totalt antall ord i dette språket'
+    dash_lang_total: 'Totalt antall ord i dette språket',
+    dash_lang_c2_hint: 'Omtrent så mange ord trengs for flytende beherskelse (nivå C2), ifølge vanlige anslag'
   },
 
   da: {
@@ -621,10 +609,8 @@ App.I18N = {
     ach_level_5: 'Niveau 5',
     ach_level_10: 'Niveau 10',
     ach_polyglot_3: '3 sprog samtidig',
-
-
-    dash_lang_started: 'Påbegyndte ord',
-    dash_lang_total: 'Samlet antal ord på dette sprog'
+    dash_lang_total: 'Samlet antal ord på dette sprog',
+    dash_lang_c2_hint: 'Cirka så mange ord kræves for flydende beherskelse (niveau C2), ifølge almindelige skøn'
   },
 
   fr: {
@@ -710,10 +696,8 @@ App.I18N = {
     ach_level_5: 'Niveau 5',
     ach_level_10: 'Niveau 10',
     ach_polyglot_3: '3 langues à la fois',
-
-
-    dash_lang_started: 'Mots commencés',
-    dash_lang_total: 'Total de mots dans cette langue'
+    dash_lang_total: 'Total de mots dans cette langue',
+    dash_lang_c2_hint: 'Il faut environ ce nombre de mots pour une maîtrise courante (niveau C2), selon les estimations courantes'
   },
 
   es: {
@@ -799,10 +783,8 @@ App.I18N = {
     ach_level_5: 'Nivel 5',
     ach_level_10: 'Nivel 10',
     ach_polyglot_3: '3 idiomas a la vez',
-
-
-    dash_lang_started: 'Palabras iniciadas',
-    dash_lang_total: 'Total de palabras en este idioma'
+    dash_lang_total: 'Total de palabras en este idioma',
+    dash_lang_c2_hint: 'Aproximadamente esa cantidad de palabras se necesita para un dominio fluido (nivel C2), según estimaciones habituales'
   },
 
   it: {
@@ -888,10 +870,8 @@ App.I18N = {
     ach_level_5: 'Livello 5',
     ach_level_10: 'Livello 10',
     ach_polyglot_3: '3 lingue insieme',
-
-
-    dash_lang_started: 'Parole iniziate',
-    dash_lang_total: 'Totale parole in questa lingua'
+    dash_lang_total: 'Totale parole in questa lingua',
+    dash_lang_c2_hint: 'Circa questo numero di parole serve per una padronanza fluente (livello C2), secondo le stime comuni'
   },
 
   pt: {
@@ -977,10 +957,8 @@ App.I18N = {
     ach_level_5: 'Nível 5',
     ach_level_10: 'Nível 10',
     ach_polyglot_3: '3 idiomas ao mesmo tempo',
-
-
-    dash_lang_started: 'Palavras iniciadas',
-    dash_lang_total: 'Total de palavras neste idioma'
+    dash_lang_total: 'Total de palavras neste idioma',
+    dash_lang_c2_hint: 'Aproximadamente esta quantidade de palavras é necessária para o domínio fluente (nível C2), segundo estimativas comuns'
   },
 
   ro: {
@@ -1066,10 +1044,8 @@ App.I18N = {
     ach_level_5: 'Nivelul 5',
     ach_level_10: 'Nivelul 10',
     ach_polyglot_3: '3 limbi simultan',
-
-
-    dash_lang_started: 'Cuvinte începute',
-    dash_lang_total: 'Total cuvinte în această limbă'
+    dash_lang_total: 'Total cuvinte în această limbă',
+    dash_lang_c2_hint: 'Aproximativ atâtea cuvinte sunt necesare pentru o stăpânire fluentă (nivel C2), conform estimărilor uzuale'
   },
 
   hr: {
@@ -1155,10 +1131,8 @@ App.I18N = {
     ach_level_5: 'Razina 5',
     ach_level_10: 'Razina 10',
     ach_polyglot_3: '3 jezika istovremeno',
-
-
-    dash_lang_started: 'Započete riječi',
-    dash_lang_total: 'Ukupno riječi u ovom jeziku'
+    dash_lang_total: 'Ukupno riječi u ovom jeziku',
+    dash_lang_c2_hint: 'Otprilike toliko riječi je potrebno za tečno vladanje (razina C2), prema uobičajenim procjenama'
   },
 
   sr: {
@@ -1244,10 +1218,8 @@ App.I18N = {
     ach_level_5: 'Ниво 5',
     ach_level_10: 'Ниво 10',
     ach_polyglot_3: '3 језика истовремено',
-
-
-    dash_lang_started: 'Започете речи',
-    dash_lang_total: 'Укупно речи у овом језику'
+    dash_lang_total: 'Укупно речи у овом језику',
+    dash_lang_c2_hint: 'Отприлике толико речи је потребно за течно владање (ниво Ц2), према уобичајеним проценама'
   },
 
   el: {
@@ -1333,10 +1305,8 @@ App.I18N = {
     ach_level_5: 'Επίπεδο 5',
     ach_level_10: 'Επίπεδο 10',
     ach_polyglot_3: '3 γλώσσες ταυτόχρονα',
-
-
-    dash_lang_started: 'Λέξεις που ξεκίνησες',
-    dash_lang_total: 'Σύνολο λέξεων σε αυτή τη γλώσσα'
+    dash_lang_total: 'Σύνολο λέξεων σε αυτή τη γλώσσα',
+    dash_lang_c2_hint: 'Περίπου τόσες λέξεις χρειάζονται για άπταιστη χρήση (επίπεδο C2), σύμφωνα με συνήθεις εκτιμήσεις'
   },
 
   fi: {
@@ -1422,10 +1392,8 @@ App.I18N = {
     ach_level_5: 'Taso 5',
     ach_level_10: 'Taso 10',
     ach_polyglot_3: '3 kieltä yhtä aikaa',
-
-
-    dash_lang_started: 'Aloitetut sanat',
-    dash_lang_total: 'Sanoja yhteensä tällä kielellä'
+    dash_lang_total: 'Sanoja yhteensä tällä kielellä',
+    dash_lang_c2_hint: 'Suunnilleen näin monta sanaa tarvitaan sujuvaan hallintaan (taso C2) yleisten arvioiden mukaan'
   },
 
   hu: {
@@ -1511,10 +1479,8 @@ App.I18N = {
     ach_level_5: '5. szint',
     ach_level_10: '10. szint',
     ach_polyglot_3: '3 nyelv egyszerre',
-
-
-    dash_lang_started: 'Elkezdett szavak',
-    dash_lang_total: 'Szavak összesen ezen a nyelven'
+    dash_lang_total: 'Szavak összesen ezen a nyelven',
+    dash_lang_c2_hint: 'Nagyjából ennyi szóra van szükség a folyékony nyelvtudáshoz (C2 szint), a szokásos becslések szerint'
   },
 
   pl: {
@@ -1600,10 +1566,8 @@ App.I18N = {
     ach_level_5: 'Poziom 5',
     ach_level_10: 'Poziom 10',
     ach_polyglot_3: '3 języki naraz',
-
-
-    dash_lang_started: 'Rozpoczęte słowa',
-    dash_lang_total: 'Łącznie słów w tym języku'
+    dash_lang_total: 'Łącznie słów w tym języku',
+    dash_lang_c2_hint: 'Mniej więcej tyle słów potrzeba do biegłego posługiwania się językiem (poziom C2), według typowych szacunków'
   },
 
   cs: {
@@ -1689,10 +1653,8 @@ App.I18N = {
     ach_level_5: 'Úroveň 5',
     ach_level_10: 'Úroveň 10',
     ach_polyglot_3: '3 jazyky najednou',
-
-
-    dash_lang_started: 'Zahájená slova',
-    dash_lang_total: 'Celkem slov v tomto jazyce'
+    dash_lang_total: 'Celkem slov v tomto jazyce',
+    dash_lang_c2_hint: 'Přibližně tolik slov je potřeba pro plynulé ovládnutí jazyka (úroveň C2), podle běžných odhadů'
   },
 
   sk: {
@@ -1778,10 +1740,8 @@ App.I18N = {
     ach_level_5: 'Úroveň 5',
     ach_level_10: 'Úroveň 10',
     ach_polyglot_3: '3 jazyky naraz',
-
-
-    dash_lang_started: 'Začaté slová',
-    dash_lang_total: 'Celkom slov v tomto jazyku'
+    dash_lang_total: 'Celkom slov v tomto jazyku',
+    dash_lang_c2_hint: 'Približne toľko slov je potrebných na plynulé ovládanie jazyka (úroveň C2), podľa bežných odhadov'
   },
 
   uk: {
@@ -1867,10 +1827,8 @@ App.I18N = {
     ach_level_5: 'Рівень 5',
     ach_level_10: 'Рівень 10',
     ach_polyglot_3: '3 мови одночасно',
-
-
-    dash_lang_started: 'Розпочаті слова',
-    dash_lang_total: 'Всього слів у цій мові'
+    dash_lang_total: 'Всього слів у цій мові',
+    dash_lang_c2_hint: 'Приблизно стільки слів потрібно для вільного володіння (рівень C2), за поширеними оцінками'
   },
 
   bg: {
@@ -1956,10 +1914,8 @@ App.I18N = {
     ach_level_5: 'Ниво 5',
     ach_level_10: 'Ниво 10',
     ach_polyglot_3: '3 езика едновременно',
-
-
-    dash_lang_started: 'Започнати думи',
-    dash_lang_total: 'Общо думи в този език'
+    dash_lang_total: 'Общо думи в този език',
+    dash_lang_c2_hint: 'Приблизно толкова думи са нужни за свободно владеене (ниво C2), според обичайните оценки'
   }
 };
 
