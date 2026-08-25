@@ -66,6 +66,7 @@ App.views.course = {
     });
 
     renderPath(root, code, lang, accent);
+    App.mascot.renderWidget(root);
   }
 };
 

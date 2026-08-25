@@ -99,7 +99,17 @@ App.I18N = {
     course_level_exam_label: 'Экзамен уровня {{level}}',
     hearts_title: 'Жизни в этом уроке',
     toast_combo: 'Комбо ×{{combo}}!',
-    toast_perfect: 'Идеально! Бонус за урок без ошибок'
+    toast_perfect: 'Идеально! Бонус за урок без ошибок',
+    mascot_streak: '🔥 Серия {{streak}} дней подряд! Так держать!',
+    mascot_daily_goal: 'Ещё {{remaining}} слов до дневной цели!',
+    mascot_tip_1: 'Каждое слово — шаг вперёд! 🚀',
+    mascot_tip_2: 'Практика — ключ к свободному языку 🔑',
+    mascot_tip_3: 'Ты можешь больше, чем думаешь! 💪',
+    mascot_tip_4: 'Маленькие шаги ведут к большим результатам 🌱',
+    mascot_tip_5: 'Ошибки — это часть обучения 😊',
+    mascot_tip_6: 'Попробуй произнести слово вслух! 🔊',
+    mascot_tip_7: 'Регулярность важнее интенсивности 📅',
+    mascot_tip_8: 'Я в тебя верю! Вперёд 🎉'
   },
 
   en: {
@@ -197,7 +207,17 @@ App.I18N = {
     course_level_exam_label: 'Level {{level}} exam',
     hearts_title: 'Hearts in this lesson',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfect! Bonus for a flawless lesson'
+    toast_perfect: 'Perfect! Bonus for a flawless lesson',
+    mascot_streak: '🔥 {{streak}}-day streak! Keep it up!',
+    mascot_daily_goal: '{{remaining}} more words to your daily goal!',
+    mascot_tip_1: 'Every word is a step forward! 🚀',
+    mascot_tip_2: 'Practice is the key to fluency 🔑',
+    mascot_tip_3: 'You can do more than you think! 💪',
+    mascot_tip_4: 'Small steps lead to big results 🌱',
+    mascot_tip_5: 'Mistakes are part of learning 😊',
+    mascot_tip_6: 'Try saying the word out loud! 🔊',
+    mascot_tip_7: 'Consistency beats intensity 📅',
+    mascot_tip_8: 'I believe in you! Let\'s go 🎉'
   },
 
   de: {
@@ -295,7 +315,17 @@ App.I18N = {
     course_level_exam_label: 'Prüfung Niveau {{level}}',
     hearts_title: 'Herzen in dieser Lektion',
     toast_combo: 'Kombo x{{combo}}!',
-    toast_perfect: 'Perfekt! Bonus für eine fehlerfreie Lektion'
+    toast_perfect: 'Perfekt! Bonus für eine fehlerfreie Lektion',
+    mascot_streak: '🔥 {{streak}} Tage in Folge! Weiter so!',
+    mascot_daily_goal: 'Noch {{remaining}} Wörter bis zum Tagesziel!',
+    mascot_tip_1: 'Jedes Wort ist ein Schritt nach vorn! 🚀',
+    mascot_tip_2: 'Übung ist der Schlüssel zur Sprachgewandtheit 🔑',
+    mascot_tip_3: 'Du kannst mehr, als du denkst! 💪',
+    mascot_tip_4: 'Kleine Schritte führen zu großen Erfolgen 🌱',
+    mascot_tip_5: 'Fehler gehören zum Lernen dazu 😊',
+    mascot_tip_6: 'Versuch, das Wort laut auszusprechen! 🔊',
+    mascot_tip_7: 'Beständigkeit schlägt Intensität 📅',
+    mascot_tip_8: 'Ich glaube an dich! Auf geht\'s 🎉'
   },
 
   nl: {
@@ -393,7 +423,17 @@ App.I18N = {
     course_level_exam_label: 'Examen niveau {{level}}',
     hearts_title: 'Levens in deze les',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfect! Bonus voor een foutloze les'
+    toast_perfect: 'Perfect! Bonus voor een foutloze les',
+    mascot_streak: '🔥 {{streak}} dagen op rij! Ga zo door!',
+    mascot_daily_goal: 'Nog {{remaining}} woorden tot je dagdoel!',
+    mascot_tip_1: 'Elk woord is een stap vooruit! 🚀',
+    mascot_tip_2: 'Oefening is de sleutel tot vloeiendheid 🔑',
+    mascot_tip_3: 'Je kunt meer dan je denkt! 💪',
+    mascot_tip_4: 'Kleine stapjes leiden tot grote resultaten 🌱',
+    mascot_tip_5: 'Fouten horen bij het leren 😊',
+    mascot_tip_6: 'Probeer het woord hardop te zeggen! 🔊',
+    mascot_tip_7: 'Regelmaat wint het van intensiteit 📅',
+    mascot_tip_8: 'Ik geloof in je! Kom op 🎉'
   },
 
   sv: {
@@ -491,7 +531,17 @@ App.I18N = {
     course_level_exam_label: 'Prov nivå {{level}}',
     hearts_title: 'Liv i denna lektion',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfekt! Bonus för en felfri lektion'
+    toast_perfect: 'Perfekt! Bonus för en felfri lektion',
+    mascot_streak: '🔥 {{streak}} dagar i rad! Fortsätt så!',
+    mascot_daily_goal: '{{remaining}} ord kvar till dagens mål!',
+    mascot_tip_1: 'Varje ord är ett steg framåt! 🚀',
+    mascot_tip_2: 'Övning ger färdighet 🔑',
+    mascot_tip_3: 'Du klarar mer än du tror! 💪',
+    mascot_tip_4: 'Små steg leder till stora resultat 🌱',
+    mascot_tip_5: 'Misstag är en del av lärandet 😊',
+    mascot_tip_6: 'Försök säga ordet högt! 🔊',
+    mascot_tip_7: 'Regelbundenhet slår intensitet 📅',
+    mascot_tip_8: 'Jag tror på dig! Kör igång 🎉'
   },
 
   no: {
@@ -589,7 +639,17 @@ App.I18N = {
     course_level_exam_label: 'Eksamen nivå {{level}}',
     hearts_title: 'Liv i denne leksjonen',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfekt! Bonus for en feilfri leksjon'
+    toast_perfect: 'Perfekt! Bonus for en feilfri leksjon',
+    mascot_streak: '🔥 {{streak}} dager på rad! Fortsett sånn!',
+    mascot_daily_goal: '{{remaining}} ord igjen til dagens mål!',
+    mascot_tip_1: 'Hvert ord er et steg fremover! 🚀',
+    mascot_tip_2: 'Øvelse gjør mester 🔑',
+    mascot_tip_3: 'Du klarer mer enn du tror! 💪',
+    mascot_tip_4: 'Små steg fører til store resultater 🌱',
+    mascot_tip_5: 'Feil er en del av læringen 😊',
+    mascot_tip_6: 'Prøv å si ordet høyt! 🔊',
+    mascot_tip_7: 'Jevnhet slår intensitet 📅',
+    mascot_tip_8: 'Jeg tror på deg! Sett i gang 🎉'
   },
 
   da: {
@@ -687,7 +747,17 @@ App.I18N = {
     course_level_exam_label: 'Eksamen niveau {{level}}',
     hearts_title: 'Liv i denne lektion',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfekt! Bonus for en fejlfri lektion'
+    toast_perfect: 'Perfekt! Bonus for en fejlfri lektion',
+    mascot_streak: '🔥 {{streak}} dage i træk! Bliv ved!',
+    mascot_daily_goal: '{{remaining}} ord tilbage til dagens mål!',
+    mascot_tip_1: 'Hvert ord er et skridt fremad! 🚀',
+    mascot_tip_2: 'Øvelse gør mester 🔑',
+    mascot_tip_3: 'Du kan mere, end du tror! 💪',
+    mascot_tip_4: 'Små skridt fører til store resultater 🌱',
+    mascot_tip_5: 'Fejl er en del af at lære 😊',
+    mascot_tip_6: 'Prøv at sige ordet højt! 🔊',
+    mascot_tip_7: 'Regelmæssighed slår intensitet 📅',
+    mascot_tip_8: 'Jeg tror på dig! Kom så 🎉'
   },
 
   fr: {
@@ -785,7 +855,17 @@ App.I18N = {
     course_level_exam_label: 'Examen niveau {{level}}',
     hearts_title: 'Vies dans cette leçon',
     toast_combo: 'Combo x{{combo}} !',
-    toast_perfect: 'Parfait ! Bonus pour une leçon sans faute'
+    toast_perfect: 'Parfait ! Bonus pour une leçon sans faute',
+    mascot_streak: '🔥 {{streak}} jours d\'affilée ! Continue comme ça !',
+    mascot_daily_goal: 'Encore {{remaining}} mots avant ton objectif du jour !',
+    mascot_tip_1: 'Chaque mot est un pas en avant ! 🚀',
+    mascot_tip_2: 'La pratique est la clé de l\'aisance 🔑',
+    mascot_tip_3: 'Tu peux plus que tu ne le penses ! 💪',
+    mascot_tip_4: 'Les petits pas mènent aux grands résultats 🌱',
+    mascot_tip_5: 'Les erreurs font partie de l\'apprentissage 😊',
+    mascot_tip_6: 'Essaie de dire le mot à voix haute ! 🔊',
+    mascot_tip_7: 'La régularité l\'emporte sur l\'intensité 📅',
+    mascot_tip_8: 'Je crois en toi ! Allez 🎉'
   },
 
   es: {
@@ -883,7 +963,17 @@ App.I18N = {
     course_level_exam_label: 'Examen de nivel {{level}}',
     hearts_title: 'Vidas en esta lección',
     toast_combo: '¡Combo x{{combo}}!',
-    toast_perfect: '¡Perfecto! Bono por una lección sin errores'
+    toast_perfect: '¡Perfecto! Bono por una lección sin errores',
+    mascot_streak: '🔥 ¡{{streak}} días seguidos! ¡Sigue así!',
+    mascot_daily_goal: '¡{{remaining}} palabras más para tu meta diaria!',
+    mascot_tip_1: '¡Cada palabra es un paso adelante! 🚀',
+    mascot_tip_2: 'La práctica es la clave de la fluidez 🔑',
+    mascot_tip_3: '¡Puedes más de lo que crees! 💪',
+    mascot_tip_4: 'Los pequeños pasos llevan a grandes resultados 🌱',
+    mascot_tip_5: 'Los errores son parte del aprendizaje 😊',
+    mascot_tip_6: '¡Intenta decir la palabra en voz alta! 🔊',
+    mascot_tip_7: 'La constancia gana a la intensidad 📅',
+    mascot_tip_8: '¡Creo en ti! Vamos 🎉'
   },
 
   it: {
@@ -981,7 +1071,17 @@ App.I18N = {
     course_level_exam_label: 'Esame di livello {{level}}',
     hearts_title: 'Vite in questa lezione',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfetto! Bonus per una lezione senza errori'
+    toast_perfect: 'Perfetto! Bonus per una lezione senza errori',
+    mascot_streak: '🔥 {{streak}} giorni di fila! Continua così!',
+    mascot_daily_goal: 'Ancora {{remaining}} parole per il tuo obiettivo giornaliero!',
+    mascot_tip_1: 'Ogni parola è un passo avanti! 🚀',
+    mascot_tip_2: 'La pratica è la chiave della scioltezza 🔑',
+    mascot_tip_3: 'Puoi più di quanto pensi! 💪',
+    mascot_tip_4: 'I piccoli passi portano a grandi risultati 🌱',
+    mascot_tip_5: 'Gli errori fanno parte dell\'apprendimento 😊',
+    mascot_tip_6: 'Prova a dire la parola ad alta voce! 🔊',
+    mascot_tip_7: 'La costanza batte l\'intensità 📅',
+    mascot_tip_8: 'Credo in te! Andiamo 🎉'
   },
 
   pt: {
@@ -1079,7 +1179,17 @@ App.I18N = {
     course_level_exam_label: 'Exame de nível {{level}}',
     hearts_title: 'Vidas nesta lição',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfeito! Bónus por uma lição sem erros'
+    toast_perfect: 'Perfeito! Bónus por uma lição sem erros',
+    mascot_streak: '🔥 {{streak}} dias seguidos! Continua assim!',
+    mascot_daily_goal: 'Faltam {{remaining}} palavras para a tua meta diária!',
+    mascot_tip_1: 'Cada palavra é um passo em frente! 🚀',
+    mascot_tip_2: 'A prática é a chave para a fluência 🔑',
+    mascot_tip_3: 'Consegues mais do que pensas! 💪',
+    mascot_tip_4: 'Pequenos passos levam a grandes resultados 🌱',
+    mascot_tip_5: 'Os erros fazem parte do aprendizado 😊',
+    mascot_tip_6: 'Tenta dizer a palavra em voz alta! 🔊',
+    mascot_tip_7: 'A constância vence a intensidade 📅',
+    mascot_tip_8: 'Acredito em ti! Vamos lá 🎉'
   },
 
   ro: {
@@ -1177,7 +1287,17 @@ App.I18N = {
     course_level_exam_label: 'Examen de nivel {{level}}',
     hearts_title: 'Vieți în această lecție',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfect! Bonus pentru o lecție fără greșeli'
+    toast_perfect: 'Perfect! Bonus pentru o lecție fără greșeli',
+    mascot_streak: '🔥 {{streak}} zile la rând! Continuă așa!',
+    mascot_daily_goal: 'Încă {{remaining}} cuvinte până la obiectivul zilei!',
+    mascot_tip_1: 'Fiecare cuvânt este un pas înainte! 🚀',
+    mascot_tip_2: 'Practica este cheia fluenței 🔑',
+    mascot_tip_3: 'Poți mai mult decât crezi! 💪',
+    mascot_tip_4: 'Pașii mici duc la rezultate mari 🌱',
+    mascot_tip_5: 'Greșelile fac parte din învățare 😊',
+    mascot_tip_6: 'Încearcă să spui cuvântul cu voce tare! 🔊',
+    mascot_tip_7: 'Constanța bate intensitatea 📅',
+    mascot_tip_8: 'Cred în tine! Hai să începem 🎉'
   },
 
   hr: {
@@ -1275,7 +1395,17 @@ App.I18N = {
     course_level_exam_label: 'Ispit razine {{level}}',
     hearts_title: 'Životi u ovoj lekciji',
     toast_combo: 'Kombo x{{combo}}!',
-    toast_perfect: 'Savršeno! Bonus za lekciju bez pogrešaka'
+    toast_perfect: 'Savršeno! Bonus za lekciju bez pogrešaka',
+    mascot_streak: '🔥 {{streak}} dana zaredom! Nastavi tako!',
+    mascot_daily_goal: 'Još {{remaining}} riječi do dnevnog cilja!',
+    mascot_tip_1: 'Svaka riječ je korak naprijed! 🚀',
+    mascot_tip_2: 'Vježba je ključ tečnosti 🔑',
+    mascot_tip_3: 'Možeš više nego što misliš! 💪',
+    mascot_tip_4: 'Mali koraci vode do velikih rezultata 🌱',
+    mascot_tip_5: 'Pogreške su dio učenja 😊',
+    mascot_tip_6: 'Pokušaj izgovoriti riječ naglas! 🔊',
+    mascot_tip_7: 'Dosljednost pobjeđuje intenzitet 📅',
+    mascot_tip_8: 'Vjerujem u tebe! Idemo 🎉'
   },
 
   sr: {
@@ -1373,7 +1503,17 @@ App.I18N = {
     course_level_exam_label: 'Испит нивоа {{level}}',
     hearts_title: 'Животи у овој лекцији',
     toast_combo: 'Комбо x{{combo}}!',
-    toast_perfect: 'Савршено! Бонус за лекцију без грешака'
+    toast_perfect: 'Савршено! Бонус за лекцију без грешака',
+    mascot_streak: '🔥 {{streak}} дана заредом! Настави тако!',
+    mascot_daily_goal: 'Још {{remaining}} речи до дневног циља!',
+    mascot_tip_1: 'Свака реч је корак напред! 🚀',
+    mascot_tip_2: 'Вежба је кључ течности 🔑',
+    mascot_tip_3: 'Можеш више него што мислиш! 💪',
+    mascot_tip_4: 'Мали кораци воде до великих резултата 🌱',
+    mascot_tip_5: 'Грешке су део учења 😊',
+    mascot_tip_6: 'Покушај да изговориш реч наглас! 🔊',
+    mascot_tip_7: 'Доследност побеђује интензитет 📅',
+    mascot_tip_8: 'Верујем у тебе! Идемо 🎉'
   },
 
   el: {
@@ -1471,7 +1611,17 @@ App.I18N = {
     course_level_exam_label: 'Εξέταση επιπέδου {{level}}',
     hearts_title: 'Ζωές σε αυτό το μάθημα',
     toast_combo: 'Κόμπο x{{combo}}!',
-    toast_perfect: 'Τέλεια! Μπόνους για μάθημα χωρίς λάθη'
+    toast_perfect: 'Τέλεια! Μπόνους για μάθημα χωρίς λάθη',
+    mascot_streak: '🔥 {{streak}} μέρες συνεχόμενα! Συνέχισε έτσι!',
+    mascot_daily_goal: 'Ακόμη {{remaining}} λέξεις για τον στόχο της ημέρας!',
+    mascot_tip_1: 'Κάθε λέξη είναι ένα βήμα μπροστά! 🚀',
+    mascot_tip_2: 'Η εξάσκηση είναι το κλειδί της ευχέρειας 🔑',
+    mascot_tip_3: 'Μπορείς περισσότερα απ\' όσα νομίζεις! 💪',
+    mascot_tip_4: 'Τα μικρά βήματα οδηγούν σε μεγάλα αποτελέσματα 🌱',
+    mascot_tip_5: 'Τα λάθη είναι μέρος της μάθησης 😊',
+    mascot_tip_6: 'Δοκίμασε να πεις τη λέξη δυνατά! 🔊',
+    mascot_tip_7: 'Η συνέπεια νικά την ένταση 📅',
+    mascot_tip_8: 'Πιστεύω σε σένα! Πάμε 🎉'
   },
 
   fi: {
@@ -1569,7 +1719,17 @@ App.I18N = {
     course_level_exam_label: 'Tason {{level}} koe',
     hearts_title: 'Elämät tässä oppitunnissa',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Täydellistä! Bonus virheettömästä oppitunnista'
+    toast_perfect: 'Täydellistä! Bonus virheettömästä oppitunnista',
+    mascot_streak: '🔥 {{streak}} päivää putkeen! Jatka samaan malliin!',
+    mascot_daily_goal: 'Vielä {{remaining}} sanaa päivätavoitteeseen!',
+    mascot_tip_1: 'Jokainen sana on askel eteenpäin! 🚀',
+    mascot_tip_2: 'Harjoittelu on sujuvuuden avain 🔑',
+    mascot_tip_3: 'Pystyt enempään kuin luulet! 💪',
+    mascot_tip_4: 'Pienet askeleet johtavat suuriin tuloksiin 🌱',
+    mascot_tip_5: 'Virheet kuuluvat oppimiseen 😊',
+    mascot_tip_6: 'Kokeile sanoa sana ääneen! 🔊',
+    mascot_tip_7: 'Säännöllisyys voittaa tehokkuuden 📅',
+    mascot_tip_8: 'Uskon sinuun! Mennään 🎉'
   },
 
   hu: {
@@ -1667,7 +1827,17 @@ App.I18N = {
     course_level_exam_label: '{{level}} szintű vizsga',
     hearts_title: 'Életek ebben a leckében',
     toast_combo: 'Kombó x{{combo}}!',
-    toast_perfect: 'Tökéletes! Bónusz a hibátlan leckéért'
+    toast_perfect: 'Tökéletes! Bónusz a hibátlan leckéért',
+    mascot_streak: '🔥 {{streak}} napos sorozat! Így tovább!',
+    mascot_daily_goal: 'Még {{remaining}} szó a napi célig!',
+    mascot_tip_1: 'Minden szó egy lépés előre! 🚀',
+    mascot_tip_2: 'A gyakorlás a folyékonyság kulcsa 🔑',
+    mascot_tip_3: 'Többre vagy képes, mint gondolnád! 💪',
+    mascot_tip_4: 'A kis lépések nagy eredményekhez vezetnek 🌱',
+    mascot_tip_5: 'A hibák a tanulás részei 😊',
+    mascot_tip_6: 'Próbáld hangosan kimondani a szót! 🔊',
+    mascot_tip_7: 'A rendszeresség fontosabb, mint az intenzitás 📅',
+    mascot_tip_8: 'Hiszek benned! Gyerünk 🎉'
   },
 
   pl: {
@@ -1765,7 +1935,17 @@ App.I18N = {
     course_level_exam_label: 'Egzamin poziomu {{level}}',
     hearts_title: 'Życia w tej lekcji',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfekcyjnie! Bonus za lekcję bez błędów'
+    toast_perfect: 'Perfekcyjnie! Bonus za lekcję bez błędów',
+    mascot_streak: '🔥 {{streak}} dni z rzędu! Tak trzymaj!',
+    mascot_daily_goal: 'Jeszcze {{remaining}} słów do dziennego celu!',
+    mascot_tip_1: 'Każde słowo to krok naprzód! 🚀',
+    mascot_tip_2: 'Praktyka to klucz do płynności 🔑',
+    mascot_tip_3: 'Możesz więcej, niż myślisz! 💪',
+    mascot_tip_4: 'Małe kroki prowadzą do wielkich rezultatów 🌱',
+    mascot_tip_5: 'Błędy są częścią nauki 😊',
+    mascot_tip_6: 'Spróbuj powiedzieć słowo na głos! 🔊',
+    mascot_tip_7: 'Regularność liczy się bardziej niż intensywność 📅',
+    mascot_tip_8: 'Wierzę w ciebie! Do dzieła 🎉'
   },
 
   cs: {
@@ -1863,7 +2043,17 @@ App.I18N = {
     course_level_exam_label: 'Zkouška úrovně {{level}}',
     hearts_title: 'Životy v této lekci',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfektní! Bonus za lekci bez chyb'
+    toast_perfect: 'Perfektní! Bonus za lekci bez chyb',
+    mascot_streak: '🔥 {{streak}} dní v řadě! Tak dál!',
+    mascot_daily_goal: 'Ještě {{remaining}} slov do denního cíle!',
+    mascot_tip_1: 'Každé slovo je krok vpřed! 🚀',
+    mascot_tip_2: 'Praxe je klíčem k plynulosti 🔑',
+    mascot_tip_3: 'Zvládneš víc, než si myslíš! 💪',
+    mascot_tip_4: 'Malé kroky vedou k velkým výsledkům 🌱',
+    mascot_tip_5: 'Chyby jsou součástí učení 😊',
+    mascot_tip_6: 'Zkus říct slovo nahlas! 🔊',
+    mascot_tip_7: 'Pravidelnost je důležitější než intenzita 📅',
+    mascot_tip_8: 'Věřím ti! Jdeme na to 🎉'
   },
 
   sk: {
@@ -1961,7 +2151,17 @@ App.I18N = {
     course_level_exam_label: 'Skúška úrovne {{level}}',
     hearts_title: 'Životy v tejto lekcii',
     toast_combo: 'Combo x{{combo}}!',
-    toast_perfect: 'Perfektné! Bonus za lekciu bez chýb'
+    toast_perfect: 'Perfektné! Bonus za lekciu bez chýb',
+    mascot_streak: '🔥 {{streak}} dní v rade! Tak ďalej!',
+    mascot_daily_goal: 'Ešte {{remaining}} slov do denného cieľa!',
+    mascot_tip_1: 'Každé slovo je krok vpred! 🚀',
+    mascot_tip_2: 'Prax je kľúčom k plynulosti 🔑',
+    mascot_tip_3: 'Zvládneš viac, než si myslíš! 💪',
+    mascot_tip_4: 'Malé kroky vedú k veľkým výsledkom 🌱',
+    mascot_tip_5: 'Chyby sú súčasťou učenia 😊',
+    mascot_tip_6: 'Skús povedať slovo nahlas! 🔊',
+    mascot_tip_7: 'Pravidelnosť je dôležitejšia než intenzita 📅',
+    mascot_tip_8: 'Verím ti! Poďme na to 🎉'
   },
 
   uk: {
@@ -2059,7 +2259,17 @@ App.I18N = {
     course_level_exam_label: 'Іспит рівня {{level}}',
     hearts_title: 'Життя в цьому уроці',
     toast_combo: 'Комбо x{{combo}}!',
-    toast_perfect: 'Ідеально! Бонус за урок без помилок'
+    toast_perfect: 'Ідеально! Бонус за урок без помилок',
+    mascot_streak: '🔥 Серія {{streak}} днів поспіль! Так тримати!',
+    mascot_daily_goal: 'Ще {{remaining}} слів до денної мети!',
+    mascot_tip_1: 'Кожне слово — крок вперед! 🚀',
+    mascot_tip_2: 'Практика — ключ до вільної мови 🔑',
+    mascot_tip_3: 'Ти можеш більше, ніж думаєш! 💪',
+    mascot_tip_4: 'Маленькі кроки ведуть до великих результатів 🌱',
+    mascot_tip_5: 'Помилки — частина навчання 😊',
+    mascot_tip_6: 'Спробуй промовити слово вголос! 🔊',
+    mascot_tip_7: 'Регулярність важливіша за інтенсивність 📅',
+    mascot_tip_8: 'Я в тебе вірю! Вперед 🎉'
   },
 
   bg: {
@@ -2157,7 +2367,17 @@ App.I18N = {
     course_level_exam_label: 'Изпит за ниво {{level}}',
     hearts_title: 'Животи в този урок',
     toast_combo: 'Комбо x{{combo}}!',
-    toast_perfect: 'Перфектно! Бонус за урок без грешки'
+    toast_perfect: 'Перфектно! Бонус за урок без грешки',
+    mascot_streak: '🔥 {{streak}} дни подред! Продължавай така!',
+    mascot_daily_goal: 'Още {{remaining}} думи до дневната цел!',
+    mascot_tip_1: 'Всяка дума е крачка напред! 🚀',
+    mascot_tip_2: 'Практиката е ключът към свободното владеене 🔑',
+    mascot_tip_3: 'Можеш повече, отколкото си мислиш! 💪',
+    mascot_tip_4: 'Малките стъпки водят до големи резултати 🌱',
+    mascot_tip_5: 'Грешките са част от ученето 😊',
+    mascot_tip_6: 'Опитай да кажеш думата на глас! 🔊',
+    mascot_tip_7: 'Постоянството побеждава интензивността 📅',
+    mascot_tip_8: 'Вярвам в теб! Хайде 🎉'
   }
 };
 

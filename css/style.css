@@ -532,6 +532,32 @@ button { background: none; }
 .peek-icon { font-size: 22px; line-height: 1; }
 .peek-word { font-size: 11px; font-weight: 700; color: var(--ink-2); text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
 
+.mascot-widget {
+  position: fixed; right: 20px; bottom: 20px; z-index: 60;
+  display: flex; align-items: flex-end; gap: 10px; max-width: min(260px, calc(100vw - 40px));
+  animation: bubbleBounce 3.4s ease-in-out infinite;
+}
+.mascot-avatar {
+  flex: none; width: 54px; height: 54px; border-radius: 50%; font-size: 28px; line-height: 1;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  background: var(--surface-2); border: 2px solid var(--brand-1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-1) 14%, transparent), 0 6px 16px rgba(0,0,0,.35);
+  transition: transform .15s ease;
+}
+.mascot-avatar:hover { transform: scale(1.08) rotate(-6deg); }
+.mascot-avatar:active { transform: scale(.96); }
+.mascot-widget.bounce .mascot-avatar { animation: popIn .35s cubic-bezier(.34,1.56,.64,1); }
+.mascot-bubble {
+  background: var(--surface); border: 2px solid var(--border); border-radius: 14px 14px 4px 14px;
+  padding: 10px 14px; font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.4;
+  box-shadow: 0 6px 16px rgba(0,0,0,.3); animation: popIn .3s ease both;
+}
+@media (max-width: 640px) {
+  .mascot-widget { right: 12px; bottom: 12px; max-width: min(200px, calc(100vw - 24px)); }
+  .mascot-avatar { width: 44px; height: 44px; font-size: 22px; }
+  .mascot-bubble { font-size: 11px; padding: 8px 11px; }
+}
+
 .flashcard {
   width: 100%; max-width: 460px; background: var(--surface);
   border: 2px solid var(--border); border-radius: 16px; display: flex; flex-direction: column;
