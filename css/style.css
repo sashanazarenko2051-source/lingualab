@@ -50,33 +50,49 @@ body {
   background-attachment: fixed;
   animation: blobDrift 24s ease-in-out infinite;
 }
-/* Moving blueprint-grid overlay, separated into its own layer so its color
-   can cycle (hue-rotate) independently of the drifting glow blobs above.
-   Each tile gets a diagonal light/dark sweep (embossed-panel illusion) plus
-   a sparse glowing accent cell every few tiles, echoing a lit isometric-cube
-   pattern without needing any image assets. */
+/* Isometric 3D-cube backdrop: three repeating-linear-gradient band sets at
+   0/60/120deg overlap into a faceted diamond tessellation (light/mid/dark
+   faces per "cube") — a real isometric texture, not just flat grid lines.
+   Separated into its own layer so its color can shimmer (hue-rotate)
+   independently of the drifting glow blobs on body itself. */
 body::before {
   content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(9px 9px at 21px 21px, rgba(57,255,157,1) 0%, transparent 65%) 0 0 / 168px 168px,
-    radial-gradient(9px 9px at 21px 21px, rgba(0,229,255,1) 0%, transparent 65%) 84px 0px / 168px 168px,
-    radial-gradient(9px 9px at 21px 21px, rgba(184,41,255,1) 0%, transparent 65%) 0px 84px / 168px 168px,
-    radial-gradient(9px 9px at 21px 21px, rgba(255,61,110,1) 0%, transparent 65%) 84px 84px / 168px 168px,
-    linear-gradient(135deg, rgba(255,255,255,.32) 0%, transparent 50%) 0 0 / 42px 42px,
-    linear-gradient(315deg, rgba(0,0,0,.7) 0%, transparent 50%) 0 0 / 42px 42px,
-    linear-gradient(rgba(0,229,255,.32) 1.5px, transparent 1.5px) 0 0 / 42px 42px,
-    linear-gradient(90deg, rgba(0,229,255,.32) 1.5px, transparent 1.5px) 0 0 / 42px 42px;
-  animation: gridSlide 22s linear infinite, gridShimmer 12s linear infinite;
+    radial-gradient(4px 4px at 21px 21px, rgba(57,255,157,1) 0%, transparent 65%) 0 0 / 168px 168px,
+    radial-gradient(4px 4px at 21px 21px, rgba(0,229,255,1) 0%, transparent 65%) 84px 0px / 168px 168px,
+    radial-gradient(4px 4px at 21px 21px, rgba(184,41,255,1) 0%, transparent 65%) 0px 84px / 168px 168px,
+    radial-gradient(4px 4px at 21px 21px, rgba(255,61,110,1) 0%, transparent 65%) 84px 84px / 168px 168px,
+    repeating-linear-gradient(0deg, rgba(140,190,255,.09) 0 21px, transparent 21px 42px),
+    repeating-linear-gradient(60deg, rgba(140,190,255,.09) 0 21px, transparent 21px 42px),
+    repeating-linear-gradient(120deg, rgba(0,0,0,.4) 0 21px, transparent 21px 42px),
+    linear-gradient(#0a1120, #0a1120);
+  animation: gridDots 22s linear infinite, gridShimmer 12s linear infinite;
 }
-@keyframes gridSlide {
+@keyframes gridDots {
   0% { background-position: 0 0, 84px 0px, 0px 84px, 84px 84px, 0 0, 0 0, 0 0, 0 0; }
-  100% { background-position: 168px 168px, 252px 168px, 168px 252px, 252px 252px, 42px 42px, 42px 42px, 42px 42px, 42px 42px; }
+  100% { background-position: 168px 168px, 252px 168px, 168px 252px, 252px 252px, 0 0, 0 0, 0 0, 0 0; }
 }
 @keyframes gridShimmer {
-  0% { filter: hue-rotate(0deg) saturate(3.5); }
-  100% { filter: hue-rotate(360deg) saturate(3.5); }
+  0% { filter: hue-rotate(0deg) saturate(1.4); }
+  100% { filter: hue-rotate(360deg) saturate(1.4); }
 }
-#app { min-height: 100vh; display: flex; flex-direction: column; }
+/* A soft colored spotlight that drifts across the cube texture, screen-
+   blended so it visibly brightens whatever faces it passes over — the
+   moving lit patch from the reference image. */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle 480px at 50% 50%, rgba(57,255,157,.5), rgba(0,229,255,.24) 45%, transparent 72%) no-repeat;
+  mix-blend-mode: screen;
+  animation: spotlightDrift 19s ease-in-out infinite;
+}
+@keyframes spotlightDrift {
+  0%, 100% { background-position: 78% 30%; }
+  50% { background-position: 15% 70%; }
+}
+/* isolation:isolate keeps the spotlight's mix-blend-mode (body::after)
+   contained to the background layers behind it, so it can't bleed into
+   panels/text painted above it. */
+#app { min-height: 100vh; display: flex; flex-direction: column; position: relative; isolation: isolate; }
 button, select, input { font-family: inherit; font-size: inherit; color: inherit; }
 button { background: none; }
 
