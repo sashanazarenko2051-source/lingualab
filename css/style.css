@@ -84,15 +84,13 @@ button { background: none; }
   display: inline-flex; align-items: center; gap: 8px;
   filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand-1) 45%, transparent));
 }
-.brand::before {
-  content: ''; width: 10px; height: 10px; border-radius: 50%;
-  background: var(--brand-2); box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand-2) 55%, transparent);
-  animation: brandPulse 2.2s ease-in-out infinite;
+.brand-wolf {
+  display: inline-block; font-size: 20px; line-height: 1; filter: none;
+  animation: brandWolfBob 2.4s ease-in-out infinite;
 }
-@keyframes brandPulse {
-  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand-2) 50%, transparent); }
-  70% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--brand-2) 0%, transparent); }
-  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand-2) 0%, transparent); }
+@keyframes brandWolfBob {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(-8deg) translateY(-2px); }
 }
 #nav { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
 #nav button {
@@ -535,18 +533,43 @@ button { background: none; }
 .mascot-widget {
   position: fixed; right: 20px; bottom: 20px; z-index: 60;
   display: flex; align-items: flex-end; gap: 10px; max-width: min(260px, calc(100vw - 40px));
-  animation: bubbleBounce 3.4s ease-in-out infinite;
 }
 .mascot-avatar {
-  flex: none; width: 54px; height: 54px; border-radius: 50%; font-size: 28px; line-height: 1;
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-  background: var(--surface-2); border: 2px solid var(--brand-1);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-1) 14%, transparent), 0 6px 16px rgba(0,0,0,.35);
-  transition: transform .15s ease;
+  flex: none; position: relative; width: 66px; height: 88px; border: none; background: transparent;
+  padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  transition: transform .15s ease; animation: mascotIdle 2.6s ease-in-out infinite;
 }
-.mascot-avatar:hover { transform: scale(1.08) rotate(-6deg); }
-.mascot-avatar:active { transform: scale(.96); }
+.mascot-avatar:hover { transform: scale(1.06); }
+.mascot-avatar:active { transform: scale(.95); }
 .mascot-widget.bounce .mascot-avatar { animation: popIn .35s cubic-bezier(.34,1.56,.64,1); }
+.mascot-head {
+  font-size: 36px; line-height: 1; position: relative; z-index: 2;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.4)) drop-shadow(0 0 10px color-mix(in srgb, var(--brand-1) 40%, transparent));
+}
+.mascot-body {
+  width: 44px; height: 36px; margin-top: -10px; position: relative; z-index: 1;
+  border-radius: 50% 50% 46% 46% / 65% 65% 35% 35%;
+  background: linear-gradient(180deg, #8b95a6 0%, #565f70 100%);
+  box-shadow: 0 4px 10px rgba(0,0,0,.35), inset 0 -6px 8px rgba(0,0,0,.25), 0 0 0 2px color-mix(in srgb, var(--brand-1) 35%, transparent);
+}
+.mascot-body::after {
+  content: ''; position: absolute; left: 50%; bottom: 3px; transform: translateX(-50%);
+  width: 20px; height: 14px; border-radius: 50%; background: #d7dde3;
+}
+.mascot-tail {
+  position: absolute; right: 4px; bottom: 16px; z-index: 0;
+  width: 13px; height: 24px; border-radius: 60% 40% 60% 0%;
+  background: linear-gradient(180deg, #565f70, #363d4a);
+  transform-origin: top right; animation: mascotTailWag 1.5s ease-in-out infinite;
+}
+@keyframes mascotIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes mascotTailWag {
+  0%, 100% { transform: rotate(18deg); }
+  50% { transform: rotate(-8deg); }
+}
 .mascot-bubble {
   background: var(--surface); border: 2px solid var(--border); border-radius: 14px 14px 4px 14px;
   padding: 10px 14px; font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.4;
@@ -554,7 +577,10 @@ button { background: none; }
 }
 @media (max-width: 640px) {
   .mascot-widget { right: 12px; bottom: 12px; max-width: min(200px, calc(100vw - 24px)); }
-  .mascot-avatar { width: 44px; height: 44px; font-size: 22px; }
+  .mascot-avatar { width: 52px; height: 70px; }
+  .mascot-head { font-size: 28px; }
+  .mascot-body { width: 34px; height: 28px; }
+  .mascot-tail { width: 10px; height: 18px; }
   .mascot-bubble { font-size: 11px; padding: 8px 11px; }
 }
 

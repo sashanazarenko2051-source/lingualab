@@ -41,7 +41,11 @@ App.mascot = (function () {
     let lastTipKey = null;
     el.innerHTML = `
       <div class="mascot-bubble" id="mascot-bubble">${pickInitialMessage()}</div>
-      <button class="mascot-avatar" id="mascot-avatar" title="${App.t('mascot_tip_1')}">${CHAR}</button>
+      <button class="mascot-avatar" id="mascot-avatar" title="${App.t('mascot_tip_1')}">
+        <span class="mascot-tail"></span>
+        <span class="mascot-body"></span>
+        <span class="mascot-head">${CHAR}</span>
+      </button>
     `;
     root.appendChild(el);
 
