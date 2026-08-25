@@ -118,14 +118,20 @@ function langCardHtml(code, currentLang) {
   const lang = App.data[code];
   const words = App.words.allWords(code);
   const mastered = words.filter(w => App.srs.isMastered(w.id)).length;
-  const pct = words.length ? Math.round((mastered / words.length) * 100) : 0;
+  const started = words.filter(w => !App.srs.isNew(w.id)).length;
+  const total = words.length;
+  const pct = total ? Math.round((mastered / total) * 100) : 0;
   const active = code === currentLang ? 'active' : '';
   return `
     <button class="lang-card ${active}" data-lang="${code}" style="--accent: var(--slot-${lang.slot})">
       <span class="lang-flag">${App.ui.flagChip(code, 'xl')}</span>
       <span class="lang-name">${App.ui.langName(code)}</span>
       <span class="lang-progress"><span class="lang-progress-fill" style="width:${pct}%"></span></span>
-      <span class="lang-meta">${mastered} / ${words.length} ${App.t('dash_words_mastered_suffix')}</span>
+      <span class="lang-meta-row">
+        <span title="${App.t('dash_stat_mastered')}">✅ ${mastered}</span>
+        <span title="${App.t('dash_lang_started')}">📥 ${started}</span>
+        <span title="${App.t('dash_lang_total')}">📚 ${total}</span>
+      </span>
     </button>
   `;
 }

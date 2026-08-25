@@ -86,7 +86,11 @@ App.I18N = {
     ach_words_1000: '1000 слов освоено',
     ach_level_5: '5 уровень',
     ach_level_10: '10 уровень',
-    ach_polyglot_3: '3 языка одновременно'
+    ach_polyglot_3: '3 языка одновременно',
+
+
+    dash_lang_started: 'Начато изучение',
+    dash_lang_total: 'Всего слов в языке'
   },
 
   en: {
@@ -171,7 +175,11 @@ App.I18N = {
     ach_words_1000: '1000 words mastered',
     ach_level_5: 'Level 5',
     ach_level_10: 'Level 10',
-    ach_polyglot_3: '3 languages at once'
+    ach_polyglot_3: '3 languages at once',
+
+
+    dash_lang_started: 'Words started',
+    dash_lang_total: 'Total words in this language'
   },
 
   de: {
@@ -256,7 +264,11 @@ App.I18N = {
     ach_words_1000: '1000 Wörter gemeistert',
     ach_level_5: 'Level 5',
     ach_level_10: 'Level 10',
-    ach_polyglot_3: '3 Sprachen gleichzeitig'
+    ach_polyglot_3: '3 Sprachen gleichzeitig',
+
+
+    dash_lang_started: 'Begonnene Wörter',
+    dash_lang_total: 'Wörter insgesamt in dieser Sprache'
   },
 
   nl: {
@@ -341,7 +353,11 @@ App.I18N = {
     ach_words_1000: '1000 woorden onder de knie',
     ach_level_5: 'Level 5',
     ach_level_10: 'Level 10',
-    ach_polyglot_3: '3 talen tegelijk'
+    ach_polyglot_3: '3 talen tegelijk',
+
+
+    dash_lang_started: 'Begonnen woorden',
+    dash_lang_total: 'Totaal aantal woorden in deze taal'
   },
 
   sv: {
@@ -426,7 +442,11 @@ App.I18N = {
     ach_words_1000: '1000 ord behärskade',
     ach_level_5: 'Nivå 5',
     ach_level_10: 'Nivå 10',
-    ach_polyglot_3: '3 språk samtidigt'
+    ach_polyglot_3: '3 språk samtidigt',
+
+
+    dash_lang_started: 'Påbörjade ord',
+    dash_lang_total: 'Totalt antal ord i detta språk'
   },
 
   no: {
@@ -511,7 +531,11 @@ App.I18N = {
     ach_words_1000: '1000 ord mestret',
     ach_level_5: 'Nivå 5',
     ach_level_10: 'Nivå 10',
-    ach_polyglot_3: '3 språk samtidig'
+    ach_polyglot_3: '3 språk samtidig',
+
+
+    dash_lang_started: 'Påbegynte ord',
+    dash_lang_total: 'Totalt antall ord i dette språket'
   },
 
   da: {
@@ -596,7 +620,11 @@ App.I18N = {
     ach_words_1000: '1000 ord mestret',
     ach_level_5: 'Niveau 5',
     ach_level_10: 'Niveau 10',
-    ach_polyglot_3: '3 sprog samtidig'
+    ach_polyglot_3: '3 sprog samtidig',
+
+
+    dash_lang_started: 'Påbegyndte ord',
+    dash_lang_total: 'Samlet antal ord på dette sprog'
   },
 
   fr: {
@@ -681,7 +709,11 @@ App.I18N = {
     ach_words_1000: '1000 mots maîtrisés',
     ach_level_5: 'Niveau 5',
     ach_level_10: 'Niveau 10',
-    ach_polyglot_3: '3 langues à la fois'
+    ach_polyglot_3: '3 langues à la fois',
+
+
+    dash_lang_started: 'Mots commencés',
+    dash_lang_total: 'Total de mots dans cette langue'
   },
 
   es: {
@@ -766,7 +798,11 @@ App.I18N = {
     ach_words_1000: '1000 palabras dominadas',
     ach_level_5: 'Nivel 5',
     ach_level_10: 'Nivel 10',
-    ach_polyglot_3: '3 idiomas a la vez'
+    ach_polyglot_3: '3 idiomas a la vez',
+
+
+    dash_lang_started: 'Palabras iniciadas',
+    dash_lang_total: 'Total de palabras en este idioma'
   },
 
   it: {
@@ -851,7 +887,11 @@ App.I18N = {
     ach_words_1000: '1000 parole apprese',
     ach_level_5: 'Livello 5',
     ach_level_10: 'Livello 10',
-    ach_polyglot_3: '3 lingue insieme'
+    ach_polyglot_3: '3 lingue insieme',
+
+
+    dash_lang_started: 'Parole iniziate',
+    dash_lang_total: 'Totale parole in questa lingua'
   },
 
   pt: {
@@ -936,7 +976,11 @@ App.I18N = {
     ach_words_1000: '1000 palavras dominadas',
     ach_level_5: 'Nível 5',
     ach_level_10: 'Nível 10',
-    ach_polyglot_3: '3 idiomas ao mesmo tempo'
+    ach_polyglot_3: '3 idiomas ao mesmo tempo',
+
+
+    dash_lang_started: 'Palavras iniciadas',
+    dash_lang_total: 'Total de palavras neste idioma'
   },
 
   ro: {
@@ -1021,7 +1065,11 @@ App.I18N = {
     ach_words_1000: '1000 de cuvinte stăpânite',
     ach_level_5: 'Nivelul 5',
     ach_level_10: 'Nivelul 10',
-    ach_polyglot_3: '3 limbi simultan'
+    ach_polyglot_3: '3 limbi simultan',
+
+
+    dash_lang_started: 'Cuvinte începute',
+    dash_lang_total: 'Total cuvinte în această limbă'
   },
 
   hr: {
@@ -1106,7 +1154,11 @@ App.I18N = {
     ach_words_1000: '1000 naučenih riječi',
     ach_level_5: 'Razina 5',
     ach_level_10: 'Razina 10',
-    ach_polyglot_3: '3 jezika istovremeno'
+    ach_polyglot_3: '3 jezika istovremeno',
+
+
+    dash_lang_started: 'Započete riječi',
+    dash_lang_total: 'Ukupno riječi u ovom jeziku'
   },
 
   sr: {
@@ -1191,7 +1243,11 @@ App.I18N = {
     ach_words_1000: '1000 научених речи',
     ach_level_5: 'Ниво 5',
     ach_level_10: 'Ниво 10',
-    ach_polyglot_3: '3 језика истовремено'
+    ach_polyglot_3: '3 језика истовремено',
+
+
+    dash_lang_started: 'Започете речи',
+    dash_lang_total: 'Укупно речи у овом језику'
   },
 
   el: {
@@ -1276,7 +1332,11 @@ App.I18N = {
     ach_words_1000: '1000 λέξεις μαθημένες',
     ach_level_5: 'Επίπεδο 5',
     ach_level_10: 'Επίπεδο 10',
-    ach_polyglot_3: '3 γλώσσες ταυτόχρονα'
+    ach_polyglot_3: '3 γλώσσες ταυτόχρονα',
+
+
+    dash_lang_started: 'Λέξεις που ξεκίνησες',
+    dash_lang_total: 'Σύνολο λέξεων σε αυτή τη γλώσσα'
   },
 
   fi: {
@@ -1361,7 +1421,11 @@ App.I18N = {
     ach_words_1000: '1000 sanaa opittu',
     ach_level_5: 'Taso 5',
     ach_level_10: 'Taso 10',
-    ach_polyglot_3: '3 kieltä yhtä aikaa'
+    ach_polyglot_3: '3 kieltä yhtä aikaa',
+
+
+    dash_lang_started: 'Aloitetut sanat',
+    dash_lang_total: 'Sanoja yhteensä tällä kielellä'
   },
 
   hu: {
@@ -1446,7 +1510,11 @@ App.I18N = {
     ach_words_1000: '1000 elsajátított szó',
     ach_level_5: '5. szint',
     ach_level_10: '10. szint',
-    ach_polyglot_3: '3 nyelv egyszerre'
+    ach_polyglot_3: '3 nyelv egyszerre',
+
+
+    dash_lang_started: 'Elkezdett szavak',
+    dash_lang_total: 'Szavak összesen ezen a nyelven'
   },
 
   pl: {
@@ -1531,7 +1599,11 @@ App.I18N = {
     ach_words_1000: '1000 opanowanych słów',
     ach_level_5: 'Poziom 5',
     ach_level_10: 'Poziom 10',
-    ach_polyglot_3: '3 języki naraz'
+    ach_polyglot_3: '3 języki naraz',
+
+
+    dash_lang_started: 'Rozpoczęte słowa',
+    dash_lang_total: 'Łącznie słów w tym języku'
   },
 
   cs: {
@@ -1616,7 +1688,11 @@ App.I18N = {
     ach_words_1000: '1000 zvládnutých slov',
     ach_level_5: 'Úroveň 5',
     ach_level_10: 'Úroveň 10',
-    ach_polyglot_3: '3 jazyky najednou'
+    ach_polyglot_3: '3 jazyky najednou',
+
+
+    dash_lang_started: 'Zahájená slova',
+    dash_lang_total: 'Celkem slov v tomto jazyce'
   },
 
   sk: {
@@ -1701,7 +1777,11 @@ App.I18N = {
     ach_words_1000: '1000 zvládnutých slov',
     ach_level_5: 'Úroveň 5',
     ach_level_10: 'Úroveň 10',
-    ach_polyglot_3: '3 jazyky naraz'
+    ach_polyglot_3: '3 jazyky naraz',
+
+
+    dash_lang_started: 'Začaté slová',
+    dash_lang_total: 'Celkom slov v tomto jazyku'
   },
 
   uk: {
@@ -1786,7 +1866,11 @@ App.I18N = {
     ach_words_1000: '1000 слів засвоєно',
     ach_level_5: 'Рівень 5',
     ach_level_10: 'Рівень 10',
-    ach_polyglot_3: '3 мови одночасно'
+    ach_polyglot_3: '3 мови одночасно',
+
+
+    dash_lang_started: 'Розпочаті слова',
+    dash_lang_total: 'Всього слів у цій мові'
   },
 
   bg: {
@@ -1871,7 +1955,11 @@ App.I18N = {
     ach_words_1000: '1000 усвоени думи',
     ach_level_5: 'Ниво 5',
     ach_level_10: 'Ниво 10',
-    ach_polyglot_3: '3 езика едновременно'
+    ach_polyglot_3: '3 езика едновременно',
+
+
+    dash_lang_started: 'Започнати думи',
+    dash_lang_total: 'Общо думи в този език'
   }
 };
 

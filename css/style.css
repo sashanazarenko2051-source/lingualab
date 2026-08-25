@@ -279,7 +279,10 @@ button { background: none; }
 .lang-name { font-weight: 800; font-size: 13px; }
 .lang-progress { display: block; width: 100%; height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
 .lang-progress-fill { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
-.lang-meta { font-size: 11px; color: var(--ink-muted); font-weight: 600; }
+.lang-meta-row {
+  display: flex; justify-content: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); font-weight: 700;
+}
 
 /* Actions row */
 .actions-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-top: 16px; }
