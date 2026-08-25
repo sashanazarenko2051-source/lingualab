@@ -266,6 +266,11 @@ App.TTS_LANG = {
   bg: 'bg-BG', hr: 'hr-HR', sr: 'sr-RS', el: 'el-GR', fi: 'fi-FI', hu: 'hu-HU'
 };
 
+// Some OS/browser voice packs report a different short language code than the
+// BCP-47 tag we ask for (most notably Norwegian: voices are often tagged "no"
+// even though the standard tag is "nb"). Try these alternates too before giving up.
+const TTS_ALT_SHORT = { nb: ['no'], no: ['nb'] };
+
 let _ttsVoices = [];
 if ('speechSynthesis' in window) {
   const loadVoices = () => { _ttsVoices = speechSynthesis.getVoices(); };
@@ -273,23 +278,41 @@ if ('speechSynthesis' in window) {
   speechSynthesis.onvoiceschanged = loadVoices;
 }
 
+function findVoice(lang) {
+  const voices = _ttsVoices.length ? _ttsVoices : speechSynthesis.getVoices();
+  const short = lang.split('-')[0].toLowerCase();
+  const shortCandidates = [short, ...(TTS_ALT_SHORT[short] || [])];
+  return voices.find(v => v.lang && v.lang.toLowerCase() === lang.toLowerCase())
+    || voices.find(v => shortCandidates.includes((v.lang || '').split('-')[0].toLowerCase()));
+}
+
+// Bumped on every call so a stale, not-yet-fired speak() from a previous call
+// (still waiting out the cancel-race delay below) can recognize it's been
+// superseded and skip itself instead of firing and immediately getting cut off —
+// that double-fire is what caused the reported "stutter/interrupted" playback
+// when the speaker button and the auto-speak-on-answer both fire close together.
+let _speakToken = 0;
+
 App.speak = function (text, langCode) {
   if (!('speechSynthesis' in window)) return;
   const lang = App.TTS_LANG[langCode] || 'en-US';
+  const token = ++_speakToken;
 
   try { speechSynthesis.cancel(); } catch (e) { /* ignore */ }
 
   // Android Chrome silently drops speak() calls made right after cancel();
   // a short delay works around it. See crbug.com/835426.
   setTimeout(() => {
+    if (token !== _speakToken) return; // a newer speak() call already took over
     try {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = lang;
-      u.rate = 0.9;
-      const voices = _ttsVoices.length ? _ttsVoices : speechSynthesis.getVoices();
-      const short = lang.split('-')[0];
-      const voice = voices.find(v => v.lang === lang) || voices.find(v => v.lang && v.lang.split('-')[0] === short);
+      u.rate = 0.85;
+      u.volume = 1;
+      u.pitch = 1;
+      const voice = findVoice(lang);
       if (voice) u.voice = voice;
+      else console.warn('No TTS voice found for', lang, '— system/browser has none installed for this language.');
       speechSynthesis.speak(u);
     } catch (e) { /* no TTS voice available — silently skip */ }
   }, 80);
