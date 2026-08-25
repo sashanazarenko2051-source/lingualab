@@ -95,7 +95,7 @@ App.data.hu = {
         { w: 'kilenc', t: 'девять', ex: 'Van kilenc macskám.', tex: 'У меня девять котов.' },
         { w: 'tíz', t: 'десять', ex: 'Van tíz macskám.', tex: 'У меня десять котов.' },
         { w: 'tizenegy', t: 'одиннадцать', ex: 'Van tizenegy könyvem.', tex: 'У меня одиннадцать книг.' },
-        { w: 'tizenkettő', t: 'двенадцать', ex: 'Van tizenkettő könyvem.', tex: 'У меня двенадцать книг.' },
+        { w: 'tizenkettő', t: 'двенадцать', ex: 'Van tizenkét könyvem.', tex: 'У меня двенадцать книг.' },
         { w: 'tizenhárom', t: 'тринадцать', ex: 'Van tizenhárom könyvem.', tex: 'У меня тринадцать книг.' },
         { w: 'tizennégy', t: 'четырнадцать', ex: 'Van tizennégy könyvem.', tex: 'У меня четырнадцать книг.' },
         { w: 'tizenöt', t: 'пятнадцать', ex: 'Van tizenöt könyvem.', tex: 'У меня пятнадцать книг.' },
@@ -469,8 +469,8 @@ App.data.hu = {
     {
       id: 'verbs', name: 'Глаголы и прилагательные', words: [
         { w: 'lenni', t: 'быть', ex: 'Boldog vagyok.', tex: 'Я счастлив(а).' },
-        { w: 'birtokolni', t: 'иметь', ex: 'Van egy autóm.', tex: 'У меня есть машина.' },
-        { w: 'akarni', t: 'хотеть', ex: 'Kérek egy kávét.', tex: 'Я хочу кофе.' },
+        { w: 'birtokolni', t: 'иметь', ex: 'Birtoklok egy autót.', tex: 'У меня есть машина.' },
+        { w: 'akarni', t: 'хотеть', ex: 'Akarok egy kávét.', tex: 'Я хочу кофе.' },
         { w: 'tudni', t: 'знать', ex: 'Tudom, hol van a szálloda.', tex: 'Я знаю, где отель.' },
         { w: 'beszélni', t: 'говорить', ex: 'Beszélek magyarul.', tex: 'Я говорю по-венгерски.' },
         { w: 'nagy', t: 'большой', ex: 'Ez a ház nagy.', tex: 'Этот дом большой.' },

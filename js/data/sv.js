@@ -451,7 +451,7 @@ App.data.sv = {
         { w: 'framtid', t: 'будущее', ex: 'Ingen känner framtiden.', tex: 'Никто не знает будущего.' },
         { w: 'nu', t: 'сейчас', ex: 'Jag är upptagen just nu.', tex: 'Сейчас я занят.' },
         { w: 'senare', t: 'позже', ex: 'Vi pratar senare.', tex: 'Давай поговорим позже.' },
-        { w: 'innan', t: 'до, раньше', ex: 'Jag har aldrig sett honom tidigare.', tex: 'Я никогда не видел его раньше.' },
+        { w: 'tidigare', t: 'до, раньше', ex: 'Jag har aldrig sett honom tidigare.', tex: 'Я никогда не видел его раньше.' },
         { w: 'efter', t: 'после', ex: 'Vi äter efter filmen.', tex: 'Мы поедим после фильма.' },
         { w: 'alltid', t: 'всегда', ex: 'Hon är alltid i tid.', tex: 'Она всегда приходит вовремя.' },
         { w: 'aldrig', t: 'никогда', ex: 'Jag dricker aldrig kaffe på natten.', tex: 'Я никогда не пью кофе ночью.' },
