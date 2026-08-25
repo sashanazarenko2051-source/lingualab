@@ -11,8 +11,14 @@
   <header class="topbar">
     <div class="brand">🌍 Lingua Lab</div>
     <nav id="nav"></nav>
-    <select id="ui-lang-switch" aria-label="Язык интерфейса"></select>
-    <select id="lang-switch" aria-label="Изучаемый язык"></select>
+    <div class="lang-dd" id="ui-lang-dd">
+      <button type="button" class="lang-dd-btn" id="ui-lang-dd-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+      <ul class="lang-dd-list" id="ui-lang-dd-list" role="listbox" hidden></ul>
+    </div>
+    <div class="lang-dd" id="lang-dd">
+      <button type="button" class="lang-dd-btn" id="lang-dd-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+      <ul class="lang-dd-list" id="lang-dd-list" role="listbox" hidden></ul>
+    </div>
   </header>
   <main id="view-root"></main>
 </div>

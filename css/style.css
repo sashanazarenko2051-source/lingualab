@@ -101,13 +101,29 @@ button { background: none; }
   background: var(--brand-2); color: #fff;
   box-shadow: 0 4px 0 color-mix(in srgb, var(--brand-2) 70%, #000 20%);
 }
-#lang-switch, #ui-lang-switch {
+.lang-dd { position: relative; flex: none; }
+.lang-dd-btn {
+  display: inline-flex; align-items: center; gap: 7px;
   border: 2px solid var(--border); background: var(--surface); color: var(--ink);
-  border-radius: 999px; padding: 6px 12px; cursor: pointer; font-weight: 600;
+  border-radius: 999px; padding: 6px 12px; cursor: pointer; font-weight: 600; font-family: inherit;
   transition: border-color .15s ease;
 }
-#lang-switch:hover, #ui-lang-switch:hover { border-color: var(--brand-1); }
-#ui-lang-switch { font-size: 12px; }
+.lang-dd-btn:hover, .lang-dd-btn[aria-expanded="true"] { border-color: var(--brand-1); }
+.lang-dd-caret { font-size: 10px; color: var(--ink-muted); }
+#ui-lang-dd .lang-dd-btn { font-size: 12px; }
+.lang-dd-list {
+  position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+  list-style: none; margin: 0; padding: 6px; min-width: 190px; max-height: 320px; overflow-y: auto;
+  border: 2px solid var(--border); background: var(--surface); border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+}
+.lang-dd-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600;
+  white-space: nowrap;
+}
+.lang-dd-item:hover { background: var(--surface-2); }
+.lang-dd-item.active { color: var(--brand-1); background: color-mix(in srgb, var(--brand-1) 12%, transparent); }
 
 .panel {
   position: relative; overflow: hidden;
@@ -467,7 +483,10 @@ button { background: none; }
   .topbar { flex-wrap: wrap; gap: 8px; padding: 8px 12px; }
   .brand { font-size: 15px; }
   #nav { order: 3; flex-basis: 100%; justify-content: center; }
-  #lang-switch, #ui-lang-switch { flex: 1; min-width: 0; }
+  .lang-dd { flex: 1; min-width: 0; }
+  .lang-dd-btn { width: 100%; min-width: 0; }
+  .lang-dd-btn-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .lang-dd-list { min-width: 0; left: 0; right: 0; }
 
   .lang-picker-head { flex-direction: column; align-items: stretch; }
   #lang-search { width: 100%; }

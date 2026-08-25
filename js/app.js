@@ -59,30 +59,80 @@ function initTopbar() {
   brand.style.cursor = 'pointer';
   brand.addEventListener('click', () => App.router.go('dashboard'));
 
-  const sel = document.getElementById('lang-switch');
-  sel.setAttribute('aria-label', App.t('aria_learning_lang'));
-  sel.innerHTML = App.LANG_ORDER.map(code => {
-    return `<option value="${code}">${App.data[code].flag} ${App.ui.langName(code)}</option>`;
-  }).join('');
-  sel.value = App.storage.getCurrentLang();
-  sel.addEventListener('change', () => {
-    App.storage.setCurrentLang(sel.value);
-    App.router.render();
+  initLangDropdown({
+    ddId: 'lang-dd', btnId: 'lang-dd-btn', listId: 'lang-dd-list',
+    ariaLabel: App.t('aria_learning_lang'),
+    codes: App.LANG_ORDER,
+    nameFor: code => App.ui.langName(code),
+    current: App.storage.getCurrentLang(),
+    onSelect: code => {
+      App.storage.setCurrentLang(code);
+      App.router.render();
+    }
   });
 
-  const uiSel = document.getElementById('ui-lang-switch');
-  uiSel.setAttribute('aria-label', App.t('aria_ui_lang'));
-  uiSel.innerHTML = App.UI_LANG_ORDER.map(code => {
+  initLangDropdown({
+    ddId: 'ui-lang-dd', btnId: 'ui-lang-dd-btn', listId: 'ui-lang-dd-list',
+    ariaLabel: App.t('aria_ui_lang'),
+    codes: App.UI_LANG_ORDER,
     // Interface-language picker always shows each language's OWN name for itself,
     // so it stays findable no matter which UI language is currently active.
-    const selfName = (App.LANG_NAMES[code] && App.LANG_NAMES[code][code]) || App.data[code].name;
-    return `<option value="${code}">${App.data[code].flag} ${selfName}</option>`;
-  }).join('');
-  uiSel.value = App.storage.getUILang();
-  uiSel.addEventListener('change', () => {
-    App.storage.setUILang(uiSel.value);
-    initTopbar();
-    App.router.render();
+    nameFor: code => (App.LANG_NAMES[code] && App.LANG_NAMES[code][code]) || App.data[code].name,
+    current: App.storage.getUILang(),
+    onSelect: code => {
+      App.storage.setUILang(code);
+      initTopbar();
+      App.router.render();
+    }
+  });
+}
+
+// CSS-drawn flag chips render everywhere (unlike flag emoji, which Windows/WebView2
+// often falls back to showing as raw two-letter codes like "GB"), so the language
+// pickers use a custom dropdown here instead of a native <select> — native <option>
+// elements can only show plain text and can't host the flag-chip spans.
+function initLangDropdown({ ddId, btnId, listId, ariaLabel, codes, nameFor, current, onSelect }) {
+  const dd = document.getElementById(ddId);
+  const btn = document.getElementById(btnId);
+  const list = document.getElementById(listId);
+
+  btn.setAttribute('aria-label', ariaLabel);
+  btn.innerHTML = `${App.ui.flagChip(current)} <span class="lang-dd-btn-name">${nameFor(current)}</span> <span class="lang-dd-caret">▾</span>`;
+
+  list.innerHTML = codes.map(code => `
+    <li class="lang-dd-item ${code === current ? 'active' : ''}" role="option" data-code="${code}" aria-selected="${code === current}">
+      ${App.ui.flagChip(code)} <span>${nameFor(code)}</span>
+    </li>
+  `).join('');
+
+  function close() {
+    list.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+  }
+  function open() {
+    document.querySelectorAll('.lang-dd-list').forEach(l => { l.hidden = true; });
+    document.querySelectorAll('.lang-dd-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+    list.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (list.hidden) open(); else close();
+  });
+
+  list.querySelectorAll('.lang-dd-item').forEach(item => {
+    item.addEventListener('click', () => {
+      close();
+      onSelect(item.dataset.code);
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dd.contains(e.target)) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
   });
 }
 
