@@ -363,6 +363,16 @@ button { background: none; }
 .flashcard-progress-fill { height: 100%; border-radius: 4px; transition: width .25s ease; }
 .flashcard-progress-num { font-size: 12px; color: var(--ink-muted); font-weight: 700; white-space: nowrap; }
 
+.flashcard-stage { width: 100%; max-width: 560px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.card-nav-btn {
+  flex: none; border: 2px solid var(--border); background: var(--surface); color: var(--ink-2);
+  border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 20px; font-weight: 800; line-height: 1;
+  box-shadow: 0 3px 0 var(--border); transition: transform .08s ease, box-shadow .08s ease, opacity .15s ease;
+}
+.card-nav-btn:hover:not(:disabled) { border-color: var(--brand-1); color: var(--ink); }
+.card-nav-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--border); }
+.card-nav-btn:disabled { opacity: .3; cursor: default; box-shadow: none; }
+
 .flashcard {
   width: 100%; max-width: 460px; background: var(--surface);
   border: 2px solid var(--border); border-radius: 24px; display: flex; flex-direction: column;
@@ -473,6 +483,8 @@ button { background: none; }
   .flashcard { padding: 16px; }
   .flashcard-icon { font-size: 44px; }
   .flashcard-translation { font-size: 20px; }
+  .flashcard-stage { gap: 4px; }
+  .card-nav-btn { width: 30px; height: 30px; font-size: 16px; }
 
   .cat-bar-label { width: 90px; }
 }

@@ -73,6 +73,9 @@ function renderCard(root, state) {
   const meaning = App.words.localizedMeaning(word);
   let answered = false;
 
+  const hasPrev = state.index > 0;
+  const hasNext = state.index < state.words.length - 1;
+
   root.innerHTML = `
     <div class="flashcard-wrap">
       <div class="flashcard-topbar">
@@ -81,16 +84,20 @@ function renderCard(root, state) {
         <div class="flashcard-progress-num">${state.index + 1} / ${state.words.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
       </div>
 
-      <div class="flashcard" style="border-color:${accent}; cursor:default">
-        <div class="flashcard-category">${App.ui.flagChip(state.code)} ${App.ui.categoryName(word.categoryId, word.categoryName)} · ${App.t('fc_how_to_say')} ${App.ui.langName(state.code).toLowerCase()}?</div>
-        <div class="flashcard-icon-row">
-          <div class="flashcard-icon">${word.icon}</div>
-          <button class="speak-btn" id="speak" title="${App.t('listen_title')}" style="color:${accent}">🔊</button>
+      <div class="flashcard-stage">
+        <button class="card-nav-btn" id="prev-card" ${hasPrev ? '' : 'disabled'}>‹</button>
+        <div class="flashcard" style="border-color:${accent}; cursor:default">
+          <div class="flashcard-category">${App.ui.flagChip(state.code)} ${App.ui.categoryName(word.categoryId, word.categoryName)} · ${App.t('fc_how_to_say')} ${App.ui.langName(state.code).toLowerCase()}?</div>
+          <div class="flashcard-icon-row">
+            <div class="flashcard-icon">${word.icon}</div>
+            <button class="speak-btn" id="speak" title="${App.t('listen_title')}" style="color:${accent}">🔊</button>
+          </div>
+          <div class="flashcard-translation" id="tr" style="color:${accent}">${meaning.w}</div>
+          <div class="flashcard-hint" id="hint">${App.t('fc_choose_correct')}</div>
+          ${word.ex ? `<div class="flashcard-example" id="ex" style="display:none">${word.ex}</div>` : ''}
+          ${meaning.ex ? `<div class="flashcard-example" id="tex" style="display:none">${meaning.ex}</div>` : ''}
         </div>
-        <div class="flashcard-translation" id="tr" style="color:${accent}">${meaning.w}</div>
-        <div class="flashcard-hint" id="hint">${App.t('fc_choose_correct')}</div>
-        ${word.ex ? `<div class="flashcard-example" id="ex" style="display:none">${word.ex}</div>` : ''}
-        ${meaning.ex ? `<div class="flashcard-example" id="tex" style="display:none">${meaning.ex}</div>` : ''}
+        <button class="card-nav-btn" id="next-card" ${hasNext ? '' : 'disabled'}>›</button>
       </div>
 
       <div class="quiz-options word-options" id="options">
@@ -105,6 +112,18 @@ function renderCard(root, state) {
   });
 
   root.querySelector('#back-to-course').addEventListener('click', () => App.router.go('course'));
+
+  root.querySelector('#prev-card').addEventListener('click', () => {
+    if (state.index === 0) return;
+    state.index -= 1;
+    renderCard(root, state);
+  });
+
+  root.querySelector('#next-card').addEventListener('click', () => {
+    if (state.index >= state.words.length - 1) return;
+    state.index += 1;
+    renderCard(root, state);
+  });
 
   root.querySelectorAll('.word-options .quiz-option').forEach(btn => {
     btn.addEventListener('click', () => {
