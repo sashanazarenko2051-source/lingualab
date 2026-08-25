@@ -53,7 +53,7 @@ def main():
     print(f'Phone access (same Wi-Fi): http://{ip}:{LAN_PORT}')
 
     webview.create_window(
-        'Lingua Lab',
+        'WO Lingua Lab',
         INDEX_PATH,
         width=1200,
         height=800,

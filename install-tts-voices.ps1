@@ -1,5 +1,5 @@
 # Installs Windows OneCore speech (TTS) voices for every language supported by
-# Lingua Lab that isn't already available on this PC. Must be run as Administrator
+# WO Lingua Lab that isn't already available on this PC. Must be run as Administrator
 # (needs to query/install Windows optional features) and needs an internet
 # connection (voice data downloads from Windows Update).
 #
@@ -81,6 +81,6 @@ Write-Host "===== Summary =====" -ForegroundColor Green
 $results | Format-Table -AutoSize
 
 Write-Host ""
-Write-Host "Done. Fully close and reopen Lingua Lab (and any browser tab with it) so it picks up the new voices." -ForegroundColor Yellow
+Write-Host "Done. Fully close and reopen WO Lingua Lab (and any browser tab with it) so it picks up the new voices." -ForegroundColor Yellow
 Write-Host "Press Enter to exit..."
 Read-Host | Out-Null

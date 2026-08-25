@@ -5,7 +5,7 @@ window.App = window.App || {};
 // Missing keys fall back to Russian (the original baseline).
 App.I18N = {
   ru: {
-    app_title: 'Lingua Lab — изучение языков',
+    app_title: 'WO Lingua Lab — изучение языков',
     nav_home: '🏠 Главная',
     aria_learning_lang: 'Изучаемый язык',
     aria_ui_lang: 'Язык интерфейса',
@@ -113,7 +113,7 @@ App.I18N = {
   },
 
   en: {
-    app_title: 'Lingua Lab — Learn Languages',
+    app_title: 'WO Lingua Lab — Learn Languages',
     nav_home: '🏠 Home',
     aria_learning_lang: 'Language you are learning',
     aria_ui_lang: 'Interface language',
@@ -221,7 +221,7 @@ App.I18N = {
   },
 
   de: {
-    app_title: 'Lingua Lab — Sprachen lernen',
+    app_title: 'WO Lingua Lab — Sprachen lernen',
     nav_home: '🏠 Startseite',
     aria_learning_lang: 'Sprache, die du lernst',
     aria_ui_lang: 'Sprache der Oberfläche',
@@ -329,7 +329,7 @@ App.I18N = {
   },
 
   nl: {
-    app_title: 'Lingua Lab — Talen leren',
+    app_title: 'WO Lingua Lab — Talen leren',
     nav_home: '🏠 Home',
     aria_learning_lang: 'Taal die je leert',
     aria_ui_lang: 'Taal van de interface',
@@ -437,7 +437,7 @@ App.I18N = {
   },
 
   sv: {
-    app_title: 'Lingua Lab — Lär dig språk',
+    app_title: 'WO Lingua Lab — Lär dig språk',
     nav_home: '🏠 Hem',
     aria_learning_lang: 'Språk du lär dig',
     aria_ui_lang: 'Gränssnittsspråk',
@@ -545,7 +545,7 @@ App.I18N = {
   },
 
   no: {
-    app_title: 'Lingua Lab — Lær språk',
+    app_title: 'WO Lingua Lab — Lær språk',
     nav_home: '🏠 Hjem',
     aria_learning_lang: 'Språket du lærer',
     aria_ui_lang: 'Grensesnittspråk',
@@ -653,7 +653,7 @@ App.I18N = {
   },
 
   da: {
-    app_title: 'Lingua Lab — Lær sprog',
+    app_title: 'WO Lingua Lab — Lær sprog',
     nav_home: '🏠 Hjem',
     aria_learning_lang: 'Sproget du lærer',
     aria_ui_lang: 'Grænsefladesprog',
@@ -761,7 +761,7 @@ App.I18N = {
   },
 
   fr: {
-    app_title: 'Lingua Lab — Apprendre les langues',
+    app_title: 'WO Lingua Lab — Apprendre les langues',
     nav_home: '🏠 Accueil',
     aria_learning_lang: 'Langue que vous apprenez',
     aria_ui_lang: 'Langue de l\'interface',
@@ -869,7 +869,7 @@ App.I18N = {
   },
 
   es: {
-    app_title: 'Lingua Lab — Aprende idiomas',
+    app_title: 'WO Lingua Lab — Aprende idiomas',
     nav_home: '🏠 Inicio',
     aria_learning_lang: 'Idioma que estás aprendiendo',
     aria_ui_lang: 'Idioma de la interfaz',
@@ -977,7 +977,7 @@ App.I18N = {
   },
 
   it: {
-    app_title: 'Lingua Lab — Impara le lingue',
+    app_title: 'WO Lingua Lab — Impara le lingue',
     nav_home: '🏠 Home',
     aria_learning_lang: 'Lingua che stai imparando',
     aria_ui_lang: 'Lingua dell\'interfaccia',
@@ -1085,7 +1085,7 @@ App.I18N = {
   },
 
   pt: {
-    app_title: 'Lingua Lab — Aprenda idiomas',
+    app_title: 'WO Lingua Lab — Aprenda idiomas',
     nav_home: '🏠 Início',
     aria_learning_lang: 'Idioma que você está aprendendo',
     aria_ui_lang: 'Idioma da interface',
@@ -1193,7 +1193,7 @@ App.I18N = {
   },
 
   ro: {
-    app_title: 'Lingua Lab — Învață limbi străine',
+    app_title: 'WO Lingua Lab — Învață limbi străine',
     nav_home: '🏠 Acasă',
     aria_learning_lang: 'Limba pe care o înveți',
     aria_ui_lang: 'Limba interfeței',
@@ -1301,7 +1301,7 @@ App.I18N = {
   },
 
   hr: {
-    app_title: 'Lingua Lab — učenje jezika',
+    app_title: 'WO Lingua Lab — učenje jezika',
     nav_home: '🏠 Početna',
     aria_learning_lang: 'Jezik koji učiš',
     aria_ui_lang: 'Jezik sučelja',
@@ -1409,7 +1409,7 @@ App.I18N = {
   },
 
   sr: {
-    app_title: 'Lingua Lab — учење језика',
+    app_title: 'WO Lingua Lab — учење језика',
     nav_home: '🏠 Почетна',
     aria_learning_lang: 'Језик који учиш',
     aria_ui_lang: 'Језик интерфејса',
@@ -1517,7 +1517,7 @@ App.I18N = {
   },
 
   el: {
-    app_title: 'Lingua Lab — Μάθε γλώσσες',
+    app_title: 'WO Lingua Lab — Μάθε γλώσσες',
     nav_home: '🏠 Αρχική',
     aria_learning_lang: 'Γλώσσα που μαθαίνεις',
     aria_ui_lang: 'Γλώσσα διεπαφής',
@@ -1625,7 +1625,7 @@ App.I18N = {
   },
 
   fi: {
-    app_title: 'Lingua Lab — opi kieliä',
+    app_title: 'WO Lingua Lab — opi kieliä',
     nav_home: '🏠 Koti',
     aria_learning_lang: 'Opiskeltava kieli',
     aria_ui_lang: 'Käyttöliittymän kieli',
@@ -1733,7 +1733,7 @@ App.I18N = {
   },
 
   hu: {
-    app_title: 'Lingua Lab — nyelvtanulás',
+    app_title: 'WO Lingua Lab — nyelvtanulás',
     nav_home: '🏠 Kezdőlap',
     aria_learning_lang: 'Tanult nyelv',
     aria_ui_lang: 'Felület nyelve',
@@ -1841,7 +1841,7 @@ App.I18N = {
   },
 
   pl: {
-    app_title: 'Lingua Lab — nauka języków',
+    app_title: 'WO Lingua Lab — nauka języków',
     nav_home: '🏠 Główna',
     aria_learning_lang: 'Język, którego się uczysz',
     aria_ui_lang: 'Język interfejsu',
@@ -1949,7 +1949,7 @@ App.I18N = {
   },
 
   cs: {
-    app_title: 'Lingua Lab — výuka jazyků',
+    app_title: 'WO Lingua Lab — výuka jazyků',
     nav_home: '🏠 Domů',
     aria_learning_lang: 'Jazyk, který se učíš',
     aria_ui_lang: 'Jazyk rozhraní',
@@ -2057,7 +2057,7 @@ App.I18N = {
   },
 
   sk: {
-    app_title: 'Lingua Lab — učenie jazykov',
+    app_title: 'WO Lingua Lab — učenie jazykov',
     nav_home: '🏠 Domov',
     aria_learning_lang: 'Jazyk, ktorý sa učíš',
     aria_ui_lang: 'Jazyk rozhrania',
@@ -2165,7 +2165,7 @@ App.I18N = {
   },
 
   uk: {
-    app_title: 'Lingua Lab — вивчення мов',
+    app_title: 'WO Lingua Lab — вивчення мов',
     nav_home: '🏠 Головна',
     aria_learning_lang: 'Мова, яку вивчаєш',
     aria_ui_lang: 'Мова інтерфейсу',
@@ -2273,7 +2273,7 @@ App.I18N = {
   },
 
   bg: {
-    app_title: 'Lingua Lab — изучаване на езици',
+    app_title: 'WO Lingua Lab — изучаване на езици',
     nav_home: '🏠 Начало',
     aria_learning_lang: 'Изучаван език',
     aria_ui_lang: 'Език на интерфейса',
