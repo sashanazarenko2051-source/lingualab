@@ -58,17 +58,19 @@ body {
 body::before {
   content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(8px 8px at 21px 21px, rgba(57,255,157,.95) 0%, transparent 70%) 0 0 / 168px 168px,
-    radial-gradient(8px 8px at 21px 21px, rgba(0,229,255,.85) 0%, transparent 70%) 84px 84px / 168px 168px,
-    linear-gradient(135deg, rgba(255,255,255,.22) 0%, transparent 48%) 0 0 / 42px 42px,
-    linear-gradient(315deg, rgba(0,0,0,.6) 0%, transparent 48%) 0 0 / 42px 42px,
-    linear-gradient(rgba(0,229,255,.26) 1px, transparent 1px) 0 0 / 42px 42px,
-    linear-gradient(90deg, rgba(0,229,255,.26) 1px, transparent 1px) 0 0 / 42px 42px;
+    radial-gradient(9px 9px at 21px 21px, rgba(57,255,157,1) 0%, transparent 65%) 0 0 / 168px 168px,
+    radial-gradient(9px 9px at 21px 21px, rgba(0,229,255,1) 0%, transparent 65%) 84px 0px / 168px 168px,
+    radial-gradient(9px 9px at 21px 21px, rgba(184,41,255,1) 0%, transparent 65%) 0px 84px / 168px 168px,
+    radial-gradient(9px 9px at 21px 21px, rgba(255,61,110,1) 0%, transparent 65%) 84px 84px / 168px 168px,
+    linear-gradient(135deg, rgba(255,255,255,.32) 0%, transparent 50%) 0 0 / 42px 42px,
+    linear-gradient(315deg, rgba(0,0,0,.7) 0%, transparent 50%) 0 0 / 42px 42px,
+    linear-gradient(rgba(0,229,255,.32) 1.5px, transparent 1.5px) 0 0 / 42px 42px,
+    linear-gradient(90deg, rgba(0,229,255,.32) 1.5px, transparent 1.5px) 0 0 / 42px 42px;
   animation: gridSlide 22s linear infinite, gridShimmer 12s linear infinite;
 }
 @keyframes gridSlide {
-  0% { background-position: 0 0, 84px 84px, 0 0, 0 0, 0 0, 0 0; }
-  100% { background-position: 168px 168px, 252px 252px, 42px 42px, 42px 42px, 42px 42px, 42px 42px; }
+  0% { background-position: 0 0, 84px 0px, 0px 84px, 84px 84px, 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 168px 168px, 252px 168px, 168px 252px, 252px 252px, 42px 42px, 42px 42px, 42px 42px, 42px 42px; }
 }
 @keyframes gridShimmer {
   0% { filter: hue-rotate(0deg) saturate(3.5); }
