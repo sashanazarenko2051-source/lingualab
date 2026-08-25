@@ -103,17 +103,19 @@ function categoryNodeHtml(s, side, accent, code) {
 // FINISHED (e.g. all A0 categories) — a cumulative checkpoint, not a lock.
 function levelExamNodeHtml(enteringLevel, testedCatIds, side, accent, code) {
   const passed = App.storage.isExamPassed(code, enteringLevel);
+  const catsAttr = testedCatIds.join(',');
   return `
     <div class="skill-node-row side-${side}">
       <button class="skill-node skill-node-level-exam ${passed ? 'done' : ''}"
-        data-level-exam="${enteringLevel}" data-exam-cats="${testedCatIds.join(',')}" style="--node-accent:${accent}">
+        data-level-exam="${enteringLevel}" data-exam-cats="${catsAttr}" style="--node-accent:${accent}">
         <span class="skill-node-level-text">${enteringLevel}</span>
         ${passed ? `<span class="skill-node-exam-badge" title="${App.t('course_exam_passed')}">🎓</span>` : ''}
       </button>
-      <div class="skill-node-label">
+      <button class="skill-node-label skill-node-label-btn"
+        data-level-exam="${enteringLevel}" data-exam-cats="${catsAttr}">
         ${App.t('course_level_exam_label', { level: enteringLevel })}<br>
         <span class="skill-node-meta">${passed ? App.t('course_exam_passed') : App.t('course_exam_need', { pct: 80 })}</span>
-      </div>
+      </button>
     </div>
   `;
 }
