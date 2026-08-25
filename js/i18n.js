@@ -95,7 +95,8 @@ App.I18N = {
     course_exam_passed: 'Сдан',
     course_exam_need: 'Нужно {{pct}}% правильных для сдачи',
     exam_result_pass: 'Экзамен сдан!',
-    exam_result_fail: 'Экзамен не сдан (нужно {{pct}}%) — попробуй ещё раз'
+    exam_result_fail: 'Экзамен не сдан (нужно {{pct}}%) — попробуй ещё раз',
+    course_level_exam_label: 'Экзамен уровня {{level}}'
   },
 
   en: {
@@ -189,7 +190,8 @@ App.I18N = {
     course_exam_passed: 'Passed',
     course_exam_need: 'Need {{pct}}% correct to pass',
     exam_result_pass: 'Exam passed!',
-    exam_result_fail: 'Exam not passed (need {{pct}}%) — try again'
+    exam_result_fail: 'Exam not passed (need {{pct}}%) — try again',
+    course_level_exam_label: 'Level {{level}} exam'
   },
 
   de: {
@@ -283,7 +285,8 @@ App.I18N = {
     course_exam_passed: 'Bestanden',
     course_exam_need: '{{pct}}% richtig nötig zum Bestehen',
     exam_result_pass: 'Prüfung bestanden!',
-    exam_result_fail: 'Prüfung nicht bestanden (benötigt {{pct}}%) — versuch es noch einmal'
+    exam_result_fail: 'Prüfung nicht bestanden (benötigt {{pct}}%) — versuch es noch einmal',
+    course_level_exam_label: 'Prüfung Niveau {{level}}'
   },
 
   nl: {
@@ -377,7 +380,8 @@ App.I18N = {
     course_exam_passed: 'Geslaagd',
     course_exam_need: '{{pct}}% goed nodig om te slagen',
     exam_result_pass: 'Examen gehaald!',
-    exam_result_fail: 'Examen niet gehaald (nodig: {{pct}}%) — probeer opnieuw'
+    exam_result_fail: 'Examen niet gehaald (nodig: {{pct}}%) — probeer opnieuw',
+    course_level_exam_label: 'Examen niveau {{level}}'
   },
 
   sv: {
@@ -471,7 +475,8 @@ App.I18N = {
     course_exam_passed: 'Godkänt',
     course_exam_need: '{{pct}}% rätt krävs för godkänt',
     exam_result_pass: 'Provet godkänt!',
-    exam_result_fail: 'Provet ej godkänt (kräver {{pct}}%) — försök igen'
+    exam_result_fail: 'Provet ej godkänt (kräver {{pct}}%) — försök igen',
+    course_level_exam_label: 'Prov nivå {{level}}'
   },
 
   no: {
@@ -565,7 +570,8 @@ App.I18N = {
     course_exam_passed: 'Bestått',
     course_exam_need: '{{pct}}% riktige kreves for å bestå',
     exam_result_pass: 'Eksamen bestått!',
-    exam_result_fail: 'Eksamen ikke bestått (krever {{pct}}%) — prøv igjen'
+    exam_result_fail: 'Eksamen ikke bestått (krever {{pct}}%) — prøv igjen',
+    course_level_exam_label: 'Eksamen nivå {{level}}'
   },
 
   da: {
@@ -659,7 +665,8 @@ App.I18N = {
     course_exam_passed: 'Bestået',
     course_exam_need: '{{pct}}% rigtige kræves for at bestå',
     exam_result_pass: 'Eksamen bestået!',
-    exam_result_fail: 'Eksamen ikke bestået (kræver {{pct}}%) — prøv igen'
+    exam_result_fail: 'Eksamen ikke bestået (kræver {{pct}}%) — prøv igen',
+    course_level_exam_label: 'Eksamen niveau {{level}}'
   },
 
   fr: {
@@ -753,7 +760,8 @@ App.I18N = {
     course_exam_passed: 'Réussi',
     course_exam_need: '{{pct}} % de bonnes réponses requis pour réussir',
     exam_result_pass: 'Examen réussi !',
-    exam_result_fail: 'Examen non réussi (il faut {{pct}} %) — réessaie'
+    exam_result_fail: 'Examen non réussi (il faut {{pct}} %) — réessaie',
+    course_level_exam_label: 'Examen niveau {{level}}'
   },
 
   es: {
@@ -847,7 +855,8 @@ App.I18N = {
     course_exam_passed: 'Aprobado',
     course_exam_need: 'Se necesita {{pct}}% de aciertos para aprobar',
     exam_result_pass: '¡Examen aprobado!',
-    exam_result_fail: 'Examen no aprobado (se necesita {{pct}}%) — inténtalo de nuevo'
+    exam_result_fail: 'Examen no aprobado (se necesita {{pct}}%) — inténtalo de nuevo',
+    course_level_exam_label: 'Examen de nivel {{level}}'
   },
 
   it: {
@@ -941,7 +950,8 @@ App.I18N = {
     course_exam_passed: 'Superato',
     course_exam_need: 'Serve il {{pct}}% di risposte corrette per superarlo',
     exam_result_pass: 'Esame superato!',
-    exam_result_fail: 'Esame non superato (serve {{pct}}%) — riprova'
+    exam_result_fail: 'Esame non superato (serve {{pct}}%) — riprova',
+    course_level_exam_label: 'Esame di livello {{level}}'
   },
 
   pt: {
@@ -1035,7 +1045,8 @@ App.I18N = {
     course_exam_passed: 'Aprovado',
     course_exam_need: 'Precisa de {{pct}}% de acertos para passar',
     exam_result_pass: 'Exame aprovado!',
-    exam_result_fail: 'Exame não aprovado (precisa de {{pct}}%) — tenta novamente'
+    exam_result_fail: 'Exame não aprovado (precisa de {{pct}}%) — tenta novamente',
+    course_level_exam_label: 'Exame de nível {{level}}'
   },
 
   ro: {
@@ -1129,7 +1140,8 @@ App.I18N = {
     course_exam_passed: 'Promovat',
     course_exam_need: 'Este nevoie de {{pct}}% răspunsuri corecte pentru a promova',
     exam_result_pass: 'Examen promovat!',
-    exam_result_fail: 'Examen nepromovat (este nevoie de {{pct}}%) — încearcă din nou'
+    exam_result_fail: 'Examen nepromovat (este nevoie de {{pct}}%) — încearcă din nou',
+    course_level_exam_label: 'Examen de nivel {{level}}'
   },
 
   hr: {
@@ -1223,7 +1235,8 @@ App.I18N = {
     course_exam_passed: 'Položeno',
     course_exam_need: 'Potrebno je {{pct}}% točnih odgovora za polaganje',
     exam_result_pass: 'Ispit položen!',
-    exam_result_fail: 'Ispit nije položen (potrebno {{pct}}%) — pokušaj ponovno'
+    exam_result_fail: 'Ispit nije položen (potrebno {{pct}}%) — pokušaj ponovno',
+    course_level_exam_label: 'Ispit razine {{level}}'
   },
 
   sr: {
@@ -1317,7 +1330,8 @@ App.I18N = {
     course_exam_passed: 'Положен',
     course_exam_need: 'Потребно је {{pct}}% тачних одговора за полагање',
     exam_result_pass: 'Испит положен!',
-    exam_result_fail: 'Испит није положен (потребно {{pct}}%) — покушај поново'
+    exam_result_fail: 'Испит није положен (потребно {{pct}}%) — покушај поново',
+    course_level_exam_label: 'Испит нивоа {{level}}'
   },
 
   el: {
@@ -1411,7 +1425,8 @@ App.I18N = {
     course_exam_passed: 'Επιτυχία',
     course_exam_need: 'Χρειάζεται {{pct}}% σωστές απαντήσεις για επιτυχία',
     exam_result_pass: 'Πέρασες την εξέταση!',
-    exam_result_fail: 'Δεν πέρασες την εξέταση (χρειάζεται {{pct}}%) — δοκίμασε ξανά'
+    exam_result_fail: 'Δεν πέρασες την εξέταση (χρειάζεται {{pct}}%) — δοκίμασε ξανά',
+    course_level_exam_label: 'Εξέταση επιπέδου {{level}}'
   },
 
   fi: {
@@ -1505,7 +1520,8 @@ App.I18N = {
     course_exam_passed: 'Läpäisty',
     course_exam_need: 'Läpäisyyn tarvitaan {{pct}} % oikein',
     exam_result_pass: 'Koe läpäisty!',
-    exam_result_fail: 'Koetta ei läpäisty (tarvitaan {{pct}} %) — yritä uudelleen'
+    exam_result_fail: 'Koetta ei läpäisty (tarvitaan {{pct}} %) — yritä uudelleen',
+    course_level_exam_label: 'Tason {{level}} koe'
   },
 
   hu: {
@@ -1599,7 +1615,8 @@ App.I18N = {
     course_exam_passed: 'Sikeres',
     course_exam_need: '{{pct}}% helyes válasz szükséges a sikerhez',
     exam_result_pass: 'Sikeres vizsga!',
-    exam_result_fail: 'Sikertelen vizsga ({{pct}}% szükséges) — próbáld újra'
+    exam_result_fail: 'Sikertelen vizsga ({{pct}}% szükséges) — próbáld újra',
+    course_level_exam_label: '{{level}} szintű vizsga'
   },
 
   pl: {
@@ -1693,7 +1710,8 @@ App.I18N = {
     course_exam_passed: 'Zdany',
     course_exam_need: 'Potrzeba {{pct}}% poprawnych odpowiedzi, aby zdać',
     exam_result_pass: 'Egzamin zdany!',
-    exam_result_fail: 'Egzamin niezdany (potrzeba {{pct}}%) — spróbuj ponownie'
+    exam_result_fail: 'Egzamin niezdany (potrzeba {{pct}}%) — spróbuj ponownie',
+    course_level_exam_label: 'Egzamin poziomu {{level}}'
   },
 
   cs: {
@@ -1787,7 +1805,8 @@ App.I18N = {
     course_exam_passed: 'Složeno',
     course_exam_need: 'Ke složení je potřeba {{pct}}% správných odpovědí',
     exam_result_pass: 'Zkouška složena!',
-    exam_result_fail: 'Zkouška nesložena (potřeba {{pct}}%) — zkus to znovu'
+    exam_result_fail: 'Zkouška nesložena (potřeba {{pct}}%) — zkus to znovu',
+    course_level_exam_label: 'Zkouška úrovně {{level}}'
   },
 
   sk: {
@@ -1881,7 +1900,8 @@ App.I18N = {
     course_exam_passed: 'Zložená',
     course_exam_need: 'Na zloženie je potrebných {{pct}}% správnych odpovedí',
     exam_result_pass: 'Skúška zložená!',
-    exam_result_fail: 'Skúška nezložená (potrebných {{pct}}%) — skús to znova'
+    exam_result_fail: 'Skúška nezložená (potrebných {{pct}}%) — skús to znova',
+    course_level_exam_label: 'Skúška úrovne {{level}}'
   },
 
   uk: {
@@ -1975,7 +1995,8 @@ App.I18N = {
     course_exam_passed: 'Складено',
     course_exam_need: 'Потрібно {{pct}}% правильних відповідей для складання',
     exam_result_pass: 'Іспит складено!',
-    exam_result_fail: 'Іспит не складено (потрібно {{pct}}%) — спробуй ще раз'
+    exam_result_fail: 'Іспит не складено (потрібно {{pct}}%) — спробуй ще раз',
+    course_level_exam_label: 'Іспит рівня {{level}}'
   },
 
   bg: {
@@ -2069,7 +2090,8 @@ App.I18N = {
     course_exam_passed: 'Издържан',
     course_exam_need: 'Нужни са {{pct}}% верни отговори за издържане',
     exam_result_pass: 'Изпитът е издържан!',
-    exam_result_fail: 'Изпитът не е издържан (нужни {{pct}}%) — опитай отново'
+    exam_result_fail: 'Изпитът не е издържан (нужни {{pct}}%) — опитай отново',
+    course_level_exam_label: 'Изпит за ниво {{level}}'
   }
 };
 

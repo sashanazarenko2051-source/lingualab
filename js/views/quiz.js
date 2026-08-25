@@ -3,23 +3,35 @@ App.views = App.views || {};
 
 // Exam pass threshold: correct-answer percentage needed to mark a category "passed".
 const EXAM_PASS_PCT = 80;
+// A single-category exam already covers every word in that category (60 max).
+// Level exams pool together several categories (A2 alone is 17 × 60 = 1020
+// words) — sitting through a thousand questions isn't realistic, so level
+// exams sample a random 60-question cross-section instead of literally everything.
+const EXAM_MAX_QUESTIONS = 60;
 
 App.views.quiz = {
   render(root) {
     const code = App.storage.getCurrentLang();
     const categoryId = App.session.quizCategory;
+    const examCategoryIds = App.session.examCategoryIds;
+    const examLevel = App.session.examLevel;
     const isExam = !!App.session.examMode;
     App.session.quizCategory = null;
     App.session.examMode = false;
+    App.session.examCategoryIds = null;
+    App.session.examLevel = null;
 
-    const pool = buildPool(code, categoryId);
+    const pool = examCategoryIds && examCategoryIds.length
+      ? examCategoryIds.flatMap(id => App.words.byCategory(code, id))
+      : buildPool(code, categoryId);
+
     if (pool.length < 4) {
       root.innerHTML = `<p class="empty-hint">${App.t('fc_not_enough_words')}</p>`;
       return;
     }
 
-    const questions = buildQuestions(pool, isExam ? pool.length : 10);
-    const state = { questions, index: 0, correct: 0, answered: false, categoryId, isExam, code };
+    const questions = buildQuestions(pool, isExam ? Math.min(pool.length, EXAM_MAX_QUESTIONS) : 10);
+    const state = { questions, index: 0, correct: 0, answered: false, categoryId, isExam, code, examLevel, examCategoryIds };
     renderQuestion(root, state);
   }
 };
@@ -67,7 +79,7 @@ function renderQuestion(root, state) {
   root.innerHTML = `
     <div class="flashcard-topbar" style="max-width:560px">
       <button class="back-btn" id="back-to-course" title="${App.t('back_btn_title')}">${App.t('back_btn')}</button>
-      <div class="quiz-progress" style="margin:0">${state.isExam ? '🎓 ' : ''}${state.index + 1} / ${state.questions.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
+      <div class="quiz-progress" style="margin:0">${state.isExam ? '🎓' + (state.examLevel ? ' ' + state.examLevel : '') + ' · ' : ''}${state.index + 1} / ${state.questions.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
     </div>
     ${q.type === 'choice'
       ? `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_translation')}</div>`
@@ -125,8 +137,9 @@ function renderResult(root, state) {
   let examBanner = '';
 
   if (state.isExam) {
+    const examKey = state.examLevel || state.categoryId;
     const passed = pct >= EXAM_PASS_PCT;
-    if (passed) App.storage.setExamPassed(state.code, state.categoryId);
+    if (passed) App.storage.setExamPassed(state.code, examKey);
     examBanner = `
       <div class="exam-banner ${passed ? 'exam-pass' : 'exam-fail'}">
         ${passed ? '🎓 ' + App.t('exam_result_pass') : App.t('exam_result_fail', { pct: EXAM_PASS_PCT })}
@@ -157,8 +170,13 @@ function renderResult(root, state) {
     App.router.go('flashcards');
   });
   root.querySelector('#exam-again')?.addEventListener('click', () => {
-    App.session.quizCategory = state.categoryId;
     App.session.examMode = true;
+    if (state.examLevel) {
+      App.session.examCategoryIds = state.examCategoryIds;
+      App.session.examLevel = state.examLevel;
+    } else {
+      App.session.quizCategory = state.categoryId;
+    }
     App.router.go('quiz');
   });
   root.querySelectorAll('[data-go]').forEach(btn => {
