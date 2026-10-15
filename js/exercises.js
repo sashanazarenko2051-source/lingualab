@@ -294,6 +294,24 @@ App.exercises = (function () {
     return `<div class="ex-head"><div class="ex-speech"><div class="ex-speech-avatar">${avatar}</div><div class="ex-speech-bubble">${textHtml}</div></div></div>`;
   }
 
+  // The correct answer with the letters the learner missed or got wrong
+  // highlighted (character LCS between what was typed and the target).
+  function diffHtml(given, target) {
+    const a = Array.from(given.toLowerCase()), b = Array.from(target);
+    const bl = b.map(c => c.toLowerCase());
+    const dp = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+    for (let i = a.length - 1; i >= 0; i--)
+      for (let j = b.length - 1; j >= 0; j--)
+        dp[i][j] = a[i] === bl[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    const keep = new Array(b.length).fill(false);
+    for (let i = 0, j = 0; i < a.length && j < b.length;) {
+      if (a[i] === bl[j]) { keep[j] = true; i++; j++; }
+      else if (dp[i + 1][j] >= dp[i][j + 1]) i++;
+      else j++;
+    }
+    return b.map((c, j) => keep[j] || c === ' ' ? esc(c) : `<mark class="ex-diff">${esc(c)}</mark>`).join('');
+  }
+
   function headHtml(title, extra) {
     return `<div class="ex-head"><div class="ex-title">${title}</div>${extra || ''}</div>`;
   }
@@ -428,38 +446,68 @@ App.exercises = (function () {
       });
     },
 
+    // Spelling must be exact, diacritics included (case and punctuation
+    // don't matter). A diacritics-only slip is still a mistake, but gets its
+    // own note; the feedback marks the letters that were missing or wrong.
+    // "Hint" fills in the next correct letter.
     type(ctx, word) {
       const letters = accentLetters(word.lang);
+      const target = variants(word.w)[0].normalize('NFC');
       ctx.body.innerHTML = `
         ${headHtml(App.t('ex_type', { lang: App.ui.langName(word.lang) }), `
           <div class="ex-prompt"><span class="ex-prompt-icon">${App.ui.wordIcon(word.icon)}</span><span class="ex-prompt-text">${esc(meaningOf(word))}</span></div>`)}
-        <input class="ex-input" id="ex-input" type="text" autocomplete="off" spellcheck="false" placeholder="${App.t('ex_type_placeholder')}">
+        <div class="ex-input-row">
+          <input class="ex-input" id="ex-input" type="text" autocomplete="off" spellcheck="false" placeholder="${App.t('ex_type_placeholder')}">
+          <button class="ex-hint-btn" id="ex-hint-btn" title="${App.t('ex_hint')}">💡 ${App.t('ex_hint')}</button>
+        </div>
+        <div class="ex-length">${Array.from(target).map(ch => ch === ' ' ? '<i class="sp"></i>' : '<i></i>').join('')}</div>
         ${letters.length ? `<div class="ex-letters">${letters.map(ch => `<button class="ex-letter" data-ch="${ch}">${ch}</button>`).join('')}</div>` : ''}
       `;
       const input = ctx.body.querySelector('#ex-input');
+      const cells = [...ctx.body.querySelectorAll('.ex-length i')];
       input.focus();
+      // Letter slots under the field fill as you type, showing the length.
+      const paintSlots = () => {
+        const n = Array.from(input.value.normalize('NFC')).length;
+        cells.forEach((c, i) => c.classList.toggle('on', i < n));
+      };
+      let done = false;
       const check = () => {
-        const given = input.value;
-        const exact = variants(word.w).some(v => norm(v) === norm(given));
-        const close = !exact && variants(word.w).some(v => fold(v) === fold(given));
-        const ok = exact || close;
+        done = true;
+        const given = input.value.normalize('NFC');
+        const ok = variants(word.w).some(v => norm(v) === norm(given));
+        const accentOnly = !ok && variants(word.w).some(v => fold(v) === fold(given));
         input.disabled = true;
+        ctx.body.querySelector('#ex-hint-btn').disabled = true;
         input.classList.add(ok ? 'correct' : 'wrong');
         ctx.answer(word, ok);
         App.speak(word.w, word.lang);
-        footerFeedback(ctx, ok, ok
-          ? (close ? `${App.t('fb_typo')} <b>${esc(word.w)}</b>` : '')
-          : answerDetail(word));
+        footerFeedback(ctx, ok, ok ? '' : (accentOnly
+          ? `${App.t('fb_typo')} <b>${diffHtml(given, target)}</b>`
+          : `${App.t('fb_answer')} <b>${diffHtml(given, target)}</b> — ${esc(meaningOf(word))}`));
       };
       const footer = footerCheck(ctx, false, check);
-      input.addEventListener('input', () => footer.enable(input.value.trim().length > 0));
+      const changed = () => { paintSlots(); footer.enable(input.value.trim().length > 0); };
+      input.addEventListener('input', changed);
       ctx.body.querySelectorAll('.ex-letter').forEach(b => b.addEventListener('click', () => {
+        if (done) return;
         const { selectionStart: a, selectionEnd: z, value } = input;
         input.value = value.slice(0, a) + b.dataset.ch + value.slice(z);
         input.focus();
         input.setSelectionRange(a + 1, a + 1);
-        footer.enable(true);
+        changed();
       }));
+      ctx.body.querySelector('#ex-hint-btn').addEventListener('click', () => {
+        if (done) return;
+        // keep the correct beginning, then add the next correct letter
+        const typed = Array.from(input.value.normalize('NFC').toLowerCase());
+        const goal = Array.from(target);
+        let k = 0;
+        while (k < typed.length && k < goal.length && typed[k] === goal[k].toLowerCase()) k += 1;
+        input.value = goal.slice(0, Math.min(goal.length, k + 1)).join('');
+        input.focus();
+        changed();
+      });
       onKey(e => { if (e.key === 'Enter') { e.preventDefault(); footer.trigger(); } });
     },
 

@@ -638,6 +638,19 @@ button { background: none; }
 .ex-input.correct { border-color: var(--good); }
 .ex-input.wrong { border-color: var(--bad); }
 .ex-letters { display: flex; flex-wrap: wrap; gap: 6px; }
+.ex-input-row { display: flex; gap: 10px; align-items: stretch; }
+.ex-input-row .ex-input { flex: 1; }
+.ex-hint-btn {
+  flex: none; padding: 0 16px; border-radius: 16px; border: 2px solid var(--warn); background: var(--surface);
+  color: var(--warn); font-weight: 800; cursor: pointer; box-shadow: 0 4px 0 var(--warn-dark);
+}
+.ex-hint-btn:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 var(--warn-dark); }
+.ex-hint-btn:disabled { opacity: .4; cursor: default; }
+.ex-length { display: flex; flex-wrap: wrap; gap: 4px; }
+.ex-length i { width: 14px; height: 5px; border-radius: 3px; background: var(--surface-2); border: 1px solid var(--border); transition: background .15s ease; }
+.ex-length i.sp { width: 10px; background: transparent; border-color: transparent; }
+.ex-length i.on { background: var(--accent); border-color: var(--accent); }
+.ex-diff { background: color-mix(in srgb, var(--warn) 45%, transparent); color: var(--ink); border-radius: 4px; padding: 0 2px; box-shadow: inset 0 -2px 0 var(--warn); }
 .ex-letter { min-width: 38px; padding: 6px 8px; font-size: 17px; font-weight: 700; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); box-shadow: 0 3px 0 var(--border); cursor: pointer; }
 
 .ex-answer-line {
