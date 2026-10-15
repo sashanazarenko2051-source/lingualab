@@ -187,20 +187,29 @@ function renderStatRow(root, currentLang) {
   const mastered = words.filter(w => App.srs.isMastered(w.id)).length;
   const streak = App.storage.state.stats.streak || 0;
 
+  // Each tile opens what it counts: today's reviews / learned words in
+  // "My words", a new lesson, or the stats page.
   const tiles = [
-    [App.t('dash_stat_due'), due, '📌'],
-    [App.t('dash_stat_new'), fresh, '🌱'],
-    [App.t('dash_stat_mastered'), mastered, '🏆'],
-    [App.t('dash_stat_streak'), streak, '🔥']
+    [App.t('dash_stat_due'), due, '📌', 'due'],
+    [App.t('dash_stat_new'), fresh, '🌱', 'learn'],
+    [App.t('dash_stat_mastered'), mastered, '🏆', 'all'],
+    [App.t('dash_stat_streak'), streak, '🔥', 'stats']
   ];
 
-  row.innerHTML = tiles.map(([label, value, icon]) => `
-    <div class="stat-tile">
+  row.innerHTML = tiles.map(([label, value, icon, go]) => `
+    <button class="stat-tile stat-tile-link" data-tile="${go}">
       <div class="stat-icon">${icon}</div>
       <div class="stat-value">${value}</div>
       <div class="stat-label">${label}</div>
-    </div>
+      <div class="stat-go">${App.t(go === 'learn' ? 'dash_tile_read' : go === 'stats' ? 'dash_tile_stats' : 'dash_tile_open')} →</div>
+    </button>
   `).join('');
+  row.querySelectorAll('[data-tile]').forEach(b => b.addEventListener('click', () => {
+    const go = b.dataset.tile;
+    if (go === 'learn') App.router.go('browse');
+    else if (go === 'stats') App.router.go('stats');
+    else { App.session.wordsSection = go; App.router.go('words'); }
+  }));
 }
 
 function renderMiniChart(root) {

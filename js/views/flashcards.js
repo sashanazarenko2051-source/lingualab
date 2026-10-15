@@ -13,11 +13,27 @@ App.views.flashcards = {
   render(root) {
     const code = App.storage.getCurrentLang();
     const mistakesMode = !!App.session.mistakesMode;
+    const customIds = App.session.customWordIds;
+    App.session.customWordIds = null;
     let categoryId = App.session.flashcardsCategory;
     App.session.flashcardsCategory = null;
     App.session.mistakesMode = false;
     const freshStart = !!App.session.freshStart;
     App.session.freshStart = false;
+
+    if (customIds) {
+      const byId = {};
+      App.words.allWords(code).forEach(w => { byId[w.id] = w; });
+      const words = customIds.map(id => byId[id]).filter(Boolean);
+      const meta = { categoryId: null, mistakesMode: true, customIds };
+      App.exercises.run({
+        root, steps: App.lesson.buildCustomSession(words), code, lessonId: App.lesson.newLessonId(),
+        onFinish: (state) => renderResult(root, state, meta),
+        onOutOfHearts: (state) => renderOutOfHearts(root, state, meta),
+        onExit: () => App.router.go('words')
+      });
+      return;
+    }
 
     if (!mistakesMode && !categoryId) categoryId = App.lesson.nextCategory(code).id;
     if (categoryId) {
@@ -104,7 +120,8 @@ function renderResult(root, state, meta) {
 // Re-runs the same topic (a plain go('flashcards') would drop the category).
 function restart(meta) {
   App.session.flashcardsCategory = meta.categoryId;
-  App.session.mistakesMode = meta.mistakesMode;
+  App.session.mistakesMode = meta.mistakesMode && !meta.customIds;
+  App.session.customWordIds = meta.customIds || null;
   App.router.go('flashcards');
 }
 

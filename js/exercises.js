@@ -333,7 +333,8 @@ App.exercises = (function () {
         <div class="ex-head"><span class="lesson-badge lesson-badge-new">✨ ${App.t('lesson_new_word')}</span></div>
         <div class="ex-card ex-intro" id="ex-intro" tabindex="0">
           <div class="ex-intro-halo"><div class="ex-intro-icon">${App.ui.wordIcon(word.icon)}</div></div>
-          <div class="ex-intro-word"><span>${letters}</span> ${speakBtn(word.w, word.lang)}</div>
+          <div class="ex-intro-word"><span>${letters}</span> ${speakBtn(word.w, word.lang)}
+            <button class="ex-speak ex-star ${App.storage.inReview(word.id) ? 'on' : ''}" id="ex-star" title="${App.t('words_add')}">${App.storage.inReview(word.id) ? '⭐' : '☆'}</button></div>
           <div class="ex-say">
             <span>🗣 ${App.t('ex_say_aloud')}</span>
             <span class="ex-say-dots"><i></i><i></i><i></i></span>
@@ -373,7 +374,13 @@ App.exercises = (function () {
         ctx.state.seen.add(word.w);
         ctx.next();
       };
-      card.addEventListener('click', (e) => { if (!e.target.closest('[data-say]')) reveal(); });
+      ctx.body.querySelector('#ex-star').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const b = e.currentTarget;
+        if (App.storage.inReview(word.id)) { App.storage.removeFromReview(word.id); b.classList.remove('on'); b.textContent = '☆'; }
+        else { App.storage.addToReview(word.id); b.classList.add('on'); b.textContent = '⭐'; App.effects.toast(`⭐ ${App.t('words_added_toast')}`); }
+      });
+      card.addEventListener('click', (e) => { if (!e.target.closest('[data-say]') && !e.target.closest('#ex-star')) reveal(); });
       btn.focus();
       btn.addEventListener('click', go);
       onKey(e => {

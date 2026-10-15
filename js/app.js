@@ -72,6 +72,7 @@ function initTopbar() {
   const nav = document.getElementById('nav');
   nav.innerHTML = `
     <button data-view="dashboard">${App.t('nav_home')}</button>
+    <button data-view="words">📒 ${App.t('nav_words')}</button>
     <button data-view="leaderboard">${App.t('nav_leaderboard')}</button>
   `;
   nav.querySelectorAll('button').forEach(btn => {
@@ -87,18 +88,8 @@ function initTopbar() {
   avatarBtn.addEventListener('click', () => App.profile.openEditor());
   App.profile.renderTopbarBadge();
 
-  initLangDropdown({
-    ddId: 'lang-dd', btnId: 'lang-dd-btn', listId: 'lang-dd-list',
-    ariaLabel: App.t('aria_learning_lang'),
-    codes: App.LANG_ORDER,
-    nameFor: code => App.ui.langName(code),
-    current: App.storage.getCurrentLang(),
-    onSelect: code => {
-      App.storage.setCurrentLang(code);
-      App.router.render();
-    }
-  });
-
+  // Only the interface language is picked in the top bar; the language you
+  // learn is chosen with the flag cards on the home page.
   initLangDropdown({
     ddId: 'ui-lang-dd', btnId: 'ui-lang-dd-btn', listId: 'ui-lang-dd-list',
     ariaLabel: App.t('aria_ui_lang'),
@@ -125,7 +116,8 @@ function initLangDropdown({ ddId, btnId, listId, ariaLabel, codes, nameFor, curr
   const list = document.getElementById(listId);
 
   btn.setAttribute('aria-label', ariaLabel);
-  btn.innerHTML = `${App.ui.flagChip(current)} <span class="lang-dd-btn-name">${nameFor(current)}</span> <span class="lang-dd-caret">▾</span>`;
+  btn.innerHTML = `<span class="lang-dd-globe">🌐</span> ${App.ui.flagChip(current)} <span class="lang-dd-btn-name">${nameFor(current)}</span> <span class="lang-dd-caret">▾</span>`;
+  btn.title = ariaLabel;
 
   list.innerHTML = codes.map(code => `
     <li class="lang-dd-item ${code === current ? 'active' : ''}" role="option" data-code="${code}" aria-selected="${code === current}">

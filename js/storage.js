@@ -15,6 +15,8 @@ App.storage = (function () {
       },
       lastLesson: null,
       mistakes: {},
+      reviewList: {},
+      missCount: {},
       profile: { name: '', animal: 'wolf', color: '#00e5ff' }
     };
   }
@@ -36,6 +38,8 @@ App.storage = (function () {
         }),
         lastLesson: parsed.lastLesson || null,
         mistakes: parsed.mistakes || {},
+        reviewList: parsed.reviewList || {},
+        missCount: parsed.missCount || {},
         profile: Object.assign({}, d.profile, parsed.profile)
       };
     } catch (e) {
@@ -164,12 +168,47 @@ App.storage = (function () {
         .sort((a, b) => state.mistakes[b].misses - state.mistakes[a].misses || state.mistakes[a].at - state.mistakes[b].at);
     },
     isMistake(wordId) { return !!state.mistakes[wordId]; },
+
+    // Personal review list ("My words"). Learners add words themselves;
+    // words reaching AUTO_REVIEW_MISSES total mistakes are added
+    // automatically and leave again after AUTO_REVIEW_CORRECT correct answers.
+    AUTO_REVIEW_MISSES: 5,
+    AUTO_REVIEW_CORRECT: 5,
+    trackReviewList(wordId, correct) {
+      const rec = state.reviewList[wordId];
+      if (!correct) {
+        state.missCount[wordId] = (state.missCount[wordId] || 0) + 1;
+        if (rec) rec.ok = 0;
+        else if (state.missCount[wordId] >= this.AUTO_REVIEW_MISSES) state.reviewList[wordId] = { auto: true, ok: 0, at: Date.now() };
+      } else if (rec) {
+        rec.ok = (rec.ok || 0) + 1;
+        if (rec.auto && rec.ok >= this.AUTO_REVIEW_CORRECT) {
+          delete state.reviewList[wordId];
+          state.missCount[wordId] = 0;
+        }
+      }
+      save();
+    },
+    addToReview(wordId) {
+      if (!state.reviewList[wordId]) state.reviewList[wordId] = { auto: false, ok: 0, at: Date.now() };
+      else state.reviewList[wordId].auto = false;
+      save();
+    },
+    removeFromReview(wordId) { delete state.reviewList[wordId]; save(); },
+    inReview(wordId) { return state.reviewList[wordId] || null; },
+    getReviewIds(code) {
+      return Object.keys(state.reviewList).filter(id => id.startsWith(code + ':'))
+        .sort((a, b) => state.reviewList[b].at - state.reviewList[a].at);
+    },
+    getMissCount(wordId) { return state.missCount[wordId] || 0; },
     // Starts a topic over: forgets its words' schedule, its mistakes and its
     // exam. XP, streak, history and achievements are kept.
     resetTopic(code, categoryId) {
       const prefix = code + ':' + categoryId + ':';
       Object.keys(state.srs).forEach(id => { if (id.startsWith(prefix)) delete state.srs[id]; });
       Object.keys(state.mistakes).forEach(id => { if (id.startsWith(prefix)) delete state.mistakes[id]; });
+      Object.keys(state.missCount).forEach(id => { if (id.startsWith(prefix)) delete state.missCount[id]; });
+      Object.keys(state.reviewList).forEach(id => { if (id.startsWith(prefix) && state.reviewList[id].auto) delete state.reviewList[id]; });
       if (state.stats.exams[code]) delete state.stats.exams[code][categoryId];
       save();
     },

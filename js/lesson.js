@@ -108,6 +108,13 @@ App.lesson = (function () {
     return steps;
   }
 
+  // A session over a chosen set of words (e.g. the "My words" review list).
+  function buildCustomSession(words) {
+    const steps = shuffle(words).slice(0, MISTAKES_SESSION).map((w, i) => ex(rotate(PRACTICE_KINDS, i), w, 'due'));
+    if (words.length >= 4) steps.unshift({ kind: 'match', words: shuffle(words).slice(0, 4) });
+    return steps;
+  }
+
   // Topic quiz: introduced words of the topic + a few from the mistakes bank,
   // each in a different exercise type, opened by a pairs match.
   function buildQuiz(code, categoryId) {
@@ -132,6 +139,7 @@ App.lesson = (function () {
   function answer(session, word, isCorrect) {
     App.srs.grade(word.id, isCorrect ? 4 : 1);
     const res = App.storage.recordMistakeAnswer(word.id, isCorrect, session.lessonId);
+    App.storage.trackReviewList(word.id, isCorrect);
     session.tally = session.tally || { added: 0, fixed: 0 };
     if (res === 'added') session.tally.added += 1;
     if (res === 'fixed') session.tally.fixed += 1;
@@ -150,5 +158,5 @@ App.lesson = (function () {
 
   function newLessonId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
 
-  return { nextCategory, buildLesson, buildMistakesSession, buildQuiz, buildExam, answer, newLessonId, shuffle };
+  return { nextCategory, buildLesson, buildMistakesSession, buildCustomSession, buildQuiz, buildExam, answer, newLessonId, shuffle };
 })();
