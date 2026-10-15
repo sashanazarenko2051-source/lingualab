@@ -17,15 +17,14 @@ App.views.dashboard = {
 
     root.innerHTML = `
       ${startLessonHtml(currentLang, nextCat, mistakes)}
-      ${lastLesson ? repeatLessonHtml(lastLesson) : ''}
-      ${mistakes ? `
-      <button class="repeat-lesson repeat-lesson-mistakes" id="mistakes-session">
+      <button class="repeat-lesson repeat-lesson-mistakes ${mistakes ? '' : 'is-empty'}" id="mistakes-session">
         <span class="repeat-lesson-icon">🔁</span>
         <span class="repeat-lesson-text">
           <span class="repeat-lesson-title">${App.t('dash_mistakes')}</span>
-          <span class="repeat-lesson-sub">${App.ui.flagChip(currentLang)} ${App.ui.langName(currentLang)} · ${App.t('dash_mistakes_sub', { n: mistakes })}</span>
+          <span class="repeat-lesson-sub">${App.ui.flagChip(currentLang)} ${App.ui.langName(currentLang)} · ${mistakes ? App.t('dash_mistakes_sub', { n: mistakes }) : App.t('words_mistakes_empty')}</span>
         </span>
-      </button>` : ''}
+      </button>
+      ${lastLesson ? repeatLessonHtml(lastLesson) : ''}
 
       <div class="lang-picker-head">
         <h2>${App.t('dash_pick_lang')}</h2>
@@ -89,7 +88,9 @@ App.views.dashboard = {
       App.router.go('flashcards');
     });
 
-    root.querySelector('#mistakes-session')?.addEventListener('click', () => {
+    root.querySelector('#mistakes-session').addEventListener('click', () => {
+      // nothing to fix yet: show the (empty) mistakes bank instead
+      if (!mistakes) { App.session.wordsSection = 'mistakes'; App.router.go('words'); return; }
       App.session.mistakesMode = true;
       App.router.go('flashcards');
     });

@@ -40,6 +40,12 @@ App.gamification = (function () {
     return codes.size;
   }
 
+  // Languages with at least one word answered correctly.
+  function languagesCorrect(state) {
+    const codes = new Set();
+    for (const id in state.srs) if (state.srs[id] && state.srs[id].reps >= 1) codes.add(id.split(':')[0]);
+    return codes.size;
+  }
   function answersTotal(state) {
     return Object.values(state.stats.history || {}).reduce((n, d) => n + (d.reviews || 0), 0);
   }
@@ -103,6 +109,7 @@ App.gamification = (function () {
     { id: 'level_10', icon: '🌟', titleKey: 'ach_level_10', howKey: 'ach_how_level', goal: 10, value: levelOf },
     { id: 'level_15', icon: '🚀', titleKey: 'ach_t_level', howKey: 'ach_how_level', goal: 15, value: levelOf },
     { id: 'level_20', icon: '👑', titleKey: 'ach_t_level', howKey: 'ach_how_level', goal: 20, value: levelOf },
+    { id: 'polyglot_1', icon: '💬', titleKey: 'ach_first_lang', howKey: 'ach_how_first_lang', goal: 1, value: languagesCorrect },
     { id: 'polyglot_2', icon: '🗣️', titleKey: 'ach_t_poly', howKey: 'ach_how_polyglot', goal: 2, value: languagesTouched },
     { id: 'polyglot_3', icon: '🌍', titleKey: 'ach_polyglot_3', howKey: 'ach_how_polyglot', goal: 3, value: languagesTouched },
     { id: 'polyglot_5', icon: '🌐', titleKey: 'ach_t_poly', howKey: 'ach_how_polyglot', goal: 5, value: languagesTouched }
