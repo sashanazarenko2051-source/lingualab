@@ -15,6 +15,8 @@ App.views.flashcards = {
     const mistakesMode = !!App.session.mistakesMode;
     const customIds = App.session.customWordIds;
     App.session.customWordIds = null;
+    const customFrom = App.session.customFrom || 'words';
+    App.session.customFrom = null;
     let categoryId = App.session.flashcardsCategory;
     App.session.flashcardsCategory = null;
     App.session.mistakesMode = false;
@@ -30,7 +32,7 @@ App.views.flashcards = {
         root, steps: App.lesson.buildCustomSession(words), code, lessonId: App.lesson.newLessonId(),
         onFinish: (state) => renderResult(root, state, meta),
         onOutOfHearts: (state) => renderOutOfHearts(root, state, meta),
-        onExit: () => App.router.go('words')
+        onExit: () => App.router.go(customFrom)
       });
       return;
     }

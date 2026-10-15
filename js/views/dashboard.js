@@ -97,7 +97,14 @@ App.views.dashboard = {
 
     root.querySelector('#repeat-lesson')?.addEventListener('click', () => {
       App.storage.setCurrentLang(lastLesson.lang);
-      App.session.flashcardsCategory = lastLesson.categoryId;
+      // Review only words of that topic you've already met — weakest first
+      // (mistakes, then due, then fewest correct repetitions). No new words.
+      const weight = (w) => (App.storage.isMistake(w.id) ? 0 : App.srs.isDue(w.id) ? 1 : 2) * 100 + App.storage.getSRS(w.id).reps;
+      const seen = App.words.byCategory(lastLesson.lang, lastLesson.categoryId)
+        .filter(w => !App.srs.isNew(w.id))
+        .sort((a, b) => weight(a) - weight(b));
+      if (seen.length) { App.session.customWordIds = seen.slice(0, 10).map(w => w.id); App.session.customFrom = 'dashboard'; }
+      else App.session.flashcardsCategory = lastLesson.categoryId;
       App.router.go('flashcards');
     });
   }
