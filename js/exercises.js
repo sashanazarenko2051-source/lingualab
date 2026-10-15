@@ -224,7 +224,7 @@ App.exercises = (function () {
     ctx.body.innerHTML = `
       ${headHtml}
       <div class="ex-options ${gridClass || ''}">
-        ${options.map((o, i) => `<button class="ex-option" data-key="${esc(o.key)}"><span class="ex-num">${i + 1}</span>${o.html}</button>`).join('')}
+        ${options.map((o, i) => `<button class="ex-option" data-key="${esc(o.key)}" ${o.say ? `data-option-say="${esc(o.say)}"` : ''}><span class="ex-num">${i + 1}</span>${o.say ? '<span class="ex-option-voice">🔊</span>' : ''}${o.html}</button>`).join('')}
       </div>
     `;
     wireSpeak(ctx.body);
@@ -248,6 +248,7 @@ App.exercises = (function () {
       btns.forEach(x => x.classList.toggle('selected', x === b));
       picked = b.dataset.key;
       footer.enable(true);
+      if (b.dataset.optionSay) App.speak(b.dataset.optionSay, word.lang);
       if (onPick) onPick(b);
     };
     btns.forEach(b => b.addEventListener('click', () => pick(b)));
@@ -343,18 +344,18 @@ App.exercises = (function () {
       const others = distractors(word, 3, w => w.icon + '|' + w.w);
       const opts = shuffle([word, ...others]).map(w => ({
         key: w.id,
-        html: `<span class="ex-pic-halo"><span class="ex-pic">${App.ui.wordIcon(w.icon)}</span></span><span class="ex-pic-word">${esc(w.w)}</span>`
+        html: `<span class="ex-pic-halo"><span class="ex-pic">${App.ui.wordIcon(w.icon)}</span></span><span class="ex-pic-word">${esc(w.w)}</span>`,
+        say: w.w
       }));
       choice(ctx, {
         word, correctKey: word.id, options: opts, gridClass: 'ex-options-pictures',
         headHtml: speechHead(App.t('ex_picture', { w: `<b>${esc(meaningOf(word))}</b>` })),
-        detail: answerDetail(word),
-        onPick: (b) => { const w = [word, ...others].find(x => x.id === b.dataset.key); if (w) App.speak(w.w, w.lang); }
+        detail: answerDetail(word)
       });
     },
 
     translate(ctx, word) {
-      const opts = shuffle([word, ...distractors(word, 3)]).map(w => ({ key: w.id, html: esc(w.w) }));
+      const opts = shuffle([word, ...distractors(word, 3)]).map(w => ({ key: w.id, html: esc(w.w), say: w.w }));
       choice(ctx, {
         word, correctKey: word.id, options: opts,
         headHtml: headHtml(App.t('ex_translate'), `
@@ -376,7 +377,7 @@ App.exercises = (function () {
     },
 
     listen(ctx, word) {
-      const opts = shuffle([word, ...distractors(word, 3)]).map(w => ({ key: w.id, html: esc(w.w) }));
+      const opts = shuffle([word, ...distractors(word, 3)]).map(w => ({ key: w.id, html: esc(w.w), say: w.w }));
       choice(ctx, {
         word, correctKey: word.id, options: opts,
         headHtml: headHtml(App.t('ex_listen'), `
@@ -392,7 +393,7 @@ App.exercises = (function () {
     blank(ctx, word) {
       const idx = word.ex.toLowerCase().indexOf(word.w.toLowerCase());
       const sentence = esc(word.ex.slice(0, idx)) + '<span class="ex-gap">____</span>' + esc(word.ex.slice(idx + word.w.length));
-      const opts = shuffle([word, ...distractors(word, 3)]).map(w => ({ key: w.id, html: esc(w.w) }));
+      const opts = shuffle([word, ...distractors(word, 3)]).map(w => ({ key: w.id, html: esc(w.w), say: w.w }));
       const m = App.words.localizedMeaning(word);
       choice(ctx, {
         word, correctKey: word.id, options: opts,

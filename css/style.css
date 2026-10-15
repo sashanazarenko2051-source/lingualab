@@ -573,6 +573,8 @@ button { background: none; }
 .ex-option.correct { border-color: var(--good); background: color-mix(in srgb, var(--good) 18%, var(--surface)); box-shadow: 0 4px 0 var(--good-dark); }
 .ex-option.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 18%, var(--surface)); box-shadow: 0 4px 0 var(--bad-dark); animation: shake .35s ease; }
 .ex-option:disabled { cursor: default; }
+.ex-option-voice { position: absolute; right: 10px; top: 7px; font-size: 13px; opacity: .55; }
+.ex-option.selected .ex-option-voice { opacity: 1; animation: picBounce .4s ease; }
 .ex-num { position: absolute; left: 10px; top: 8px; font-size: 11px; color: var(--ink-muted); border: 1px solid var(--border); border-radius: 6px; padding: 0 5px; }
 /* Picture choice: colorful tiles popping in one by one, icon on a halo. */
 .ex-options-pictures .ex-option {
