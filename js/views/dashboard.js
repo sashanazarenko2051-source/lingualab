@@ -57,8 +57,15 @@ App.views.dashboard = {
       </section>
 
       <section class="panel">
-        <h3>${App.t('dash_activity_7d')}</h3>
+        <div class="chart-head">
+          <h3 id="chart-title">${App.t('dash_activity_7d')}</h3>
+          <div class="chart-tabs">
+            <button class="chart-tab active" data-chart="week">${App.t('chart_week')}</button>
+            <button class="chart-tab" data-chart="month">${App.t('chart_month')}</button>
+          </div>
+        </div>
         <div class="minichart" id="minichart"></div>
+        <div class="month-view" id="month-view" hidden></div>
       </section>
 
       <section class="panel">
@@ -72,6 +79,14 @@ App.views.dashboard = {
     renderLevelRow(root);
     renderDailyGoal(root);
     renderMiniChart(root);
+    root.querySelectorAll('[data-chart]').forEach(b => b.addEventListener('click', () => {
+      const month = b.dataset.chart === 'month';
+      root.querySelectorAll('[data-chart]').forEach(x => x.classList.toggle('active', x === b));
+      root.querySelector('#minichart').hidden = month;
+      root.querySelector('#month-view').hidden = !month;
+      root.querySelector('#chart-title').textContent = month ? App.t('chart_month_title') : App.t('dash_activity_7d');
+      if (month) { monthOffset = 0; renderMonth(root); }
+    }));
     renderAchievements(root);
     App.mascot.renderWidget(root);
 
@@ -222,23 +237,81 @@ function renderStatRow(root, currentLang) {
   }));
 }
 
+// This week from Monday to Sunday; today is highlighted, days still ahead
+// are dimmed. Each bar shows its number of answers.
 function renderMiniChart(root) {
   const el = root.querySelector('#minichart');
-  const days = App.storage.getHistory(7);
+  const dayKeys = ['day_mon', 'day_tue', 'day_wed', 'day_thu', 'day_fri', 'day_sat', 'day_sun'];
+  const now = new Date();
+  const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay() + 6) % 7));
+  const history = App.storage.state.stats.history || {};
+  const days = dayKeys.map((k, i) => {
+    const d = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + i);
+    const key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    const e = history[key] || { reviews: 0, correct: 0 };
+    return { label: App.t(k), reviews: e.reviews || 0, correct: e.correct || 0, today: i === (now.getDay() + 6) % 7, future: d > now };
+  });
   const max = Math.max(1, ...days.map(d => d.reviews));
-  const dayKeys = ['day_sun', 'day_mon', 'day_tue', 'day_wed', 'day_thu', 'day_fri', 'day_sat'];
 
   el.innerHTML = days.map(d => {
     const h = Math.round((d.reviews / max) * 100);
-    const dow = App.t(dayKeys[new Date(d.date).getDay()]);
     const tip = App.t('tooltip_reviews_correct', { reviews: d.reviews, correct: d.correct });
     return `
-      <div class="minichart-col">
+      <div class="minichart-col ${d.today ? 'is-today' : ''} ${d.future ? 'is-future' : ''}">
+        <div class="minichart-n">${d.reviews || ''}</div>
         <div class="minichart-bar" style="height:${Math.max(h, d.reviews ? 6 : 2)}%" title="${tip}"></div>
-        <div class="minichart-label">${dow}</div>
+        <div class="minichart-label">${d.label}</div>
       </div>
     `;
   }).join('');
+}
+
+// Month calendar (Mon–Sun rows): answers per day, darker = more. The arrows
+// page through earlier months.
+let monthOffset = 0;
+function renderMonth(root) {
+  const el = root.querySelector('#month-view');
+  const now = new Date();
+  const first = new Date(now.getFullYear(), now.getMonth() + monthOffset, 1);
+  const daysIn = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+  const lead = (first.getDay() + 6) % 7;
+  const history = App.storage.state.stats.history || {};
+  const key = (d) => first.getFullYear() + '-' + String(first.getMonth() + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+  const counts = [];
+  for (let d = 1; d <= daysIn; d++) counts.push((history[key(d)] || {}).reviews || 0);
+  const max = Math.max(1, ...counts);
+  const total = counts.reduce((a, b) => a + b, 0);
+  const active = counts.filter(Boolean).length;
+  let title;
+  try { title = first.toLocaleString(App.storage.getUILang(), { month: 'long', year: 'numeric' }); }
+  catch (e) { title = first.getFullYear() + '-' + String(first.getMonth() + 1).padStart(2, '0'); }
+  const dayKeys = ['day_mon', 'day_tue', 'day_wed', 'day_thu', 'day_fri', 'day_sat', 'day_sun'];
+  const isThisMonth = monthOffset === 0;
+
+  let cells = '';
+  for (let i = 0; i < lead; i++) cells += '<div class="mv-cell mv-blank"></div>';
+  counts.forEach((n, i) => {
+    const d = i + 1;
+    const future = isThisMonth && d > now.getDate();
+    const lvl = n ? Math.min(4, 1 + Math.floor((n / max) * 3.999)) : 0;
+    cells += `<div class="mv-cell mv-l${lvl} ${isThisMonth && d === now.getDate() ? 'mv-today' : ''} ${future ? 'mv-future' : ''}" title="${App.t('tooltip_reviews_correct', { reviews: n, correct: (history[key(d)] || {}).correct || 0 })}">
+      <span class="mv-d">${d}</span><span class="mv-n">${n || ''}</span></div>`;
+  });
+
+  el.innerHTML = `
+    <div class="mv-nav">
+      <button class="browse-arrow" id="mv-prev">‹</button>
+      <span class="mv-title">${title}</span>
+      <button class="browse-arrow" id="mv-next" ${isThisMonth ? 'disabled' : ''}>›</button>
+    </div>
+    <div class="mv-grid">
+      ${dayKeys.map(k => `<div class="mv-dow">${App.t(k)}</div>`).join('')}
+      ${cells}
+    </div>
+    <div class="mv-total">${App.t('chart_month_total', { n: total, d: active })}</div>
+  `;
+  el.querySelector('#mv-prev').addEventListener('click', () => { monthOffset -= 1; renderMonth(root); });
+  el.querySelector('#mv-next').addEventListener('click', () => { if (monthOffset < 0) { monthOffset += 1; renderMonth(root); } });
 }
 
 function renderLevelRow(root) {
