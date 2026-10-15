@@ -5,107 +5,69 @@ App.views = App.views || {};
 // <script> tags share one global scope.
 (function () {
 
-// Dictionary / reading mode: pick a topic and page through its words one by
-// one (picture, word with audio, translation, example). Nothing is graded,
-// so reading here never changes your progress.
-let topicId = null;
-let index = 0;
-let keyHandler = null;
+// Dictionary: a plain list of every word in the language you're learning,
+// with its translation, grouped by topic. Click a word to hear it. Nothing
+// is graded, so reading here never changes your progress.
+let query = '';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-function setKeys(fn) {
-  if (keyHandler) document.removeEventListener('keydown', keyHandler);
-  keyHandler = fn;
-  if (fn) document.addEventListener('keydown', fn);
-}
-
 App.views.browse = {
   render(root) {
-    setKeys(null);
     const code = App.storage.getCurrentLang();
-    if (topicId && !App.data[code].categories.some(c => c.id === topicId)) topicId = null;
-    if (topicId) renderReader(root, code); else renderTopics(root, code);
+    const total = App.words.allWords(code).length;
+    root.innerHTML = `
+      <div class="words-head">
+        <h2>📖 ${App.t('browse_title')}: ${App.ui.flagChip(code)} ${App.ui.langName(code)} <span class="words-count">${total}</span></h2>
+        <input type="text" id="browse-search" placeholder="${App.t('words_search')}" value="${esc(query)}">
+      </div>
+      <p class="words-note browse-note">${App.t('browse_note')}</p>
+      <div class="browse-jump" id="browse-jump"></div>
+      <div id="browse-list"></div>
+    `;
+    root.querySelector('#browse-search').addEventListener('input', (e) => {
+      query = e.target.value.trim().toLowerCase();
+      renderList(root, code);
+    });
+    renderList(root, code);
   }
 };
 
-function renderTopics(root, code) {
+function renderList(root, code) {
   const cats = App.data[code].categories;
-  root.innerHTML = `
-    <div class="words-head">
-      <h2>📖 ${App.t('browse_title')}: ${App.ui.flagChip(code)} ${App.ui.langName(code)}</h2>
-    </div>
-    <p class="words-note browse-note">${App.t('browse_note')}</p>
-    <div class="browse-topics">
-      ${cats.map(c => {
-        const words = App.words.byCategory(code, c.id);
-        const fresh = words.filter(w => App.srs.isNew(w.id)).length;
-        return `<button class="browse-topic" data-topic="${c.id}" style="--accent: var(--slot-${App.data[code].slot})">
-          <span class="browse-topic-icon">${App.CATEGORY_ICONS[c.id] || '📘'}</span>
-          <span class="browse-topic-name">${App.ui.categoryName(c.id, c.name)}</span>
-          <span class="browse-topic-meta">${App.t('browse_topic_meta', { n: words.length, fresh })}</span>
-        </button>`;
-      }).join('')}
-    </div>
-  `;
-  root.querySelectorAll('[data-topic]').forEach(b => b.addEventListener('click', () => {
-    topicId = b.dataset.topic;
-    index = 0;
-    renderReader(root, code);
-  }));
-}
+  const groups = cats.map(cat => ({
+    cat,
+    words: App.words.byCategory(code, cat.id).filter(w => !query
+      || w.w.toLowerCase().includes(query) || App.words.localizedMeaning(w).w.toLowerCase().includes(query))
+  })).filter(g => g.words.length);
 
-function renderReader(root, code) {
-  const cat = App.data[code].categories.find(c => c.id === topicId);
-  const words = App.words.byCategory(code, topicId);
-  index = Math.max(0, Math.min(index, words.length - 1));
-  const w = words[index];
-  const m = App.words.localizedMeaning(w);
-  const accent = `var(--slot-${App.data[code].slot})`;
+  root.querySelector('#browse-jump').innerHTML = query ? '' : groups.map(g =>
+    `<button class="browse-chip" data-jump="${g.cat.id}">${App.CATEGORY_ICONS[g.cat.id] || '📘'} ${App.ui.categoryName(g.cat.id, g.cat.name)}</button>`).join('');
 
-  root.innerHTML = `
-    <div class="browse-reader" style="--accent:${accent}">
-      <div class="ex-topbar">
-        <button class="ex-close" id="br-back" title="${App.t('back_btn_title')}">←</button>
-        <div class="ex-progress"><div class="ex-progress-fill" style="width:${Math.round(((index + 1) / words.length) * 100)}%; background:${accent}"></div></div>
-        <span class="browse-pos">${index + 1} / ${words.length}</span>
+  root.querySelector('#browse-list').innerHTML = groups.map(g => `
+    <section class="panel browse-group" id="bt-${g.cat.id}">
+      <div class="words-section-head">
+        <h3>${App.CATEGORY_ICONS[g.cat.id] || '📘'} ${App.ui.categoryName(g.cat.id, g.cat.name)} <span class="words-count">${g.words.length}</span></h3>
+        <button class="action-card browse-learn" data-learn="${g.cat.id}">🎓 ${App.t('browse_learn')}</button>
       </div>
-      <div class="browse-topic-title">${App.CATEGORY_ICONS[cat.id] || '📘'} ${App.ui.categoryName(cat.id, cat.name)}</div>
-      <div class="ex-card ex-intro browse-card">
-        <div class="ex-intro-halo"><div class="ex-intro-icon">${App.ui.wordIcon(w.icon)}</div></div>
-        <div class="ex-intro-word">${esc(w.w)} <button class="ex-speak" data-say="${esc(w.w)}">🔊</button></div>
-        <div class="ex-intro-meaning">${esc(m.w)}</div>
-        ${w.ex ? `<div class="ex-intro-ex">${esc(w.ex)} <button class="ex-speak" data-say="${esc(w.ex)}">🔊</button></div>` : ''}
-        ${m.ex ? `<div class="ex-intro-ex ex-intro-ex-tr">${esc(m.ex)}</div>` : ''}
-        ${App.srs.isNew(w.id) ? '' : `<div class="browse-known">✅ ${App.t('browse_known')}</div>`}
+      <div class="browse-table">
+        ${g.words.map(w => `
+          <button class="browse-line" data-say="${esc(w.w)}" title="${App.t('listen_title')}">
+            <span class="browse-w">${esc(w.w)}</span>
+            <span class="browse-tr">${esc(App.words.localizedMeaning(w).w)}</span>
+            <span class="browse-known">${App.srs.isNew(w.id) ? '' : '✅'}</span>
+          </button>`).join('')}
       </div>
-      <div class="browse-nav">
-        <button class="action-card" id="br-prev" ${index === 0 ? 'disabled' : ''} style="display:inline-flex">← ${App.t('browse_prev')}</button>
-        <button class="action-card" id="br-learn" style="display:inline-flex">🎓 ${App.t('browse_learn')}</button>
-        <button class="quiz-next" id="br-next">${index === words.length - 1 ? App.t('browse_topics') : App.t('browse_next')} →</button>
-      </div>
-    </div>
-  `;
-  App.speak(w.w, code);
+    </section>
+  `).join('') || `<p class="empty-hint">—</p>`;
+
   root.querySelectorAll('[data-say]').forEach(b => b.addEventListener('click', () => App.speak(b.dataset.say, code)));
-  const prev = () => { if (index > 0) { index -= 1; renderReader(root, code); } };
-  const next = () => {
-    if (index < words.length - 1) { index += 1; renderReader(root, code); }
-    else { topicId = null; renderTopics(root, code); setKeys(null); }
-  };
-  root.querySelector('#br-prev').addEventListener('click', prev);
-  root.querySelector('#br-next').addEventListener('click', next);
-  root.querySelector('#br-back').addEventListener('click', () => { topicId = null; setKeys(null); renderTopics(root, code); });
-  root.querySelector('#br-learn').addEventListener('click', () => {
-    setKeys(null);
-    App.session.flashcardsCategory = topicId;
+  root.querySelectorAll('[data-jump]').forEach(b => b.addEventListener('click', () =>
+    root.querySelector('#bt-' + b.dataset.jump)?.scrollIntoView({ behavior: 'smooth', block: 'start' })));
+  root.querySelectorAll('[data-learn]').forEach(b => b.addEventListener('click', () => {
+    App.session.flashcardsCategory = b.dataset.learn;
     App.router.go('flashcards');
-  });
-  setKeys(e => {
-    if (App.router.current !== 'browse') { setKeys(null); return; }
-    if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); next(); }
-    else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-  });
+  }));
 }
 
 })();

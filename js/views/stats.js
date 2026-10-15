@@ -6,31 +6,67 @@ App.views = App.views || {};
 // view file would otherwise silently collide with (or override) this one.
 (function () {
 
+// The page is split in two: everything for ONE language (picked with the
+// flag tabs, so "Greetings" in English and in Czech are never mixed up),
+// then the totals for all languages together.
+let tab = null;
+
+const pctOf = (a, b) => b ? Math.round((a / b) * 100) + '%' : '—';
+const tile = (icon, value, label, sub) =>
+  `<div class="stat-tile"><div class="stat-icon">${icon}</div><div class="stat-value">${value}</div><div class="stat-label">${label}</div>${sub ? `<div class="stat-sub">${sub}</div>` : ''}</div>`;
+
 App.views.stats = {
   render(root) {
-    const code = App.storage.getCurrentLang();
+    const started = (c) => App.words.allWords(c).some(w => !App.srs.isNew(w.id));
+    const order = App.LANG_ORDER.slice().sort((a, b) => started(b) - started(a));
+    if (!tab || !App.data[tab]) tab = App.storage.getCurrentLang();
+    const code = tab;
     const lang = App.data[code];
     const words = App.words.allWords(code);
-    const mastered = words.filter(w => App.srs.isMastered(w.id));
-    const learning = words.filter(w => !App.srs.isNew(w.id) && !App.srs.isMastered(w.id));
-    const streak = App.storage.state.stats.streak || 0;
+    const c = counts(words);
+    const fresh = c.total - c.mastered - c.learning;
+    const due = words.filter(w => !App.srs.isNew(w.id) && App.srs.isDue(w.id)).length;
+    const mistakes = App.storage.getMistakeIds(code).length;
+
     const history = Object.values(App.storage.state.stats.history || {});
     const reviews = history.reduce((n, d) => n + (d.reviews || 0), 0);
     const correct = history.reduce((n, d) => n + (d.correct || 0), 0);
-    const accuracy = reviews ? Math.round((correct / reviews) * 100) + '%' : '—';
+    const langAns = history.reduce((n, d) => n + ((d.langs && d.langs[code] && d.langs[code].reviews) || 0), 0);
+    const langOk = history.reduce((n, d) => n + ((d.langs && d.langs[code] && d.langs[code].correct) || 0), 0);
+    const streak = App.storage.state.stats.streak || 0;
+    const today = App.gamification.todayCount(App.storage.state);
+    const goal = App.gamification.DAILY_GOAL;
+    const level = App.gamification.levelForXP(App.storage.state.stats.xp);
 
     root.innerHTML = `
-      <section class="stat-row">
-        <div class="stat-tile"><div class="stat-icon">🏆</div><div class="stat-value">${mastered.length}<span class="stat-of">/${words.length}</span></div><div class="stat-label">${App.t('stats_mastered')}</div></div>
-        <div class="stat-tile"><div class="stat-icon">📖</div><div class="stat-value">${learning.length}</div><div class="stat-label">${App.t('stats_learning')}</div></div>
-        <div class="stat-tile"><div class="stat-icon">✍️</div><div class="stat-value">${reviews}</div><div class="stat-label">${App.t('stats_reviews')}</div></div>
-        <div class="stat-tile"><div class="stat-icon">🎯</div><div class="stat-value">${accuracy}</div><div class="stat-label">${App.t('stats_accuracy')}</div></div>
-        <div class="stat-tile"><div class="stat-icon">🔥</div><div class="stat-value">${streak}</div><div class="stat-label">${App.t('stats_streak')}</div></div>
-      </section>
+      <div class="words-tabs stats-tabs">
+        ${order.map(l => `<button class="words-tab ${l === code ? 'active' : ''}" data-tab="${l}" style="--accent: var(--slot-${App.data[l].slot})">${App.ui.flagChip(l)} ${App.ui.langName(l)}</button>`).join('')}
+      </div>
+
+      <div class="panel stats-lang-panel" style="--accent: var(--slot-${lang.slot})">
+        <h2 class="stats-lang-title">${App.ui.flagChip(code)} ${App.ui.langName(code)}</h2>
+        <section class="stat-row">
+          ${tile('🏆', `${c.mastered}<span class="stat-of">/${c.total}</span>`, App.t('stats_mastered'), pctOf(c.mastered, c.total))}
+          ${tile('📖', c.learning, App.t('stats_learning'))}
+          ${tile('🆕', fresh, App.t('stats_new'))}
+          ${tile('⏰', due, App.t('stats_due'))}
+          ${tile('🔁', mistakes, App.t('stats_mistakes'))}
+          ${tile('🎯', pctOf(langOk, langAns), App.t('stats_lang_accuracy'), App.t('stats_of_answers', { n: langAns }))}
+        </section>
+        <p class="stats-legend">${App.t('stats_legend')}</p>
+        <h3>${App.ui.flagChip(code)} ${App.ui.langName(code)}: ${App.t('stats_progress_by_topic')}</h3>
+        <div id="cat-bars"></div>
+      </div>
 
       <div class="panel">
-        <h3>${App.ui.langName(code)}: ${App.t('stats_progress_by_topic')}</h3>
-        <div id="cat-bars"></div>
+        <h3>🌍 ${App.t('stats_overall')}</h3>
+        <section class="stat-row">
+          ${tile('✍️', reviews, App.t('stats_reviews'))}
+          ${tile('🎯', pctOf(correct, reviews), App.t('stats_accuracy'))}
+          ${tile('📅', `${today}<span class="stat-of">/${goal}</span>`, App.t('stats_today'))}
+          ${tile('⭐', level, App.t('dash_level'))}
+          ${tile('🔥', streak, App.t('stats_streak'))}
+        </section>
       </div>
 
       <div class="panel">
@@ -44,6 +80,7 @@ App.views.stats = {
       </div>
     `;
 
+    root.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => { tab = b.dataset.tab; App.views.stats.render(root); }));
     renderCatBars(root, code, lang);
     renderMiniChart30(root);
     renderAllLangs(root, code);
@@ -74,7 +111,7 @@ function barRow(labelHtml, c, color) {
         <div class="cat-bar-fill" style="width:${shown(c.mastered)}%; background:${color}"></div>
         <div class="cat-bar-fill cat-bar-learning" style="width:${shown(c.learning)}%; background:${color}"></div>
       </div>
-      <div class="cat-bar-pct"><b>${c.mastered}</b>/${c.total} · ${whole}%</div>
+      <div class="cat-bar-pct">✅ <b>${c.mastered}</b>${c.learning ? ` · 📖 ${c.learning}` : ''} / ${c.total} · ${whole}%</div>
     </div>
   `;
 }
@@ -82,7 +119,7 @@ function barRow(labelHtml, c, color) {
 function renderCatBars(root, code, lang) {
   const color = `var(--slot-${lang.slot})`;
   root.querySelector('#cat-bars').innerHTML = lang.categories
-    .map(cat => barRow(App.ui.categoryName(cat.id, cat.name), counts(App.words.byCategory(code, cat.id)), color))
+    .map(cat => barRow(`${App.CATEGORY_ICONS[cat.id] || '📘'} ${App.ui.categoryName(cat.id, cat.name)}${App.storage.isExamPassed(code, cat.id) ? ' 🎓' : ''}`, counts(App.words.byCategory(code, cat.id)), color))
     .join('');
 }
 

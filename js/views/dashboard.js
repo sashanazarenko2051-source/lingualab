@@ -18,6 +18,14 @@ App.views.dashboard = {
     root.innerHTML = `
       ${startLessonHtml(currentLang, nextCat, mistakes)}
       ${lastLesson ? repeatLessonHtml(lastLesson) : ''}
+      ${mistakes ? `
+      <button class="repeat-lesson repeat-lesson-mistakes" id="mistakes-session">
+        <span class="repeat-lesson-icon">🔁</span>
+        <span class="repeat-lesson-text">
+          <span class="repeat-lesson-title">${App.t('dash_mistakes')}</span>
+          <span class="repeat-lesson-sub">${App.ui.flagChip(currentLang)} ${App.ui.langName(currentLang)} · ${App.t('dash_mistakes_sub', { n: mistakes })}</span>
+        </span>
+      </button>` : ''}
 
       <div class="lang-picker-head">
         <h2>${App.t('dash_pick_lang')}</h2>
@@ -37,12 +45,6 @@ App.views.dashboard = {
       </section>
 
       <section class="actions-row">
-        ${mistakes ? `
-        <button class="action-card action-card-mistakes" id="mistakes-session">
-          <span class="action-icon">🔁</span>
-          <span class="action-title">${App.t('dash_mistakes')}</span>
-          <span class="action-sub">${App.t('dash_mistakes_sub', { n: mistakes })}</span>
-        </button>` : ''}
         <button class="action-card" data-go="course">
           <span class="action-icon">🎓</span>
           <span class="action-title">${App.t('dash_continue_path')}</span>
@@ -264,7 +266,7 @@ function renderAchievements(root) {
   const unlocked = App.storage.state.stats.achievements || [];
   el.innerHTML = App.gamification.ACHIEVEMENTS.map(a => {
     const isUnlocked = unlocked.includes(a.id);
-    return `<button class="ach-badge ${isUnlocked ? 'unlocked' : 'locked'}" data-ach="${a.id}" title="${App.t(a.titleKey)}">${a.icon}</button>`;
+    return `<button class="ach-badge ${isUnlocked ? 'unlocked' : 'locked'}" data-ach="${a.id}" title="${App.t(a.titleKey, { n: a.goal })}">${a.icon}</button>`;
   }).join('') + `<div class="ach-hint">👆 ${App.t('ach_hint_tap')}</div>`;
   el.querySelectorAll('[data-ach]').forEach(b => b.addEventListener('click', () => App.achievements.openInfo(b.dataset.ach)));
 }

@@ -18,7 +18,7 @@ App.achievements = (function () {
     const unlocked = isUnlocked(id);
     const value = Math.min(a.value(state), a.goal);
     const pct = Math.round((value / a.goal) * 100);
-    const name = App.t(a.titleKey);
+    const name = App.t(a.titleKey, { n: a.goal });
     const shared = App.storage.getProfile().showcase === id;
 
     const overlay = document.createElement('div');
@@ -80,7 +80,7 @@ App.achievements = (function () {
     if (!list.length) return '';
     list.sort((x, y) => (y.id === showcase) - (x.id === showcase));
     return `<span class="lb-ach">${list.slice(0, 6).map(a =>
-      `<span class="lb-ach-icon ${a.id === showcase ? 'showcase' : ''}" title="${esc(App.t(a.titleKey))}">${a.icon}</span>`).join('')}</span>`;
+      `<span class="lb-ach-icon ${a.id === showcase ? 'showcase' : ''}" title="${esc(App.t(a.titleKey, { n: a.goal }))}">${a.icon}</span>`).join('')}</span>`;
   }
 
   return { openInfo, badgesHtml, isUnlocked };

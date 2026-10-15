@@ -30,7 +30,7 @@ App.srs = (function () {
       // Correct again before the word was due (e.g. re-asked later in the
       // same lesson): keep the schedule. Advancing here jumped the interval
       // from 1 to 6 days within a single sitting.
-      App.storage.recordReview(true);
+      App.storage.recordReview(true, id);
       return prev;
     } else {
       ef = Math.max(1.3, ef + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
@@ -42,7 +42,7 @@ App.srs = (function () {
 
     const rec = { ef, interval, reps, due: Date.now() + interval * DAY };
     App.storage.setSRS(id, rec);
-    App.storage.recordReview(quality >= 3);
+    App.storage.recordReview(quality >= 3, id);
     return rec;
   }
 

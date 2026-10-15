@@ -73,11 +73,21 @@ App.storage = (function () {
     save();
   }
 
-  function recordReview(correct) {
+  // wordId (optional) also tallies the answer under its language, so the
+  // stats page can show accuracy per language.
+  function recordReview(correct, wordId) {
     const key = todayKey();
     if (!state.stats.history[key]) state.stats.history[key] = { reviews: 0, correct: 0 };
-    state.stats.history[key].reviews += 1;
-    if (correct) state.stats.history[key].correct += 1;
+    const day = state.stats.history[key];
+    day.reviews += 1;
+    if (correct) day.correct += 1;
+    if (wordId) {
+      const code = wordId.split(':')[0];
+      day.langs = day.langs || {};
+      const l = day.langs[code] = day.langs[code] || { reviews: 0, correct: 0 };
+      l.reviews += 1;
+      if (correct) l.correct += 1;
+    }
     touchStreak();
     save();
   }

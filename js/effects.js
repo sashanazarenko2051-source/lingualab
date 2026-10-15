@@ -93,7 +93,7 @@ App.effects = (function () {
       setTimeout(() => {
         achievement();
         confetti();
-        toast(`${a.icon} <b>${App.t('toast_achievement')}</b><br><span>${App.t(a.titleKey)}</span>`, 'fx-toast-ach');
+        toast(`${a.icon} <b>${App.t('toast_achievement')}</b><br><span>${App.t(a.titleKey, { n: a.goal })}</span>`, 'fx-toast-ach');
       }, gain.leveledUp ? 500 + i * 900 : i * 900);
     });
   }
