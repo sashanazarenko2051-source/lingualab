@@ -231,6 +231,7 @@ App.exercises = (function () {
     let picked = null;
     const check = () => {
       const ok = picked === correctKey;
+      ctx.body.querySelector('.ex-options').classList.add('ex-answered');
       ctx.body.querySelectorAll('.ex-option').forEach(b => {
         b.disabled = true;
         if (b.dataset.key === correctKey) b.classList.add('correct');
@@ -261,6 +262,12 @@ App.exercises = (function () {
     const i = phrase ? sentence.toLowerCase().indexOf(phrase.toLowerCase()) : -1;
     if (i === -1) return esc(sentence);
     return esc(sentence.slice(0, i)) + `<mark class="ex-mark">${esc(sentence.slice(i, i + phrase.length))}</mark>` + esc(sentence.slice(i + phrase.length));
+  }
+
+  // The task said by the learner's own avatar in a speech bubble.
+  function speechHead(textHtml) {
+    const avatar = App.profile ? App.profile.avatarBadgeHtml(App.storage.getProfile(), 64) : '🐺';
+    return `<div class="ex-head"><div class="ex-speech"><div class="ex-speech-avatar">${avatar}</div><div class="ex-speech-bubble">${textHtml}</div></div></div>`;
   }
 
   function headHtml(title, extra) {
@@ -336,11 +343,11 @@ App.exercises = (function () {
       const others = distractors(word, 3, w => w.icon + '|' + w.w);
       const opts = shuffle([word, ...others]).map(w => ({
         key: w.id,
-        html: `<span class="ex-pic">${App.ui.wordIcon(w.icon)}</span><span class="ex-pic-word">${esc(w.w)}</span>`
+        html: `<span class="ex-pic-halo"><span class="ex-pic">${App.ui.wordIcon(w.icon)}</span></span><span class="ex-pic-word">${esc(w.w)}</span>`
       }));
       choice(ctx, {
         word, correctKey: word.id, options: opts, gridClass: 'ex-options-pictures',
-        headHtml: headHtml(App.t('ex_picture', { w: esc(meaningOf(word)) })),
+        headHtml: speechHead(App.t('ex_picture', { w: `<b>${esc(meaningOf(word))}</b>` })),
         detail: answerDetail(word),
         onPick: (b) => { const w = [word, ...others].find(x => x.id === b.dataset.key); if (w) App.speak(w.w, w.lang); }
       });
