@@ -17,6 +17,7 @@ App.storage = (function () {
       mistakes: {},
       reviewList: {},
       missCount: {},
+      friends: [],
       profile: { name: '', animal: 'wolf', color: '#00e5ff' }
     };
   }
@@ -40,6 +41,7 @@ App.storage = (function () {
         mistakes: parsed.mistakes || {},
         reviewList: parsed.reviewList || {},
         missCount: parsed.missCount || {},
+        friends: parsed.friends || [],
         profile: Object.assign({}, d.profile, parsed.profile)
       };
     } catch (e) {
@@ -209,6 +211,12 @@ App.storage = (function () {
     // re-added automatically on the very next mistake.
     removeFromReview(wordId) { delete state.reviewList[wordId]; state.missCount[wordId] = 0; save(); },
     inReview(wordId) { return state.reviewList[wordId] || null; },
+
+    // Friends are a local list of cloud uids (see views/friends.js).
+    getFriends() { return state.friends.slice(); },
+    isFriend(uid) { return state.friends.includes(uid); },
+    addFriend(uid) { if (!state.friends.includes(uid)) { state.friends.push(uid); save(); } },
+    removeFriend(uid) { state.friends = state.friends.filter(id => id !== uid); save(); },
     getReviewIds(code) {
       return Object.keys(state.reviewList).filter(id => id.startsWith(code + ':'))
         .sort((a, b) => state.reviewList[b].at - state.reviewList[a].at);

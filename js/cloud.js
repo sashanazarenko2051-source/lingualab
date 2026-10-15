@@ -32,6 +32,11 @@ App.cloud = (function () {
     if (isReady) cb(); else readyCbs.push(cb);
   }
 
+  // Short code friends type in to find you: the first 6 characters of the uid.
+  function getFriendCode() {
+    return uid ? uid.slice(0, 6).toUpperCase() : '';
+  }
+
   function syncProfile(profile, level, weeklyXP) {
     if (!configured || !uid || !db) return Promise.resolve();
     const week = App.storage.isoWeekKey(new Date());
@@ -41,6 +46,8 @@ App.cloud = (function () {
       outlineColor: profile.outlineColor, bgPattern: profile.bgPattern, flag: profile.flag || null,
       achievements: App.storage.state.stats.achievements || [], showcase: profile.showcase || null,
       level, weeklyXP, week,
+      friendCode: getFriendCode(), nameLower: String(profile.name || '').trim().toLowerCase(),
+      xpLevel: App.gamification.levelForXP(App.storage.state.stats.xp), streak: App.storage.state.stats.streak || 0,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
   }
@@ -74,8 +81,35 @@ App.cloud = (function () {
       .then(snap => snap.docs.map(d => d.data()));
   }
 
+  // Search by friend code or by exact name (case-insensitive).
+  function findUsers(q) {
+    if (!configured || !db) return Promise.resolve([]);
+    const users = db.collection('users');
+    return Promise.all([
+      users.where('friendCode', '==', q.toUpperCase()).limit(5).get(),
+      users.where('nameLower', '==', q.toLowerCase()).limit(10).get()
+    ]).then(snaps => {
+      const seen = {};
+      snaps.forEach(s => s.docs.forEach(d => { seen[d.id] = d.data(); }));
+      return Object.values(seen);
+    });
+  }
+
+  // Friends' public profiles; Firestore "in" queries take 10 ids at a time.
+  function fetchUsers(uids) {
+    if (!configured || !db || !uids.length) return Promise.resolve([]);
+    const chunks = [];
+    for (let i = 0; i < uids.length; i += 10) chunks.push(uids.slice(i, i + 10));
+    return Promise.all(chunks.map(c => db.collection('users')
+      .where(firebase.firestore.FieldPath.documentId(), 'in', c).get()))
+      .then(snaps => [].concat(...snaps.map(s => s.docs.map(d => d.data()))));
+  }
+
   return {
     isConfigured: () => configured,
+    getFriendCode,
+    findUsers,
+    fetchUsers,
     onReady,
     scheduleSync,
     fetchLeaderboard,

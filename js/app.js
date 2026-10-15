@@ -73,6 +73,7 @@ function initTopbar() {
   nav.innerHTML = `
     <button data-view="dashboard">${App.t('nav_home')}</button>
     <button data-view="words">📒 ${App.t('nav_words')}</button>
+    <button data-view="friends">👥 ${App.t('nav_friends')}</button>
     <button data-view="leaderboard">${App.t('nav_leaderboard')}</button>
   `;
   nav.querySelectorAll('button').forEach(btn => {
