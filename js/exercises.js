@@ -45,10 +45,28 @@ App.exercises = (function () {
   function tokens(sentence) {
     return String(sentence).split(/\s+/).map(t => t.replace(/^[.,!?;:"«»„“”¿¡…()]+|[.,!?;:"«»„“”¿¡…()]+$/g, '')).filter(Boolean);
   }
-  function canBuild(word) {
+  // Words of the language the learner has met: answered before (has an SRS
+  // record) or introduced earlier in this session. Keyed by normalized form.
+  function knownTokens(state) {
+    const known = new Map();
+    const add = (text) => tokens(text).forEach(t => { if (!known.has(norm(t))) known.set(norm(t), t); });
+    const prefix = state.code + ':';
+    Object.keys(App.storage.state.srs).forEach(id => {
+      if (id.startsWith(prefix)) add(id.split(':').slice(2).join(':'));
+    });
+    state.seen.forEach(w => add(w));
+    return known;
+  }
+
+  // A sentence is only built when every word in it is already known — the
+  // examples often contain words the course hasn't taught yet.
+  function canBuild(word, state) {
     const m = App.words.localizedMeaning(word);
-    const n = tokens(word.ex || '').length;
-    return !!(word.ex && m.ex && n >= 3 && n <= 9);
+    const toks = tokens(word.ex || '');
+    if (!(word.ex && m.ex && toks.length >= 3 && toks.length <= 9)) return false;
+    const known = knownTokens(state);
+    tokens(word.w).forEach(t => known.set(norm(t), t));
+    return toks.every(t => known.has(norm(t)));
   }
   function canBlank(word) {
     return !!(word.ex && word.ex.toLowerCase().includes(word.w.toLowerCase()) && word.ex.toLowerCase() !== word.w.toLowerCase());
@@ -71,11 +89,16 @@ App.exercises = (function () {
 
   // A step kind may not fit a word (no example, no voice, non-Latin
   // typing...): fall back to a plain translation choice.
-  function resolveKind(step) {
+  function resolveKind(step, state) {
     const w = step.word;
     switch (step.kind) {
       case 'listen': return App.hasVoice(w.lang) ? 'listen' : 'reverse';
-      case 'build': return canBuild(w) ? 'build' : 'translate';
+      case 'build':
+        // Full example sentence only if every word in it is known; otherwise
+        // assemble the learned phrase itself when it has several words.
+        step.phrase = !canBuild(w, state);
+        if (!step.phrase) return 'build';
+        return tokens(w.w).length >= 2 && tokens(w.w).length <= 8 ? 'build' : 'reverse';
       case 'blank': return canBlank(w) ? 'blank' : 'reverse';
       case 'type': return canType(w) ? 'type' : 'translate';
       default: return step.kind;
@@ -88,7 +111,7 @@ App.exercises = (function () {
     const state = {
       steps: opts.steps, index: 0, code: opts.code, lessonId: opts.lessonId,
       hearts: MAX_HEARTS, useHearts: opts.hearts !== false, combo: 0,
-      correct: 0, tested: 0, learned: 0, repeats: {}, tally: { added: 0, fixed: 0 },
+      correct: 0, tested: 0, learned: 0, seen: new Set(), repeats: {}, tally: { added: 0, fixed: 0 },
       startedAt: Date.now()
     };
     renderStep(opts, state);
@@ -117,7 +140,7 @@ App.exercises = (function () {
     const step = state.steps[state.index];
     currentStep = step;
     const accent = `var(--slot-${App.data[state.code].slot})`;
-    const kind = step.kind === 'match' ? 'match' : resolveKind(step);
+    const kind = step.kind === 'match' ? 'match' : resolveKind(step, state);
     const root = opts.root;
 
     root.innerHTML = `
@@ -329,6 +352,7 @@ App.exercises = (function () {
       const go = () => {
         if (!revealed) { reveal(); return; }
         ctx.state.learned += 1;
+        ctx.state.seen.add(word.w);
         ctx.next();
       };
       card.addEventListener('click', (e) => { if (!e.target.closest('[data-say]')) reveal(); });
@@ -439,18 +463,21 @@ App.exercises = (function () {
       onKey(e => { if (e.key === 'Enter') { e.preventDefault(); footer.trigger(); } });
     },
 
-    build(ctx, word) {
+    build(ctx, word, step) {
       const m = App.words.localizedMeaning(word);
-      const target = tokens(word.ex);
+      const text = step.phrase ? word.w : word.ex;
+      const promptText = step.phrase ? m.w : m.ex;
+      const target = tokens(text);
       const targetNorm = new Set(target.map(norm));
-      const extra = shuffle(sameTopic(word).filter(w => w.ex && w.id !== word.id).flatMap(w => tokens(w.ex)))
-        .filter(t => !targetNorm.has(norm(t)))
-        .filter((t, i, arr) => arr.findIndex(x => norm(x) === norm(t)) === i)
+      // Decoy tiles are known words too, so nothing unfamiliar shows up.
+      const extra = shuffle([...knownTokens(ctx.state).entries()])
+        .filter(([n]) => !targetNorm.has(n))
+        .map(([, t]) => t)
         .slice(0, 2);
       const bank = shuffle([...target, ...extra]).map((t, i) => ({ id: i, t }));
       const chosen = [];
       ctx.body.innerHTML = `
-        ${headHtml(App.t('ex_build'), `<div class="ex-prompt"><span class="ex-prompt-text ex-prompt-sentence">${esc(m.ex)}</span></div>`)}
+        ${headHtml(App.t(step.phrase ? 'ex_build_phrase' : 'ex_build'), `<div class="ex-prompt">${step.phrase ? `<span class="ex-prompt-icon">${App.ui.wordIcon(word.icon)}</span>` : ''}<span class="ex-prompt-text ex-prompt-sentence">${esc(promptText)}</span></div>`)}
         <div class="ex-answer-line" id="ex-line"></div>
         <div class="ex-bank" id="ex-bank"></div>
       `;
@@ -473,11 +500,11 @@ App.exercises = (function () {
       };
       const check = () => {
         locked = true;
-        const ok = norm(chosen.map(c => c.t).join(' ')) === norm(word.ex);
+        const ok = norm(chosen.map(c => c.t).join(' ')) === norm(text);
         line.classList.add(ok ? 'correct' : 'wrong');
         ctx.answer(word, ok);
-        App.speak(word.ex, word.lang);
-        footerFeedback(ctx, ok, ok ? '' : `${App.t('fb_answer')} <b>${esc(word.ex)}</b>`);
+        App.speak(text, word.lang);
+        footerFeedback(ctx, ok, ok ? '' : `${App.t('fb_answer')} <b>${esc(text)}</b>`);
       };
       const footer = footerCheck(ctx, false, check);
       draw();

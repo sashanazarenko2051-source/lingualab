@@ -61,8 +61,10 @@ App.lesson = (function () {
     group.forEach(w => { steps.push(ex('intro', w)); steps.push(ex('picture', w)); });
     if (group.length >= 3) steps.push({ kind: 'match', words: group });
     shuffle(group).forEach((w, i) => steps.push(ex(rotate(['listen', 'reverse', 'translate'], i), w)));
-    const sentence = group.find(w => w.ex);
-    if (sentence) steps.push(ex('build', sentence));
+    // Prefer a multi-word phrase: it can always be assembled from its own
+    // words, while most example sentences contain words not taught yet.
+    const toBuild = group.find(w => w.w.trim().includes(' ')) || group.find(w => w.ex);
+    if (toBuild) steps.push(ex('build', toBuild));
     return steps;
   }
 
