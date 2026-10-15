@@ -12,7 +12,10 @@ App.views.dashboard = {
 
     const lastLesson = App.storage.getLastLesson();
 
+    const nextCat = nextLessonCategory(currentLang);
+
     root.innerHTML = `
+      ${startLessonHtml(currentLang, nextCat)}
       ${lastLesson ? repeatLessonHtml(lastLesson) : ''}
 
       <div class="lang-picker-head">
@@ -71,6 +74,11 @@ App.views.dashboard = {
       btn.addEventListener('click', () => App.router.go(btn.dataset.go));
     });
 
+    root.querySelector('#start-lesson').addEventListener('click', () => {
+      App.session.flashcardsCategory = nextCat.id;
+      App.router.go('flashcards');
+    });
+
     root.querySelector('#repeat-lesson')?.addEventListener('click', () => {
       App.storage.setCurrentLang(lastLesson.lang);
       App.session.flashcardsCategory = lastLesson.categoryId;
@@ -78,6 +86,29 @@ App.views.dashboard = {
     });
   }
 };
+
+// First category on the course path that isn't fully mastered yet; once
+// everything is mastered, fall back to the first one for review.
+function nextLessonCategory(code) {
+  const cats = App.data[code].categories;
+  return cats.find(cat => {
+    const words = App.words.byCategory(code, cat.id);
+    return words.some(w => !App.srs.isMastered(w.id));
+  }) || cats[0];
+}
+
+function startLessonHtml(code, cat) {
+  const lang = App.data[code];
+  return `
+    <button class="repeat-lesson start-lesson" id="start-lesson" style="--accent: var(--slot-${lang.slot})">
+      <span class="repeat-lesson-icon">▶️</span>
+      <span class="repeat-lesson-text">
+        <span class="repeat-lesson-title">${App.t('dash_start_lesson')}</span>
+        <span class="repeat-lesson-sub">${App.ui.flagChip(code)} ${App.ui.langName(code)} · ${App.ui.categoryName(cat.id, cat.name)}</span>
+      </span>
+    </button>
+  `;
+}
 
 function repeatLessonHtml(lastLesson) {
   const lang = App.data[lastLesson.lang];

@@ -534,6 +534,9 @@ button { background: none; }
 .repeat-lesson-text { display: flex; flex-direction: column; gap: 2px; }
 .repeat-lesson-title { font-weight: 800; color: var(--accent); }
 .repeat-lesson-sub { font-size: 12px; color: var(--ink-2); }
+.start-lesson { background: var(--accent); }
+.start-lesson .repeat-lesson-title { color: #fff; font-size: 17px; }
+.start-lesson .repeat-lesson-sub { color: rgba(255, 255, 255, .85); }
 
 /* Language grid (dashboard picker) */
 .lang-picker-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
