@@ -1248,6 +1248,13 @@ button { background: none; }
 .mascot-avatar:active { transform: scale(.95); }
 .mascot-widget.bounce .mascot-avatar { animation: popIn .35s cubic-bezier(.34,1.56,.64,1); }
 .wolf-figure { display: block; animation: mascotIdle 2.4s ease-in-out infinite; transform-origin: 50% 100%; }
+.wolf-figure { --wf-b1: #8b95a6; --wf-b2: #565f70; --wf-h1: #9aa4b5; --wf-h2: #6b7688; --wf-limb: #4b5364; --wf-paw: #363d4a; --wf-ear: #565f70; --wf-belly: #d7dde3; --wf-mask: #dfe4ea; }
+.wolf-figure.skin-brown { --wf-b1: #b08360; --wf-b2: #7a5236; --wf-h1: #c29572; --wf-h2: #8d6243; --wf-limb: #6e4a30; --wf-paw: #4f3420; --wf-ear: #7a5236; --wf-belly: #ead6c0; --wf-mask: #ecdcc8; }
+.wolf-figure.skin-arctic { --wf-b1: #f4f6f8; --wf-b2: #c4ccd6; --wf-h1: #ffffff; --wf-h2: #d3dae2; --wf-limb: #bcc5cf; --wf-paw: #9aa5b1; --wf-ear: #c4ccd6; --wf-belly: #ffffff; --wf-mask: #ffffff; }
+.wolf-figure.skin-black { --wf-b1: #50566a; --wf-b2: #262a33; --wf-h1: #5a6074; --wf-h2: #33374a; --wf-limb: #2c3039; --wf-paw: #1b1d24; --wf-ear: #33374a; --wf-belly: #8b93a5; --wf-mask: #9aa2b3; }
+.wolf-figure.skin-red { --wf-b1: #e8894a; --wf-b2: #b85a25; --wf-h1: #f09a5c; --wf-h2: #c96a33; --wf-limb: #a8501f; --wf-paw: #7a3a16; --wf-ear: #b85a25; --wf-belly: #fbe3cf; --wf-mask: #fde9d8; }
+.mascot-avatar:focus { outline: none; }
+.mascot-avatar:focus-visible { outline: 2px solid var(--brand-1); outline-offset: 4px; border-radius: 12px; }
 .wolf-leg-l, .wolf-leg-r, .wolf-arm-l, .wolf-arm-r, .wolf-tail-grp, .wolf-eye, .wolf-head {
   transform-box: fill-box; transform-origin: 50% 0%;
 }
@@ -1341,9 +1348,16 @@ button { background: none; }
   96% { transform: scaleY(.1); }
 }
 .mascot-bubble {
-  background: var(--surface); border: 2px solid var(--border); border-radius: 14px 14px 4px 14px;
+  position: relative;
+  background: var(--surface); border: 2px solid color-mix(in srgb, var(--brand-1) 70%, transparent); border-radius: 14px 14px 4px 14px;
   padding: 10px 14px; font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.4;
-  box-shadow: 0 6px 16px rgba(0,0,0,.3); animation: popIn .3s ease both;
+  box-shadow: 0 6px 16px rgba(0,0,0,.3), 0 0 14px color-mix(in srgb, var(--brand-1) 30%, transparent); animation: popIn .3s ease both;
+}
+/* little tail pointing at the wolf */
+.mascot-bubble::after {
+  content: ''; position: absolute; right: -9px; bottom: 10px; width: 14px; height: 14px; background: var(--surface);
+  border-right: 2px solid color-mix(in srgb, var(--brand-1) 70%, transparent); border-top: 2px solid color-mix(in srgb, var(--brand-1) 70%, transparent);
+  transform: rotate(45deg); border-radius: 0 3px 0 0;
 }
 @media (max-width: 640px) {
   .mascot-widget { right: 12px; bottom: 12px; max-width: min(200px, calc(100vw - 24px)); }

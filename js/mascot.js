@@ -13,34 +13,36 @@ App.mascot = (function () {
     <svg class="wolf-figure" viewBox="0 -24 100 154" width="72" height="111" aria-hidden="true">
       <defs>
         <linearGradient id="wolfBodyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#8b95a6"/><stop offset="1" stop-color="#565f70"/>
+          <stop offset="0" style="stop-color:var(--wf-b1)"/><stop offset="1" style="stop-color:var(--wf-b2)"/>
         </linearGradient>
         <linearGradient id="wolfHeadGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#959fb0"/><stop offset="1" stop-color="#6b7688"/>
+          <stop offset="0" style="stop-color:var(--wf-h1)"/><stop offset="1" style="stop-color:var(--wf-h2)"/>
         </linearGradient>
       </defs>
       <g class="wolf-tail-grp">
         <path d="M70,64 C82,60 92,50 94,32 C99,48 92,62 78,68 C75,67 72,65 70,64 Z" fill="url(#wolfBodyGrad)" stroke="#2b303f" stroke-width="2.2" stroke-linejoin="round"/>
         <ellipse cx="91" cy="34" rx="5.5" ry="4.5" fill="#f2f1ee"/>
       </g>
-      <g class="wolf-leg-l"><rect x="32" y="90" width="14" height="26" rx="7" fill="#4b5364" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="39" cy="118" rx="9" ry="5" fill="#363d4a" stroke="#2b303f" stroke-width="1.8"/></g>
-      <g class="wolf-leg-r"><rect x="54" y="90" width="14" height="26" rx="7" fill="#4b5364" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="61" cy="118" rx="9" ry="5" fill="#363d4a" stroke="#2b303f" stroke-width="1.8"/></g>
+      <g class="wolf-leg-l"><rect x="32" y="90" width="14" height="26" rx="7" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="39" cy="118" rx="9" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
+      <g class="wolf-leg-r"><rect x="54" y="90" width="14" height="26" rx="7" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="61" cy="118" rx="9" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
       <ellipse cx="50" cy="68" rx="27" ry="26" fill="url(#wolfBodyGrad)" stroke="#2b303f" stroke-width="2.2"/>
-      <ellipse cx="50" cy="77" rx="15" ry="13" fill="#d7dde3"/>
-      <g class="wolf-arm-l"><rect x="16" y="58" width="11" height="24" rx="5.5" fill="#4b5364" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="21.5" cy="84" rx="6" ry="5" fill="#363d4a" stroke="#2b303f" stroke-width="1.8"/></g>
-      <g class="wolf-arm-r"><rect x="73" y="58" width="11" height="24" rx="5.5" fill="#4b5364" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="78.5" cy="84" rx="6" ry="5" fill="#363d4a" stroke="#2b303f" stroke-width="1.8"/></g>
+      <ellipse cx="50" cy="77" rx="15" ry="13" style="fill:var(--wf-belly)"/>
+      <g class="wolf-arm-l"><rect x="16" y="58" width="11" height="24" rx="5.5" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="21.5" cy="84" rx="6" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
+      <g class="wolf-arm-r"><rect x="73" y="58" width="11" height="24" rx="5.5" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="78.5" cy="84" rx="6" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
       <path d="M27,49 Q50,59 73,49 L73,56 Q50,66 27,56 Z" fill="#00c8dc" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
       <path d="M63,57 L70,57 L67,69 Z" fill="#00a5b9" stroke="#2b303f" stroke-width="1.5" stroke-linejoin="round"/>
       <g class="wolf-head">
-        <path d="M27,22 C25,10 29,2 35,2 C41,3 43,12 42,23 C37,17 31,17 27,22 Z" fill="#565f70" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
-        <path d="M73,22 C75,10 71,2 65,2 C59,3 57,12 58,23 C63,17 69,17 73,22 Z" fill="#565f70" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
-        <path d="M29,19 C29,12 31,7 35,7 C38,8 39,13 38,18 C35,15 32,15 29,19 Z" fill="#cfd6de"/>
-        <path d="M71,19 C71,12 69,7 65,7 C62,8 61,13 62,18 C65,15 68,15 71,19 Z" fill="#cfd6de"/>
-        <circle cx="50" cy="32" r="23" fill="url(#wolfHeadGrad)" stroke="#2b303f" stroke-width="2.2"/>
+        <path d="M27,26 L29,-3 L46,14 Z" style="fill:var(--wf-ear)" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M73,26 L71,-3 L54,14 Z" style="fill:var(--wf-ear)" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M31,19 L31.5,5 L41,14 Z" fill="#f2b8c6"/>
+        <path d="M69,19 L68.5,5 L59,14 Z" fill="#f2b8c6"/>
+        <path d="M50,9 C64,9 73,17 74,27 L81,35 L73,37 L77,44 L66,45 C61,52 39,52 34,45 L23,44 L27,37 L19,35 L26,27 C27,17 36,9 50,9 Z" fill="url(#wolfHeadGrad)" stroke="#2b303f" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M50,17 C46,22 44,27 45,31 L36,34 C35,42 41,50 50,50 C59,50 65,42 64,34 L55,31 C56,27 54,22 50,17 Z" style="fill:var(--wf-mask)" opacity=".9"/>
         <ellipse cx="39" cy="21" rx="3.5" ry="2" fill="#ffffff" opacity=".22"/>
         <ellipse class="wolf-cheek" cx="34" cy="39" rx="4" ry="2.5" fill="#ff8fab" opacity=".55"/>
         <ellipse class="wolf-cheek" cx="66" cy="39" rx="4" ry="2.5" fill="#ff8fab" opacity=".55"/>
-        <ellipse cx="50" cy="41" rx="13" ry="10" fill="#d7dde3" stroke="#2b303f" stroke-width="1.8"/>
+        <path d="M50,32 C57,32 62,36 62,41.5 C62,47.5 56,50.5 50,50.5 C44,50.5 38,47.5 38,41.5 C38,36 43,32 50,32 Z" fill="#f4f6f8" stroke="#2b303f" stroke-width="1.8"/>
+        <path d="M36,22 L45,24 M64,22 L55,24" stroke="#2b303f" stroke-width="1.8" stroke-linecap="round" opacity=".7"/>
         <!-- eyes: default / wink (right closed) / closed / hearts / big -->
         <g class="eyes-open">
           <g class="wolf-eye"><circle cx="41" cy="28" r="3" fill="#23272f"/><circle cx="42.2" cy="26.8" r="1" fill="#fff" opacity=".85"/></g>
@@ -155,11 +157,13 @@ App.mascot = (function () {
     const svg = el.querySelector('.wolf-figure');
     const fx = el.querySelector('#mascot-fx');
     let lastTip = null, lastKind = null, scene = null;
+    const SKINS = ['gray', 'brown', 'arctic', 'black', 'red'];
+    let skin = 'gray';
 
     function show(next) {
       scene = next;
       const look = next.look;
-      svg.setAttribute('class', `wolf-figure mood-${look.mood} ${look.acc ? 'acc-on-' + look.acc : ''}`);
+      svg.setAttribute('class', `wolf-figure skin-${skin} mood-${look.mood} ${look.acc ? 'acc-on-' + look.acc : ''}`);
       bubble.innerHTML = bubbleHtml(next);
       bubble.classList.remove('pop'); void bubble.offsetWidth; bubble.classList.add('pop');
       el.className = 'mascot-widget';
@@ -188,10 +192,14 @@ App.mascot = (function () {
         scene.revealed = true;
         bubble.innerHTML = bubbleHtml(scene);
         el.className = 'mascot-widget'; void el.offsetWidth; el.classList.add('anim-jump');
-        svg.setAttribute('class', 'wolf-figure mood-grin acc-on-glasses');
+        svg.setAttribute('class', `wolf-figure skin-${skin} mood-grin acc-on-glasses`);
       }
     });
-    el.querySelector('#mascot-avatar').addEventListener('click', () => show(nextScene()));
+    // Each click on the wolf also swaps its coat.
+    el.querySelector('#mascot-avatar').addEventListener('click', () => {
+      skin = SKINS[(SKINS.indexOf(skin) + 1) % SKINS.length];
+      show(nextScene());
+    });
 
     const first = contextScenes()[0];
     show(first ? Object.assign({ kind: 'context' }, first) : nextScene());
