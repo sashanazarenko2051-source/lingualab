@@ -4,14 +4,17 @@ window.App = window.App || {};
 // Awarded every time a flashcard or quiz question is graded (see App.srs.grade).
 App.gamification = (function () {
   const XP_CORRECT = 10;
-  const XP_WRONG = 2;
-  const DAILY_GOAL = 15;
+  const XP_WRONG = 0;
+  const DAILY_GOAL = 30;
+  // Level L starts at LEVEL_STEP * (L-1)^2 XP: level 2 at 100, 5 at 1600,
+  // 8 at 4900, 10 at 8100 (was 4x easier: level 8 came after ~120 answers).
+  const LEVEL_STEP = 100;
 
   function levelForXP(xp) {
-    return 1 + Math.floor(Math.sqrt((xp || 0) / 25));
+    return 1 + Math.floor(Math.sqrt((xp || 0) / LEVEL_STEP));
   }
   function xpForLevel(level) {
-    return 25 * (level - 1) * (level - 1);
+    return LEVEL_STEP * (level - 1) * (level - 1);
   }
   function xpProgress(xp) {
     const level = levelForXP(xp);
