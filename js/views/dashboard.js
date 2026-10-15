@@ -12,10 +12,11 @@ App.views.dashboard = {
 
     const lastLesson = App.storage.getLastLesson();
 
-    const nextCat = nextLessonCategory(currentLang);
+    const nextCat = App.lesson.nextCategory(currentLang);
+    const mistakes = App.storage.getMistakeIds(currentLang).length;
 
     root.innerHTML = `
-      ${startLessonHtml(currentLang, nextCat)}
+      ${startLessonHtml(currentLang, nextCat, mistakes)}
       ${lastLesson ? repeatLessonHtml(lastLesson) : ''}
 
       <div class="lang-picker-head">
@@ -36,6 +37,12 @@ App.views.dashboard = {
       </section>
 
       <section class="actions-row">
+        ${mistakes ? `
+        <button class="action-card action-card-mistakes" id="mistakes-session">
+          <span class="action-icon">🔁</span>
+          <span class="action-title">${App.t('dash_mistakes')}</span>
+          <span class="action-sub">${App.t('dash_mistakes_sub', { n: mistakes })}</span>
+        </button>` : ''}
         <button class="action-card" data-go="course">
           <span class="action-icon">🎓</span>
           <span class="action-title">${App.t('dash_continue_path')}</span>
@@ -79,6 +86,11 @@ App.views.dashboard = {
       App.router.go('flashcards');
     });
 
+    root.querySelector('#mistakes-session')?.addEventListener('click', () => {
+      App.session.mistakesMode = true;
+      App.router.go('flashcards');
+    });
+
     root.querySelector('#repeat-lesson')?.addEventListener('click', () => {
       App.storage.setCurrentLang(lastLesson.lang);
       App.session.flashcardsCategory = lastLesson.categoryId;
@@ -87,24 +99,14 @@ App.views.dashboard = {
   }
 };
 
-// First category on the course path that isn't fully mastered yet; once
-// everything is mastered, fall back to the first one for review.
-function nextLessonCategory(code) {
-  const cats = App.data[code].categories;
-  return cats.find(cat => {
-    const words = App.words.byCategory(code, cat.id);
-    return words.some(w => !App.srs.isMastered(w.id));
-  }) || cats[0];
-}
-
-function startLessonHtml(code, cat) {
+function startLessonHtml(code, cat, mistakes) {
   const lang = App.data[code];
   return `
     <button class="repeat-lesson start-lesson" id="start-lesson" style="--accent: var(--slot-${lang.slot})">
       <span class="repeat-lesson-icon">▶️</span>
       <span class="repeat-lesson-text">
         <span class="repeat-lesson-title">${App.t('dash_start_lesson')}</span>
-        <span class="repeat-lesson-sub">${App.ui.flagChip(code)} ${App.ui.langName(code)} · ${App.ui.categoryName(cat.id, cat.name)}</span>
+        <span class="repeat-lesson-sub">${App.ui.flagChip(code)} ${App.ui.langName(code)} · ${App.ui.categoryName(cat.id, cat.name)}${mistakes ? ` · ${App.t('dash_start_review', { n: Math.min(mistakes, 4) })}` : ''}</span>
       </span>
     </button>
   `;

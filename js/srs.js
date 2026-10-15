@@ -26,6 +26,12 @@ App.srs = (function () {
     if (quality < 3) {
       reps = 0;
       interval = 1;
+    } else if (App.storage.getSRS(id) && prev.due > Date.now()) {
+      // Correct again before the word was due (e.g. re-asked later in the
+      // same lesson): keep the schedule. Advancing here jumped the interval
+      // from 1 to 6 days within a single sitting.
+      App.storage.recordReview(true);
+      return prev;
     } else {
       ef = Math.max(1.3, ef + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
       reps += 1;

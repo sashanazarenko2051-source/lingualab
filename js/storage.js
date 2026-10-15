@@ -14,6 +14,7 @@ App.storage = (function () {
         weeklyXP: 0, weekKey: null
       },
       lastLesson: null,
+      mistakes: {},
       profile: { name: '', animal: 'wolf', color: '#00e5ff' }
     };
   }
@@ -34,6 +35,7 @@ App.storage = (function () {
           exams: (parsed.stats && parsed.stats.exams) || {}
         }),
         lastLesson: parsed.lastLesson || null,
+        mistakes: parsed.mistakes || {},
         profile: Object.assign({}, d.profile, parsed.profile)
       };
     } catch (e) {
@@ -137,6 +139,31 @@ App.storage = (function () {
     getWeeklyXP() {
       return { xp: state.stats.weeklyXP || 0, week: state.stats.weekKey };
     },
+    // Mistakes bank: every wrong answer lands here and keeps coming back in
+    // later lessons until it's answered right in two different lessons in a
+    // row. Keyed by word id: { misses, streak, lesson, at }.
+    recordMistakeAnswer(wordId, correct, lessonId) {
+      const rec = state.mistakes[wordId];
+      let result = null;
+      if (!correct) {
+        state.mistakes[wordId] = { misses: (rec ? rec.misses : 0) + 1, streak: 0, lesson: lessonId, at: Date.now() };
+        result = rec ? 'again' : 'added';
+      } else if (rec && rec.lesson !== lessonId) {
+        // Only one correct answer per lesson counts, so a word re-asked a
+        // minute later in the same lesson can't clear itself.
+        rec.streak += 1;
+        rec.lesson = lessonId;
+        if (rec.streak >= 2) { delete state.mistakes[wordId]; result = 'fixed'; }
+      }
+      save();
+      return result;
+    },
+    getMistakeIds(code) {
+      return Object.keys(state.mistakes)
+        .filter(id => id.startsWith(code + ':'))
+        .sort((a, b) => state.mistakes[b].misses - state.mistakes[a].misses || state.mistakes[a].at - state.mistakes[b].at);
+    },
+    isMistake(wordId) { return !!state.mistakes[wordId]; },
     getProfile() { return state.profile; },
     setProfile(p) {
       state.profile = Object.assign({}, state.profile, p);

@@ -499,6 +499,34 @@ button { background: none; }
 }
 .panel h3 { margin: 0 0 12px 0; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-2); }
 
+/* Lesson chain: badges, intro card, summary */
+.lesson-badge {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 800;
+  padding: 3px 10px; border-radius: 999px; letter-spacing: .03em;
+}
+.lesson-badge-new { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+.lesson-badge-mistake { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--bad); }
+.lesson-badge-due { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+.flashcard-word { font-size: 30px; font-weight: 800; line-height: 1.15; }
+.flashcard-meaning { font-size: 17px; font-weight: 700; color: var(--ink); }
+.flashcard-example-tr { opacity: .75; }
+.intro-actions { display: flex; justify-content: center; margin-top: 14px; }
+.intro-actions .quiz-next { padding: 14px 40px; font-size: 16px; }
+.lesson-summary { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
+.lesson-summary span {
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px;
+  padding: 6px 12px; font-size: 13px; font-weight: 700;
+}
+.action-card-mistakes { border-color: color-mix(in srgb, var(--bad) 60%, var(--border)); }
+.action-card-mistakes .action-title { color: var(--bad); }
+/* Text word icons ("17", "½", "×2") drawn as a numeral badge. */
+.icon-text {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 1.6em; padding: 0 .25em;
+  font-family: var(--font-mono); font-weight: 800; font-size: .62em; line-height: 1.5;
+  color: var(--ink); background: linear-gradient(135deg, var(--brand-2), var(--brand-1));
+  border-radius: .35em; white-space: nowrap; text-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+
 .hearts-out-icon { font-size: 56px; animation: popIn .5s ease both; }
 .hearts-out-title { font-size: 26px; font-weight: 800; color: var(--bad); margin-top: 6px; }
 .hearts-out-sub { color: var(--ink-2); margin-top: 6px; max-width: 360px; margin-inline: auto; }

@@ -1,5 +1,12 @@
 window.App = window.App || {};
 
+App.ui = App.ui || {};
+// Word icons are usually emoji; plain text ones (numbers like "17", "½",
+// "×2") get a numeral badge style so they read as pictures, not captions.
+App.ui.wordIcon = function (icon) {
+  return /[\p{Extended_Pictographic}\u20E3\uFE0F]/u.test(icon) ? icon : `<span class="icon-text">${icon}</span>`;
+};
+
 App.words = (function () {
   function allWords(langCode) {
     const lang = App.data[langCode];

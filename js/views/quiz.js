@@ -27,17 +27,26 @@ App.views.quiz = {
     App.session.examCategoryIds = null;
     App.session.examLevel = null;
 
-    const pool = examCategoryIds && examCategoryIds.length
-      ? examCategoryIds.flatMap(id => App.words.byCategory(code, id))
-      : buildPool(code, categoryId);
+    let words;
+    if (examCategoryIds && examCategoryIds.length) {
+      words = examCategoryIds.flatMap(id => App.words.byCategory(code, id));
+    } else if (isExam) {
+      words = buildPool(code, categoryId);
+    } else if (!categoryId) {
+      words = shuffle(buildPool(code, null)).slice(0, 10);
+    } else {
+      // Regular topic quiz: words already met in this topic, plus a few
+      // from the mistakes bank so earlier errors keep coming back.
+      words = App.lesson.quizWords(code, categoryId);
+    }
 
-    if (pool.length < 4) {
+    if (words.length < 4) {
       root.innerHTML = `<p class="empty-hint">${App.t('fc_not_enough_words')}</p>`;
       return;
     }
 
-    const questions = buildQuestions(pool, isExam ? pool.length : 10);
-    const state = { questions, index: 0, correct: 0, answered: false, categoryId, isExam, code, examLevel, examCategoryIds, hearts: MAX_HEARTS, combo: 0 };
+    const questions = buildQuestions(shuffle(words), code);
+    const state = { questions, index: 0, correct: 0, answered: false, categoryId, isExam, code, examLevel, examCategoryIds, hearts: MAX_HEARTS, combo: 0, lessonId: App.lesson.newLessonId() };
     renderQuestion(root, state);
   }
 };
@@ -55,10 +64,11 @@ function shuffle(arr) {
   return a;
 }
 
-function buildQuestions(pool, count) {
-  const shuffled = shuffle(pool).slice(0, Math.min(count, pool.length));
-  return shuffled.map(word => {
-    const others = pool.filter(w => w.id !== word.id);
+// Distractors come from each word's own topic, so mixed-in review words
+// from earlier topics still get plausible wrong options.
+function buildQuestions(words, code) {
+  return words.map(word => {
+    const others = App.words.byCategory(code, word.categoryId).filter(w => w.id !== word.id && w.w !== word.w);
     const distractors = shuffle(others).slice(0, 3);
 
     if (word.ex) {
@@ -88,6 +98,7 @@ function renderQuestion(root, state) {
       <div class="quiz-progress" style="margin:0">${state.isExam ? '🎓' + (state.examLevel ? ' ' + state.examLevel : '') + ' · ' : ''}${state.index + 1} / ${state.questions.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
     </div>
     <div class="hearts-row" style="max-width:560px" title="${state.isExam ? '' : App.t('hearts_title')}">${state.isExam ? '' : heartsHtml(state.hearts)}${state.combo >= 2 ? `<span class="combo-badge">🔥${state.combo}</span>` : ''}</div>
+    ${App.storage.isMistake(q.word.id) ? `<div class="lesson-badge lesson-badge-mistake" style="align-self:center">🔁 ${App.t('lesson_review_mistake')}</div>` : ''}
     ${q.type === 'choice'
       ? `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_translation')}</div>`
       : `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_missing')}</div>`}
@@ -113,7 +124,7 @@ function renderQuestion(root, state) {
         else if (b === btn) b.classList.add('wrong');
       });
 
-      App.srs.grade(q.word.id, isCorrect ? 4 : 1);
+      App.lesson.answer(state, q.word, isCorrect);
       isCorrect ? App.effects.correct() : App.effects.wrong();
       App.effects.celebrate(App.gamification.grade(isCorrect));
 
