@@ -37,7 +37,21 @@ App.router = (function () {
     const root = document.getElementById('view-root');
     root.innerHTML = '';
     const mod = App.views[current];
-    if (mod && mod.render) mod.render(root);
+    if (!mod || !mod.render) return;
+    try {
+      mod.render(root);
+    } catch (e) {
+      // Show a way out instead of a silently empty page.
+      console.error(e);
+      root.innerHTML = `
+        <div class="session-empty">
+          <div class="session-empty-icon">⚠️</div>
+          <div>${App.t('load_error')}</div>
+          <div style="margin-top:14px"><button class="action-card" id="reload-page" style="display:inline-flex">${App.t('load_error_reload')}</button></div>
+        </div>
+      `;
+      root.querySelector('#reload-page').addEventListener('click', () => location.reload());
+    }
   }
 
   return { go, render, get current() { return current; } };

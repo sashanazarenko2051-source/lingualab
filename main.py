@@ -54,6 +54,14 @@ class AppRequestHandler(http.server.SimpleHTTPRequestHandler):
         pass
 
 
+class AppServer(http.server.ThreadingHTTPServer):
+    # The page requests ~45 scripts at once. socketserver's default listen
+    # backlog of 5 made Windows refuse the overflow, so random files (a
+    # language, or lesson.js itself) failed to load and pages came up empty.
+    request_queue_size = 128
+    daemon_threads = True
+
+
 def start_server():
     """Serves the app for the desktop window and, on the same port, for a
     phone's browser on the same Wi-Fi (e.g. http://192.168.x.x:8765).
@@ -66,7 +74,7 @@ def start_server():
     handler = functools.partial(AppRequestHandler, directory=BASE_DIR)
     for host, port in (('0.0.0.0', LAN_PORT), ('127.0.0.1', 0)):
         try:
-            server = http.server.ThreadingHTTPServer((host, port), handler)
+            server = AppServer((host, port), handler)
             break
         except OSError:
             continue
