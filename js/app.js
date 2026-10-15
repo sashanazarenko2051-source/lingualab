@@ -16,6 +16,11 @@ App.LANG_FAMILIES = [
   { key: 'family_other', codes: ['el', 'fi', 'hu'] }
 ];
 
+// If a language's data file failed to load, drop it instead of letting one
+// missing App.data entry crash every view that loops over all languages.
+App.LANG_ORDER = App.LANG_ORDER.filter(code => App.data[code]);
+App.LANG_FAMILIES.forEach(fam => { fam.codes = fam.codes.filter(code => App.data[code]); });
+
 App.router = (function () {
   let current = 'dashboard';
 
@@ -145,6 +150,7 @@ function initLangDropdown({ ddId, btnId, listId, ariaLabel, codes, nameFor, curr
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (!App.data[App.storage.getCurrentLang()]) App.storage.setCurrentLang(App.LANG_ORDER[0]);
   initTopbar();
   const startView = App.views[location.hash.slice(1)] ? location.hash.slice(1) : 'dashboard';
   App.router.go(startView);

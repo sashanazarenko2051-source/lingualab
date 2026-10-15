@@ -34,13 +34,43 @@ def local_ip():
         s.close()
 
 
-def start_lan_server():
-    """Serves the same app over the local network so it can be opened from a
-    phone's browser on the same Wi-Fi (e.g. http://192.168.x.x:8765)."""
-    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=BASE_DIR)
-    try:
-        server = http.server.ThreadingHTTPServer(('0.0.0.0', LAN_PORT), handler)
-    except OSError:
+class AppRequestHandler(http.server.SimpleHTTPRequestHandler):
+    # Some Windows registries map .js to text/plain; pin the right types.
+    extensions_map = {
+        **http.server.SimpleHTTPRequestHandler.extensions_map,
+        '.js': 'text/javascript',
+        '.css': 'text/css',
+    }
+
+    def end_headers(self):
+        # Always revalidate, so an updated JS/CSS file shows up on next launch
+        # instead of WebView2 serving a stale cached copy.
+        self.send_header('Cache-Control', 'no-cache')
+        super().end_headers()
+
+    def log_message(self, format, *args):
+        # Launched via pythonw.exe there is no stderr to log to, and writing
+        # to it would break request handling.
+        pass
+
+
+def start_server():
+    """Serves the app for the desktop window and, on the same port, for a
+    phone's browser on the same Wi-Fi (e.g. http://192.168.x.x:8765).
+
+    The window loads from this server instead of pywebview's built-in one,
+    which randomly dropped some of the ~45 script requests on startup (so
+    e.g. no.js/da.js went missing and the home page failed to render). A
+    fixed port also keeps a stable origin, so localStorage progress survives
+    restarts. Falls back to a random local-only port if 8765 is taken."""
+    handler = functools.partial(AppRequestHandler, directory=BASE_DIR)
+    for host, port in (('0.0.0.0', LAN_PORT), ('127.0.0.1', 0)):
+        try:
+            server = http.server.ThreadingHTTPServer((host, port), handler)
+            break
+        except OSError:
+            continue
+    else:
         return None
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -48,18 +78,25 @@ def start_lan_server():
 
 
 def main():
-    start_lan_server()
-    ip = local_ip()
-    print(f'Phone access (same Wi-Fi): http://{ip}:{LAN_PORT}')
+    server = start_server()
+    if server:
+        port = server.server_address[1]
+        url = f'http://127.0.0.1:{port}/index.html'
+        if port == LAN_PORT:
+            print(f'Phone access (same Wi-Fi): http://{local_ip()}:{LAN_PORT}')
+    else:
+        url = INDEX_PATH
 
     webview.create_window(
         'WO Lingua Lab',
-        INDEX_PATH,
+        url,
         width=1200,
         height=800,
         min_size=(960, 640),
     )
-    webview.start(icon=ICON_PATH)
+    # private_mode=False keeps localStorage (profile, progress, streak)
+    # between launches instead of wiping it every time the window closes.
+    webview.start(icon=ICON_PATH, private_mode=False)
 
 
 if __name__ == '__main__':
