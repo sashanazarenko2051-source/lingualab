@@ -133,8 +133,10 @@ def main():
         print(f'Phone access (same Wi-Fi): http://{local_ip()}:{LAN_PORT}')
     if server or app_already_serving():
         # A second window reuses the running server: same origin, so the
-        # same saved progress.
-        url = f'http://127.0.0.1:{LAN_PORT}/index.html'
+        # same saved progress. The ?v= makes the page URL itself new after
+        # every update — WebView2 kept serving a stale cached /index.html
+        # without even asking the server.
+        url = f'http://127.0.0.1:{LAN_PORT}/index.html?v={asset_version()}'
     else:
         url = INDEX_PATH
 
