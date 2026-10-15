@@ -13,14 +13,18 @@ App.views.stats = {
     const words = App.words.allWords(code);
     const mastered = words.filter(w => App.srs.isMastered(w.id));
     const learning = words.filter(w => !App.srs.isNew(w.id) && !App.srs.isMastered(w.id));
-    const fresh = words.filter(w => App.srs.isNew(w.id));
     const streak = App.storage.state.stats.streak || 0;
+    const history = Object.values(App.storage.state.stats.history || {});
+    const reviews = history.reduce((n, d) => n + (d.reviews || 0), 0);
+    const correct = history.reduce((n, d) => n + (d.correct || 0), 0);
+    const accuracy = reviews ? Math.round((correct / reviews) * 100) + '%' : '—';
 
     root.innerHTML = `
       <section class="stat-row">
-        <div class="stat-tile"><div class="stat-icon">📚</div><div class="stat-value">${words.length}</div><div class="stat-label">${App.t('stats_total_words')}</div></div>
-        <div class="stat-tile"><div class="stat-icon">🏆</div><div class="stat-value">${mastered.length}</div><div class="stat-label">${App.t('stats_mastered')}</div></div>
+        <div class="stat-tile"><div class="stat-icon">🏆</div><div class="stat-value">${mastered.length}<span class="stat-of">/${words.length}</span></div><div class="stat-label">${App.t('stats_mastered')}</div></div>
         <div class="stat-tile"><div class="stat-icon">📖</div><div class="stat-value">${learning.length}</div><div class="stat-label">${App.t('stats_learning')}</div></div>
+        <div class="stat-tile"><div class="stat-icon">✍️</div><div class="stat-value">${reviews}</div><div class="stat-label">${App.t('stats_reviews')}</div></div>
+        <div class="stat-tile"><div class="stat-icon">🎯</div><div class="stat-value">${accuracy}</div><div class="stat-label">${App.t('stats_accuracy')}</div></div>
         <div class="stat-tile"><div class="stat-icon">🔥</div><div class="stat-value">${streak}</div><div class="stat-label">${App.t('stats_streak')}</div></div>
       </section>
 
@@ -46,20 +50,40 @@ App.views.stats = {
   }
 };
 
-function renderCatBars(root, code, lang) {
-  const el = root.querySelector('#cat-bars');
-  el.innerHTML = lang.categories.map(cat => {
-    const words = App.words.byCategory(code, cat.id);
-    const mastered = words.filter(w => App.srs.isMastered(w.id)).length;
-    const pct = words.length ? Math.round((mastered / words.length) * 100) : 0;
-    return `
-      <div class="cat-bar-row">
-        <div class="cat-bar-label">${App.ui.categoryName(cat.id, cat.name)}</div>
-        <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${pct}%; background: var(--slot-${lang.slot})"></div></div>
-        <div class="cat-bar-pct">${pct}%</div>
+// Word counts for a set of words: learned (mastered) and still in progress.
+function counts(words) {
+  let mastered = 0, learning = 0;
+  words.forEach(w => {
+    if (App.srs.isMastered(w.id)) mastered += 1;
+    else if (!App.srs.isNew(w.id)) learning += 1;
+  });
+  return { mastered, learning, total: words.length };
+}
+
+// Two-layer bar (learned solid, in progress lighter) with "learned / total".
+// Anything started gets a visible minimum width — 46 of 2415 words is under
+// 2%, which used to look like an empty bar.
+function barRow(labelHtml, c, color) {
+  const pct = (n) => c.total ? (n / c.total) * 100 : 0;
+  const shown = (n) => n ? Math.max(pct(n), 1.5) : 0;
+  const whole = c.total ? Math.round(pct(c.mastered)) : 0;
+  return `
+    <div class="cat-bar-row ${c.mastered || c.learning ? 'started' : ''}">
+      <div class="cat-bar-label">${labelHtml}</div>
+      <div class="cat-bar-track">
+        <div class="cat-bar-fill" style="width:${shown(c.mastered)}%; background:${color}"></div>
+        <div class="cat-bar-fill cat-bar-learning" style="width:${shown(c.learning)}%; background:${color}"></div>
       </div>
-    `;
-  }).join('');
+      <div class="cat-bar-pct"><b>${c.mastered}</b>/${c.total} · ${whole}%</div>
+    </div>
+  `;
+}
+
+function renderCatBars(root, code, lang) {
+  const color = `var(--slot-${lang.slot})`;
+  root.querySelector('#cat-bars').innerHTML = lang.categories
+    .map(cat => barRow(App.ui.categoryName(cat.id, cat.name), counts(App.words.byCategory(code, cat.id)), color))
+    .join('');
 }
 
 function renderMiniChart30(root) {
@@ -74,20 +98,12 @@ function renderMiniChart30(root) {
 }
 
 function renderAllLangs(root, currentLang) {
-  const el = root.querySelector('#all-langs');
-  el.innerHTML = App.LANG_ORDER.map(code => {
-    const lang = App.data[code];
-    const words = App.words.allWords(code);
-    const mastered = words.filter(w => App.srs.isMastered(w.id)).length;
-    const pct = words.length ? Math.round((mastered / words.length) * 100) : 0;
-    return `
-      <div class="cat-bar-row">
-        <div class="cat-bar-label">${App.ui.flagChip(code)} ${App.ui.langName(code)}</div>
-        <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${pct}%; background: var(--slot-${lang.slot})"></div></div>
-        <div class="cat-bar-pct">${pct}%</div>
-      </div>
-    `;
-  }).join('');
+  // Languages you've started come first, most learned on top.
+  const rows = App.LANG_ORDER.map(code => ({ code, c: counts(App.words.allWords(code)) }))
+    .sort((a, b) => (b.c.mastered + b.c.learning > 0) - (a.c.mastered + a.c.learning > 0) || b.c.mastered - a.c.mastered);
+  root.querySelector('#all-langs').innerHTML = rows
+    .map(({ code, c }) => barRow(`${App.ui.flagChip(code)} ${App.ui.langName(code)}`, c, `var(--slot-${App.data[code].slot})`))
+    .join('');
 }
 
 })();

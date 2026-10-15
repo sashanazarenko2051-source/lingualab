@@ -37,18 +37,22 @@ App.gamification = (function () {
     return codes.size;
   }
 
+  // value(state) measures progress toward `goal`; howKey explains how to earn it.
+  const streakOf = s => s.stats.streak || 0;
+  const levelOf = s => levelForXP(s.stats.xp);
   const ACHIEVEMENTS = [
-    { id: 'first_word', icon: '🌱', titleKey: 'ach_first_word', check: s => Object.keys(s.srs).length >= 1 },
-    { id: 'streak_3', icon: '🔥', titleKey: 'ach_streak_3', check: s => (s.stats.streak || 0) >= 3 },
-    { id: 'streak_7', icon: '🔥', titleKey: 'ach_streak_7', check: s => (s.stats.streak || 0) >= 7 },
-    { id: 'streak_30', icon: '🔥', titleKey: 'ach_streak_30', check: s => (s.stats.streak || 0) >= 30 },
-    { id: 'words_50', icon: '📚', titleKey: 'ach_words_50', check: s => masteredCount(s) >= 50 },
-    { id: 'words_200', icon: '📖', titleKey: 'ach_words_200', check: s => masteredCount(s) >= 200 },
-    { id: 'words_1000', icon: '🏛️', titleKey: 'ach_words_1000', check: s => masteredCount(s) >= 1000 },
-    { id: 'level_5', icon: '⭐', titleKey: 'ach_level_5', check: s => levelForXP(s.stats.xp) >= 5 },
-    { id: 'level_10', icon: '🌟', titleKey: 'ach_level_10', check: s => levelForXP(s.stats.xp) >= 10 },
-    { id: 'polyglot_3', icon: '🌍', titleKey: 'ach_polyglot_3', check: s => languagesTouched(s) >= 3 }
+    { id: 'first_word', icon: '🌱', titleKey: 'ach_first_word', howKey: 'ach_how_first', goal: 1, value: s => Object.keys(s.srs).length },
+    { id: 'streak_3', icon: '🔥', titleKey: 'ach_streak_3', howKey: 'ach_how_streak', goal: 3, value: streakOf },
+    { id: 'streak_7', icon: '🔥', titleKey: 'ach_streak_7', howKey: 'ach_how_streak', goal: 7, value: streakOf },
+    { id: 'streak_30', icon: '🔥', titleKey: 'ach_streak_30', howKey: 'ach_how_streak', goal: 30, value: streakOf },
+    { id: 'words_50', icon: '📚', titleKey: 'ach_words_50', howKey: 'ach_how_words', goal: 50, value: masteredCount },
+    { id: 'words_200', icon: '📖', titleKey: 'ach_words_200', howKey: 'ach_how_words', goal: 200, value: masteredCount },
+    { id: 'words_1000', icon: '🏛️', titleKey: 'ach_words_1000', howKey: 'ach_how_words', goal: 1000, value: masteredCount },
+    { id: 'level_5', icon: '⭐', titleKey: 'ach_level_5', howKey: 'ach_how_level', goal: 5, value: levelOf },
+    { id: 'level_10', icon: '🌟', titleKey: 'ach_level_10', howKey: 'ach_how_level', goal: 10, value: levelOf },
+    { id: 'polyglot_3', icon: '🌍', titleKey: 'ach_polyglot_3', howKey: 'ach_how_polyglot', goal: 3, value: languagesTouched }
   ];
+  ACHIEVEMENTS.forEach(a => { a.check = s => a.value(s) >= a.goal; });
 
   function todayCount(state) {
     const d = new Date();

@@ -86,7 +86,8 @@ App.profile = (function () {
       bgColor: p.bgColor || legacy,
       outlineColor: p.outlineColor || legacy,
       bgPattern: BG_PATTERNS.includes(p.bgPattern) ? p.bgPattern : 'solid',
-      flag: p.flag || null
+      flag: p.flag || null,
+      showcase: p.showcase || null
     };
   }
 

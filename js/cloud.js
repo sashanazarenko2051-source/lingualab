@@ -39,6 +39,7 @@ App.cloud = (function () {
       uid, name: profile.name, animal: profile.animal,
       animalColor: profile.animalColor, bgColor: profile.bgColor,
       outlineColor: profile.outlineColor, bgPattern: profile.bgPattern, flag: profile.flag || null,
+      achievements: App.storage.state.stats.achievements || [], showcase: profile.showcase || null,
       level, weeklyXP, week,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });

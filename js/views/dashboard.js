@@ -72,6 +72,7 @@ App.views.dashboard = {
     renderDailyGoal(root);
     renderMiniChart(root);
     renderAchievements(root);
+    App.mascot.renderWidget(root);
 
     root.querySelector('#lang-search').addEventListener('input', (e) => {
       renderLangGroups(root, App.storage.getCurrentLang(), e.target.value.trim().toLowerCase());
@@ -254,8 +255,9 @@ function renderAchievements(root) {
   const unlocked = App.storage.state.stats.achievements || [];
   el.innerHTML = App.gamification.ACHIEVEMENTS.map(a => {
     const isUnlocked = unlocked.includes(a.id);
-    return `<div class="ach-badge ${isUnlocked ? 'unlocked' : 'locked'}" title="${App.t(a.titleKey)}">${a.icon}</div>`;
-  }).join('');
+    return `<button class="ach-badge ${isUnlocked ? 'unlocked' : 'locked'}" data-ach="${a.id}" title="${App.t(a.titleKey)}">${a.icon}</button>`;
+  }).join('') + `<div class="ach-hint">👆 ${App.t('ach_hint_tap')}</div>`;
+  el.querySelectorAll('[data-ach]').forEach(b => b.addEventListener('click', () => App.achievements.openInfo(b.dataset.ach)));
 }
 
 })();

@@ -964,6 +964,24 @@ button { background: none; }
 }
 .ach-badge:hover { transform: translateY(-2px); }
 .ach-badge.locked { filter: grayscale(1); opacity: .35; }
+.ach-badge { cursor: pointer; font-family: inherit; color: inherit; }
+.ach-hint { width: 100%; font-size: 12px; color: var(--ink-2); margin-top: 6px; }
+.ach-card { text-align: center; max-width: 400px; }
+.ach-card h3 { text-transform: none; letter-spacing: 0; font-size: 20px; color: var(--ink); margin: 6px 0 2px; }
+.ach-card-icon { font-size: 64px; line-height: 1; filter: grayscale(1); opacity: .5; animation: popIn .4s cubic-bezier(.34,1.56,.64,1) both; }
+.ach-card-unlocked .ach-card-icon { filter: drop-shadow(0 0 16px color-mix(in srgb, var(--warn) 70%, transparent)); opacity: 1; animation: popIn .4s cubic-bezier(.34,1.56,.64,1) both, iconBob 3s ease-in-out .5s infinite; }
+.ach-card-status { font-weight: 800; color: var(--ink-2); margin-bottom: 10px; }
+.ach-card-unlocked .ach-card-status { color: var(--good); }
+.ach-card-how { background: var(--surface-2); border-radius: 12px; padding: 10px 14px; color: var(--ink); line-height: 1.45; }
+.ach-card-progress { height: 12px; border-radius: 999px; background: var(--surface-2); overflow: hidden; margin: 14px 0 6px; border: 1px solid var(--border); }
+.ach-card-fill { height: 100%; background: linear-gradient(90deg, var(--brand-1), var(--good)); border-radius: 999px; }
+.ach-card-count { font-family: var(--font-mono); font-weight: 700; color: var(--ink-2); margin-bottom: 14px; }
+.ach-card .profile-modal-actions { justify-content: center; flex-wrap: wrap; }
+.ach-share.on { border-color: var(--good) !important; color: var(--good); }
+.ach-card-note { margin-top: 10px; font-size: 12px; color: var(--ink-muted); }
+.lb-ach { display: inline-flex; gap: 2px; flex: none; }
+.lb-ach-icon { font-size: 15px; opacity: .8; }
+.lb-ach-icon.showcase { font-size: 20px; opacity: 1; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--warn) 80%, transparent)); }
 .ach-badge.unlocked { border-color: var(--brand-1); box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand-1) 40%, transparent), 0 0 14px color-mix(in srgb, var(--brand-1) 40%, transparent); }
 
 /* Effects: toasts + confetti */
@@ -1152,7 +1170,7 @@ button { background: none; }
   display: flex; align-items: flex-end; gap: 10px; max-width: min(260px, calc(100vw - 40px));
 }
 .mascot-avatar {
-  flex: none; position: relative; width: 72px; height: 94px; border: none; background: transparent;
+  flex: none; position: relative; width: 72px; height: 111px; border: none; background: transparent;
   padding: 0; cursor: pointer; display: flex; align-items: flex-end; justify-content: center;
   transition: transform .15s ease;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,.4)) drop-shadow(0 0 10px color-mix(in srgb, var(--brand-1) 35%, transparent));
@@ -1161,9 +1179,64 @@ button { background: none; }
 .mascot-avatar:active { transform: scale(.95); }
 .mascot-widget.bounce .mascot-avatar { animation: popIn .35s cubic-bezier(.34,1.56,.64,1); }
 .wolf-figure { display: block; animation: mascotIdle 2.4s ease-in-out infinite; transform-origin: 50% 100%; }
-.wolf-leg-l, .wolf-leg-r, .wolf-arm-l, .wolf-arm-r, .wolf-tail-grp, .wolf-eye {
+.wolf-leg-l, .wolf-leg-r, .wolf-arm-l, .wolf-arm-r, .wolf-tail-grp, .wolf-eye, .wolf-head {
   transform-box: fill-box; transform-origin: 50% 0%;
 }
+.wolf-head { transform-origin: 50% 90%; }
+
+/* Expressions and accessories: hidden by default, switched by classes */
+.wolf-figure .eye-wink, .wolf-figure .eyes-closed, .wolf-figure .eyes-heart, .wolf-figure .eyes-big,
+.wolf-figure .mouth-o, .wolf-figure .mouth-grin, .wolf-figure .acc { display: none; }
+.mood-wink .wolf-eye-r { display: none; }
+.mood-wink .eye-wink { display: inline; }
+.mood-sleepy .eyes-open, .mood-love .eyes-open, .mood-surprised .eyes-open { display: none; }
+.mood-sleepy .eyes-closed { display: inline; }
+.mood-love .eyes-heart { display: inline; }
+.mood-surprised .eyes-big { display: inline; }
+.mood-surprised .mouth-smile, .mood-sleepy .mouth-smile, .mood-grin .mouth-smile, .mood-love .mouth-smile { display: none; }
+.mood-surprised .mouth-o, .mood-sleepy .mouth-o { display: inline; }
+.mood-sleepy .mouth-o { transform: scale(.6); transform-box: fill-box; transform-origin: center; }
+.mood-grin .mouth-grin, .mood-love .mouth-grin { display: inline; }
+.mood-love .wolf-cheek { opacity: .95; }
+.acc-on-party .acc-party, .acc-on-grad .acc-grad, .acc-on-phones .acc-phones, .acc-on-glasses .acc-glasses,
+.acc-on-shades .acc-shades, .acc-on-nightcap .acc-nightcap { display: inline; animation: accIn .4s cubic-bezier(.34,1.56,.64,1); transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes accIn { from { transform: translateY(-14px) scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* One-shot scene animations on the whole widget */
+.mascot-widget.anim-jump .wolf-figure { animation: wolfJump .7s cubic-bezier(.34,1.56,.64,1) 2, mascotIdle 2.4s ease-in-out 1.4s infinite; }
+@keyframes wolfJump { 0%, 100% { transform: translateY(0) scaleY(1); } 30% { transform: translateY(0) scaleY(.86); } 60% { transform: translateY(-22px) scaleY(1.06); } }
+.mascot-widget.anim-spin .wolf-figure { animation: wolfSpin .9s ease, mascotIdle 2.4s ease-in-out .9s infinite; }
+@keyframes wolfSpin { 0% { transform: scaleX(1); } 25% { transform: scaleX(0) translateY(-6px); } 50% { transform: scaleX(-1) translateY(-10px); } 75% { transform: scaleX(0) translateY(-6px); } 100% { transform: scaleX(1); } }
+.mascot-widget.anim-dance .wolf-figure { animation: wolfDance .5s ease-in-out 6; }
+@keyframes wolfDance { 0%, 100% { transform: rotate(-8deg) translateY(0); } 50% { transform: rotate(8deg) translateY(-6px); } }
+.mascot-widget.anim-dance .wolf-arm-l, .mascot-widget.anim-dance .wolf-arm-r { animation-duration: .5s; }
+.mascot-widget.anim-wave .wolf-arm-r { animation: wolfWave .35s ease-in-out 6 alternate; transform-origin: 50% 10%; }
+@keyframes wolfWave { from { transform: rotate(-150deg); } to { transform: rotate(-110deg); } }
+.mascot-widget.anim-think .wolf-head, .mascot-widget.anim-nod .wolf-head { animation: wolfTilt 1.6s ease-in-out 2; }
+@keyframes wolfTilt { 0%, 100% { transform: rotate(0); } 40%, 60% { transform: rotate(-12deg); } }
+.mascot-widget.anim-nod .wolf-head { animation: wolfNod .45s ease-in-out 4; }
+@keyframes wolfNod { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(6deg) translateY(2px); } }
+.mascot-widget.anim-love .wolf-figure { animation: wolfLove .6s ease-in-out 3; }
+@keyframes wolfLove { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08) translateY(-4px); } }
+.mascot-widget.anim-sleep .wolf-figure { animation: wolfSleep 3s ease-in-out infinite; }
+@keyframes wolfSleep { 0%, 100% { transform: rotate(-3deg) translateY(2px); } 50% { transform: rotate(3deg) translateY(4px); } }
+.mascot-widget.anim-sleep .wolf-leg-l, .mascot-widget.anim-sleep .wolf-leg-r, .mascot-widget.anim-sleep .wolf-arm-l, .mascot-widget.anim-sleep .wolf-arm-r { animation-play-state: paused; }
+
+/* Floating effect emoji over the wolf */
+.mascot-fx { position: absolute; top: 0; right: -4px; font-size: 22px; pointer-events: none; opacity: 0; }
+.mascot-fx.go { animation: fxFloat 1.8s ease-out 2; }
+@keyframes fxFloat { 0% { opacity: 0; transform: translateY(10px) scale(.6); } 20% { opacity: 1; transform: translateY(0) scale(1.1); } 100% { opacity: 0; transform: translateY(-36px) scale(1); } }
+
+/* Word card inside the bubble */
+.mascot-word { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.mw-icon { font-size: 36px; line-height: 1; flex: none; }
+.mw-text { display: flex; flex-direction: column; gap: 2px; }
+.mw-q { font-size: 11px; color: var(--ink-2); font-weight: 700; }
+.mw-word { font-size: 16px; font-weight: 800; color: var(--brand-1); display: flex; align-items: center; gap: 6px; }
+.mw-say { border: 1px solid var(--border); background: var(--surface-2); border-radius: 8px; cursor: pointer; font-size: 12px; padding: 1px 5px; }
+.mw-tr { font-size: 14px; font-weight: 800; color: var(--warn); animation: popIn .3s ease both; }
+.mw-hint { font-size: 11px; color: var(--ink-muted); }
+.mascot-bubble.pop { animation: popIn .3s ease both; }
 .wolf-leg-l { animation: legSwingL 1.1s ease-in-out infinite; }
 .wolf-leg-r { animation: legSwingR 1.1s ease-in-out infinite; }
 .wolf-arm-l { animation: armSwingL 1.3s ease-in-out infinite; }
@@ -1200,13 +1273,13 @@ button { background: none; }
 }
 .mascot-bubble {
   background: var(--surface); border: 2px solid var(--border); border-radius: 14px 14px 4px 14px;
-  padding: 10px 14px; font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.4;
+  padding: 10px 14px; font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.4;
   box-shadow: 0 6px 16px rgba(0,0,0,.3); animation: popIn .3s ease both;
 }
 @media (max-width: 640px) {
   .mascot-widget { right: 12px; bottom: 12px; max-width: min(200px, calc(100vw - 24px)); }
-  .mascot-avatar { width: 54px; height: 70px; }
-  .wolf-figure { width: 54px; height: 70px; }
+  .mascot-avatar { width: 54px; height: 83px; }
+  .wolf-figure { width: 54px; height: 83px; }
   .mascot-bubble { font-size: 11px; padding: 8px 11px; }
 }
 
@@ -1294,9 +1367,13 @@ button { background: none; }
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
 .cat-bar-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
 .cat-bar-label { width: 140px; font-size: 12px; color: var(--ink-2); font-weight: 600; flex: none; }
-.cat-bar-track { flex: 1; height: 9px; border-radius: 5px; background: var(--surface-2); overflow: hidden; }
-.cat-bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand-1), var(--brand-2)); border-radius: 5px; }
-.cat-bar-pct { width: 40px; text-align: right; font-size: 12px; font-weight: 700; color: var(--ink-muted); flex: none; }
+.cat-bar-track { flex: 1; min-width: 60px; height: 10px; border-radius: 5px; background: var(--surface-2); overflow: hidden; display: flex; }
+.cat-bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand-1), var(--brand-2)); }
+.cat-bar-learning { opacity: .4; }
+.cat-bar-pct { min-width: 110px; text-align: right; font-size: 12px; font-weight: 700; color: var(--ink-muted); flex: none; white-space: nowrap; }
+.cat-bar-pct b { color: var(--ink); }
+.cat-bar-row.started .cat-bar-label { color: var(--ink); }
+.stat-of { font-size: .55em; color: var(--ink-muted); margin-left: 2px; }
 
 .empty-hint { color: var(--ink-muted); text-align: center; padding: 30px; }
 

@@ -58,6 +58,7 @@ function loadBoard(root, level) {
         <span class="lb-rank">${i + 1}</span>
         ${App.profile.avatarBadgeHtml(r, 32)}
         <span class="lb-name">${escapeHtml(r.name || '?')}</span>
+        ${App.achievements.badgesHtml(r.achievements, r.showcase)}
         <span class="lb-xp">${r.weeklyXP || 0} XP</span>
       </div>
     `).join('');
