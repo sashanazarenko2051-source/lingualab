@@ -291,7 +291,14 @@ function findVoice(lang) {
 // when the speaker button and the auto-speak-on-answer both fire close together.
 let _speakToken = 0;
 
-App.speak = function (text, langCode) {
+// True when the system has a voice for this language — listening exercises
+// are only offered then.
+App.hasVoice = function (langCode) {
+  if (!('speechSynthesis' in window)) return false;
+  return !!findVoice(App.TTS_LANG[langCode] || 'en-US');
+};
+
+App.speak = function (text, langCode, rate) {
   if (!('speechSynthesis' in window)) return;
   const lang = App.TTS_LANG[langCode] || 'en-US';
   const token = ++_speakToken;
@@ -305,7 +312,7 @@ App.speak = function (text, langCode) {
     try {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = lang;
-      u.rate = 0.85;
+      u.rate = rate || 0.85;
       u.volume = 1;
       u.pitch = 1;
       const voice = findVoice(lang);

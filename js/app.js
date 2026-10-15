@@ -34,6 +34,7 @@ App.router = (function () {
     document.querySelectorAll('#nav button').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.view === current);
     });
+    if (App.exercises) App.exercises.stop();
     const root = document.getElementById('view-root');
     root.innerHTML = '';
     const mod = App.views[current];

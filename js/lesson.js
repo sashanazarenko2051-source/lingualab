@@ -1,11 +1,11 @@
 window.App = window.App || {};
 
 // Builds lessons as one logical chain:
-//   1. warm-up: words from the mistakes bank (other topics) + words due for
+//   1. warm-up: words from the mistakes bank (any topic) + words due for
 //      spaced-repetition review;
-//   2. new words of the topic, in course order, in small groups — each word
-//      is first introduced (picture, word, audio, translation, example) and
-//      only then tested, so nothing is asked before it was shown;
+//   2. new words of the topic, in course order, in groups of 4 — each word
+//      is introduced, then met again in Duolingo-style exercises (picture,
+//      pairs, listening, translation, sentence building) — see App.exercises;
 //   3. every wrong answer goes to the mistakes bank and resurfaces in the
 //      warm-up of later lessons and quizzes until fixed.
 App.lesson = (function () {
@@ -41,29 +41,47 @@ App.lesson = (function () {
       .slice(0, limit);
   }
 
-  function test(word, review) { return { kind: 'test', word, review: review || null }; }
-  function intro(word) { return { kind: 'intro', word }; }
+  function ex(kind, word, review) { return { kind, word, review: review || null }; }
 
-  // Steps for a flashcard lesson. Returns [] when there's nothing to do.
+  // Exercise kinds rotate so the same word is met in different ways
+  // (recognition -> listening -> recall -> production). Kinds that don't fit
+  // a word (no example, no voice, non-Latin typing) are swapped for a plain
+  // translation by App.exercises at render time.
+  const REVIEW_KINDS = { mistake: ['type', 'listen', 'translate', 'blank'], due: ['reverse', 'listen', 'translate', 'blank'] };
+  const PRACTICE_KINDS = ['translate', 'listen', 'reverse', 'blank', 'type', 'build'];
+  const QUIZ_KINDS = ['translate', 'reverse', 'listen', 'blank', 'type', 'build'];
+  const EXAM_KINDS = ['translate', 'reverse', 'blank', 'type'];
+  const rotate = (kinds, i) => kinds[i % kinds.length];
+
+  // New words in a group of 4: meet each with its picture right after the
+  // intro, match all four, hear/recognize them again, then build one
+  // sentence — every new word is used at least three times.
+  function newWordSteps(group) {
+    const steps = [];
+    group.forEach(w => { steps.push(ex('intro', w)); steps.push(ex('picture', w)); });
+    if (group.length >= 3) steps.push({ kind: 'match', words: group });
+    shuffle(group).forEach((w, i) => steps.push(ex(rotate(['listen', 'reverse', 'translate'], i), w)));
+    const sentence = group.find(w => w.ex);
+    if (sentence) steps.push(ex('build', sentence));
+    return steps;
+  }
+
+  // Steps for a lesson. Returns [] when there's nothing to do.
   function buildLesson(code, categoryId) {
     const topic = App.words.byCategory(code, categoryId);
     const taken = new Set();
     const steps = [];
 
     // Warm-up: mistakes bank first (any topic), then due reviews.
-    mistakeWords(code, null, WARMUP_MISTAKES).forEach(w => { taken.add(w.id); steps.push(test(w, 'mistake')); });
+    mistakeWords(code, null, WARMUP_MISTAKES).forEach((w, i) => { taken.add(w.id); steps.push(ex(rotate(REVIEW_KINDS.mistake, i), w, 'mistake')); });
     App.words.allWords(code)
       .filter(w => !taken.has(w.id) && !App.srs.isNew(w.id) && App.srs.isDue(w.id))
       .slice(0, WARMUP_DUE)
-      .forEach(w => { taken.add(w.id); steps.push(test(w, 'due')); });
+      .forEach((w, i) => { taken.add(w.id); steps.push(ex(rotate(REVIEW_KINDS.due, i), w, 'due')); });
 
     const fresh = topic.filter(w => App.srs.isNew(w.id) && !taken.has(w.id)).slice(0, NEW_PER_LESSON);
     if (fresh.length) {
-      for (let i = 0; i < fresh.length; i += GROUP_SIZE) {
-        const group = fresh.slice(i, i + GROUP_SIZE);
-        group.forEach(w => steps.push(intro(w)));
-        shuffle(group).forEach(w => steps.push(test(w)));
-      }
+      for (let i = 0; i < fresh.length; i += GROUP_SIZE) steps.push(...newWordSteps(fresh.slice(i, i + GROUP_SIZE)));
     } else {
       // Topic fully introduced: practice its weakest words (topic mistakes,
       // then due, then lowest repetition count).
@@ -71,26 +89,37 @@ App.lesson = (function () {
         const rec = App.storage.getSRS(w.id) || { reps: 0, due: 0 };
         return (App.storage.isMistake(w.id) ? -1000 : 0) + (App.srs.isDue(w.id) ? -100 : 0) + rec.reps;
       };
-      topic.filter(w => !taken.has(w.id))
-        .sort((a, b) => weakness(a) - weakness(b))
-        .slice(0, PRACTICE_SIZE)
-        .forEach(w => steps.push(test(w, App.storage.isMistake(w.id) ? 'mistake' : null)));
+      const weak = topic.filter(w => !taken.has(w.id)).sort((a, b) => weakness(a) - weakness(b)).slice(0, PRACTICE_SIZE);
+      if (weak.length >= 4) steps.push({ kind: 'match', words: weak.slice(0, 4) });
+      weak.forEach((w, i) => steps.push(ex(rotate(PRACTICE_KINDS, i), w, App.storage.isMistake(w.id) ? 'mistake' : null)));
     }
     return steps;
   }
 
   function buildMistakesSession(code) {
-    return mistakeWords(code, null, MISTAKES_SESSION).map(w => test(w, 'mistake'));
+    const words = mistakeWords(code, null, MISTAKES_SESSION);
+    const steps = words.map((w, i) => ex(rotate(REVIEW_KINDS.mistake, i), w, 'mistake'));
+    if (words.length >= 4) steps.unshift({ kind: 'match', words: words.slice(0, 4) });
+    return steps;
   }
 
-  // Quiz words: introduced words of the topic + a few from the mistakes bank.
-  function quizWords(code, categoryId) {
+  // Topic quiz: introduced words of the topic + a few from the mistakes bank,
+  // each in a different exercise type, opened by a pairs match.
+  function buildQuiz(code, categoryId) {
     const topic = App.words.byCategory(code, categoryId);
     const seen = topic.filter(w => !App.srs.isNew(w.id));
     const base = seen.length >= 4 ? seen : topic;
     const picked = shuffle(base).slice(0, QUIZ_TOPIC);
     const mistakes = mistakeWords(code, new Set(picked.map(w => w.id)), QUIZ_MISTAKES);
-    return picked.concat(mistakes);
+    const steps = picked.map((w, i) => ex(rotate(QUIZ_KINDS, i), w))
+      .concat(mistakes.map((w, i) => ex(rotate(REVIEW_KINDS.mistake, i), w, 'mistake')));
+    if (picked.length >= 4) steps.unshift({ kind: 'match', words: picked.slice(0, 4) });
+    return steps;
+  }
+
+  // Exams: one graded exercise per word, no pairs (each word counts once).
+  function buildExam(words) {
+    return shuffle(words).map((w, i) => ex(rotate(EXAM_KINDS, i), w));
   }
 
   // Grades an answer everywhere it matters (SRS schedule + mistakes bank) and
@@ -116,5 +145,5 @@ App.lesson = (function () {
 
   function newLessonId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
 
-  return { nextCategory, buildLesson, buildMistakesSession, quizWords, answer, newLessonId, shuffle };
+  return { nextCategory, buildLesson, buildMistakesSession, buildQuiz, buildExam, answer, newLessonId, shuffle };
 })();

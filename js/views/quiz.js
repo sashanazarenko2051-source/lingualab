@@ -9,169 +9,60 @@ App.views = App.views || {};
 
 // Exam pass threshold: correct-answer percentage needed to mark a category "passed".
 const EXAM_PASS_PCT = 80;
-const MAX_HEARTS = 5;
 
-function heartsHtml(hearts) {
-  return Array.from({ length: MAX_HEARTS }, (_, i) => i < hearts ? '❤️' : '🖤').join('');
-}
-
+// Topic quizzes and exams, played by App.exercises. Quizzes mix exercise
+// types and pull in words from the mistakes bank; exams test every word of
+// a topic (or of a whole level) once and are graded by EXAM_PASS_PCT, so they
+// have no hearts.
 App.views.quiz = {
   render(root) {
     const code = App.storage.getCurrentLang();
-    const categoryId = App.session.quizCategory;
-    const examCategoryIds = App.session.examCategoryIds;
-    const examLevel = App.session.examLevel;
-    const isExam = !!App.session.examMode;
+    const meta = {
+      code,
+      categoryId: App.session.quizCategory,
+      examCategoryIds: App.session.examCategoryIds,
+      examLevel: App.session.examLevel,
+      isExam: !!App.session.examMode
+    };
     App.session.quizCategory = null;
     App.session.examMode = false;
     App.session.examCategoryIds = null;
     App.session.examLevel = null;
 
-    let words;
-    if (examCategoryIds && examCategoryIds.length) {
-      words = examCategoryIds.flatMap(id => App.words.byCategory(code, id));
-    } else if (isExam) {
-      words = buildPool(code, categoryId);
-    } else if (!categoryId) {
-      words = shuffle(buildPool(code, null)).slice(0, 10);
+    let steps;
+    if (meta.examCategoryIds && meta.examCategoryIds.length) {
+      steps = App.lesson.buildExam(meta.examCategoryIds.flatMap(id => App.words.byCategory(code, id)));
+    } else if (meta.isExam) {
+      steps = App.lesson.buildExam(App.words.byCategory(code, meta.categoryId));
     } else {
-      // Regular topic quiz: words already met in this topic, plus a few
-      // from the mistakes bank so earlier errors keep coming back.
-      words = App.lesson.quizWords(code, categoryId);
+      steps = App.lesson.buildQuiz(code, meta.categoryId || App.lesson.nextCategory(code).id);
     }
 
-    if (words.length < 4) {
+    if (steps.length < 4) {
       root.innerHTML = `<p class="empty-hint">${App.t('fc_not_enough_words')}</p>`;
       return;
     }
 
-    const questions = buildQuestions(shuffle(words), code);
-    const state = { questions, index: 0, correct: 0, answered: false, categoryId, isExam, code, examLevel, examCategoryIds, hearts: MAX_HEARTS, combo: 0, lessonId: App.lesson.newLessonId() };
-    renderQuestion(root, state);
+    App.exercises.run({
+      root, steps, code, lessonId: App.lesson.newLessonId(), hearts: !meta.isExam,
+      onFinish: (state) => renderResult(root, state, meta),
+      onOutOfHearts: (state) => renderOutOfHearts(root, meta),
+      onExit: () => App.router.go('course')
+    });
   }
 };
 
-function buildPool(code, categoryId) {
-  return categoryId ? App.words.byCategory(code, categoryId) : App.words.allWords(code);
-}
-
-function shuffle(arr) {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-// Distractors come from each word's own topic, so mixed-in review words
-// from earlier topics still get plausible wrong options.
-function buildQuestions(words, code) {
-  return words.map(word => {
-    const others = App.words.byCategory(code, word.categoryId).filter(w => w.id !== word.id && w.w !== word.w);
-    const distractors = shuffle(others).slice(0, 3);
-
-    if (word.ex) {
-      const blanked = blankOut(word.ex, word.w);
-      const options = shuffle([word, ...distractors]).map(w => w.w);
-      return { type: 'blank', word, prompt: blanked, options, answer: word.w };
-    }
-    const options = shuffle([word, ...distractors]).map(w => App.words.localizedMeaning(w).w);
-    return { type: 'choice', word, prompt: word.w, options, answer: App.words.localizedMeaning(word).w };
-  });
-}
-
-function blankOut(sentence, target) {
-  const idx = sentence.toLowerCase().indexOf(target.toLowerCase());
-  if (idx === -1) return sentence;
-  return sentence.slice(0, idx) + '____' + sentence.slice(idx + target.length);
-}
-
-function renderQuestion(root, state) {
-  const q = state.questions[state.index];
-  const flag = App.ui.flagChip(App.storage.getCurrentLang());
-  state.answered = false;
-
-  root.innerHTML = `
-    <div class="flashcard-topbar" style="max-width:560px">
-      <button class="back-btn" id="back-to-course" title="${App.t('back_btn_title')}">${App.t('back_btn')}</button>
-      <div class="quiz-progress" style="margin:0">${state.isExam ? '🎓' + (state.examLevel ? ' ' + state.examLevel : '') + ' · ' : ''}${state.index + 1} / ${state.questions.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
-    </div>
-    <div class="hearts-row" style="max-width:560px" title="${state.isExam ? '' : App.t('hearts_title')}">${state.isExam ? '' : heartsHtml(state.hearts)}${state.combo >= 2 ? `<span class="combo-badge">🔥${state.combo}</span>` : ''}</div>
-    ${App.storage.isMistake(q.word.id) ? `<div class="lesson-badge lesson-badge-mistake" style="align-self:center">🔁 ${App.t('lesson_review_mistake')}</div>` : ''}
-    ${q.type === 'choice'
-      ? `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_translation')}</div>`
-      : `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_missing')}</div>`}
-    <div class="quiz-options" id="options">
-      ${q.options.map(opt => `<button class="quiz-option" data-opt="${encodeURIComponent(opt)}">${opt}</button>`).join('')}
-    </div>
-  `;
-
-  root.querySelector('#back-to-course').addEventListener('click', () => App.router.go('course'));
-
-  root.querySelectorAll('.quiz-option').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (state.answered) return;
-      state.answered = true;
-      const chosen = decodeURIComponent(btn.dataset.opt);
-      const isCorrect = chosen === q.answer;
-      if (isCorrect) state.correct += 1;
-
-      root.querySelectorAll('.quiz-option').forEach(b => {
-        b.disabled = true;
-        const val = decodeURIComponent(b.dataset.opt);
-        if (val === q.answer) b.classList.add('correct');
-        else if (b === btn) b.classList.add('wrong');
-      });
-
-      App.lesson.answer(state, q.word, isCorrect);
-      isCorrect ? App.effects.correct() : App.effects.wrong();
-      App.effects.celebrate(App.gamification.grade(isCorrect));
-
-      if (isCorrect) {
-        state.combo += 1;
-        const bonus = App.gamification.comboBonus(state.combo);
-        if (bonus) {
-          App.effects.comboToast(state.combo);
-          App.effects.celebrate(bonus);
-        }
-      } else {
-        state.combo = 0;
-        // Exams are graded by EXAM_PASS_PCT alone, so hearts only apply to
-        // regular quizzes.
-        if (!state.isExam) {
-          state.hearts = Math.max(0, state.hearts - 1);
-          App.effects.heartLoss();
-          root.querySelector('.hearts-row')?.classList.add('shake');
-        }
-      }
-
-      setTimeout(() => {
-        state.index += 1;
-        if (!state.isExam && state.hearts === 0) {
-          renderOutOfHearts(root, state);
-        } else if (state.index >= state.questions.length) {
-          renderResult(root, state);
-        } else {
-          renderQuestion(root, state);
-        }
-      }, 700);
-    });
-  });
-}
-
-function findNextCategory(categoryId) {
+function findNextCategory(code, categoryId) {
   if (!categoryId) return null;
-  const code = App.storage.getCurrentLang();
   const cats = App.data[code].categories;
   const idx = cats.findIndex(c => c.id === categoryId);
   if (idx === -1 || idx + 1 >= cats.length) return null;
   return cats[idx + 1];
 }
 
-function renderResult(root, state) {
-  const pct = Math.round((state.correct / state.questions.length) * 100);
-  const next = findNextCategory(state.categoryId);
+function renderResult(root, state, meta) {
+  const pct = state.tested ? Math.round((state.correct / state.tested) * 100) : 0;
+  const next = meta.isExam ? null : findNextCategory(meta.code, meta.categoryId);
   let examBanner = '';
 
   if (pct === 100) {
@@ -181,10 +72,10 @@ function renderResult(root, state) {
     }, 300);
   }
 
-  if (state.isExam) {
-    const examKey = state.examLevel || state.categoryId;
+  if (meta.isExam) {
+    const examKey = meta.examLevel || meta.categoryId;
     const passed = pct >= EXAM_PASS_PCT;
-    if (passed) App.storage.setExamPassed(state.code, examKey);
+    if (passed) App.storage.setExamPassed(meta.code, examKey);
     examBanner = `
       <div class="exam-banner ${passed ? 'exam-pass' : 'exam-fail'}">
         ${passed ? '🎓 ' + App.t('exam_result_pass') : App.t('exam_result_fail', { pct: EXAM_PASS_PCT })}
@@ -193,11 +84,16 @@ function renderResult(root, state) {
     if (passed) { App.effects.confetti(); App.effects.levelUp(); }
   }
 
+  const t = state.tally;
   root.innerHTML = `
     <div class="quiz-result">
       ${examBanner}
       <div class="quiz-result-score">${pct}%</div>
-      <div>${App.t('fc_correct_of', { correct: state.correct, total: state.questions.length })}</div>
+      <div>${App.t('fc_correct_of', { correct: state.correct, total: state.tested })}</div>
+      ${t.fixed || t.added ? `<div class="lesson-summary">
+        ${t.fixed ? `<span>✅ ${App.t('fc_result_fixed', { n: t.fixed })}</span>` : ''}
+        ${t.added ? `<span>🔁 ${App.t('fc_result_mistakes', { n: t.added })}</span>` : ''}
+      </div>` : ''}
       <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px; align-items:center">
         ${next ? `<button class="quiz-next" id="to-next" style="padding:14px 32px; font-size:15px">${App.t('quiz_next_topic', { name: App.ui.categoryName(next.id, next.name) })}</button>` : ''}
         <div style="display:flex; gap:10px">
@@ -212,25 +108,25 @@ function renderResult(root, state) {
     App.session.flashcardsCategory = next.id;
     App.router.go('flashcards');
   });
-  root.querySelector('#quiz-again').addEventListener('click', () => restart(state));
+  root.querySelector('#quiz-again').addEventListener('click', () => restart(meta));
   root.querySelectorAll('[data-go]').forEach(btn => {
     btn.addEventListener('click', () => App.router.go(btn.dataset.go));
   });
 }
 
 // Re-runs the same quiz or exam (a plain go('quiz') would drop the topic).
-function restart(state) {
-  App.session.examMode = state.isExam;
-  if (state.examLevel) {
-    App.session.examCategoryIds = state.examCategoryIds;
-    App.session.examLevel = state.examLevel;
+function restart(meta) {
+  App.session.examMode = meta.isExam;
+  if (meta.examLevel) {
+    App.session.examCategoryIds = meta.examCategoryIds;
+    App.session.examLevel = meta.examLevel;
   } else {
-    App.session.quizCategory = state.categoryId;
+    App.session.quizCategory = meta.categoryId;
   }
   App.router.go('quiz');
 }
 
-function renderOutOfHearts(root, state) {
+function renderOutOfHearts(root, meta) {
   root.innerHTML = `
     <div class="quiz-result">
       <div class="hearts-out-icon">💔</div>
@@ -245,7 +141,7 @@ function renderOutOfHearts(root, state) {
       </div>
     </div>
   `;
-  root.querySelector('#quiz-retry').addEventListener('click', () => restart(state));
+  root.querySelector('#quiz-retry').addEventListener('click', () => restart(meta));
   root.querySelectorAll('[data-go]').forEach(btn => {
     btn.addEventListener('click', () => App.router.go(btn.dataset.go));
   });
