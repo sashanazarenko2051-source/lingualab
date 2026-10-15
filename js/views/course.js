@@ -61,10 +61,42 @@ function noteCard(n) {
   return `<div class="note-card"><h4>${n.title}</h4><p>${n.text}</p></div>`;
 }
 
+// Asks before wiping a topic's progress, then opens its first lesson.
+function confirmRestart(code, cat) {
+  const name = App.ui.categoryName(cat.id, cat.name);
+  const seen = App.words.byCategory(code, cat.id).filter(w => !App.srs.isNew(w.id)).length;
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML = `
+    <div class="modal-card restart-card">
+      <div class="restart-icon">↺</div>
+      <h3>${App.t('course_restart_title', { name })}</h3>
+      <p>${App.t('course_restart_text', { n: seen })}</p>
+      <div class="profile-modal-actions">
+        <button class="action-card" id="restart-cancel" style="display:inline-flex">${App.t('profile_cancel')}</button>
+        <button class="action-card restart-yes" id="restart-yes" style="display:inline-flex">↺ ${App.t('course_restart')}</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  const close = () => overlay.remove();
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  overlay.querySelector('#restart-cancel').addEventListener('click', close);
+  overlay.querySelector('#restart-yes').addEventListener('click', () => {
+    App.storage.resetTopic(code, cat.id);
+    close();
+    App.session.flashcardsCategory = cat.id;
+    App.session.freshStart = true;
+    App.router.go('flashcards');
+  });
+  overlay.querySelector('#restart-cancel').focus();
+}
+
 function categoryStats(code, cat) {
   const words = App.words.byCategory(code, cat.id);
   const mastered = words.filter(w => App.srs.isMastered(w.id)).length;
-  return { cat, mastered, total: words.length, pct: words.length ? Math.round((mastered / words.length) * 100) : 0 };
+  const started = words.some(w => !App.srs.isNew(w.id));
+  return { cat, mastered, started, total: words.length, pct: words.length ? Math.round((mastered / words.length) * 100) : 0 };
 }
 
 function categoryNodeHtml(s, side, accent, code) {
@@ -86,6 +118,7 @@ function categoryNodeHtml(s, side, accent, code) {
           title="${examPassed ? App.t('course_exam_passed') : App.t('course_exam_need', { pct: 80 })}">
           ${examPassed ? '✅ ' + App.t('course_exam_passed') : '🎓 ' + App.t('course_exam_btn')}
         </button>
+        ${s.started ? `<button class="skill-node-exam-link skill-node-restart" data-restart="${s.cat.id}" title="${App.t('course_restart_hint')}">↺ ${App.t('course_restart')}</button>` : ''}
       </div>
     </div>
   `;
@@ -164,6 +197,13 @@ function renderPath(root, code, lang, accent) {
       App.session.quizCategory = btn.dataset.exam;
       App.session.examMode = true;
       App.router.go('quiz');
+    });
+  });
+  el.querySelectorAll('[data-restart]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const cat = cats.find(c => c.id === btn.dataset.restart);
+      confirmRestart(code, cat);
     });
   });
   el.querySelectorAll('[data-level-exam]').forEach(btn => {

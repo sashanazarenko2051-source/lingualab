@@ -69,14 +69,17 @@ App.lesson = (function () {
   }
 
   // Steps for a lesson. Returns [] when there's nothing to do.
-  function buildLesson(code, categoryId) {
+  // opts.warmup === false skips the review warm-up (used right after a topic
+  // is started over, so it opens on the topic's first word).
+  function buildLesson(code, categoryId, opts) {
     const topic = App.words.byCategory(code, categoryId);
     const taken = new Set();
     const steps = [];
 
+    const warmup = !(opts && opts.warmup === false);
     // Warm-up: mistakes bank first (any topic), then due reviews.
-    mistakeWords(code, null, WARMUP_MISTAKES).forEach((w, i) => { taken.add(w.id); steps.push(ex(rotate(REVIEW_KINDS.mistake, i), w, 'mistake')); });
-    App.words.allWords(code)
+    if (warmup) mistakeWords(code, null, WARMUP_MISTAKES).forEach((w, i) => { taken.add(w.id); steps.push(ex(rotate(REVIEW_KINDS.mistake, i), w, 'mistake')); });
+    if (warmup) App.words.allWords(code)
       .filter(w => !taken.has(w.id) && !App.srs.isNew(w.id) && App.srs.isDue(w.id))
       .slice(0, WARMUP_DUE)
       .forEach((w, i) => { taken.add(w.id); steps.push(ex(rotate(REVIEW_KINDS.due, i), w, 'due')); });

@@ -164,6 +164,15 @@ App.storage = (function () {
         .sort((a, b) => state.mistakes[b].misses - state.mistakes[a].misses || state.mistakes[a].at - state.mistakes[b].at);
     },
     isMistake(wordId) { return !!state.mistakes[wordId]; },
+    // Starts a topic over: forgets its words' schedule, its mistakes and its
+    // exam. XP, streak, history and achievements are kept.
+    resetTopic(code, categoryId) {
+      const prefix = code + ':' + categoryId + ':';
+      Object.keys(state.srs).forEach(id => { if (id.startsWith(prefix)) delete state.srs[id]; });
+      Object.keys(state.mistakes).forEach(id => { if (id.startsWith(prefix)) delete state.mistakes[id]; });
+      if (state.stats.exams[code]) delete state.stats.exams[code][categoryId];
+      save();
+    },
     getProfile() { return state.profile; },
     setProfile(p) {
       state.profile = Object.assign({}, state.profile, p);

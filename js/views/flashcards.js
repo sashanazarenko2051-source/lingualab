@@ -16,6 +16,8 @@ App.views.flashcards = {
     let categoryId = App.session.flashcardsCategory;
     App.session.flashcardsCategory = null;
     App.session.mistakesMode = false;
+    const freshStart = !!App.session.freshStart;
+    App.session.freshStart = false;
 
     if (!mistakesMode && !categoryId) categoryId = App.lesson.nextCategory(code).id;
     if (categoryId) {
@@ -23,7 +25,7 @@ App.views.flashcards = {
       if (cat) App.storage.setLastLesson(code, categoryId, cat.name);
     }
 
-    const steps = mistakesMode ? App.lesson.buildMistakesSession(code) : App.lesson.buildLesson(code, categoryId);
+    const steps = mistakesMode ? App.lesson.buildMistakesSession(code) : App.lesson.buildLesson(code, categoryId, { warmup: !freshStart });
     if (!steps.length) {
       root.innerHTML = emptyHtml();
       root.querySelector('[data-go]')?.addEventListener('click', (e) => App.router.go(e.target.dataset.go));
