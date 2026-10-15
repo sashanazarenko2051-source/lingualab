@@ -87,7 +87,7 @@ function renderQuestion(root, state) {
       <button class="back-btn" id="back-to-course" title="${App.t('back_btn_title')}">${App.t('back_btn')}</button>
       <div class="quiz-progress" style="margin:0">${state.isExam ? '🎓' + (state.examLevel ? ' ' + state.examLevel : '') + ' · ' : ''}${state.index + 1} / ${state.questions.length} · ${App.t('quiz_correct_label')}: ${state.correct}</div>
     </div>
-    <div class="hearts-row" style="max-width:560px" title="${App.t('hearts_title')}">${heartsHtml(state.hearts)}${state.combo >= 2 ? `<span class="combo-badge">🔥${state.combo}</span>` : ''}</div>
+    <div class="hearts-row" style="max-width:560px" title="${state.isExam ? '' : App.t('hearts_title')}">${state.isExam ? '' : heartsHtml(state.hearts)}${state.combo >= 2 ? `<span class="combo-badge">🔥${state.combo}</span>` : ''}</div>
     ${q.type === 'choice'
       ? `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_translation')}</div>`
       : `<div class="quiz-question">${q.prompt}</div><div class="quiz-question-sub">${flag} ${App.ui.categoryName(q.word.categoryId, q.word.categoryName)} · ${App.t('quiz_choose_missing')}</div>`}
@@ -126,14 +126,20 @@ function renderQuestion(root, state) {
         }
       } else {
         state.combo = 0;
-        state.hearts = Math.max(0, state.hearts - 1);
-        App.effects.heartLoss();
-        root.querySelector('.hearts-row')?.classList.add('shake');
+        // Exams are graded by EXAM_PASS_PCT alone, so hearts only apply to
+        // regular quizzes.
+        if (!state.isExam) {
+          state.hearts = Math.max(0, state.hearts - 1);
+          App.effects.heartLoss();
+          root.querySelector('.hearts-row')?.classList.add('shake');
+        }
       }
 
       setTimeout(() => {
         state.index += 1;
-        if (state.index >= state.questions.length) {
+        if (!state.isExam && state.hearts === 0) {
+          renderOutOfHearts(root, state);
+        } else if (state.index >= state.questions.length) {
           renderResult(root, state);
         } else {
           renderQuestion(root, state);
@@ -184,9 +190,7 @@ function renderResult(root, state) {
       <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px; align-items:center">
         ${next ? `<button class="quiz-next" id="to-next" style="padding:14px 32px; font-size:15px">${App.t('quiz_next_topic', { name: App.ui.categoryName(next.id, next.name) })}</button>` : ''}
         <div style="display:flex; gap:10px">
-          ${state.isExam
-            ? `<button class="action-card" id="exam-again" style="display:inline-flex">${App.t('fc_again')}</button>`
-            : `<button class="action-card" data-go="quiz" style="display:inline-flex">${App.t('fc_again')}</button>`}
+          <button class="action-card" id="quiz-again" style="display:inline-flex">${App.t('fc_again')}</button>
           <button class="action-card" data-go="course" style="display:inline-flex">${App.t('quiz_course')}</button>
           <button class="action-card" data-go="dashboard" style="display:inline-flex">${App.t('fc_home')}</button>
         </div>
@@ -197,16 +201,40 @@ function renderResult(root, state) {
     App.session.flashcardsCategory = next.id;
     App.router.go('flashcards');
   });
-  root.querySelector('#exam-again')?.addEventListener('click', () => {
-    App.session.examMode = true;
-    if (state.examLevel) {
-      App.session.examCategoryIds = state.examCategoryIds;
-      App.session.examLevel = state.examLevel;
-    } else {
-      App.session.quizCategory = state.categoryId;
-    }
-    App.router.go('quiz');
+  root.querySelector('#quiz-again').addEventListener('click', () => restart(state));
+  root.querySelectorAll('[data-go]').forEach(btn => {
+    btn.addEventListener('click', () => App.router.go(btn.dataset.go));
   });
+}
+
+// Re-runs the same quiz or exam (a plain go('quiz') would drop the topic).
+function restart(state) {
+  App.session.examMode = state.isExam;
+  if (state.examLevel) {
+    App.session.examCategoryIds = state.examCategoryIds;
+    App.session.examLevel = state.examLevel;
+  } else {
+    App.session.quizCategory = state.categoryId;
+  }
+  App.router.go('quiz');
+}
+
+function renderOutOfHearts(root, state) {
+  root.innerHTML = `
+    <div class="quiz-result">
+      <div class="hearts-out-icon">💔</div>
+      <div class="hearts-out-title">${App.t('hearts_out_title')}</div>
+      <div class="hearts-out-sub">${App.t('hearts_out_sub')}</div>
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px; align-items:center">
+        <button class="quiz-next" id="quiz-retry" style="padding:14px 32px; font-size:15px">${App.t('hearts_retry')}</button>
+        <div style="display:flex; gap:10px">
+          <button class="action-card" data-go="course" style="display:inline-flex">${App.t('quiz_course')}</button>
+          <button class="action-card" data-go="dashboard" style="display:inline-flex">${App.t('fc_home')}</button>
+        </div>
+      </div>
+    </div>
+  `;
+  root.querySelector('#quiz-retry').addEventListener('click', () => restart(state));
   root.querySelectorAll('[data-go]').forEach(btn => {
     btn.addEventListener('click', () => App.router.go(btn.dataset.go));
   });

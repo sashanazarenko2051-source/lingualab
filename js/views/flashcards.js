@@ -78,14 +78,16 @@ function buildOptions(word, pool) {
   return shuffle([word, ...distractors]);
 }
 
-function peekCardHtml(id, word, code) {
+// Previous/next words shown at the sides for context only: navigating with
+// them let you skip words or answer the same word twice for extra points.
+function peekCardHtml(word) {
   if (!word) return `<div class="flashcard-peek flashcard-peek-empty"></div>`;
   const meaning = App.words.localizedMeaning(word);
   return `
-    <button class="flashcard-peek" id="${id}">
+    <div class="flashcard-peek">
       <div class="peek-icon">${word.icon}</div>
       <div class="peek-word">${meaning.w}</div>
-    </button>
+    </div>
   `;
 }
 
@@ -111,7 +113,7 @@ function renderCard(root, state) {
       <div class="hearts-row" id="hearts-row" title="${App.t('hearts_title')}">${heartsHtml(state.hearts)}${state.combo >= 2 ? `<span class="combo-badge">🔥${state.combo}</span>` : ''}</div>
 
       <div class="flashcard-stage">
-        ${peekCardHtml('prev-card', prevWord, state.code)}
+        ${peekCardHtml(prevWord)}
         <div class="flashcard" style="border-color:${accent}; cursor:default">
           <div class="flashcard-category">${App.ui.flagChip(state.code)} ${App.ui.categoryName(word.categoryId, word.categoryName)} · ${App.t('fc_how_to_say')} ${App.ui.langName(state.code).toLowerCase()}?</div>
           <div class="flashcard-icon-row">
@@ -123,7 +125,7 @@ function renderCard(root, state) {
           ${word.ex ? `<div class="flashcard-example" id="ex" style="display:none">${word.ex}</div>` : ''}
           ${meaning.ex ? `<div class="flashcard-example" id="tex" style="display:none">${meaning.ex}</div>` : ''}
         </div>
-        ${peekCardHtml('next-card', nextWord, state.code)}
+        ${peekCardHtml(nextWord)}
       </div>
 
       <div class="quiz-options word-options" id="options">
@@ -138,18 +140,6 @@ function renderCard(root, state) {
   });
 
   root.querySelector('#back-to-course').addEventListener('click', () => App.router.go('course'));
-
-  root.querySelector('#prev-card')?.addEventListener('click', () => {
-    if (state.index === 0) return;
-    state.index -= 1;
-    renderCard(root, state);
-  });
-
-  root.querySelector('#next-card')?.addEventListener('click', () => {
-    if (state.index >= state.words.length - 1) return;
-    state.index += 1;
-    renderCard(root, state);
-  });
 
   root.querySelectorAll('.word-options .quiz-option').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -197,7 +187,9 @@ function renderCard(root, state) {
 
       setTimeout(() => {
         state.index += 1;
-        if (state.index >= state.words.length) {
+        if (state.hearts === 0) {
+          renderOutOfHearts(root, state);
+        } else if (state.index >= state.words.length) {
           renderResult(root, state);
         } else {
           renderCard(root, state);
@@ -223,7 +215,7 @@ function renderResult(root, state) {
       <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px; align-items:center">
         <button class="quiz-next" id="to-quiz" style="padding:14px 32px; font-size:15px">${App.t('fc_next_tests')}</button>
         <div style="display:flex; gap:10px">
-          <button class="action-card" data-go="flashcards" style="display:inline-flex">${App.t('fc_again')}</button>
+          <button class="action-card" id="fc-again" style="display:inline-flex">${App.t('fc_again')}</button>
           <button class="action-card" data-go="dashboard" style="display:inline-flex">${App.t('fc_home')}</button>
         </div>
       </div>
@@ -233,6 +225,35 @@ function renderResult(root, state) {
     App.session.quizCategory = state.categoryId;
     App.router.go('quiz');
   });
+  root.querySelector('#fc-again').addEventListener('click', () => restart(state));
+  root.querySelectorAll('[data-go]').forEach(btn => {
+    btn.addEventListener('click', () => App.router.go(btn.dataset.go));
+  });
+}
+
+// Re-runs the same topic (a plain go('flashcards') would drop the category
+// and start a session over the whole language instead).
+function restart(state) {
+  App.session.flashcardsCategory = state.categoryId;
+  App.router.go('flashcards');
+}
+
+function renderOutOfHearts(root, state) {
+  root.innerHTML = `
+    <div class="quiz-result">
+      <div class="hearts-out-icon">💔</div>
+      <div class="hearts-out-title">${App.t('hearts_out_title')}</div>
+      <div class="hearts-out-sub">${App.t('hearts_out_sub')}</div>
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px; align-items:center">
+        <button class="quiz-next" id="fc-retry" style="padding:14px 32px; font-size:15px">${App.t('hearts_retry')}</button>
+        <div style="display:flex; gap:10px">
+          <button class="action-card" data-go="course" style="display:inline-flex">${App.t('quiz_course')}</button>
+          <button class="action-card" data-go="dashboard" style="display:inline-flex">${App.t('fc_home')}</button>
+        </div>
+      </div>
+    </div>
+  `;
+  root.querySelector('#fc-retry').addEventListener('click', () => restart(state));
   root.querySelectorAll('[data-go]').forEach(btn => {
     btn.addEventListener('click', () => App.router.go(btn.dataset.go));
   });
