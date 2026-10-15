@@ -37,66 +37,47 @@ html, body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   font-size: 14px;
 }
-@keyframes blobDrift {
-  0%, 100% { background-position: 8% -8%, 100% 10%, 20% 110%; }
-  50% { background-position: 16% -2%, 90% 18%, 28% 100%; }
-}
-body {
-  background:
-    radial-gradient(ellipse 800px 500px at 8% -8%, var(--page-glow-1), transparent 62%),
-    radial-gradient(ellipse 800px 550px at 100% 8%, var(--page-glow-2), transparent 58%),
-    radial-gradient(ellipse 700px 480px at 22% 108%, var(--page-glow-3), transparent 58%),
-    var(--page);
-  background-attachment: fixed;
-  animation: blobDrift 24s ease-in-out infinite;
-}
-/* Isometric 3D-cube backdrop: three repeating-linear-gradient band sets at
-   0/60/120deg overlap into a faceted diamond tessellation (light/mid/dark
-   faces per "cube") — a real isometric texture, not just flat grid lines.
-   Separated into its own layer so its color can shimmer (hue-rotate)
-   independently of the drifting glow blobs on body itself. */
+/* Background scene. Everything that moves here animates only transform /
+   opacity, which the GPU compositor handles without repainting. The old
+   backdrop animated filter: hue-rotate and background-position on
+   full-screen layers, forcing a full repaint every frame, which made
+   WebView2 skip painting page content. */
+body { background: var(--page); }
+/* Static faint dot lattice: texture without any per-frame cost. */
 body::before {
-  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(4px 4px at 21px 21px, rgba(57,255,157,1) 0%, transparent 65%) 0 0 / 168px 168px,
-    radial-gradient(4px 4px at 21px 21px, rgba(0,229,255,1) 0%, transparent 65%) 84px 0px / 168px 168px,
-    radial-gradient(4px 4px at 21px 21px, rgba(184,41,255,1) 0%, transparent 65%) 0px 84px / 168px 168px,
-    radial-gradient(4px 4px at 21px 21px, rgba(255,61,110,1) 0%, transparent 65%) 84px 84px / 168px 168px,
-    repeating-linear-gradient(0deg, rgba(200,230,255,.28) 0 1.5px, transparent 1.5px 42px),
-    repeating-linear-gradient(60deg, rgba(200,230,255,.28) 0 1.5px, transparent 1.5px 42px),
-    repeating-linear-gradient(120deg, rgba(200,230,255,.22) 0 1.5px, transparent 1.5px 42px),
-    repeating-linear-gradient(0deg, rgba(140,190,255,.13) 0 21px, transparent 21px 42px),
-    repeating-linear-gradient(60deg, rgba(140,190,255,.13) 0 21px, transparent 21px 42px),
-    repeating-linear-gradient(120deg, rgba(0,0,0,.5) 0 21px, transparent 21px 42px),
-    linear-gradient(#0a1120, #0a1120);
-  animation: gridDots 22s linear infinite, gridShimmer 12s linear infinite;
+  content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background: radial-gradient(circle at 1px 1px, rgba(147,184,214,.16) 1px, transparent 1.5px) 0 0 / 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 30%, transparent 100%);
 }
-@keyframes gridDots {
-  0% { background-position: 0 0, 84px 0px, 0px 84px, 84px 84px, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
-  100% { background-position: 168px 168px, 252px 168px, 168px 252px, 252px 252px, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+.bg-scene { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+/* Aurora: three big pre-blurred color blobs drifting on transform only. */
+.aurora {
+  position: absolute; width: 60vmax; height: 60vmax; border-radius: 50%;
+  filter: blur(80px); opacity: .38; will-change: transform;
 }
-@keyframes gridShimmer {
-  0% { filter: hue-rotate(0deg) saturate(1.15); }
-  100% { filter: hue-rotate(360deg) saturate(1.15); }
+.aurora-1 { background: var(--brand-1); top: -25vmax; left: -15vmax; animation: auroraA 26s ease-in-out infinite; }
+.aurora-2 { background: var(--brand-2); top: -10vmax; right: -25vmax; animation: auroraB 32s ease-in-out infinite; }
+.aurora-3 { background: var(--brand-3); bottom: -35vmax; left: 20vw; opacity: .22; animation: auroraC 38s ease-in-out infinite; }
+@keyframes auroraA { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(18vw, 12vh) scale(1.15); } }
+@keyframes auroraB { 0%, 100% { transform: translate(0, 0) scale(1.1); } 50% { transform: translate(-20vw, 18vh) scale(.9); } }
+@keyframes auroraC { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-15vw, -14vh) scale(1.2); } }
+/* Floating letters from the app's alphabets, drifting up and fading. */
+.bg-glyph {
+  position: absolute; bottom: -60px; font-weight: 800; line-height: 1;
+  color: var(--glyph-color); opacity: 0; will-change: transform, opacity;
+  text-shadow: 0 0 18px var(--glyph-color);
+  animation: glyphRise var(--glyph-dur) linear var(--glyph-delay) infinite;
 }
-/* A soft colored spotlight that drifts across the cube texture — the
-   moving lit patch from the reference image. Plain alpha-blended radial
-   gradient (NOT mix-blend-mode: screen) — blend modes on a fixed-position
-   layer caused a visible rectangular rendering artifact in Chromium/
-   WebView2 (a hard-edged patch instead of a soft circular glow), so this
-   sticks to a normal translucent overlay instead. */
-body::after {
-  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(circle 380px at 50% 50%, rgba(57,255,157,.28), rgba(0,229,255,.14) 45%, transparent 72%) no-repeat;
-  animation: spotlightDrift 19s ease-in-out infinite;
+@keyframes glyphRise {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  12% { opacity: var(--glyph-alpha); }
+  85% { opacity: var(--glyph-alpha); }
+  100% { transform: translateY(-115vh) rotate(var(--glyph-spin)); opacity: 0; }
 }
-@keyframes spotlightDrift {
-  0%, 100% { background-position: 78% 30%; }
-  50% { background-position: 15% 70%; }
+@media (prefers-reduced-motion: reduce) {
+  .bg-glyph { display: none; }
 }
-/* isolation:isolate keeps the spotlight's mix-blend-mode (body::after)
-   contained to the background layers behind it, so it can't bleed into
-   panels/text painted above it. */
 #app { min-height: 100vh; display: flex; flex-direction: column; position: relative; isolation: isolate; }
 button, select, input { font-family: inherit; font-size: inherit; color: inherit; }
 button { background: none; }

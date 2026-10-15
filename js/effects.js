@@ -114,3 +114,38 @@ App.effects = (function () {
     toast, confetti, celebrate, comboToast, perfectToast
   };
 })();
+
+// Background scene: aurora blobs plus letters from the app's alphabets
+// floating up. Built once at startup; all motion is CSS transform/opacity.
+(function () {
+  const GLYPHS = ['A', 'Ж', 'Ω', 'ß', 'Ä', 'Ł', 'Ñ', 'Ç', 'Я', 'Ø', 'Å', 'Ő', 'Ř', 'Λ', 'Ї', 'Ș', 'É', 'Ђ', 'Ž', 'Ψ'];
+  const COLORS = ['var(--brand-1)', 'var(--brand-2)', 'var(--brand-3)', 'var(--warn)'];
+
+  function rand(min, max) { return min + Math.random() * (max - min); }
+
+  function build() {
+    const scene = document.createElement('div');
+    scene.className = 'bg-scene';
+    scene.setAttribute('aria-hidden', 'true');
+    let html = '<div class="aurora aurora-1"></div><div class="aurora aurora-2"></div><div class="aurora aurora-3"></div>';
+    GLYPHS.forEach((ch, i) => {
+      const dur = rand(22, 40);
+      const style = [
+        `left:${(i / GLYPHS.length) * 100 + rand(-2, 2)}%`,
+        `font-size:${Math.round(rand(22, 64))}px`,
+        `--glyph-color:${COLORS[i % COLORS.length]}`,
+        `--glyph-alpha:${rand(0.08, 0.2).toFixed(2)}`,
+        `--glyph-dur:${dur.toFixed(1)}s`,
+        // Negative delay so letters are already mid-flight on first paint.
+        `--glyph-delay:${(-rand(0, dur)).toFixed(1)}s`,
+        `--glyph-spin:${Math.round(rand(-40, 40))}deg`
+      ].join(';');
+      html += `<span class="bg-glyph" style="${style}">${ch}</span>`;
+    });
+    scene.innerHTML = html;
+    document.body.prepend(scene);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+  else build();
+})();
