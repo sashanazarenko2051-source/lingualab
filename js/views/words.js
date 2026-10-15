@@ -60,7 +60,9 @@ function matches(w) {
   return w.w.toLowerCase().includes(query) || App.words.localizedMeaning(w).w.toLowerCase().includes(query);
 }
 
-function rowHtml(w, extra) {
+// remove: 'review' or 'mistakes' adds a 🗑 button that takes the word off
+// that list.
+function rowHtml(w, extra, remove) {
   const rec = App.storage.inReview(w.id);
   return `
     <div class="word-row">
@@ -71,7 +73,8 @@ function rowHtml(w, extra) {
       </span>
       ${extra || ''}
       <button class="word-row-btn" data-say="${esc(w.w)}" title="${App.t('listen_title')}">🔊</button>
-      <button class="word-row-btn word-star ${rec ? 'on' : ''}" data-star="${w.id}" title="${rec ? App.t('words_remove') : App.t('words_add')}">${rec ? '⭐' : '☆'}</button>
+      ${remove ? '' : `<button class="word-row-btn word-star ${rec ? 'on' : ''}" data-star="${w.id}" title="${rec ? App.t('words_remove') : App.t('words_add')}">${rec ? '⭐' : '☆'}</button>`}
+      ${remove ? `<button class="word-row-btn word-del" data-del="${remove}" data-id="${w.id}" title="${App.t(remove === 'review' ? 'words_remove' : 'words_del_mistake')}">🗑</button>` : ''}
     </div>
   `;
 }
@@ -86,7 +89,7 @@ function section(id, title, words, opts) {
         ${opts.action && words.length ? opts.action : ''}
       </div>
       ${opts.note ? `<p class="words-note">${opts.note}</p>` : ''}
-      ${list.length ? `<div class="word-list">${list.map(w => rowHtml(w, opts.extra ? opts.extra(w) : '')).join('')}</div>`
+      ${list.length ? `<div class="word-list">${list.map(w => rowHtml(w, opts.extra ? opts.extra(w) : '', opts.remove)).join('')}</div>`
         : `<p class="empty-hint">${opts.empty || '—'}</p>`}
     </section>
   `;
@@ -121,11 +124,11 @@ function renderBody(root) {
     ${section('review', '⭐ ' + App.t('words_review_list'), review, {
       note: App.t('words_review_note', { miss: App.storage.AUTO_REVIEW_MISSES, ok: need }),
       empty: App.t('words_review_empty'),
-      extra: reviewExtra,
+      extra: reviewExtra, remove: 'review',
       action: `<button class="quiz-next words-practice" data-practice="review">▶ ${App.t('words_practice')}</button>`
     })}
     ${section('mistakes', '🔁 ' + App.t('words_mistakes'), mistakes, {
-      extra: missExtra, empty: App.t('words_mistakes_empty'),
+      extra: missExtra, empty: App.t('words_mistakes_empty'), remove: 'mistakes',
       action: `<button class="quiz-next words-practice" data-practice="mistakes">▶ ${App.t('words_practice')}</button>`
     })}
     ${section('due', '🕐 ' + App.t('words_due'), due, {
@@ -151,6 +154,14 @@ function renderBody(root) {
     const id = b.dataset.star;
     if (App.storage.inReview(id)) App.storage.removeFromReview(id);
     else { App.storage.addToReview(id); App.effects.toast(`⭐ ${App.t('words_added_toast')}`); }
+    const y = window.scrollY;
+    renderBody(root);
+    window.scrollTo(0, y);
+  }));
+  body.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.del === 'review') App.storage.removeFromReview(b.dataset.id);
+    else App.storage.removeMistake(b.dataset.id);
+    App.effects.toast(`🗑 ${App.t('words_removed_toast')}`);
     const y = window.scrollY;
     renderBody(root);
     window.scrollTo(0, y);

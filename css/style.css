@@ -676,6 +676,14 @@ button { background: none; }
 .ex-footer-good .ex-feedback-title { color: var(--good); }
 .ex-footer-bad .ex-feedback-title { color: var(--bad); }
 .ex-feedback-detail { margin-top: 4px; color: var(--ink); }
+.ex-footer-star {
+  margin-top: 8px; padding: 5px 12px; border-radius: 999px; cursor: pointer; font: inherit; font-size: 13px; font-weight: 800;
+  color: var(--ink); background: rgba(255,255,255,.08); border: 2px solid var(--border);
+}
+.ex-footer-star:hover { border-color: var(--warn); }
+.ex-footer-star.on { border-color: var(--warn); color: var(--warn); }
+.word-del:hover { border-color: var(--bad, #ff5c7a); }
+.ex-hint-left { font-size: 12px; opacity: .8; }
 .ex-hint { color: var(--ink-2); font-weight: 600; }
 .ex-btn {
   min-width: 160px; padding: 14px 26px; border-radius: 16px; border: none; cursor: pointer;

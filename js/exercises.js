@@ -215,18 +215,32 @@ App.exercises = (function () {
     };
   }
 
-  function footerFeedback(ctx, ok, detailHtml) {
+  // The ☆ button in the feedback footer puts the word on your own review
+  // list (or takes it off) without leaving the lesson.
+  function starLabel(word) {
+    return App.storage.inReview(word.id) ? `⭐ ${App.t('words_remove')}` : `☆ ${App.t('words_add')}`;
+  }
+  function footerFeedback(ctx, ok, detailHtml, word) {
     ctx.footer.className = 'ex-footer ' + (ok ? 'ex-footer-good' : 'ex-footer-bad');
     ctx.footer.innerHTML = `
       <div class="ex-footer-inner">
         <div class="ex-feedback">
           <div class="ex-feedback-title">${ok ? '✅ ' + App.t('fb_correct') : '❌ ' + App.t('fb_wrong')}</div>
           ${detailHtml ? `<div class="ex-feedback-detail">${detailHtml}</div>` : ''}
+          ${word ? `<button class="ex-footer-star ${App.storage.inReview(word.id) ? 'on' : ''}" id="ex-footer-star">${starLabel(word)}</button>` : ''}
         </div>
         <button class="ex-btn" id="ex-continue">${App.t('ex_continue')}</button>
       </div>
     `;
     const btn = ctx.footer.querySelector('#ex-continue');
+    const star = ctx.footer.querySelector('#ex-footer-star');
+    if (star) star.addEventListener('click', () => {
+      if (App.storage.inReview(word.id)) App.storage.removeFromReview(word.id);
+      else { App.storage.addToReview(word.id); App.effects.toast(`⭐ ${App.t('words_added_toast')}`); }
+      star.classList.toggle('on', !!App.storage.inReview(word.id));
+      star.textContent = starLabel(word);
+      btn.focus();
+    });
     btn.focus();
     btn.addEventListener('click', () => ctx.next());
     onKey(e => { if (e.key === 'Enter') { e.preventDefault(); ctx.next(); } });
@@ -262,7 +276,7 @@ App.exercises = (function () {
       });
       ctx.answer(word, ok);
       App.speak(word.w, word.lang);
-      footerFeedback(ctx, ok, ok ? '' : detail);
+      footerFeedback(ctx, ok, ok ? '' : detail, word);
     };
     const footer = footerCheck(ctx, false, check);
     const btns = [...ctx.body.querySelectorAll('.ex-option')];
@@ -456,7 +470,8 @@ App.exercises = (function () {
     // Spelling must be exact, diacritics included (case and punctuation
     // don't matter). A diacritics-only slip is still a mistake, but gets its
     // own note; the feedback marks the letters that were missing or wrong.
-    // "Hint" fills in the next correct letter.
+    // "Hint" fills in the next correct letter, but only for about a third of
+    // the word — the rest has to be typed by the learner.
     type(ctx, word) {
       const letters = accentLetters(word.lang);
       const target = variants(word.w)[0].normalize('NFC');
@@ -465,13 +480,19 @@ App.exercises = (function () {
           <div class="ex-prompt"><span class="ex-prompt-icon">${App.ui.wordIcon(word.icon)}</span><span class="ex-prompt-text">${esc(meaningOf(word))}</span></div>`)}
         <div class="ex-input-row">
           <input class="ex-input" id="ex-input" type="text" autocomplete="off" spellcheck="false" placeholder="${App.t('ex_type_placeholder')}">
-          <button class="ex-hint-btn" id="ex-hint-btn" title="${App.t('ex_hint')}">💡 ${App.t('ex_hint')}</button>
+          <button class="ex-hint-btn" id="ex-hint-btn" title="${App.t('ex_hint')}">💡 ${App.t('ex_hint')} <span class="ex-hint-left"></span></button>
         </div>
         <div class="ex-length">${Array.from(target).map(ch => ch === ' ' ? '<i class="sp"></i>' : '<i></i>').join('')}</div>
         ${letters.length ? `<div class="ex-letters">${letters.map(ch => `<button class="ex-letter" data-ch="${ch}">${ch}</button>`).join('')}</div>` : ''}
       `;
       const input = ctx.body.querySelector('#ex-input');
+      const hintBtn = ctx.body.querySelector('#ex-hint-btn');
       const cells = [...ctx.body.querySelectorAll('.ex-length i')];
+      let hintsLeft = Math.floor(Array.from(target.replace(/\s/g, '')).length / 3);
+      const paintHint = () => {
+        hintBtn.querySelector('.ex-hint-left').textContent = hintsLeft > 0 ? `×${hintsLeft}` : '';
+        hintBtn.disabled = done || hintsLeft <= 0;
+      };
       input.focus();
       // Letter slots under the field fill as you type, showing the length.
       const paintSlots = () => {
@@ -485,13 +506,13 @@ App.exercises = (function () {
         const ok = variants(word.w).some(v => norm(v) === norm(given));
         const accentOnly = !ok && variants(word.w).some(v => fold(v) === fold(given));
         input.disabled = true;
-        ctx.body.querySelector('#ex-hint-btn').disabled = true;
+        hintBtn.disabled = true;
         input.classList.add(ok ? 'correct' : 'wrong');
         ctx.answer(word, ok);
         App.speak(word.w, word.lang);
         footerFeedback(ctx, ok, ok ? '' : (accentOnly
           ? `${App.t('fb_typo')} <b>${diffHtml(given, target)}</b>`
-          : `${App.t('fb_answer')} <b>${diffHtml(given, target)}</b> — ${esc(meaningOf(word))}`));
+          : `${App.t('fb_answer')} <b>${diffHtml(given, target)}</b> — ${esc(meaningOf(word))}`), word);
       };
       const footer = footerCheck(ctx, false, check);
       const changed = () => { paintSlots(); footer.enable(input.value.trim().length > 0); };
@@ -504,14 +525,18 @@ App.exercises = (function () {
         input.setSelectionRange(a + 1, a + 1);
         changed();
       }));
-      ctx.body.querySelector('#ex-hint-btn').addEventListener('click', () => {
-        if (done) return;
+      paintHint();
+      hintBtn.addEventListener('click', () => {
+        if (done || hintsLeft <= 0) return;
         // keep the correct beginning, then add the next correct letter
         const typed = Array.from(input.value.normalize('NFC').toLowerCase());
         const goal = Array.from(target);
         let k = 0;
         while (k < typed.length && k < goal.length && typed[k] === goal[k].toLowerCase()) k += 1;
-        input.value = goal.slice(0, Math.min(goal.length, k + 1)).join('');
+        if (k >= goal.length - 1) return;
+        input.value = goal.slice(0, k + 1).join('');
+        hintsLeft -= 1;
+        paintHint();
         input.focus();
         changed();
       });
@@ -559,7 +584,7 @@ App.exercises = (function () {
         line.classList.add(ok ? 'correct' : 'wrong');
         ctx.answer(word, ok);
         App.speak(text, word.lang);
-        footerFeedback(ctx, ok, ok ? '' : `${App.t('fb_answer')} <b>${esc(text)}</b>`);
+        footerFeedback(ctx, ok, ok ? '' : `${App.t('fb_answer')} <b>${esc(text)}</b>`, word);
       };
       const footer = footerCheck(ctx, false, check);
       draw();

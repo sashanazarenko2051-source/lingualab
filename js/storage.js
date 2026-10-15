@@ -168,6 +168,7 @@ App.storage = (function () {
         .sort((a, b) => state.mistakes[b].misses - state.mistakes[a].misses || state.mistakes[a].at - state.mistakes[b].at);
     },
     isMistake(wordId) { return !!state.mistakes[wordId]; },
+    removeMistake(wordId) { delete state.mistakes[wordId]; save(); },
 
     // Personal review list ("My words"). Learners add words themselves;
     // words reaching AUTO_REVIEW_MISSES total mistakes are added
@@ -194,7 +195,9 @@ App.storage = (function () {
       else state.reviewList[wordId].auto = false;
       save();
     },
-    removeFromReview(wordId) { delete state.reviewList[wordId]; save(); },
+    // Removing a word by hand also resets its miss count, so it isn't
+    // re-added automatically on the very next mistake.
+    removeFromReview(wordId) { delete state.reviewList[wordId]; state.missCount[wordId] = 0; save(); },
     inReview(wordId) { return state.reviewList[wordId] || null; },
     getReviewIds(code) {
       return Object.keys(state.reviewList).filter(id => id.startsWith(code + ':'))
