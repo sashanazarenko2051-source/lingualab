@@ -133,7 +133,7 @@ App.mascot = (function () {
         <span class="mw-icon">${App.ui.wordIcon(w.icon)}</span>
         <span class="mw-text">
           <span class="mw-q">${esc(scene.title)}</span>
-          <span class="mw-word">${esc(w.w)} <button class="mw-say" data-say="1" title="${App.t('listen_title')}">🔊</button></span>
+          <span class="mw-word">${esc(w.w)}</span>
           <span class="mw-tr" ${scene.revealed ? '' : 'hidden'}>${esc(m.w)}</span>
           ${scene.revealed ? '' : `<span class="mw-hint">👆 ${App.t('ex_show')}</span>`}
         </span>
@@ -167,7 +167,6 @@ App.mascot = (function () {
       el.classList.add('anim-' + look.anim);
       fx.textContent = look.fx || '';
       fx.classList.remove('go'); void fx.offsetWidth; fx.classList.add('go');
-      if (next.kind === 'word' && next.revealed) App.speak(next.word.w, next.word.lang);
     }
 
     // Rotates through scene types so consecutive clicks feel different.
@@ -185,11 +184,9 @@ App.mascot = (function () {
 
     bubble.addEventListener('click', (e) => {
       if (!scene || scene.kind !== 'word') return;
-      if (e.target.closest('[data-say]') || scene.revealed) { App.speak(scene.word.w, scene.word.lang); }
       if (!scene.revealed) {
         scene.revealed = true;
         bubble.innerHTML = bubbleHtml(scene);
-        App.speak(scene.word.w, scene.word.lang);
         el.className = 'mascot-widget'; void el.offsetWidth; el.classList.add('anim-jump');
         svg.setAttribute('class', 'wolf-figure mood-grin acc-on-glasses');
       }
