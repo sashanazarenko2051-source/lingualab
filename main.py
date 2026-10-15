@@ -17,6 +17,7 @@ import threading
 import http.server
 import functools
 import re
+import time
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 INDEX_PATH = os.path.join(BASE_DIR, 'index.html')
@@ -100,56 +101,64 @@ class AppServer(http.server.ThreadingHTTPServer):
         super().server_bind()
 
 
-def app_already_serving():
-    """True if another copy of the app is already serving on LAN_PORT."""
-    try:
-        with socket.create_connection(('127.0.0.1', LAN_PORT), timeout=1):
-            return True
-    except OSError:
-        return False
-
-
-def start_server():
+def start_server(wait=0.0):
     """Serves the app for the desktop window and, on the same port, for a
     phone's browser on the same Wi-Fi (e.g. http://192.168.x.x:8765).
 
     The window loads from this server instead of pywebview's built-in one,
     which randomly dropped some of the ~45 script requests on startup. A
     fixed port also keeps a stable origin, so localStorage progress survives
-    restarts. Returns None if the port is taken."""
+    restarts. Keeps retrying for `wait` seconds (a just-closed window's
+    process may still hold the port); returns None if it stays taken."""
     handler = functools.partial(AppRequestHandler, directory=BASE_DIR)
-    try:
-        server = AppServer(('0.0.0.0', LAN_PORT), handler)
-    except OSError:
-        return None
+    deadline = time.monotonic() + wait
+    while True:
+        try:
+            server = AppServer(('0.0.0.0', LAN_PORT), handler)
+            break
+        except OSError:
+            if time.monotonic() >= deadline:
+                return None
+            time.sleep(0.25)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     return server
 
 
+def take_over_port(window, url):
+    """Used when another instance owned the port at startup: once it exits,
+    start our own server so this window doesn't end up with nothing behind
+    it ("connection refused"), and reload if the page never loaded."""
+    while not start_server():
+        time.sleep(0.5)
+    try:
+        if window.evaluate_js('typeof App') != 'object':
+            window.load_url(url)
+    except Exception:
+        pass
+
+
 def main():
-    server = start_server()
+    server = start_server(wait=4)
     if server:
         print(f'Phone access (same Wi-Fi): http://{local_ip()}:{LAN_PORT}')
-    if server or app_already_serving():
-        # A second window reuses the running server: same origin, so the
-        # same saved progress. The ?v= makes the page URL itself new after
-        # every update — WebView2 kept serving a stale cached /index.html
-        # without even asking the server.
-        url = f'http://127.0.0.1:{LAN_PORT}/index.html?v={asset_version()}'
-    else:
-        url = INDEX_PATH
+    # The ?v= makes the page URL itself new after every update — WebView2
+    # kept serving a stale cached /index.html without even asking the server.
+    url = f'http://127.0.0.1:{LAN_PORT}/index.html?v={asset_version()}'
 
-    webview.create_window(
+    window = webview.create_window(
         'WO Lingua Lab',
         url,
         width=1200,
         height=800,
         min_size=(960, 640),
     )
+    # A second window reuses the running instance's server (same origin, so
+    # the same saved progress) and takes the port over when that one exits.
+    func, args = (None, ()) if server else (take_over_port, (window, url))
     # private_mode=False keeps localStorage (profile, progress, streak)
     # between launches instead of wiping it every time the window closes.
-    webview.start(icon=ICON_PATH, private_mode=False)
+    webview.start(func, args, icon=ICON_PATH, private_mode=False)
 
 
 if __name__ == '__main__':
