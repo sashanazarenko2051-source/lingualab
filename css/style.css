@@ -518,8 +518,34 @@ button { background: none; }
 .ex-prompt-text { font-size: 22px; font-weight: 800; color: var(--accent); }
 .ex-prompt-sentence { font-size: 18px; color: var(--ink); }
 .ex-card { background: var(--surface); border: 2px solid var(--accent); border-radius: 20px; padding: 24px; box-shadow: 0 5px 0 color-mix(in srgb, var(--accent) 55%, #000 10%); text-align: center; }
-.ex-intro { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.ex-intro-icon { font-size: 72px; line-height: 1; animation: popIn .4s cubic-bezier(.34,1.56,.64,1) both; }
+.ex-intro { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.ex-intro { position: relative; overflow: hidden; cursor: pointer; outline: none; }
+.ex-intro-halo {
+  width: 150px; height: 150px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 45%, transparent) 0%, color-mix(in srgb, var(--accent) 12%, transparent) 55%, transparent 72%);
+  animation: popIn .45s cubic-bezier(.34,1.56,.64,1) both;
+}
+.ex-intro-icon { font-size: 84px; line-height: 1; animation: iconBob 3s ease-in-out .5s infinite; filter: drop-shadow(0 8px 14px rgba(0,0,0,.35)); }
+@keyframes iconBob { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-8px) rotate(3deg); } }
+.ex-letter-pop { display: inline-block; animation: letterPop .35s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes letterPop { from { opacity: 0; transform: translateY(14px) scale(.6); } to { opacity: 1; transform: none; } }
+.ex-say { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: var(--ink-2); }
+.ex-say-dots { display: inline-flex; gap: 6px; }
+.ex-say-dots i { width: 12px; height: 12px; border-radius: 50%; background: var(--surface-2); border: 2px solid var(--border); transition: background .2s ease, transform .2s ease; }
+.ex-say-dots i.on { background: var(--accent); border-color: var(--accent); transform: scale(1.15); box-shadow: 0 0 10px var(--accent); }
+.ex-intro-hint { margin-top: 6px; font-weight: 700; color: var(--ink-2); animation: hintPulse 1.6s ease-in-out infinite; }
+@keyframes hintPulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+.ex-intro-back { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; padding-top: 12px; margin-top: 4px; border-top: 2px dashed var(--border); }
+.ex-intro-back[hidden] { display: none; }
+.ex-intro-revealed .ex-intro-back { animation: flipIn .5s cubic-bezier(.34,1.3,.64,1) both; transform-origin: top center; }
+@keyframes flipIn { from { opacity: 0; transform: perspective(600px) rotateX(-70deg); } to { opacity: 1; transform: none; } }
+.ex-intro-revealed::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.18) 50%, transparent 70%);
+  transform: translateX(-100%); animation: sheen .9s ease .05s 1 both;
+}
+@keyframes sheen { to { transform: translateX(100%); } }
+.ex-mark { background: color-mix(in srgb, var(--accent) 30%, transparent); color: inherit; border-radius: 6px; padding: 0 4px; box-shadow: inset 0 -3px 0 var(--accent); }
 .ex-intro-word { font-size: 32px; font-weight: 800; color: var(--accent); display: flex; align-items: center; gap: 10px; }
 .ex-intro-meaning { font-size: 24px; font-weight: 800; color: var(--accent); }
 .ex-intro-ex { font-size: 19px; font-weight: 700; font-style: italic; color: var(--accent); display: flex; align-items: center; gap: 8px; margin-top: 6px; }

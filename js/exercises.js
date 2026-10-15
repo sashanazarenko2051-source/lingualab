@@ -257,6 +257,12 @@ App.exercises = (function () {
     });
   }
 
+  function highlight(sentence, phrase) {
+    const i = phrase ? sentence.toLowerCase().indexOf(phrase.toLowerCase()) : -1;
+    if (i === -1) return esc(sentence);
+    return esc(sentence.slice(0, i)) + `<mark class="ex-mark">${esc(sentence.slice(i, i + phrase.length))}</mark>` + esc(sentence.slice(i + phrase.length));
+  }
+
   function headHtml(title, extra) {
     return `<div class="ex-head"><div class="ex-title">${title}</div>${extra || ''}</div>`;
   }
@@ -266,27 +272,64 @@ App.exercises = (function () {
 
   // ---- renderers ----------------------------------------------------------
   const RENDER = {
+    // New word as a two-sided card: first only the picture and the word (try
+    // to guess the meaning), then a tap flips in the translation and the
+    // example with the word highlighted. Three dots fill as you listen —
+    // a nudge to say it aloud three times.
     intro(ctx, word) {
       const m = App.words.localizedMeaning(word);
+      const letters = Array.from(word.w.normalize('NFC'))
+        .map((ch, i) => ch === ' ' ? ' ' : `<span class="ex-letter-pop" style="animation-delay:${0.15 + i * 0.045}s">${esc(ch)}</span>`).join('');
       ctx.body.innerHTML = `
         <div class="ex-head"><span class="lesson-badge lesson-badge-new">✨ ${App.t('lesson_new_word')}</span></div>
-        <div class="ex-card ex-intro">
-          <div class="ex-intro-icon">${App.ui.wordIcon(word.icon)}</div>
-          <div class="ex-intro-word">${esc(word.w)} ${speakBtn(word.w, word.lang)}</div>
-          <div class="ex-intro-meaning">${esc(m.w)}</div>
-          ${word.ex ? `<div class="ex-intro-ex">${esc(word.ex)} ${speakBtn(word.ex, word.lang)}</div>` : ''}
-          ${m.ex ? `<div class="ex-intro-ex ex-intro-ex-tr">${esc(m.ex)}</div>` : ''}
+        <div class="ex-card ex-intro" id="ex-intro" tabindex="0">
+          <div class="ex-intro-halo"><div class="ex-intro-icon">${App.ui.wordIcon(word.icon)}</div></div>
+          <div class="ex-intro-word"><span>${letters}</span> ${speakBtn(word.w, word.lang)}</div>
+          <div class="ex-say">
+            <span>🗣 ${App.t('ex_say_aloud')}</span>
+            <span class="ex-say-dots"><i></i><i></i><i></i></span>
+          </div>
+          <div class="ex-intro-hint" id="ex-hint">👆 ${App.t('ex_tap_reveal')}</div>
+          <div class="ex-intro-back" id="ex-back" hidden>
+            <div class="ex-intro-meaning">${esc(m.w)}</div>
+            ${word.ex ? `<div class="ex-intro-ex">${highlight(word.ex, word.w)} ${speakBtn(word.ex, word.lang)}</div>` : ''}
+            ${m.ex ? `<div class="ex-intro-ex ex-intro-ex-tr">${highlight(m.ex, m.w)}</div>` : ''}
+          </div>
         </div>
       `;
+      const card = ctx.body.querySelector('#ex-intro');
+      const dots = [...ctx.body.querySelectorAll('.ex-say-dots i')];
+      let listens = 0;
+      const heard = () => { if (listens < dots.length) dots[listens++].classList.add('on'); };
       wireSpeak(ctx.body);
+      ctx.body.querySelectorAll('[data-say]').forEach(b => b.addEventListener('click', heard));
       App.speak(word.w, word.lang);
+      heard();
+
+      let revealed = false;
       ctx.footer.className = 'ex-footer';
-      ctx.footer.innerHTML = `<div class="ex-footer-inner"><span></span><button class="ex-btn" id="ex-got">${App.t('lesson_got_it')}</button></div>`;
-      const go = () => { ctx.state.learned += 1; ctx.next(); };
+      ctx.footer.innerHTML = `<div class="ex-footer-inner"><span></span><button class="ex-btn" id="ex-got">${App.t('ex_show')}</button></div>`;
       const btn = ctx.footer.querySelector('#ex-got');
+      const reveal = () => {
+        if (revealed) return;
+        revealed = true;
+        ctx.body.querySelector('#ex-hint').remove();
+        ctx.body.querySelector('#ex-back').hidden = false;
+        card.classList.add('ex-intro-revealed');
+        btn.textContent = App.t('lesson_got_it');
+      };
+      const go = () => {
+        if (!revealed) { reveal(); return; }
+        ctx.state.learned += 1;
+        ctx.next();
+      };
+      card.addEventListener('click', (e) => { if (!e.target.closest('[data-say]')) reveal(); });
       btn.focus();
       btn.addEventListener('click', go);
-      onKey(e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+      onKey(e => {
+        if (e.key === 'Enter') { e.preventDefault(); go(); }
+        else if (e.key === ' ') { e.preventDefault(); reveal(); }
+      });
     },
 
     picture(ctx, word) {
