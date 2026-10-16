@@ -16,6 +16,7 @@ App.views.dashboard = {
     const mistakes = App.storage.getMistakeIds(currentLang).length;
 
     root.innerHTML = `
+      ${App.notify.bannerHtml()}
       ${startLessonHtml(currentLang, nextCat, mistakes)}
       <button class="repeat-lesson repeat-lesson-mistakes ${mistakes ? '' : 'is-empty'}" id="mistakes-session">
         <span class="repeat-lesson-icon">🔁</span>
@@ -74,6 +75,7 @@ App.views.dashboard = {
       </section>
     `;
 
+    App.notify.bindBanner(root, () => { const b = root.querySelector('#start-lesson'); if (b) b.click(); });
     renderLangGroups(root, currentLang, '');
     renderStatRow(root, currentLang);
     renderLevelRow(root);

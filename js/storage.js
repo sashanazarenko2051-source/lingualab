@@ -18,7 +18,9 @@ App.storage = (function () {
       reviewList: {},
       missCount: {},
       friends: [],
-      profile: { name: '', animal: 'wolf', color: '#00e5ff' }
+      profile: { name: '', animal: 'wolf', color: '#00e5ff' },
+      hearts: { count: 20, steps: 0 },
+      settings: { theme: 'neon', custom: {}, scale: 1, bgAnim: true, motion: true, notify: true, notified: {} }
     };
   }
 
@@ -42,7 +44,9 @@ App.storage = (function () {
         reviewList: parsed.reviewList || {},
         missCount: parsed.missCount || {},
         friends: parsed.friends || [],
-        profile: Object.assign({}, d.profile, parsed.profile)
+        profile: Object.assign({}, d.profile, parsed.profile),
+        hearts: Object.assign({}, d.hearts, parsed.hearts),
+        settings: Object.assign({}, d.settings, parsed.settings)
       };
     } catch (e) {
       return defaults();
@@ -73,6 +77,8 @@ App.storage = (function () {
     }
     state.stats.lastActiveDate = today;
     save();
+    // A studied day moves the phone reminders forward.
+    if (App.notify) App.notify.reschedule();
   }
 
   // wordId (optional) also tallies the answer under its language, so the

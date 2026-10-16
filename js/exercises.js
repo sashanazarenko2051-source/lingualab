@@ -4,11 +4,11 @@ window.App = window.App || {};
 //
 // A session is a list of steps ({ kind, word } or { kind: 'match', words }).
 // Each exercise follows the same rhythm: answer -> "Check" -> a green or red
-// feedback bar at the bottom -> "Continue". Wrong answers cost a heart and the
+// feedback bar at the bottom -> "Continue". Wrong answers cost a heart from
+// the shared wallet (App.hearts), as does every 10th exercise, and the
 // word comes back a few steps later (and goes to the mistakes bank via
 // App.lesson.answer).
 App.exercises = (function () {
-  const MAX_HEARTS = 5;
   const NON_LATIN = ['el', 'ru', 'uk', 'bg', 'sr'];
   const shuffle = (a) => App.lesson.shuffle(a);
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -110,11 +110,13 @@ App.exercises = (function () {
   function run(opts) {
     const state = {
       steps: opts.steps, index: 0, code: opts.code, lessonId: opts.lessonId,
-      hearts: MAX_HEARTS, useHearts: opts.hearts !== false, combo: 0,
+      hearts: App.hearts.count(), useHearts: opts.hearts !== false, combo: 0,
       correct: 0, tested: 0, learned: 0, seen: new Set(), repeats: {}, tally: { added: 0, fixed: 0 },
       startedAt: Date.now()
     };
-    renderStep(opts, state);
+    // An empty wallet can't start a lesson with hearts.
+    if (state.useHearts && state.hearts === 0) opts.onOutOfHearts(state);
+    else renderStep(opts, state);
     return state;
   }
 
@@ -124,7 +126,7 @@ App.exercises = (function () {
       <div class="ex-topbar">
         <button class="ex-close" id="ex-close" title="${App.t('back_btn_title')}">✕</button>
         <div class="ex-progress"><div class="ex-progress-fill" style="width:${pct}%; background:${accent}"></div></div>
-        ${state.useHearts ? `<div class="ex-hearts" id="ex-hearts" title="${App.t('hearts_title')}">❤️ <b>${state.hearts}</b></div>` : ''}
+        ${state.useHearts ? App.hearts.pillHtml('ex-hearts', 'ex-hearts') : ''}
         ${state.combo >= 2 ? `<span class="combo-badge">🔥${state.combo}</span>` : ''}
       </div>
     `;
@@ -176,17 +178,28 @@ App.exercises = (function () {
       loseHeart() {
         state.combo = 0;
         if (!state.useHearts) return;
-        state.hearts = Math.max(0, state.hearts - 1);
+        App.hearts.lose(1);
+        state.hearts = App.hearts.count();
         App.effects.heartLoss();
-        const h = root.querySelector('#ex-hearts');
-        if (h) { h.querySelector('b').textContent = state.hearts; h.classList.remove('shake'); void h.offsetWidth; h.classList.add('shake'); }
+        App.hearts.updatePill(root.querySelector('#ex-hearts'), true);
       },
       next() {
         onKey(null);
         state.index += 1;
+        // Every DRAIN_EVERY finished exercises cost a heart too.
+        const drained = state.useHearts && App.hearts.stepDone();
+        if (drained) {
+          state.hearts = App.hearts.count();
+          App.effects.heartLoss();
+          App.effects.toast(App.t('hearts_drain_toast', { n: App.hearts.DRAIN_EVERY }), 'heart-toast');
+        }
+        if (state.useHearts) state.hearts = App.hearts.count();
         if (state.useHearts && state.hearts === 0) opts.onOutOfHearts(state);
         else if (state.index >= state.steps.length) opts.onFinish(state);
-        else renderStep(opts, state);
+        else {
+          renderStep(opts, state);
+          if (drained) App.hearts.breakAt(root.querySelector('#ex-hearts .heart-ico'));
+        }
       }
     };
 
@@ -653,5 +666,5 @@ App.exercises = (function () {
   // The step on screen (for debugging and automated checks).
   function current() { return currentStep; }
 
-  return { run, stop, current, MAX_HEARTS };
+  return { run, stop, current };
 })();

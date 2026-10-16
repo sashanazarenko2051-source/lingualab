@@ -128,25 +128,7 @@ function restart(meta) {
 }
 
 function renderOutOfHearts(root, state, meta) {
-  root.innerHTML = `
-    <div class="quiz-result">
-      <div class="hearts-out-icon">💔</div>
-      <div class="hearts-out-title">${App.t('hearts_out_title')}</div>
-      <div class="hearts-out-sub">${App.t('hearts_out_sub')}</div>
-      ${summaryHtml(state)}
-      <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px; align-items:center">
-        <button class="quiz-next" id="fc-retry" style="padding:14px 32px; font-size:15px">${App.t('hearts_retry')}</button>
-        <div style="display:flex; gap:10px">
-          <button class="action-card" data-go="course" style="display:inline-flex">${App.t('quiz_course')}</button>
-          <button class="action-card" data-go="dashboard" style="display:inline-flex">${App.t('fc_home')}</button>
-        </div>
-      </div>
-    </div>
-  `;
-  root.querySelector('#fc-retry').addEventListener('click', () => restart(meta));
-  root.querySelectorAll('[data-go]').forEach(btn => {
-    btn.addEventListener('click', () => App.router.go(btn.dataset.go));
-  });
+  App.hearts.renderOut(root, { summary: summaryHtml(state), onRetry: () => restart(meta) });
 }
 
 })();

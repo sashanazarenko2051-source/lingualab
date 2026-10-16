@@ -56,6 +56,7 @@ class AppRequestHandler(http.server.SimpleHTTPRequestHandler):
         **http.server.SimpleHTTPRequestHandler.extensions_map,
         '.js': 'text/javascript',
         '.css': 'text/css',
+        '.webmanifest': 'application/manifest+json',
     }
 
     def do_GET(self):
@@ -138,6 +139,37 @@ def take_over_port(window, url):
         pass
 
 
+# Windows toast shown through PowerShell's registered app id (an
+# unregistered id makes Windows drop the toast silently). Title and text go
+# in through environment variables, never into the script source.
+TOAST_PS = r"""
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null
+$xml = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02)
+$t = $xml.GetElementsByTagName('text')
+$t.Item(0).AppendChild($xml.CreateTextNode($env:LL_TITLE)) > $null
+$t.Item(1).AppendChild($xml.CreateTextNode($env:LL_BODY)) > $null
+$id = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($id).Show([Windows.UI.Notifications.ToastNotification]::new($xml))
+"""
+
+
+class Api:
+    """Functions the page can call as window.pywebview.api.*"""
+
+    def notify(self, title, body):
+        if sys.platform != 'win32':
+            return False
+        import subprocess
+        env = dict(os.environ, LL_TITLE=str(title)[:120], LL_BODY=str(body)[:240])
+        try:
+            subprocess.Popen(
+                ['powershell', '-NoProfile', '-NonInteractive', '-Command', TOAST_PS],
+                env=env, creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
+            return True
+        except Exception:
+            return False
+
+
 def main():
     server = start_server(wait=4)
     if server:
@@ -152,6 +184,7 @@ def main():
         width=1200,
         height=800,
         min_size=(960, 640),
+        js_api=Api(),
     )
     # A second window reuses the running instance's server (same origin, so
     # the same saved progress) and takes the port over when that one exits.

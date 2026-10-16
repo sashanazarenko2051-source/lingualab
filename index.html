@@ -2,7 +2,14 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d1526">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>WO Lingua Lab — изучение языков</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -15,6 +22,8 @@
       <button type="button" class="lang-dd-btn" id="ui-lang-dd-btn" aria-haspopup="listbox" aria-expanded="false"></button>
       <ul class="lang-dd-list" id="ui-lang-dd-list" role="listbox" hidden></ul>
     </div>
+    <div class="topbar-hearts" id="topbar-hearts"></div>
+    <button type="button" class="topbar-gear" id="topbar-gear">⚙️</button>
     <button type="button" class="topbar-avatar" id="topbar-avatar-btn"></button>
   </header>
   <main id="view-root"></main>
@@ -47,11 +56,14 @@
 <script src="js/langnames.js"></script>
 <script src="js/categorynames.js"></script>
 <script src="js/storage.js"></script>
+<script src="js/theme.js"></script>
 <script src="js/gamification.js"></script>
 <script src="js/effects.js"></script>
 <script src="js/srs.js"></script>
 <script src="js/words.js"></script>
 <script src="js/lesson.js"></script>
+<script src="js/hearts.js"></script>
+<script src="js/notify.js"></script>
 <script src="js/exercises.js"></script>
 <script src="js/levels.js"></script>
 <script src="js/mascot.js"></script>
@@ -72,6 +84,7 @@
 <script src="js/views/words.js"></script>
 <script src="js/views/browse.js"></script>
 <script src="js/views/friends.js"></script>
+<script src="js/views/settings.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

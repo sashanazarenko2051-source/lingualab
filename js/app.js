@@ -37,6 +37,7 @@ App.router = (function () {
     if (App.exercises) App.exercises.stop();
     const root = document.getElementById('view-root');
     root.innerHTML = '';
+    window.scrollTo(0, 0);
     const mod = App.views[current];
     if (!mod || !mod.render) return;
     try {
@@ -88,6 +89,10 @@ function initTopbar() {
   avatarBtn.title = App.t('profile_edit_title');
   avatarBtn.addEventListener('click', () => App.profile.openEditor());
   App.profile.renderTopbarBadge();
+  App.hearts.mountTopbar();
+  const gear = document.getElementById('topbar-gear');
+  gear.title = App.t('set_title');
+  gear.addEventListener('click', () => App.router.go('settings'));
 
   // Only the interface language is picked in the top bar; the language you
   // learn is chosen with the flag cards on the home page.
@@ -157,10 +162,19 @@ function initLangDropdown({ ddId, btnId, listId, ariaLabel, codes, nameFor, curr
   });
 }
 
+// The saved theme goes on before anything renders, so there's no flash of
+// the standard colors.
+App.theme.apply();
+
 document.addEventListener('DOMContentLoaded', () => {
   if (!App.data[App.storage.getCurrentLang()]) App.storage.setCurrentLang(App.LANG_ORDER[0]);
   initTopbar();
   const startView = App.views[location.hash.slice(1)] ? location.hash.slice(1) : 'dashboard';
   App.router.go(startView);
   if (!App.storage.hasProfile()) App.profile.openEditor();
+  App.notify.start();
+  // Offline cache for the installed phone app (needs https or localhost).
+  if ('serviceWorker' in navigator && window.isSecureContext && !window.pywebview) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
 });
