@@ -5,9 +5,9 @@ window.App = window.App || {};
 App.levels = (function () {
   const THRESHOLDS = [
     { code: 'A0', min: 0 },
-    { code: 'A1', min: 500 },
-    { code: 'A2', min: 1000 },
-    { code: 'B1', min: 2000 }
+    { code: 'A1', min: 640 },
+    { code: 'A2', min: 1280 },
+    { code: 'B1', min: 2640 }
   ];
 
   function forWordCount(masteredWords) {

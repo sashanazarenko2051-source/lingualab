@@ -8,9 +8,10 @@ App.views = App.views || {};
 
 // The 34 shared categories are grouped into CEFR levels by cumulative word
 // count, using commonly-cited vocabulary-size benchmarks per level (A0: ~500
-// words, A1: ~1000, A2: ~2000, B1: ~2000-3500). At 60 words/category that's:
-// A0 = categories 0-7, A1 = 8-15, A2 = 16-32, B1 = 33 (just barely enters B1
-// territory — 2040 words total isn't enough to reach B2+, so those aren't shown).
+// words, A1: ~1000, A2: ~2000, B1: ~2000-3500). At 80 words/category that's:
+// A0 = categories 0-7 (640 words), A1 = 8-15 (640), A2 = 16-32 (1360),
+// B1 = 33 (just enters B1 territory; 2720 words in total isn't enough to
+// reach B2+, so those aren't shown). App.levels uses matching thresholds.
 const LEVEL_GROUPS = [
   { code: 'A0', from: 0, to: 8 },
   { code: 'A1', from: 8, to: 16 },
