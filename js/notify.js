@@ -33,25 +33,44 @@ App.notify = (function () {
     return Math.round((b - a) / 86400000);
   }
 
+  // Title and body for a reminder kind. Several variants per kind
+  // (App.NOTIFY_TEXTS); `pick` chooses one, so the banner changes daily and
+  // scheduled phone reminders don't repeat. Falls back to the i18n strings.
+  function text(kind, vars, pick) {
+    const ui = (App.storage.getUILang && App.storage.getUILang()) || 'ru';
+    const set = App.NOTIFY_TEXTS && App.NOTIFY_TEXTS[ui] && App.NOTIFY_TEXTS[ui][kind];
+    const fill = str => str.replace(/{{(\w+)}}/g, (m, k) => (vars[k] != null ? vars[k] : ''));
+    if (set && set.length) {
+      const [title, body] = set[Math.abs(pick) % set.length];
+      return { kind, title: fill(title), body: fill(body) };
+    }
+    return { kind, title: App.t('notify_' + kind + '_title', vars), body: App.t('notify_' + kind + '_body', vars) };
+  }
+  function langVar() {
+    const code = App.storage.getCurrentLang && App.storage.getCurrentLang();
+    return code && App.ui && App.ui.langName ? App.ui.langName(code) : '';
+  }
+  function dayNumber(d) { return Math.floor((d.getTime() - d.getTimezoneOffset() * 60000) / 86400000); }
+
   // The reminder that fits right now, or null.
   function current(now) {
     now = now || new Date();
     const stats = App.storage.state.stats;
     const name = (App.storage.state.profile && App.storage.state.profile.name) || '';
     const gap = daysBetween(stats.lastActiveDate, now);
+    const day = dayNumber(now);
+    const vars = { n: gap, lang: langVar(), name };
     if (gap === 0) return null;
     if (gap === Infinity) {
       // Never studied: only nudge once a profile exists.
-      return name ? { kind: 'start', title: App.t('notify_start_title'), body: App.t('notify_start_body') } : null;
+      return name ? text('start', vars, day) : null;
     }
-    if (gap >= 2) {
-      return { kind: 'away', title: App.t('notify_away_title', { name }), body: App.t('notify_away_body', { n: gap }) };
-    }
+    if (gap >= 2) return text('away', vars, day);
     // gap === 1: studied yesterday, not yet today.
     if ((stats.streak || 0) >= 1 && now.getHours() >= STREAK_WARN_HOUR) {
-      return { kind: 'streak', title: App.t('notify_streak_title'), body: App.t('notify_streak_body', { n: stats.streak }) };
+      return text('streak', Object.assign(vars, { n: stats.streak }), day);
     }
-    return { kind: 'today', title: App.t('notify_today_title'), body: App.t('notify_today_body') };
+    return text('today', vars, day);
   }
 
   // ---- delivery -------------------------------------------------------------
@@ -146,14 +165,16 @@ App.notify = (function () {
       const studiedToday = daysBetween(stats.lastActiveDate, new Date()) === 0;
       const at = (days) => { const d = new Date(); d.setDate(d.getDate() + days); d.setHours(REMIND_HOUR, 0, 0, 0); return d; };
       const list = [];
+      const lang = langVar();
+      const today = dayNumber(new Date());
       if (!studiedToday && at(0) > new Date()) {
-        list.push({ id: NATIVE_IDS[0], at: at(0), title: App.t('notify_streak_title'), body: App.t('notify_streak_body', { n: stats.streak || 1 }) });
+        list.push(Object.assign({ id: NATIVE_IDS[0], at: at(0) }, text('streak', { n: stats.streak || 1, lang }, today)));
       }
+      // Each future day gets a different variant.
       [1, 2, 3, 7].forEach((days, i) => {
         const gap = studiedToday ? days : days + 1;
-        list.push({ id: NATIVE_IDS[i + 1], at: at(days),
-          title: App.t('notify_away_title', { name: (App.storage.state.profile || {}).name || '' }),
-          body: App.t('notify_away_body', { n: gap }) });
+        const kind = gap === 1 ? 'today' : 'away';
+        list.push(Object.assign({ id: NATIVE_IDS[i + 1], at: at(days) }, text(kind, { n: gap, lang }, today + days)));
       });
       ln.schedule({ notifications: list.map(n => ({ id: n.id, title: n.title, body: n.body, schedule: { at: n.at, allowWhileIdle: true } })) }).catch(() => {});
     });

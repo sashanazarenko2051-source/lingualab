@@ -159,7 +159,8 @@ App.exercises = (function () {
     const ctx = {
       state, accent, body, footer, step,
       // Grades one word; returns nothing. Called once per graded answer.
-      answer(word, isCorrect) {
+      // opts.noHeart: a miss that doesn't cost a heart (the answer was revealed).
+      answer(word, isCorrect, opts) {
         state.tested += 1;
         if (isCorrect) state.correct += 1;
         App.lesson.answer(state, word, isCorrect);
@@ -170,7 +171,7 @@ App.exercises = (function () {
           const bonus = App.gamification.comboBonus(state.combo);
           if (bonus) { App.effects.comboToast(state.combo); App.effects.celebrate(bonus); }
         } else {
-          ctx.loseHeart();
+          if (opts && opts.noHeart) state.combo = 0; else ctx.loseHeart();
           requeue(state, word);
         }
       },
@@ -236,12 +237,13 @@ App.exercises = (function () {
   function starLabel(word) {
     return App.storage.inReview(word.id) ? `⭐ ${App.t('words_remove')}` : `☆ ${App.t('words_add')}`;
   }
-  function footerFeedback(ctx, ok, detailHtml, word) {
+  // titleHtml (optional) replaces the standard "Correct" / "Wrong" title.
+  function footerFeedback(ctx, ok, detailHtml, word, titleHtml) {
     ctx.footer.className = 'ex-footer ' + (ok ? 'ex-footer-good' : 'ex-footer-bad');
     ctx.footer.innerHTML = `
       <div class="ex-footer-inner">
         <div class="ex-feedback">
-          <div class="ex-feedback-title">${ok ? '✅ ' + App.t('fb_correct') : '❌ ' + App.t('fb_wrong')}</div>
+          <div class="ex-feedback-title">${titleHtml || (ok ? '✅ ' + App.t('fb_correct') : '❌ ' + App.t('fb_wrong'))}</div>
           ${detailHtml ? `<div class="ex-feedback-detail">${detailHtml}</div>` : ''}
           ${word ? `<button class="ex-footer-star ${App.storage.inReview(word.id) ? 'on' : ''}" id="ex-footer-star">${starLabel(word)}</button>` : ''}
         </div>
@@ -487,7 +489,8 @@ App.exercises = (function () {
     // don't matter). A diacritics-only slip is still a mistake, but gets its
     // own note; the feedback marks the letters that were missing or wrong.
     // "Hint" fills in the next correct letter, but only for about a third of
-    // the word — the rest has to be typed by the learner.
+    // the word — the rest has to be typed by the learner. "Show word" reveals
+    // all of it: graded as a miss (the word comes back) but costs no heart.
     type(ctx, word) {
       const letters = accentLetters(word.lang);
       const target = variants(word.w)[0].normalize('NFC');
@@ -497,12 +500,14 @@ App.exercises = (function () {
         <div class="ex-input-row">
           <input class="ex-input" id="ex-input" type="text" autocomplete="off" spellcheck="false" placeholder="${App.t('ex_type_placeholder')}">
           <button class="ex-hint-btn" id="ex-hint-btn" title="${App.t('ex_hint')}">💡 ${App.t('ex_hint')} <span class="ex-hint-left"></span></button>
+          <button class="ex-hint-btn ex-reveal-btn" id="ex-reveal-btn" title="${App.t('ex_reveal')}">👁 ${App.t('ex_reveal')}</button>
         </div>
         <div class="ex-length">${Array.from(target).map(ch => ch === ' ' ? '<i class="sp"></i>' : '<i></i>').join('')}</div>
         ${letters.length ? `<div class="ex-letters">${letters.map(ch => `<button class="ex-letter" data-ch="${ch}">${ch}</button>`).join('')}</div>` : ''}
       `;
       const input = ctx.body.querySelector('#ex-input');
       const hintBtn = ctx.body.querySelector('#ex-hint-btn');
+      const revealBtn = ctx.body.querySelector('#ex-reveal-btn');
       const cells = [...ctx.body.querySelectorAll('.ex-length i')];
       let hintsLeft = Math.floor(Array.from(target.replace(/\s/g, '')).length / 3);
       const paintHint = () => {
@@ -523,6 +528,7 @@ App.exercises = (function () {
         const accentOnly = !ok && variants(word.w).some(v => fold(v) === fold(given));
         input.disabled = true;
         hintBtn.disabled = true;
+        revealBtn.disabled = true;
         input.classList.add(ok ? 'correct' : 'wrong');
         ctx.answer(word, ok);
         App.speak(word.w, word.lang);
@@ -555,6 +561,19 @@ App.exercises = (function () {
         paintHint();
         input.focus();
         changed();
+      });
+      revealBtn.addEventListener('click', () => {
+        if (done) return;
+        done = true;
+        input.value = target;
+        paintSlots();
+        input.disabled = true;
+        hintBtn.disabled = true;
+        revealBtn.disabled = true;
+        input.classList.add('revealed');
+        ctx.answer(word, false, { noHeart: true });
+        App.speak(word.w, word.lang);
+        footerFeedback(ctx, false, `<b>${esc(target)}</b> — ${esc(meaningOf(word))}`, word, '👁 ' + App.t('ex_revealed_title'));
       });
       onKey(e => { if (e.key === 'Enter') { e.preventDefault(); footer.trigger(); } });
     },

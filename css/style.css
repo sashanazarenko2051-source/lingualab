@@ -1740,3 +1740,12 @@ button { background: none; }
 [data-theme="light"] .ex-hearts,
 [data-theme="light"] .lang-meta-row { text-shadow: none; }
 [data-theme="light"] .lang-card.active .lang-name { color: color-mix(in srgb, var(--accent) 70%, #000); }
+/* Typing exercise: revealed word, and the buttons wrap under the field on phones. */
+.ex-input.revealed { border-color: var(--warn); color: var(--warn); }
+.ex-reveal-btn { white-space: nowrap; }
+@media (max-width: 720px) {
+  .ex-input-row { flex-wrap: wrap; }
+  .ex-input-row .ex-input { flex-basis: 100%; }
+  .ex-input-row .ex-hint-btn { flex: 1; justify-content: center; }
+}
+@media (max-width: 720px) { .ex-input-row .ex-hint-btn { padding: 10px 12px; } }

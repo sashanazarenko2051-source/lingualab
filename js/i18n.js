@@ -5,6 +5,8 @@ window.App = window.App || {};
 // Missing keys fall back to Russian (the original baseline).
 App.I18N = {
   ru: {
+    ex_reveal: 'Показать слово',
+    ex_revealed_title: 'Запомни это слово',
     hearts_refilled_title: 'Сердечек: {{n}}',
     hearts_refilled_sub: 'Можно продолжать урок!',
     hearts_ad_btn: '📺 Реклама → +1 ❤️',
@@ -361,6 +363,8 @@ App.I18N = {
   },
 
   en: {
+    ex_reveal: 'Show word',
+    ex_revealed_title: 'Remember this word',
     hearts_refilled_title: 'Hearts: {{n}}',
     hearts_refilled_sub: 'You can continue the lesson!',
     hearts_ad_btn: '📺 Ad → +1 ❤️',
@@ -717,6 +721,8 @@ App.I18N = {
   },
 
   de: {
+    ex_reveal: 'Wort zeigen',
+    ex_revealed_title: 'Merk dir dieses Wort',
     hearts_refilled_title: 'Herzen: {{n}}',
     hearts_refilled_sub: 'Du kannst die Lektion fortsetzen!',
     hearts_ad_btn: '📺 Werbung → +1 ❤️',
@@ -1073,6 +1079,8 @@ App.I18N = {
   },
 
   nl: {
+    ex_reveal: 'Woord tonen',
+    ex_revealed_title: 'Onthoud dit woord',
     hearts_refilled_title: 'Hartjes: {{n}}',
     hearts_refilled_sub: 'Je kunt verder met de les!',
     hearts_ad_btn: '📺 Advertentie → +1 ❤️',
@@ -1429,6 +1437,8 @@ App.I18N = {
   },
 
   sv: {
+    ex_reveal: 'Visa ordet',
+    ex_revealed_title: 'Kom ihåg det här ordet',
     hearts_refilled_title: 'Hjärtan: {{n}}',
     hearts_refilled_sub: 'Du kan fortsätta lektionen!',
     hearts_ad_btn: '📺 Annons → +1 ❤️',
@@ -1785,6 +1795,8 @@ App.I18N = {
   },
 
   no: {
+    ex_reveal: 'Vis ordet',
+    ex_revealed_title: 'Husk dette ordet',
     hearts_refilled_title: 'Hjerter: {{n}}',
     hearts_refilled_sub: 'Du kan fortsette leksjonen!',
     hearts_ad_btn: '📺 Reklame → +1 ❤️',
@@ -2141,6 +2153,8 @@ App.I18N = {
   },
 
   da: {
+    ex_reveal: 'Vis ordet',
+    ex_revealed_title: 'Husk dette ord',
     hearts_refilled_title: 'Hjerter: {{n}}',
     hearts_refilled_sub: 'Du kan fortsætte lektionen!',
     hearts_ad_btn: '📺 Reklame → +1 ❤️',
@@ -2497,6 +2511,8 @@ App.I18N = {
   },
 
   fr: {
+    ex_reveal: 'Afficher le mot',
+    ex_revealed_title: 'Retiens ce mot',
     hearts_refilled_title: 'Cœurs : {{n}}',
     hearts_refilled_sub: 'Tu peux continuer la leçon !',
     hearts_ad_btn: '📺 Pub → +1 ❤️',
@@ -2853,6 +2869,8 @@ App.I18N = {
   },
 
   es: {
+    ex_reveal: 'Mostrar palabra',
+    ex_revealed_title: 'Recuerda esta palabra',
     hearts_refilled_title: 'Corazones: {{n}}',
     hearts_refilled_sub: '¡Puedes continuar la lección!',
     hearts_ad_btn: '📺 Anuncio → +1 ❤️',
@@ -3209,6 +3227,8 @@ App.I18N = {
   },
 
   it: {
+    ex_reveal: 'Mostra parola',
+    ex_revealed_title: 'Ricorda questa parola',
     hearts_refilled_title: 'Cuori: {{n}}',
     hearts_refilled_sub: 'Puoi continuare la lezione!',
     hearts_ad_btn: '📺 Pubblicità → +1 ❤️',
@@ -3565,6 +3585,8 @@ App.I18N = {
   },
 
   pt: {
+    ex_reveal: 'Mostrar palavra',
+    ex_revealed_title: 'Lembra-te desta palavra',
     hearts_refilled_title: 'Corações: {{n}}',
     hearts_refilled_sub: 'Podes continuar a lição!',
     hearts_ad_btn: '📺 Anúncio → +1 ❤️',
@@ -3921,6 +3943,8 @@ App.I18N = {
   },
 
   ro: {
+    ex_reveal: 'Arată cuvântul',
+    ex_revealed_title: 'Ține minte acest cuvânt',
     hearts_refilled_title: 'Inimi: {{n}}',
     hearts_refilled_sub: 'Poți continua lecția!',
     hearts_ad_btn: '📺 Reclamă → +1 ❤️',
@@ -4277,6 +4301,8 @@ App.I18N = {
   },
 
   hr: {
+    ex_reveal: 'Prikaži riječ',
+    ex_revealed_title: 'Zapamti ovu riječ',
     hearts_refilled_title: 'Srca: {{n}}',
     hearts_refilled_sub: 'Možeš nastaviti lekciju!',
     hearts_ad_btn: '📺 Reklama → +1 ❤️',
@@ -4633,6 +4659,8 @@ App.I18N = {
   },
 
   sr: {
+    ex_reveal: 'Прикажи реч',
+    ex_revealed_title: 'Запамти ову реч',
     hearts_refilled_title: 'Срца: {{n}}',
     hearts_refilled_sub: 'Можеш да наставиш лекцију!',
     hearts_ad_btn: '📺 Реклама → +1 ❤️',
@@ -4989,6 +5017,8 @@ App.I18N = {
   },
 
   el: {
+    ex_reveal: 'Δείξε τη λέξη',
+    ex_revealed_title: 'Θυμήσου αυτή τη λέξη',
     hearts_refilled_title: 'Καρδιές: {{n}}',
     hearts_refilled_sub: 'Μπορείς να συνεχίσεις το μάθημα!',
     hearts_ad_btn: '📺 Διαφήμιση → +1 ❤️',
@@ -5345,6 +5375,8 @@ App.I18N = {
   },
 
   fi: {
+    ex_reveal: 'Näytä sana',
+    ex_revealed_title: 'Muista tämä sana',
     hearts_refilled_title: 'Sydämiä: {{n}}',
     hearts_refilled_sub: 'Voit jatkaa oppituntia!',
     hearts_ad_btn: '📺 Mainos → +1 ❤️',
@@ -5701,6 +5733,8 @@ App.I18N = {
   },
 
   hu: {
+    ex_reveal: 'Szó mutatása',
+    ex_revealed_title: 'Jegyezd meg ezt a szót',
     hearts_refilled_title: 'Szívek: {{n}}',
     hearts_refilled_sub: 'Folytathatod a leckét!',
     hearts_ad_btn: '📺 Reklám → +1 ❤️',
@@ -6057,6 +6091,8 @@ App.I18N = {
   },
 
   pl: {
+    ex_reveal: 'Pokaż słowo',
+    ex_revealed_title: 'Zapamiętaj to słowo',
     hearts_refilled_title: 'Serca: {{n}}',
     hearts_refilled_sub: 'Możesz kontynuować lekcję!',
     hearts_ad_btn: '📺 Reklama → +1 ❤️',
@@ -6413,6 +6449,8 @@ App.I18N = {
   },
 
   cs: {
+    ex_reveal: 'Ukázat slovo',
+    ex_revealed_title: 'Zapamatuj si toto slovo',
     hearts_refilled_title: 'Srdíčka: {{n}}',
     hearts_refilled_sub: 'Můžeš pokračovat v lekci!',
     hearts_ad_btn: '📺 Reklama → +1 ❤️',
@@ -6769,6 +6807,8 @@ App.I18N = {
   },
 
   sk: {
+    ex_reveal: 'Ukázať slovo',
+    ex_revealed_title: 'Zapamätaj si toto slovo',
     hearts_refilled_title: 'Srdiečka: {{n}}',
     hearts_refilled_sub: 'Môžeš pokračovať v lekcii!',
     hearts_ad_btn: '📺 Reklama → +1 ❤️',
@@ -7125,6 +7165,8 @@ App.I18N = {
   },
 
   uk: {
+    ex_reveal: 'Показати слово',
+    ex_revealed_title: 'Запам\'ятай це слово',
     hearts_refilled_title: 'Сердечок: {{n}}',
     hearts_refilled_sub: 'Можна продовжувати урок!',
     hearts_ad_btn: '📺 Реклама → +1 ❤️',
@@ -7481,6 +7523,8 @@ App.I18N = {
   },
 
   bg: {
+    ex_reveal: 'Покажи думата',
+    ex_revealed_title: 'Запомни тази дума',
     hearts_refilled_title: 'Сърчица: {{n}}',
     hearts_refilled_sub: 'Можеш да продължиш урока!',
     hearts_ad_btn: '📺 Реклама → +1 ❤️',

@@ -3,8 +3,8 @@ App.views = App.views || {};
 
 (function () {
 
-// Settings: color theme (presets + own colors), interface size, animations,
-// reminders and the hearts wallet. Every change applies right away.
+// Settings: color theme (presets + own colors), interface size, animations
+// and reminders. Every change applies right away.
 const CUSTOM_LABELS = {
   'brand-1': 'set_color_accent1', 'brand-2': 'set_color_accent2', 'brand-3': 'set_color_accent3',
   page: 'set_color_page', surface: 'set_color_surface', ink: 'set_color_ink'
@@ -63,14 +63,6 @@ function render(root) {
         <button class="action-card" id="set-notify-test">📨 ${App.t('set_notify_test')}</button>
       </section>
 
-      <section class="settings-card">
-        <h2>❤️ ${App.t('set_hearts')}</h2>
-        <div class="settings-hearts">
-          ${App.hearts.pillHtml('set-heart-pill')}
-          <span class="settings-hint">${App.t('hearts_rule_mistake')} · ${App.t('hearts_rule_drain', { n: App.hearts.DRAIN_EVERY })} · ${App.t('hearts_rule_ad')}</span>
-        </div>
-        <button class="heart-ad-btn" id="set-heart-ad">${App.t('hearts_ad_btn')}</button>
-      </section>
     </div>
   `;
 
@@ -94,13 +86,6 @@ function render(root) {
   });
   root.querySelector('#set-notify-test').addEventListener('click', () => App.notify.test().then(() => render(root)));
 
-  const adBtn = root.querySelector('#set-heart-ad');
-  adBtn.disabled = App.hearts.count() >= App.hearts.MAX;
-  if (adBtn.disabled) adBtn.textContent = App.t('hearts_full');
-  adBtn.addEventListener('click', () => {
-    adBtn.disabled = true; adBtn.classList.add('loading');
-    App.hearts.watchAd().then(() => render(root));
-  });
 }
 
 function toggleHtml(id, label, on) {
