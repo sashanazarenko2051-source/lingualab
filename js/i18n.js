@@ -5,6 +5,9 @@ window.App = window.App || {};
 // Missing keys fall back to Russian (the original baseline).
 App.I18N = {
   ru: {
+    help_open: 'Как это работает',
+    help_open_sub: 'Курс, повторение, сердечки',
+    help_more: 'Подробнее',
     ex_reveal: 'Показать слово',
     ex_revealed_title: 'Запомни это слово',
     hearts_refilled_title: 'Сердечек: {{n}}',
@@ -363,6 +366,9 @@ App.I18N = {
   },
 
   en: {
+    help_open: 'How it works',
+    help_open_sub: 'Course, review, hearts',
+    help_more: 'Learn more',
     ex_reveal: 'Show word',
     ex_revealed_title: 'Remember this word',
     hearts_refilled_title: 'Hearts: {{n}}',
@@ -721,6 +727,9 @@ App.I18N = {
   },
 
   de: {
+    help_open: 'So funktioniert es',
+    help_open_sub: 'Kurs, Wiederholung, Herzen',
+    help_more: 'Mehr erfahren',
     ex_reveal: 'Wort zeigen',
     ex_revealed_title: 'Merk dir dieses Wort',
     hearts_refilled_title: 'Herzen: {{n}}',
@@ -1079,6 +1088,9 @@ App.I18N = {
   },
 
   nl: {
+    help_open: 'Hoe het werkt',
+    help_open_sub: 'Cursus, herhalen, hartjes',
+    help_more: 'Meer info',
     ex_reveal: 'Woord tonen',
     ex_revealed_title: 'Onthoud dit woord',
     hearts_refilled_title: 'Hartjes: {{n}}',
@@ -1437,6 +1449,9 @@ App.I18N = {
   },
 
   sv: {
+    help_open: 'Så fungerar det',
+    help_open_sub: 'Kurs, repetition, hjärtan',
+    help_more: 'Läs mer',
     ex_reveal: 'Visa ordet',
     ex_revealed_title: 'Kom ihåg det här ordet',
     hearts_refilled_title: 'Hjärtan: {{n}}',
@@ -1795,6 +1810,9 @@ App.I18N = {
   },
 
   no: {
+    help_open: 'Slik fungerer det',
+    help_open_sub: 'Kurs, repetisjon, hjerter',
+    help_more: 'Les mer',
     ex_reveal: 'Vis ordet',
     ex_revealed_title: 'Husk dette ordet',
     hearts_refilled_title: 'Hjerter: {{n}}',
@@ -2153,6 +2171,9 @@ App.I18N = {
   },
 
   da: {
+    help_open: 'Sådan virker det',
+    help_open_sub: 'Kursus, gentagelse, hjerter',
+    help_more: 'Læs mere',
     ex_reveal: 'Vis ordet',
     ex_revealed_title: 'Husk dette ord',
     hearts_refilled_title: 'Hjerter: {{n}}',
@@ -2511,6 +2532,9 @@ App.I18N = {
   },
 
   fr: {
+    help_open: 'Comment ça marche',
+    help_open_sub: 'Cours, révision, cœurs',
+    help_more: 'En savoir plus',
     ex_reveal: 'Afficher le mot',
     ex_revealed_title: 'Retiens ce mot',
     hearts_refilled_title: 'Cœurs : {{n}}',
@@ -2869,6 +2893,9 @@ App.I18N = {
   },
 
   es: {
+    help_open: 'Cómo funciona',
+    help_open_sub: 'Curso, repaso, corazones',
+    help_more: 'Más información',
     ex_reveal: 'Mostrar palabra',
     ex_revealed_title: 'Recuerda esta palabra',
     hearts_refilled_title: 'Corazones: {{n}}',
@@ -3227,6 +3254,9 @@ App.I18N = {
   },
 
   it: {
+    help_open: 'Come funziona',
+    help_open_sub: 'Corso, ripasso, cuori',
+    help_more: 'Scopri di più',
     ex_reveal: 'Mostra parola',
     ex_revealed_title: 'Ricorda questa parola',
     hearts_refilled_title: 'Cuori: {{n}}',
@@ -3585,6 +3615,9 @@ App.I18N = {
   },
 
   pt: {
+    help_open: 'Como funciona',
+    help_open_sub: 'Curso, revisão, corações',
+    help_more: 'Saber mais',
     ex_reveal: 'Mostrar palavra',
     ex_revealed_title: 'Lembra-te desta palavra',
     hearts_refilled_title: 'Corações: {{n}}',
@@ -3943,6 +3976,9 @@ App.I18N = {
   },
 
   ro: {
+    help_open: 'Cum funcționează',
+    help_open_sub: 'Curs, recapitulare, inimi',
+    help_more: 'Află mai multe',
     ex_reveal: 'Arată cuvântul',
     ex_revealed_title: 'Ține minte acest cuvânt',
     hearts_refilled_title: 'Inimi: {{n}}',
@@ -4301,6 +4337,9 @@ App.I18N = {
   },
 
   hr: {
+    help_open: 'Kako to radi',
+    help_open_sub: 'Tečaj, ponavljanje, srca',
+    help_more: 'Saznaj više',
     ex_reveal: 'Prikaži riječ',
     ex_revealed_title: 'Zapamti ovu riječ',
     hearts_refilled_title: 'Srca: {{n}}',
@@ -4659,6 +4698,9 @@ App.I18N = {
   },
 
   sr: {
+    help_open: 'Како то ради',
+    help_open_sub: 'Курс, понављање, срца',
+    help_more: 'Сазнај више',
     ex_reveal: 'Прикажи реч',
     ex_revealed_title: 'Запамти ову реч',
     hearts_refilled_title: 'Срца: {{n}}',
@@ -5017,6 +5059,9 @@ App.I18N = {
   },
 
   el: {
+    help_open: 'Πώς λειτουργεί',
+    help_open_sub: 'Μάθημα, επανάληψη, καρδιές',
+    help_more: 'Μάθε περισσότερα',
     ex_reveal: 'Δείξε τη λέξη',
     ex_revealed_title: 'Θυμήσου αυτή τη λέξη',
     hearts_refilled_title: 'Καρδιές: {{n}}',
@@ -5375,6 +5420,9 @@ App.I18N = {
   },
 
   fi: {
+    help_open: 'Näin se toimii',
+    help_open_sub: 'Kurssi, kertaus, sydämet',
+    help_more: 'Lue lisää',
     ex_reveal: 'Näytä sana',
     ex_revealed_title: 'Muista tämä sana',
     hearts_refilled_title: 'Sydämiä: {{n}}',
@@ -5733,6 +5781,9 @@ App.I18N = {
   },
 
   hu: {
+    help_open: 'Hogyan működik',
+    help_open_sub: 'Tanfolyam, ismétlés, szívek',
+    help_more: 'Bővebben',
     ex_reveal: 'Szó mutatása',
     ex_revealed_title: 'Jegyezd meg ezt a szót',
     hearts_refilled_title: 'Szívek: {{n}}',
@@ -6091,6 +6142,9 @@ App.I18N = {
   },
 
   pl: {
+    help_open: 'Jak to działa',
+    help_open_sub: 'Kurs, powtórki, serca',
+    help_more: 'Więcej',
     ex_reveal: 'Pokaż słowo',
     ex_revealed_title: 'Zapamiętaj to słowo',
     hearts_refilled_title: 'Serca: {{n}}',
@@ -6449,6 +6503,9 @@ App.I18N = {
   },
 
   cs: {
+    help_open: 'Jak to funguje',
+    help_open_sub: 'Kurz, opakování, srdíčka',
+    help_more: 'Více',
     ex_reveal: 'Ukázat slovo',
     ex_revealed_title: 'Zapamatuj si toto slovo',
     hearts_refilled_title: 'Srdíčka: {{n}}',
@@ -6807,6 +6864,9 @@ App.I18N = {
   },
 
   sk: {
+    help_open: 'Ako to funguje',
+    help_open_sub: 'Kurz, opakovanie, srdiečka',
+    help_more: 'Viac',
     ex_reveal: 'Ukázať slovo',
     ex_revealed_title: 'Zapamätaj si toto slovo',
     hearts_refilled_title: 'Srdiečka: {{n}}',
@@ -7165,6 +7225,9 @@ App.I18N = {
   },
 
   uk: {
+    help_open: 'Як це працює',
+    help_open_sub: 'Курс, повторення, сердечка',
+    help_more: 'Докладніше',
     ex_reveal: 'Показати слово',
     ex_revealed_title: 'Запам\'ятай це слово',
     hearts_refilled_title: 'Сердечок: {{n}}',
@@ -7523,6 +7586,9 @@ App.I18N = {
   },
 
   bg: {
+    help_open: 'Как работи',
+    help_open_sub: 'Курс, преговор, сърчица',
+    help_more: 'Научи повече',
     ex_reveal: 'Покажи думата',
     ex_revealed_title: 'Запомни тази дума',
     hearts_refilled_title: 'Сърчица: {{n}}',

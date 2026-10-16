@@ -55,6 +55,11 @@ App.views.dashboard = {
           <span class="action-title">${App.t('dash_stats')}</span>
           <span class="action-sub">${App.t('dash_stats_sub')}</span>
         </button>
+        <button class="action-card" data-go="help">
+          <span class="action-icon">📖</span>
+          <span class="action-title">${App.t('help_open')}</span>
+          <span class="action-sub">${App.t('help_open_sub')}</span>
+        </button>
       </section>
 
       <section class="panel">

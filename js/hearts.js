@@ -190,8 +190,10 @@ App.hearts = (function () {
             <div>📺 ${App.t('hearts_rule_ad')}</div>
           </div>
           <button class="heart-ad-btn" id="heart-popup-ad">${App.t('hearts_ad_btn')}</button>
+          <button class="heart-popup-more" id="heart-popup-more">ℹ️ ${App.t('help_more')}</button>
         </div>`;
       wrap.querySelector('#heart-popup-close').addEventListener('click', closePopup);
+      wrap.querySelector('#heart-popup-more').addEventListener('click', () => { closePopup(); App.openHelp('hearts'); });
       bindAd(wrap.querySelector('#heart-popup-ad'), draw);
     };
     draw();

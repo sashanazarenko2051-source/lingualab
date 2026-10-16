@@ -1749,3 +1749,21 @@ button { background: none; }
   .ex-input-row .ex-hint-btn { flex: 1; justify-content: center; }
 }
 @media (max-width: 720px) { .ex-input-row .ex-hint-btn { padding: 10px 12px; } }
+
+/* ---- How it works ------------------------------------------------------- */
+.help-page { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+.help-intro { font-size: 14px; }
+.help-toc { display: flex; flex-wrap: wrap; gap: 8px; }
+.help-toc button { padding: 7px 12px; border-radius: 999px; border: 2px solid var(--border); background: var(--surface); color: var(--ink); font-weight: 700; cursor: pointer; }
+.help-toc button:hover { border-color: var(--brand-1); }
+.help-card { scroll-margin-top: 80px; }
+.help-body { color: var(--ink-2); line-height: 1.55; font-size: 14px; }
+.help-body p { margin: 0 0 8px; }
+.help-body p:last-child { margin-bottom: 0; }
+.help-body ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.help-body b { color: var(--ink); }
+.help-tip { margin-bottom: 10px; padding: 10px 14px; border-radius: 12px; color: var(--ink);
+  background: color-mix(in srgb, var(--good) 14%, var(--surface)); border: 2px solid color-mix(in srgb, var(--good) 45%, var(--border)); }
+.settings-help { display: flex !important; align-items: center; gap: 10px; align-self: stretch; font-weight: 800; }
+.settings-help span { color: var(--ink-muted); font-weight: 600; font-size: 12px; }
+.heart-popup-more { margin-top: 10px; background: none; border: none; color: var(--brand-1); font-weight: 700; cursor: pointer; }

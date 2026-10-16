@@ -23,6 +23,7 @@ function render(root) {
   root.innerHTML = `
     <div class="settings-page">
       <h1 class="settings-title">⚙️ ${App.t('set_title')}</h1>
+      <button class="action-card settings-help" id="set-help">📖 ${App.t('help_open')} <span>${App.t('help_open_sub')}</span></button>
 
       <section class="settings-card">
         <h2>🎨 ${App.t('set_theme')}</h2>
@@ -66,6 +67,7 @@ function render(root) {
     </div>
   `;
 
+  root.querySelector('#set-help').addEventListener('click', () => App.openHelp());
   root.querySelectorAll('.theme-card').forEach(btn => btn.addEventListener('click', () => {
     App.theme.setTheme(btn.dataset.theme);
     render(root);
