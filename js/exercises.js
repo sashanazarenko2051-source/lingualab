@@ -168,15 +168,18 @@ App.exercises = (function () {
           const bonus = App.gamification.comboBonus(state.combo);
           if (bonus) { App.effects.comboToast(state.combo); App.effects.celebrate(bonus); }
         } else {
-          state.combo = 0;
-          if (state.useHearts) {
-            state.hearts = Math.max(0, state.hearts - 1);
-            App.effects.heartLoss();
-            const h = root.querySelector('#ex-hearts');
-            if (h) { h.querySelector('b').textContent = state.hearts; h.classList.remove('shake'); void h.offsetWidth; h.classList.add('shake'); }
-          }
+          ctx.loseHeart();
           requeue(state, word);
         }
+      },
+      // Costs a heart and breaks the combo without grading a word again.
+      loseHeart() {
+        state.combo = 0;
+        if (!state.useHearts) return;
+        state.hearts = Math.max(0, state.hearts - 1);
+        App.effects.heartLoss();
+        const h = root.querySelector('#ex-hearts');
+        if (h) { h.querySelector('b').textContent = state.hearts; h.classList.remove('shake'); void h.offsetWidth; h.classList.add('shake'); }
       },
       next() {
         onKey(null);
@@ -622,8 +625,13 @@ App.exercises = (function () {
         } else {
           [a, b].forEach(x => { x.classList.remove('selected'); x.classList.add('wrong'); });
           setTimeout(() => [a, b].forEach(x => x.classList.remove('wrong')), 600);
+          // Every wrong pair costs a heart; the word is graded as missed once.
           if (!missed.has(word.id)) { missed.add(word.id); ctx.answer(word, false); }
-          if (ctx.state.useHearts && ctx.state.hearts === 0) footerFeedback(ctx, false, '');
+          else { App.effects.wrong(); ctx.loseHeart(); }
+          if (ctx.state.useHearts && ctx.state.hearts === 0) {
+            items.forEach(x => { x.disabled = true; });
+            footerFeedback(ctx, false, '');
+          }
         }
       };
       items.forEach(it => it.addEventListener('click', () => {
