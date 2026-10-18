@@ -20,6 +20,10 @@ import re
 import time
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Built into one .exe by PyInstaller (build-exe.ps1), the app files are
+# unpacked to a temp folder named by sys._MEIPASS.
+if getattr(sys, 'frozen', False):
+    BASE_DIR = sys._MEIPASS
 INDEX_PATH = os.path.join(BASE_DIR, 'index.html')
 ICON_PATH = os.path.join(BASE_DIR, 'icon.ico')
 LAN_PORT = 8765
