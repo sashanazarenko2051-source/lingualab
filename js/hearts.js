@@ -26,6 +26,42 @@ App.hearts = (function () {
   function lose(n) { set(count() - (n || 1)); }
   function add(n) { set(count() + (n || 1)); }
 
+  // Free refill: at REFILL_HOURS (local time) the wallet is topped up to
+  // REFILL_TO. Hearts above that (from ads) are kept. Missed refill moments
+  // (app closed) are applied on the next check.
+  const REFILL_TO = 12;
+  const REFILL_HOURS = [1, 13];
+
+  // The latest refill moment that is not in the future.
+  function lastRefillMoment(now) {
+    const d = new Date(now);
+    for (let back = 0; back < 2; back++) {
+      const hours = REFILL_HOURS.slice().sort((a, b) => b - a);
+      for (const h of hours) {
+        const t = new Date(d.getFullYear(), d.getMonth(), d.getDate() - back, h).getTime();
+        if (t <= now) return t;
+      }
+    }
+    return 0;
+  }
+
+  function checkRefill() {
+    const h = st();
+    const now = Date.now();
+    const moment = lastRefillMoment(now);
+    if ((h.refilledAt || 0) >= moment) return false;
+    h.refilledAt = now;
+    if (h.count < REFILL_TO) { set(REFILL_TO); return true; }
+    App.storage.save();
+    return false;
+  }
+
+  function startRefillTimer() {
+    checkRefill();
+    setInterval(checkRefill, 60 * 1000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) checkRefill(); });
+  }
+
   // Called once per finished exercise; returns true when the drain took a heart.
   function stepDone() {
     const h = st();
@@ -171,6 +207,7 @@ App.hearts = (function () {
     const draw = () => { host.innerHTML = pillHtml('topbar-heart-pill', 'clickable'); };
     draw();
     onChange(draw);
+    startRefillTimer();
     host.addEventListener('click', openPopup);
   }
 
@@ -188,6 +225,7 @@ App.hearts = (function () {
             <div>❌ ${App.t('hearts_rule_mistake')}</div>
             <div>🔟 ${App.t('hearts_rule_drain', { n: DRAIN_EVERY })}</div>
             <div>📺 ${App.t('hearts_rule_ad')}</div>
+            <div>🕐 ${App.t('hearts_rule_refill', { n: REFILL_TO })}</div>
           </div>
           <button class="heart-ad-btn" id="heart-popup-ad">${App.t('hearts_ad_btn')}</button>
           <button class="heart-popup-more" id="heart-popup-more">ℹ️ ${App.t('help_more')}</button>

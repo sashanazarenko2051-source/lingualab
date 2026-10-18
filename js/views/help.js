@@ -36,6 +36,7 @@ const HELP = {
           <li>У тебя до <b>20 сердечек</b>, они сохраняются между уроками.</li>
           <li>Ошибка — <b>−1 сердечко</b>. Каждые <b>10 заданий</b> — тоже −1.</li>
           <li>Когда сердечки закончились, урок не начать. <b>1 реклама = +1 сердечко</b> — нажми на сердечко вверху экрана.</li>
+          <li>Каждый день в <b>1:00 и 13:00</b> сердечки сами пополняются до <b>12</b>.</li>
           <li>«👁 Показать слово» сердечко не отнимает. Экзамены уровней идут без сердечек.</li>
         </ul>`],
       ['streak', '🔥', 'Серия, опыт и уровни', `
@@ -81,6 +82,7 @@ const HELP = {
           <li>У тебе до <b>20 сердечок</b>, вони зберігаються між уроками.</li>
           <li>Помилка — <b>−1 сердечко</b>. Кожні <b>10 завдань</b> — теж −1.</li>
           <li>Коли сердечка закінчилися, урок не почати. <b>1 реклама = +1 сердечко</b> — натисни на сердечко вгорі екрана.</li>
+          <li>Щодня о <b>1:00 і 13:00</b> сердечка самі поповнюються до <b>12</b>.</li>
           <li>«👁 Показати слово» сердечко не забирає. Іспити рівнів ідуть без сердечок.</li>
         </ul>`],
       ['streak', '🔥', 'Серія, досвід і рівні', `
@@ -126,6 +128,7 @@ const HELP = {
           <li>You have up to <b>20 hearts</b>, kept between lessons.</li>
           <li>A mistake costs <b>−1 heart</b>. Every <b>10 exercises</b> cost −1 as well.</li>
           <li>With no hearts left you can't start a lesson. <b>1 ad = +1 heart</b> — tap the heart at the top of the screen.</li>
+          <li>Every day at <b>1:00 and 13:00</b> hearts refill to <b>12</b> on their own.</li>
           <li>“👁 Show word” costs no heart. Level exams have no hearts.</li>
         </ul>`],
       ['streak', '🔥', 'Streak, XP and levels', `
