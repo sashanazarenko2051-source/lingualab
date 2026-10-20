@@ -199,7 +199,7 @@ App.data.fr = {
         { w: 'Vraiment ?', t: 'Правда?', ex: 'Tu as gagné au loto ? Vraiment ?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Génial !', t: 'Здорово!', ex: 'On va à la mer ? Génial !', tex: 'Мы едем на море? Здорово!' },
         { w: 'Cordialement', t: 'С уважением', ex: 'Cordialement, Anne Martin.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Cher… (Madame, Monsieur)', t: 'Уважаемый… (в письме)', ex: 'Cher Monsieur Martin,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Cher / Chère / Chers… (Madame, Monsieur)', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Cher Monsieur Martin,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Dieu merci !', t: 'Слава богу!', ex: 'Te voilà ! Dieu merci !', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Que puis-je faire pour vous ?', t: 'Чем могу помочь?', ex: 'Bonjour ! Que puis-je faire pour vous ?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Quelle heure est-il ?', t: 'Который час?', ex: 'Excusez-moi, quelle heure est-il ?', tex: 'Извините, который час?' },

@@ -199,7 +199,7 @@ App.data.pt = {
         { w: 'A sério?', t: 'Правда?', ex: 'Ganhaste a lotaria? A sério?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Que fixe!', t: 'Здорово!', ex: 'Vamos à praia? Que fixe!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Com os melhores cumprimentos', t: 'С уважением', ex: 'Com os melhores cumprimentos, Ana Silva.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Caro… (Exmo. Senhor)', t: 'Уважаемый… (в письме)', ex: 'Caro Senhor Silva,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Caro / Cara / Caros… (Exmo. Senhor)', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Caro Senhor Silva,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Graças a Deus!', t: 'Слава богу!', ex: 'Aí estás tu! Graças a Deus!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Em que posso ajudar?', t: 'Чем могу помочь?', ex: 'Boa tarde! Em que posso ajudar?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Que horas são?', t: 'Который час?', ex: 'Desculpe, que horas são?', tex: 'Извините, который час?' },

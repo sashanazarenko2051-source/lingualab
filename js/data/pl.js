@@ -198,7 +198,7 @@ App.data.pl = {
         { w: 'Naprawdę?', t: 'Правда?', ex: 'Wygrałeś w totka? Naprawdę?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Super!', t: 'Здорово!', ex: 'Jedziemy nad morze? Super!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Z poważaniem', t: 'С уважением', ex: 'Z poważaniem, Anna Nowak.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Szanowny…', t: 'Уважаемый… (в письме)', ex: 'Szanowny Panie Nowak,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Szanowny / Szanowna / Szanowni…', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Szanowny Panie Nowak,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Dzięki Bogu!', t: 'Слава богу!', ex: 'Jesteś! Dzięki Bogu!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'W czym mogę pomóc?', t: 'Чем могу помочь?', ex: 'Dzień dobry! W czym mogę pomóc?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Która godzina?', t: 'Который час?', ex: 'Przepraszam, która godzina?', tex: 'Извините, который час?' },

@@ -198,7 +198,7 @@ App.data.ro = {
         { w: 'Serios?', t: 'Правда?', ex: 'Ai câștigat la loterie? Serios?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Super!', t: 'Здорово!', ex: 'Mergem la mare? Super!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Cu stimă', t: 'С уважением', ex: 'Cu stimă, Ana Popescu.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Stimate…', t: 'Уважаемый… (в письме)', ex: 'Stimate domnule Popescu,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Stimate / Stimată / Stimați…', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Stimate domnule Popescu,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Slavă Domnului!', t: 'Слава богу!', ex: 'Iată-te! Slavă Domnului!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Cu ce vă pot ajuta?', t: 'Чем могу помочь?', ex: 'Bună ziua! Cu ce vă pot ajuta?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Cât e ceasul?', t: 'Который час?', ex: 'Scuzați-mă, cât e ceasul?', tex: 'Извините, который час?' },

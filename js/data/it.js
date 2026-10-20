@@ -200,7 +200,7 @@ App.data.it = {
         { w: 'Davvero?', t: 'Правда?', ex: 'Hai vinto alla lotteria? Davvero?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Fantastico!', t: 'Здорово!', ex: 'Andiamo al mare? Fantastico!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Cordiali saluti', t: 'С уважением', ex: 'Cordiali saluti, Anna Rossi.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Gentile…', t: 'Уважаемый… (в письме)', ex: 'Gentile signor Rossi,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Gentile / Caro / Cara… (in una lettera)', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Gentile signor Rossi,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Grazie al cielo!', t: 'Слава богу!', ex: 'Eccoti! Grazie al cielo!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Come posso aiutarla?', t: 'Чем могу помочь?', ex: 'Buongiorno! Come posso aiutarla?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Che ore sono?', t: 'Который час?', ex: 'Scusi, che ore sono?', tex: 'Извините, который час?' },

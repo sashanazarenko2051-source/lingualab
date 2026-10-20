@@ -198,7 +198,7 @@ App.data.sv = {
         { w: 'Verkligen?', t: 'Правда?', ex: 'Vann du på lotto? Verkligen?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Toppen!', t: 'Здорово!', ex: 'Ska vi åka till havet? Toppen!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Med vänliga hälsningar', t: 'С уважением', ex: 'Med vänliga hälsningar, Anna Andersson.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Bäste… (Hej…)', t: 'Уважаемый… (в письме)', ex: 'Bäste herr Andersson,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Bäste / Bästa… (Hej…)', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Bäste herr Andersson,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Gudskelov!', t: 'Слава богу!', ex: 'Där är du! Gudskelov!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Hur kan jag hjälpa dig?', t: 'Чем могу помочь?', ex: 'Hej! Hur kan jag hjälpa dig?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Vad är klockan?', t: 'Который час?', ex: 'Ursäkta, vad är klockan?', tex: 'Извините, который час?' },

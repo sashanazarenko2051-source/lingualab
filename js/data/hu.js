@@ -198,7 +198,7 @@ App.data.hu = {
         { w: 'Tényleg?', t: 'Правда?', ex: 'Nyertél a lottón? Tényleg?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Szuper!', t: 'Здорово!', ex: 'Megyünk a tengerhez? Szuper!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Üdvözlettel', t: 'С уважением', ex: 'Üdvözlettel: Kovács Anna.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Kedves… (Tisztelt…)', t: 'Уважаемый… (в письме)', ex: 'Tisztelt Kovács Úr!', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Kedves… (Tisztelt…)', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Tisztelt Kovács Úr!', tex: 'Уважаемый господин Иванов!' },
         { w: 'Hála Istennek!', t: 'Слава богу!', ex: 'Itt vagy! Hála Istennek!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Miben segíthetek?', t: 'Чем могу помочь?', ex: 'Jó napot! Miben segíthetek?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Hány óra van?', t: 'Который час?', ex: 'Elnézést, hány óra van?', tex: 'Извините, который час?' },

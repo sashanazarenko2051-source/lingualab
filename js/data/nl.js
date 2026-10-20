@@ -200,7 +200,7 @@ App.data.nl = {
         { w: 'Echt?', t: 'Правда?', ex: 'Heb je de loterij gewonnen? Echt?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Geweldig!', t: 'Здорово!', ex: 'Gaan we naar zee? Geweldig!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Met vriendelijke groet', t: 'С уважением', ex: 'Met vriendelijke groet, Anna de Vries.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Geachte…', t: 'Уважаемый… (в письме)', ex: 'Geachte heer De Vries,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Geachte…', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Geachte heer De Vries,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Godzijdank!', t: 'Слава богу!', ex: 'Daar ben je! Godzijdank!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Waarmee kan ik u helpen?', t: 'Чем могу помочь?', ex: 'Goedemiddag! Waarmee kan ik u helpen?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Hoe laat is het?', t: 'Который час?', ex: 'Pardon, hoe laat is het?', tex: 'Извините, который час?' },

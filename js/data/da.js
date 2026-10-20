@@ -198,7 +198,7 @@ App.data.da = {
         { w: 'Virkelig?', t: 'Правда?', ex: 'Vandt du i lotto? Virkelig?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Hvor dejligt!', t: 'Здорово!', ex: 'Skal vi til havet? Hvor dejligt!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Med venlig hilsen', t: 'С уважением', ex: 'Med venlig hilsen, Anna Hansen.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Kære…', t: 'Уважаемый… (в письме)', ex: 'Kære hr. Hansen,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Kære…', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Kære hr. Hansen,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Gudskelov!', t: 'Слава богу!', ex: 'Der er du! Gudskelov!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Hvad kan jeg hjælpe med?', t: 'Чем могу помочь?', ex: 'Goddag! Hvad kan jeg hjælpe med?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Hvad er klokken?', t: 'Который час?', ex: 'Undskyld, hvad er klokken?', tex: 'Извините, который час?' },

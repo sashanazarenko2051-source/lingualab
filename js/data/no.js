@@ -201,7 +201,7 @@ App.data.no = {
         { w: 'Virkelig?', t: 'Правда?', ex: 'Vant du i lotto? Virkelig?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Så flott!', t: 'Здорово!', ex: 'Skal vi til sjøen? Så flott!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Med vennlig hilsen', t: 'С уважением', ex: 'Med vennlig hilsen, Anna Hansen.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Kjære… (Hei…)', t: 'Уважаемый… (в письме)', ex: 'Kjære Hansen,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Kjære… (Hei…)', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Kjære Hansen,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Gudskjelov!', t: 'Слава богу!', ex: 'Der er du! Gudskjelov!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Hva kan jeg hjelpe deg med?', t: 'Чем могу помочь?', ex: 'Hei! Hva kan jeg hjelpe deg med?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Hva er klokka?', t: 'Который час?', ex: 'Unnskyld, hva er klokka?', tex: 'Извините, который час?' },

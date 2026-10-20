@@ -200,7 +200,7 @@ App.data.hr = {
         { w: 'Stvarno?', t: 'Правда?', ex: 'Dobio si na lotu? Stvarno?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Super!', t: 'Здорово!', ex: 'Idemo na more? Super!', tex: 'Мы едем на море? Здорово!' },
         { w: 'S poštovanjem', t: 'С уважением', ex: 'S poštovanjem, Ana Horvat.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Poštovani…', t: 'Уважаемый… (в письме)', ex: 'Poštovani gospodine Horvat,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Poštovani / Poštovana…', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Poštovani gospodine Horvat,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Hvala Bogu!', t: 'Слава богу!', ex: 'Tu si! Hvala Bogu!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Kako vam mogu pomoći?', t: 'Чем могу помочь?', ex: 'Dobar dan! Kako vam mogu pomoći?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Koliko je sati?', t: 'Который час?', ex: 'Oprostite, koliko je sati?', tex: 'Извините, который час?' },

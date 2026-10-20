@@ -64,6 +64,8 @@ function render(root) {
         <button class="action-card" id="set-notify-test">📨 ${App.t('set_notify_test')}</button>
       </section>
 
+      ${voiceCardHtml()}
+
     </div>
   `;
 
@@ -88,6 +90,75 @@ function render(root) {
   });
   root.querySelector('#set-notify-test').addEventListener('click', () => App.notify.test().then(() => render(root)));
 
+  bindVoiceCard(root);
+}
+
+// ---- pronunciation voice ---------------------------------------------------
+// The voices come from the device. A gender preference picks the default for
+// every language; a voice picked from the list overrides it for that language.
+function voiceCardHtml() {
+  const s = App.storage.state.settings;
+  const code = App.storage.getCurrentLang();
+  const tag = App.TTS_LANG[code] || 'en-US';
+  const voices = App.voicesFor(tag);
+  const gender = s.voiceGender || 'male';
+  const picked = (s.voices || {})[code] || '';
+  const label = v => {
+    const g = App.voiceGender(v);
+    return (g === 'male' ? '👨 ' : g === 'female' ? '👩 ' : '') + v.name;
+  };
+  return `
+      <section class="settings-card">
+        <h2>🔊 ${App.t('set_voice')}</h2>
+        <p class="settings-hint">${App.t('set_voice_hint')}</p>
+        <div class="settings-row voice-gender">
+          <span>${App.t('set_voice_gender')}</span>
+          <button class="action-card${gender === 'male' ? ' active' : ''}" data-gender="male">👨 ${App.t('voice_male')}</button>
+          <button class="action-card${gender === 'female' ? ' active' : ''}" data-gender="female">👩 ${App.t('voice_female')}</button>
+        </div>
+        ${voices.length ? `
+        <label class="settings-row voice-pick">
+          <span>${App.t('set_voice_pick')}</span>
+          <select id="set-voice">
+            <option value="">${App.t('voice_auto')}</option>
+            ${voices.map(v => `<option value="${v.voiceURI.replace(/"/g, '&quot;')}" ${v.voiceURI === picked ? 'selected' : ''}>${label(v)}</option>`).join('')}
+          </select>
+        </label>` : `<div class="settings-status">🔇 ${App.t('tts_no_voice')}</div>`}
+        <button class="action-card" id="set-voice-test" ${voices.length ? '' : 'disabled'}>▶️ ${App.t('set_voice_test')}</button>
+      </section>`;
+}
+
+function bindVoiceCard(root) {
+  const s = App.storage.state.settings;
+  const code = App.storage.getCurrentLang();
+  root.querySelectorAll('[data-gender]').forEach(btn => btn.addEventListener('click', () => {
+    s.voiceGender = btn.dataset.gender;
+    s.voices = {};
+    App.storage.save();
+    render(root);
+    speakSample(code);
+  }));
+  const sel = root.querySelector('#set-voice');
+  if (sel) sel.addEventListener('change', () => {
+    s.voices = Object.assign({}, s.voices, { [code]: sel.value });
+    if (!sel.value) delete s.voices[code];
+    App.storage.save();
+    speakSample(code);
+  });
+  root.querySelector('#set-voice-test').addEventListener('click', () => speakSample(code));
+  // Voices often arrive a moment after the page loads.
+  if ('speechSynthesis' in window && !App.voicesFor(App.TTS_LANG[code] || 'en-US').length) {
+    speechSynthesis.addEventListener('voiceschanged', function again() {
+      speechSynthesis.removeEventListener('voiceschanged', again);
+      if (document.body.contains(root) && root.querySelector('.settings-page')) render(root);
+    });
+  }
+}
+
+function speakSample(code) {
+  const words = App.words.allWords(code);
+  const w = words[0];
+  if (w) App.speak(w.ex || w.w, code);
 }
 
 function toggleHtml(id, label, on) {

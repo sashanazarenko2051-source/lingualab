@@ -200,7 +200,7 @@ App.data.de = {
         { w: 'Wirklich?', t: 'Правда?', ex: 'Du hast im Lotto gewonnen? Wirklich?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Toll!', t: 'Здорово!', ex: 'Wir fahren ans Meer? Toll!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Mit freundlichen Grüßen', t: 'С уважением', ex: 'Mit freundlichen Grüßen, Anna Schmidt.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Sehr geehrte(r)…', t: 'Уважаемый… (в письме)', ex: 'Sehr geehrter Herr Schmidt,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Sehr geehrter / Sehr geehrte…', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Sehr geehrter Herr Schmidt,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Gott sei Dank!', t: 'Слава богу!', ex: 'Da bist du ja! Gott sei Dank!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Wie kann ich Ihnen helfen?', t: 'Чем могу помочь?', ex: 'Guten Tag! Wie kann ich Ihnen helfen?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Wie spät ist es?', t: 'Который час?', ex: 'Entschuldigung, wie spät ist es?', tex: 'Извините, который час?' },

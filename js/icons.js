@@ -548,12 +548,56 @@ if ('speechSynthesis' in window) {
   speechSynthesis.onvoiceschanged = loadVoices;
 }
 
-function findVoice(lang) {
+// Voices only say whether they're male or female through their name, so
+// known voice names (Windows, Edge Natural/Online, macOS/iOS) are listed here.
+const TTS_MALE = /\b(male|jakub|anton[ií]n|filip|luk[aá][sš]|pavel|dmitry|ostap|adam|marek|ivan|borislav|matej|sre[cć]ko|nicholas|andrei|emil|stefanos|nestoras|harri|szabolcs|tam[aá]s|bengt|mattias|jon|finn|jeppe|frank|maarten|stefan|conrad|killian|florian|paul|henri|remy|pablo|[aá]lvaro|cosimo|diego|giuseppe|duarte|daniel|george|ryan|thomas|guy|david|mark|james|andrew|brian|christopher|eric|roger|steffan|yuri|aleksandr|milan|petr|ond[rř]ej|grzegorz|tomasz)\b/i;
+const TTS_FEMALE = /\b(female|woman|irina|zira|hazel|susan|hedda|katja|hortense|julie|helena|laura|elsa|paulina|heidi|helle|hanna|helia|vlasta|viktoria|svetlana|dariya|polina|zofia|agnieszka|kalina|gabrijela|sophie|athina|noora|selma|no[eé]mi|sofie|pernille|iselin|christel|colette|fenna|amala|seraphina|denise|eloise|vivienne|elvira|ximena|isabella|raquel|fernanda|alina|sonia|libby|maisie|aria|jenny|emma|ava|michelle|zuzana|milena|zosia|anna|ioana|melina|satu|mariska|nora|sara|ellen|alice|amelie|monica|joana|katya|mar[ií]a|lucia|paola)\b/i;
+
+App.voiceGender = function (v) {
+  const name = (v && v.name) || '';
+  if (TTS_FEMALE.test(name)) return 'female';
+  if (TTS_MALE.test(name)) return 'male';
+  return '';
+};
+
+// Every voice the device has for a language.
+App.voicesFor = function (lang) {
+  if (!('speechSynthesis' in window)) return [];
   const voices = _ttsVoices.length ? _ttsVoices : speechSynthesis.getVoices();
   const short = lang.split('-')[0].toLowerCase();
   const shortCandidates = [short, ...(TTS_ALT_SHORT[short] || [])];
-  return voices.find(v => v.lang && v.lang.toLowerCase() === lang.toLowerCase())
-    || voices.find(v => shortCandidates.includes((v.lang || '').split('-')[0].toLowerCase()));
+  return voices.filter(v => shortCandidates.includes((v.lang || '').split('-')[0].toLowerCase()));
+};
+
+function voiceSettings() {
+  const s = (App.storage && App.storage.state && App.storage.state.settings) || {};
+  return { gender: s.voiceGender || 'male', picked: s.voices || {} };
+}
+
+// The voice picked in Settings, or else the best one: the right gender,
+// neural ("Natural"/"Online"/"Enhanced") voices first, the exact region next.
+// Without a voice for the language nothing is returned — the system default
+// voice would read the text with another language's pronunciation.
+function findVoice(lang) {
+  const list = App.voicesFor(lang);
+  if (!list.length) return null;
+  const { gender, picked } = voiceSettings();
+  const code = Object.keys(App.TTS_LANG).find(k => App.TTS_LANG[k] === lang);
+  const own = code && picked[code] && list.find(v => v.voiceURI === picked[code]);
+  if (own) return own;
+  const score = v => (App.voiceGender(v) === gender ? 8 : App.voiceGender(v) ? 0 : 3)
+    + (/natural|neural|online|enhanced|premium|wavenet/i.test(v.name) ? 4 : 0)
+    + ((v.lang || '').toLowerCase() === lang.toLowerCase() ? 2 : 0)
+    + (v.localService ? 1 : 0);
+  return list.slice().sort((a, b) => score(b) - score(a))[0];
+}
+
+// Tells once in a while that the device has no voice for the language.
+let _noVoiceToastAt = 0;
+function warnNoVoice() {
+  if (Date.now() - _noVoiceToastAt < 60000 || !App.effects) return;
+  _noVoiceToastAt = Date.now();
+  App.effects.toast('🔇 ' + App.t('tts_no_voice'));
 }
 
 // Bumped on every call so a stale, not-yet-fired speak() from a previous call
@@ -574,6 +618,10 @@ App.speak = function (text, langCode, rate) {
   if (!('speechSynthesis' in window)) return;
   const lang = App.TTS_LANG[langCode] || 'en-US';
   const token = ++_speakToken;
+  const voice = findVoice(lang);
+  // An empty list means the voices haven't loaded yet: then speak by lang.
+  const loaded = (_ttsVoices.length ? _ttsVoices : speechSynthesis.getVoices()).length > 0;
+  if (!voice && loaded) { warnNoVoice(); return; }
 
   try { speechSynthesis.cancel(); } catch (e) { /* ignore */ }
 
@@ -584,12 +632,16 @@ App.speak = function (text, langCode, rate) {
     try {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = lang;
-      u.rate = rate || 0.85;
+      // Slowing a voice down makes some engines choppy; neural voices are
+      // clear at normal speed, the older ones get a little slower.
+      u.rate = rate || (voice && /natural|neural|online|enhanced|premium/i.test(voice.name) ? 0.95 : 0.9);
       u.volume = 1;
       u.pitch = 1;
-      const voice = findVoice(lang);
       if (voice) u.voice = voice;
-      else console.warn('No TTS voice found for', lang, '— system/browser has none installed for this language.');
+      // Chrome can garbage-collect an utterance mid-word and cut it off;
+      // holding a reference until it ends prevents that.
+      App._utterance = u;
+      u.onend = () => { if (App._utterance === u) App._utterance = null; };
       speechSynthesis.speak(u);
     } catch (e) { /* no TTS voice available — silently skip */ }
   }, 80);

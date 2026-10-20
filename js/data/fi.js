@@ -198,7 +198,7 @@ App.data.fi = {
         { w: 'Ihanko totta?', t: 'Правда?', ex: 'Voititko lotossa? Ihanko totta?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: 'Mahtavaa!', t: 'Здорово!', ex: 'Lähdemmekö meren rannalle? Mahtavaa!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Ystävällisin terveisin', t: 'С уважением', ex: 'Ystävällisin terveisin, Anna Virtanen.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Hyvä… (kirjeessä)', t: 'Уважаемый… (в письме)', ex: 'Hyvä herra Virtanen,', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Hyvä… (kirjeessä)', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Hyvä herra Virtanen,', tex: 'Уважаемый господин Иванов!' },
         { w: 'Luojan kiitos!', t: 'Слава богу!', ex: 'Siinä sinä olet! Luojan kiitos!', tex: 'Ты нашёлся! Слава богу!' },
         { w: 'Miten voin auttaa?', t: 'Чем могу помочь?', ex: 'Hyvää päivää! Miten voin auttaa?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: 'Paljonko kello on?', t: 'Который час?', ex: 'Anteeksi, paljonko kello on?', tex: 'Извините, который час?' },

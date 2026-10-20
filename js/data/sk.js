@@ -199,7 +199,7 @@ App.data.sk = {
       { w: 'Naozaj?', t: 'Правда?', ex: 'Vyhral si v lotérii? Naozaj?', tex: 'Ты выиграл в лотерею? Правда?' },
       { w: 'To je super!', t: 'Здорово!', ex: 'Ideme k moru? To je super!', tex: 'Мы едем на море? Здорово!' },
       { w: 'S pozdravom', t: 'С уважением', ex: 'S pozdravom, Anna Nováková.', tex: 'С уважением, Анна Петрова.' },
-      { w: 'Vážený…', t: 'Уважаемый… (в письме)', ex: 'Vážený pán Novák,', tex: 'Уважаемый господин Иванов!' },
+      { w: 'Vážený / Vážená / Vážení…', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Vážený pán Novák,', tex: 'Уважаемый господин Иванов!' },
       { w: 'Vďaka Bohu!', t: 'Слава богу!', ex: 'Tu si! Vďaka Bohu!', tex: 'Ты нашёлся! Слава богу!' },
       { w: 'S čím vám môžem pomôcť?', t: 'Чем могу помочь?', ex: 'Dobrý deň! S čím vám môžem pomôcť?', tex: 'Здравствуйте! Чем могу помочь?' },
       { w: 'Koľko je hodín?', t: 'Который час?', ex: 'Prepáčte, koľko je hodín?', tex: 'Извините, который час?' },

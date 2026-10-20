@@ -199,7 +199,7 @@ App.data.es = {
         { w: '¿De verdad?', t: 'Правда?', ex: '¿Has ganado la lotería? ¿De verdad?', tex: 'Ты выиграл в лотерею? Правда?' },
         { w: '¡Genial!', t: 'Здорово!', ex: '¿Vamos a la playa? ¡Genial!', tex: 'Мы едем на море? Здорово!' },
         { w: 'Un cordial saludo', t: 'С уважением', ex: 'Un cordial saludo, Ana García.', tex: 'С уважением, Анна Петрова.' },
-        { w: 'Estimado…', t: 'Уважаемый… (в письме)', ex: 'Estimado señor García:', tex: 'Уважаемый господин Иванов!' },
+        { w: 'Estimado / Estimada / Estimados…', t: 'Уважаемый / Уважаемая / Уважаемые… (в письме)', ex: 'Estimado señor García:', tex: 'Уважаемый господин Иванов!' },
         { w: '¡Gracias a Dios!', t: 'Слава богу!', ex: '¡Ahí estás! ¡Gracias a Dios!', tex: 'Ты нашёлся! Слава богу!' },
         { w: '¿En qué puedo ayudarle?', t: 'Чем могу помочь?', ex: '¡Buenas tardes! ¿En qué puedo ayudarle?', tex: 'Здравствуйте! Чем могу помочь?' },
         { w: '¿Qué hora es?', t: 'Который час?', ex: 'Perdone, ¿qué hora es?', tex: 'Извините, который час?' },
