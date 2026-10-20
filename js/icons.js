@@ -637,7 +637,9 @@ App.speak = function (text, langCode, rate) {
   setTimeout(() => {
     if (token !== _speakToken) return; // a newer speak() call already took over
     try {
-      const u = new SpeechSynthesisUtterance(text);
+      // "Rád jsem pomohl / Ráda jsem pomohla": read both forms with a pause
+      // instead of the slash.
+      const u = new SpeechSynthesisUtterance(String(text).replace(/\s*\/\s*/g, ', '));
       u.lang = lang;
       // Slowing a voice down makes some engines choppy; neural voices are
       // clear at normal speed, the older ones get a little slower.
