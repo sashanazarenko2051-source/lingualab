@@ -1,1 +1,3 @@
 dist/
+tools/.gemini_key
+tools/gemini_cache/
