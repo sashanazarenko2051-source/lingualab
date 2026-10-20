@@ -20,6 +20,7 @@ App.storage = (function () {
       friends: [],
       profile: { name: '', animal: 'wolf', color: '#00e5ff' },
       hearts: { count: 20, steps: 0 },
+      premium: false,
       settings: { theme: 'neon', custom: {}, scale: 1, bgAnim: true, motion: true, notify: true, notified: {} }
     };
   }
@@ -46,6 +47,7 @@ App.storage = (function () {
         friends: parsed.friends || [],
         profile: Object.assign({}, d.profile, parsed.profile),
         hearts: Object.assign({}, d.hearts, parsed.hearts),
+        premium: !!parsed.premium,
         settings: Object.assign({}, d.settings, parsed.settings)
       };
     } catch (e) {

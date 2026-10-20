@@ -73,18 +73,10 @@ App.exercises = (function () {
   }
   function canType(word) { return !NON_LATIN.includes(word.lang) && word.w.length <= 24; }
 
-  // Non-ASCII letters used by a language, for the accent buttons under the
-  // typing field (cached per language).
-  const accentCache = {};
-  function accentLetters(code) {
-    if (!accentCache[code]) {
-      const set = new Set();
-      App.words.allWords(code).forEach(w => {
-        for (const ch of w.w.toLowerCase()) if (ch > '\u007f' && /\p{L}/u.test(ch)) set.add(ch);
-      });
-      accentCache[code] = [...set].sort().slice(0, 14);
-    }
-    return accentCache[code];
+  // The letter tiles under the typing field: exactly the word's own letters
+  // (punctuation and spaces left out), shuffled, each usable once.
+  function wordLetters(target) {
+    return shuffle(Array.from(target).filter(ch => /[\p{L}\p{N}]/u.test(ch)));
   }
 
   // A step kind may not fit a word (no example, no voice, non-Latin
@@ -493,10 +485,10 @@ App.exercises = (function () {
     // own note; the feedback marks the letters that were missing or wrong.
     // "Hint" fills in the next correct letter, but only for about a third of
     // the word — the rest has to be typed by the learner. "Show word" reveals
-    // all of it: graded as a miss (the word comes back) but costs no heart.
+    // all of it: graded as a miss that costs a heart (the word comes back).
     type(ctx, word) {
-      const letters = accentLetters(word.lang);
       const target = variants(word.w)[0].normalize('NFC');
+      const letters = wordLetters(target);
       ctx.body.innerHTML = `
         ${headHtml(App.t('ex_type', { lang: App.ui.langName(word.lang) }), `
           <div class="ex-prompt"><span class="ex-prompt-icon">${App.ui.wordIcon(word.icon)}</span><span class="ex-prompt-text">${esc(meaningOf(word))}</span></div>`)}
@@ -506,7 +498,7 @@ App.exercises = (function () {
           <button class="ex-hint-btn ex-reveal-btn" id="ex-reveal-btn" title="${App.t('ex_reveal')}">👁 ${App.t('ex_reveal')}</button>
         </div>
         <div class="ex-length">${Array.from(target).map(ch => ch === ' ' ? '<i class="sp"></i>' : '<i></i>').join('')}</div>
-        ${letters.length ? `<div class="ex-letters">${letters.map(ch => `<button class="ex-letter" data-ch="${ch}">${ch}</button>`).join('')}</div>` : ''}
+        ${letters.length ? `<div class="ex-letters">${letters.map(ch => `<button class="ex-letter" data-ch="${esc(ch)}">${esc(ch)}</button>`).join('')}</div>` : ''}
       `;
       const input = ctx.body.querySelector('#ex-input');
       const hintBtn = ctx.body.querySelector('#ex-hint-btn');
@@ -533,6 +525,7 @@ App.exercises = (function () {
         hintBtn.disabled = true;
         revealBtn.disabled = true;
         input.classList.add(ok ? 'correct' : 'wrong');
+        paintTiles();
         ctx.answer(word, ok);
         App.speak(word.w, word.lang);
         footerFeedback(ctx, ok, ok ? '' : (accentOnly
@@ -540,7 +533,19 @@ App.exercises = (function () {
           : `${App.t('fb_answer')} <b>${diffHtml(given, target)}</b> — ${esc(meaningOf(word))}`), word);
       };
       const footer = footerCheck(ctx, false, check);
-      const changed = () => { paintSlots(); footer.enable(input.value.trim().length > 0); };
+      // A tile goes grey once its letter is used up in what's typed.
+      const tiles = [...ctx.body.querySelectorAll('.ex-letter')];
+      const paintTiles = () => {
+        const left = {};
+        Array.from(input.value.normalize('NFC').toLowerCase()).forEach(ch => { left[ch] = (left[ch] || 0) + 1; });
+        tiles.forEach(t => {
+          const ch = t.dataset.ch.toLowerCase();
+          const used = left[ch] > 0;
+          if (used) left[ch] -= 1;
+          t.disabled = done || used;
+        });
+      };
+      const changed = () => { paintSlots(); paintTiles(); footer.enable(input.value.trim().length > 0); };
       input.addEventListener('input', changed);
       ctx.body.querySelectorAll('.ex-letter').forEach(b => b.addEventListener('click', () => {
         if (done) return;
@@ -574,7 +579,8 @@ App.exercises = (function () {
         hintBtn.disabled = true;
         revealBtn.disabled = true;
         input.classList.add('revealed');
-        ctx.answer(word, false, { noHeart: true });
+        paintTiles();
+        ctx.answer(word, false);
         App.speak(word.w, word.lang);
         footerFeedback(ctx, false, `<b>${esc(target)}</b> — ${esc(meaningOf(word))}`, word, '👁 ' + App.t('ex_revealed_title'));
       });

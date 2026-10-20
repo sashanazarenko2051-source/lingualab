@@ -12,12 +12,7 @@ App.views = App.views || {};
 // A0 = categories 0-7 (1760 words), A1 = 8-15 (1760), A2 = 16-32 (3740),
 // B1 = 33 (just enters B1 territory; 7480 words in total isn't enough to
 // reach B2+, so those aren't shown). App.levels uses matching thresholds.
-const LEVEL_GROUPS = [
-  { code: 'A0', from: 0, to: 8 },
-  { code: 'A1', from: 8, to: 16 },
-  { code: 'A2', from: 16, to: 33 },
-  { code: 'B1', from: 33, to: 34 }
-];
+const LEVEL_GROUPS = App.access.LEVEL_GROUPS;
 App.views.course = {
   render(root) {
     const code = App.storage.getCurrentLang();
@@ -97,13 +92,25 @@ function categoryStats(code, cat) {
   const words = App.words.byCategory(code, cat.id);
   const mastered = words.filter(w => App.srs.isMastered(w.id)).length;
   const started = words.some(w => !App.srs.isNew(w.id));
-  return { cat, mastered, started, total: words.length, pct: words.length ? Math.round((mastered / words.length) * 100) : 0 };
+  return { cat, mastered, started, total: words.length, pct: words.length ? Math.round((mastered / words.length) * 100) : 0,
+    locked: !App.access.isUnlocked(code, cat.id) };
 }
 
 function categoryNodeHtml(s, side, accent, code) {
   const done = s.pct >= 100;
   const icon = App.CATEGORY_ICONS[s.cat.id] || '📘';
   const examPassed = App.storage.isExamPassed(code, s.cat.id);
+  if (s.locked) return `
+    <div class="skill-node-row side-${side} locked">
+      <button class="skill-node skill-node-locked" data-locked="${s.cat.id}" style="--node-accent:${accent}">
+        <span class="skill-node-icon">${icon}</span><span class="skill-node-lock">🔒</span>
+      </button>
+      <div class="skill-node-label">
+        ${App.ui.categoryName(s.cat.id, s.cat.name)}<br>
+        <span class="skill-node-meta">🔒 ${App.t('lock_short')}</span>
+      </div>
+    </div>
+  `;
   return `
     <div class="skill-node-row side-${side}">
       <button class="skill-node ${done ? 'done' : ''}" data-cat="${s.cat.id}"
@@ -191,6 +198,9 @@ function renderPath(root, code, lang, accent) {
       App.session.flashcardsCategory = btn.dataset.cat;
       App.router.go('flashcards');
     });
+  });
+  el.querySelectorAll('[data-locked]').forEach(btn => {
+    btn.addEventListener('click', () => App.access.showLocked(code, btn.dataset.locked));
   });
   el.querySelectorAll('[data-exam]').forEach(btn => {
     btn.addEventListener('click', (e) => {

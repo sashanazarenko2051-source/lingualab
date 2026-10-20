@@ -38,6 +38,13 @@ App.views.flashcards = {
     }
 
     if (!mistakesMode && !categoryId) categoryId = App.lesson.nextCategory(code).id;
+    // A closed topic can be reached from the dashboard, word list or a
+    // finished exam; send those back to the course with the lock notice.
+    if (!mistakesMode && categoryId && !App.access.isUnlocked(code, categoryId)) {
+      App.router.go('course');
+      App.access.showLocked(code, categoryId);
+      return;
+    }
     if (categoryId) {
       const cat = App.data[code].categories.find(c => c.id === categoryId);
       if (cat) App.storage.setLastLesson(code, categoryId, cat.name);

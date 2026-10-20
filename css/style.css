@@ -1167,6 +1167,13 @@ button { background: none; }
 .skill-node.done { background: var(--node-accent); box-shadow: 0 5px 0 color-mix(in srgb, var(--node-accent) 65%, #000 15%); animation: none; }
 .skill-node-icon { font-size: 30px; z-index: 1; }
 .skill-node.done .skill-node-icon { filter: brightness(0) invert(1); }
+.skill-node-locked { opacity: .55; }
+.skill-node-locked .skill-node-icon { filter: grayscale(1); }
+.skill-node-lock { position: absolute; right: -4px; bottom: -4px; font-size: 20px; z-index: 2; }
+.skill-node-row.locked .skill-node-label { opacity: .6; }
+.lock-actions { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+.lock-actions .action-card { justify-content: center; }
+.lock-premium { border-color: #ffd23f; color: #ffd23f; }
 .skill-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
 .skill-ring-track { fill: none; stroke: var(--surface-2); stroke-width: 3; }
 .skill-ring-fill { fill: none; stroke-width: 3; stroke-linecap: round; transition: stroke-dasharray .3s ease; }
