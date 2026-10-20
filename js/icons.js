@@ -647,6 +647,11 @@ App.speak = function (text, langCode, rate) {
       u.volume = 1;
       u.pitch = 1;
       if (voice) u.voice = voice;
+      // The device may only have one voice for a language (Czech: only the
+      // male Jakub). Then the other gender is imitated by the pitch.
+      const vs = voiceSettings();
+      const vg = voice && App.voiceGender(voice);
+      if (vg && vg !== vs.gender && !vs.picked[langCode]) u.pitch = vs.gender === 'female' ? 1.5 : 0.7;
       // Chrome can garbage-collect an utterance mid-word and cut it off;
       // holding a reference until it ends prevents that.
       App._utterance = u;

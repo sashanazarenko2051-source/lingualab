@@ -23,7 +23,6 @@ function render(root) {
   root.innerHTML = `
     <div class="settings-page">
       <h1 class="settings-title">⚙️ ${App.t('set_title')}</h1>
-      <button class="action-card settings-help" id="set-help">📖 ${App.t('help_open')} <span>${App.t('help_open_sub')}</span></button>
 
       <section class="settings-card">
         <h2>🎨 ${App.t('set_theme')}</h2>
@@ -39,8 +38,12 @@ function render(root) {
       <section class="settings-card">
         <h2>🖌️ ${App.t('set_custom')}</h2>
         <p class="settings-hint">${App.t('set_custom_hint')}</p>
+        <div class="settings-row accent-count-row">
+          <span>🎨 ${App.t('set_accents')}</span>
+          <div class="seg">${[1, 2, 3].map(n => `<button class="seg-btn${st.accents === n ? ' active' : ''}" data-accents="${n}">${n}</button>`).join('')}</div>
+        </div>
         <div class="color-grid">
-          ${App.theme.CUSTOM_KEYS.map(k => `
+          ${App.theme.CUSTOM_KEYS.filter(k => !/^brand-/.test(k) || Number(k.slice(6)) <= st.accents).map(k => `
             <label class="color-item">
               <input type="color" data-key="${k}" value="${toHex(App.theme.value(k))}">
               <span>${App.t(CUSTOM_LABELS[k])}</span>
@@ -75,15 +78,23 @@ function render(root) {
         <h2>🌍 ${App.t('set_country')}</h2>
         <p class="settings-hint">${App.t('country_hint')}</p>
         ${App.regions.searchHtml('set-country-search')}
-        <select class="shop-term" id="set-country">${App.regions.optionsHtml(App.regions.country() || 'OTHER')}</select>
+        <select class="shop-term country-list" id="set-country" size="6">${App.regions.optionsHtml(App.regions.country() || 'OTHER')}</select>
+        <div class="country-save-row">
+          <span class="country-current" id="set-country-current">✅ ${App.regions.countryName(App.regions.country() || 'OTHER')}</span>
+          <button class="quiz-next country-save" id="set-country-save">${App.t('profile_save')}</button>
+        </div>
       </section>
 
       ${voiceCardHtml()}
 
+      <div class="settings-bottom">
+        <button class="quiz-next" id="set-save-all">💾 ${App.t('set_save_all')}</button>
+        <button class="action-card" id="set-factory">🏭 ${App.t('set_factory')}</button>
+      </div>
+
     </div>
   `;
 
-  root.querySelector('#set-help').addEventListener('click', () => App.openHelp());
   root.querySelectorAll('.theme-card').forEach(btn => btn.addEventListener('click', () => {
     // A unique theme not bought yet opens its card in the shop.
     if (!App.theme.setTheme(btn.dataset.theme)) { App.session.shopSection = 'themes'; App.router.go('shop'); return; }
@@ -93,12 +104,16 @@ function render(root) {
     inp.addEventListener('input', () => App.theme.setCustom(inp.dataset.key, inp.value));
     inp.addEventListener('change', () => render(root));
   });
+  root.querySelectorAll('[data-accents]').forEach(b => b.addEventListener('click', () => {
+    App.theme.setOption('accents', Number(b.dataset.accents));
+    render(root);
+  }));
   root.querySelectorAll('.font-card').forEach(b => b.addEventListener('click', () => {
     App.theme.setOption('font', b.dataset.font);
     root.querySelectorAll('.font-card').forEach(x => x.classList.toggle('active', x === b));
   }));
   const scale = root.querySelector('#set-scale');
-  scale.addEventListener('input', () => { root.querySelector('#set-scale-val').textContent = Math.round(scale.value * 100) + '%'; });
+  scale.addEventListener('input', () => { root.querySelector('#set-scale-val').textContent = Math.round(scale.value * 100) + '%'; App.theme.setOption('scale', Number(scale.value)); });
   scale.addEventListener('change', () => App.theme.setOption('scale', Number(scale.value)));
   root.querySelector('#set-bganim').addEventListener('change', e => App.theme.setOption('bgAnim', e.target.checked));
   root.querySelector('#set-motion').addEventListener('change', e => App.theme.setOption('motion', e.target.checked));
@@ -109,9 +124,49 @@ function render(root) {
   });
   root.querySelector('#set-notify-test').addEventListener('click', () => App.notify.test().then(() => render(root)));
 
-  root.querySelector('#set-country').addEventListener('change', e => App.regions.setCountry(e.target.value));
-  App.regions.bindSearch(root.querySelector('#set-country-search'), root.querySelector('#set-country'), v => App.regions.setCountry(v));
+  // Search narrows the list; the choice is kept only after "Save".
+  App.regions.bindSearch(root.querySelector('#set-country-search'), root.querySelector('#set-country'));
+  root.querySelector('#set-country-save').addEventListener('click', () => {
+    const v = root.querySelector('#set-country').value;
+    if (!v) return;
+    App.regions.setCountry(v);
+    root.querySelector('#set-country-current').textContent = '✅ ' + App.regions.countryName(v);
+    App.effects.toast('✅ ' + App.regions.countryName(v));
+  });
   bindVoiceCard(root);
+
+  root.querySelector('#set-save-all').addEventListener('click', () => {
+    App.storage.save();
+    if (App.cloud && App.cloud.scheduleSync) App.cloud.scheduleSync();
+    App.effects.toast('✅ ' + App.t('set_saved'));
+  });
+  // Factory settings: looks, voice and the rest go back to the defaults;
+  // progress, profile and purchases stay.
+  root.querySelector('#set-factory').addEventListener('click', () => {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `
+      <div class="modal-card restart-card">
+        <div class="restart-icon">🏭</div>
+        <p>${App.t('set_factory_confirm')}</p>
+        <div class="profile-modal-actions">
+          <button class="action-card" id="fac-no" style="display:inline-flex">${App.t('profile_cancel')}</button>
+          <button class="quiz-next" id="fac-yes">${App.t('set_factory')}</button>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+    overlay.querySelector('#fac-no').addEventListener('click', () => overlay.remove());
+    overlay.querySelector('#fac-yes').addEventListener('click', () => {
+      const s = App.storage.state.settings || {};
+      Object.keys(s).forEach(k => { delete s[k]; });
+      App.storage.state.settings = s;
+      App.theme.apply();
+      App.storage.save();
+      overlay.remove();
+      render(root);
+      App.effects.toast('✅ ' + App.t('set_factory'));
+    });
+  });
 }
 
 // ---- pronunciation voice ---------------------------------------------------
@@ -144,7 +199,8 @@ function voiceCardHtml() {
             <option value="">${App.t('voice_auto')}</option>
             ${voices.map(v => `<option value="${v.voiceURI.replace(/"/g, '&quot;')}" ${v.voiceURI === picked ? 'selected' : ''}>${label(v)}</option>`).join('')}
           </select>
-        </label>` : `<div class="settings-status">🔇 ${App.t('tts_no_voice')}</div>`}
+        </label>
+        ${voices.some(v => App.voiceGender(v) === gender) ? '' : `<div class="settings-status">ℹ️ ${App.t('tts_gender_pitch')}</div>`}` : `<div class="settings-status">🔇 ${App.t('tts_no_voice')}</div>`}
         <button class="action-card" id="set-voice-test" ${voices.length ? '' : 'disabled'}>▶️ ${App.t('set_voice_test')}</button>
       </section>`;
 }

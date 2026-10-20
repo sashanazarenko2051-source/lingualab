@@ -75,8 +75,9 @@ App.regions = (function () {
       const keep = all.filter(o => !q || o.text.toLowerCase().includes(q) || o.value.toLowerCase() === q);
       const current = select.value;
       select.innerHTML = keep.map(o => `<option value="${o.value}">${o.text}</option>`).join('');
-      if (keep.some(o => o.value === current) && !q) select.value = current;
-      else if (keep.length && onPick) onPick(select.value);
+      if (keep.some(o => o.value === current)) select.value = current;
+      else if (keep.length) select.selectedIndex = 0;
+      if (q && keep.length && onPick) onPick(select.value);
     });
   }
 

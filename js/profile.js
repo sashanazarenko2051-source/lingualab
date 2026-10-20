@@ -79,7 +79,7 @@ App.profile = (function () {
   function normalize(p) {
     p = p || {};
     const legacy = p.color || COLORS[0];
-    return {
+    return Object.assign({}, p, {
       name: p.name || '',
       animal: p.animal || 'wolf',
       animalColor: p.animalColor || legacy,
@@ -88,7 +88,7 @@ App.profile = (function () {
       bgPattern: BG_PATTERNS.includes(p.bgPattern) ? p.bgPattern : 'solid',
       flag: p.flag || null,
       showcase: p.showcase || null
-    };
+    });
   }
 
   function avatarBadgeHtml(profile, size) {
@@ -127,13 +127,24 @@ App.profile = (function () {
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
     overlay.innerHTML = `
-      <div class="modal-card">
+      <div class="modal-card profile-card">
         <h3>${App.t('profile_edit_title')}</h3>
+        <div class="profile-cols">
+        <div class="profile-side">
+        <div class="profile-preview" id="profile-preview">${avatarBadgeHtml(draft, 96)}</div>
         <label class="profile-name-label">${App.t('profile_name_label')}
           <input type="text" id="profile-name-input" maxlength="18" value="${escapeHtml(draft.name)}" placeholder="${escapeHtml(App.t('profile_name_placeholder'))}">
         </label>
-        <div class="profile-preview" id="profile-preview">${avatarBadgeHtml(draft, 72)}</div>
-
+        <div class="profile-section-label">🌍 ${App.t('country_title')}</div>
+        ${App.regions.searchHtml('profile-country-search')}
+        <select class="shop-term" id="profile-country">${App.regions.optionsHtml(App.regions.country() || 'OTHER')}</select>
+        <div class="profile-section-label">${App.t('profile_flag_label')}</div>
+        <div class="profile-flag-row" id="profile-flag-row">
+          <button type="button" class="profile-flag-opt profile-flag-none ${!draft.flag ? 'active' : ''}" data-flag="">✕</button>
+          ${flagList().map(code => `<button type="button" class="profile-flag-opt ${code === draft.flag ? 'active' : ''}" data-flag="${code}">${App.ui.flagChip(code)}</button>`).join('')}
+        </div>
+        </div>
+        <div class="profile-main">
         <div class="profile-section-label">${App.t('profile_animal_label')}</div>
         <div class="profile-animal-grid" id="profile-animal-grid">
           ${ANIMALS.map(a => `<button type="button" class="profile-animal-opt ${a === draft.animal ? 'active' : ''}" data-animal="${a}">${ANIMAL_EMOJI[a]}</button>`).join('')}
@@ -153,10 +164,7 @@ App.profile = (function () {
         <div class="profile-section-label">${App.t('profile_outline_color_label')}</div>
         <div class="profile-color-row" id="profile-color-row-outline">${colorRowHtml('outline', draft.outlineColor)}</div>
 
-        <div class="profile-section-label">${App.t('profile_flag_label')}</div>
-        <div class="profile-flag-row" id="profile-flag-row">
-          <button type="button" class="profile-flag-opt profile-flag-none ${!draft.flag ? 'active' : ''}" data-flag="">✕</button>
-          ${flagList().map(code => `<button type="button" class="profile-flag-opt ${code === draft.flag ? 'active' : ''}" data-flag="${code}">${App.ui.flagChip(code)}</button>`).join('')}
+        </div>
         </div>
 
         <div class="profile-modal-actions">
@@ -174,7 +182,7 @@ App.profile = (function () {
     }
 
     function refreshPreview() {
-      overlay.querySelector('#profile-preview').innerHTML = avatarBadgeHtml(draft, 72);
+      overlay.querySelector('#profile-preview').innerHTML = avatarBadgeHtml(draft, 96);
       overlay.querySelectorAll('.profile-animal-opt').forEach(b => b.classList.toggle('active', b.dataset.animal === draft.animal));
       overlay.querySelectorAll('.profile-pattern-opt').forEach(b => b.classList.toggle('active', b.dataset.pattern === draft.bgPattern));
       overlay.querySelectorAll('#profile-color-row-animal .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.animalColor));
@@ -204,6 +212,7 @@ App.profile = (function () {
     });
 
     updateBgColorRowVisibility();
+    App.regions.bindSearch(overlay.querySelector('#profile-country-search'), overlay.querySelector('#profile-country'));
 
     function close() { overlay.remove(); }
     overlay.querySelector('#profile-cancel').addEventListener('click', close);
@@ -212,6 +221,8 @@ App.profile = (function () {
     overlay.querySelector('#profile-save').addEventListener('click', () => {
       const name = overlay.querySelector('#profile-name-input').value.trim().slice(0, 18);
       draft.name = name || App.t('profile_default_name');
+      const country = overlay.querySelector('#profile-country').value;
+      if (country) draft.country = country;
       App.storage.setProfile(draft);
       close();
       renderTopbarBadge();

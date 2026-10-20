@@ -1930,3 +1930,42 @@ button { background: none; }
   font-size: 10px; font-weight: 800; line-height: 16px; text-align: center;
   background: var(--surface); color: var(--ink); border: 1px solid var(--border);
 }
+
+/* Profile editor: avatar, name, country and flag on the left; animals,
+   backgrounds and colors on the right, all on even grids. */
+.modal-card.profile-card { max-width: 820px; }
+.profile-cols { display: grid; grid-template-columns: 250px 1fr; gap: 24px; align-items: start; }
+.profile-side { position: sticky; top: 0; }
+.profile-side .profile-preview { margin: 0 0 12px; }
+.profile-side .shop-term { width: 100%; }
+.profile-card .profile-flag-row { max-height: 150px; }
+.profile-card .profile-section-label:first-child { margin-top: 0; }
+.profile-card .profile-animal-grid,
+.profile-card .profile-pattern-row { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin-bottom: 4px; }
+.profile-card .profile-pattern-opt { width: auto; height: auto; aspect-ratio: 1; }
+.profile-card .profile-color-row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 8px; margin-bottom: 4px; }
+.profile-card .profile-color-opt { width: auto; height: auto; aspect-ratio: 1; }
+.profile-card .profile-modal-actions { margin-top: 18px; }
+@media (max-width: 760px) {
+  .profile-cols { grid-template-columns: 1fr; }
+  .profile-side { position: static; }
+  .profile-card .profile-animal-grid, .profile-card .profile-pattern-row { grid-template-columns: repeat(8, 1fr); }
+  .profile-card .profile-color-row { grid-template-columns: repeat(10, 1fr); }
+}
+
+/* Segmented 1 / 2 / 3 picker */
+.seg { display: inline-flex; gap: 4px; padding: 3px; border-radius: 12px; background: var(--surface-2); border: 2px solid var(--border); margin-left: auto; }
+.seg-btn { border: none; background: transparent; color: var(--ink-2); font: inherit; font-weight: 800; min-width: 40px; padding: 6px 10px; border-radius: 9px; cursor: pointer; }
+.seg-btn.active { background: var(--brand-1); color: #fff; }
+.accent-count-row { margin-bottom: 10px; }
+
+/* Country in Settings: a short list + Save */
+.country-list { height: auto; padding: 4px; }
+.country-list option { padding: 6px 8px; border-radius: 6px; }
+.country-list option:checked { background: var(--brand-1); color: #fff; }
+.country-save-row { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.country-save-row .country-save { margin: 0 0 0 auto; padding: 9px 20px; }
+.country-current { font-weight: 700; color: var(--ink-2); }
+
+.settings-bottom { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 6px 0 24px; }
+.settings-bottom .quiz-next, .settings-bottom .action-card { margin: 0; display: inline-flex; align-items: center; padding: 12px 22px; }

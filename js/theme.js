@@ -99,6 +99,7 @@ App.theme = (function () {
     if (typeof st.bgAnim !== 'boolean') st.bgAnim = true;
     if (typeof st.motion !== 'boolean') st.motion = true;
     if (!(st.font in FONTS)) st.font = 'standard';
+    if (![1, 2, 3].includes(st.accents)) st.accents = 3;
     return st;
   }
 
@@ -130,6 +131,9 @@ App.theme = (function () {
     el.classList.toggle('reduce-motion', !st.motion);
     el.style.zoom = st.scale === 1 ? '' : String(st.scale);
     if (FONTS[st.font]) el.style.setProperty('--font-body', FONTS[st.font]); else el.style.removeProperty('--font-body');
+    // Fewer accents: the unused ones repeat the last chosen accent.
+    if (st.accents < 3) el.style.setProperty('--brand-3', value(st.accents === 1 ? 'brand-1' : 'brand-2'));
+    if (st.accents < 2) el.style.setProperty('--brand-2', value('brand-1'));
     if (App.contrast) App.contrast.refresh();
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', value('surface'));
@@ -154,7 +158,7 @@ App.theme = (function () {
   }
   function reset() {
     const st = settings();
-    st.theme = 'neon'; st.custom = {}; st.scale = 1; st.bgAnim = true; st.motion = true; st.font = 'standard';
+    st.theme = 'neon'; st.custom = {}; st.scale = 1; st.bgAnim = true; st.motion = true; st.font = 'standard'; st.accents = 3;
     App.storage.save(); apply();
   }
 
