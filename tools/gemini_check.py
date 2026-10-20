@@ -14,7 +14,7 @@ in t ("мир, покой").
 
 The API key is read from the GEMINI_API_KEY environment variable or from
 tools/.gemini_key (both kept out of git). The model can be set with
-GEMINI_MODEL.
+GEMINI_MODEL, and GEMINI_LIMIT=N stops after N batches (a trial run).
 """
 import json, os, re, sys, time, urllib.request, urllib.error
 
@@ -22,7 +22,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HERE = os.path.join(ROOT, 'tools')
 CACHE = os.path.join(HERE, 'gemini_cache')
 BATCH = 80
-MODEL = os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash')
+MODEL = os.environ.get('GEMINI_MODEL', 'gemini-3.5-flash')
+# Stop after this many new batches (0 = no limit), for a trial run.
+LIMIT = int(os.environ.get('GEMINI_LIMIT', '0'))
 
 LANGS = {
     'en': 'English', 'cs': 'Czech', 'sk': 'Slovak', 'de': 'German', 'nl': 'Dutch', 'sv': 'Swedish',
@@ -103,7 +105,7 @@ def ask(key, lang, cat, chunk):
     url = 'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent' % MODEL
     req = urllib.request.Request(url, json.dumps(body).encode('utf8'),
                                  {'Content-Type': 'application/json', 'x-goog-api-key': key})
-    for attempt in range(6):
+    for attempt in range(10):
         try:
             with urllib.request.urlopen(req, timeout=180) as r:
                 data = json.loads(r.read().decode('utf8'))
@@ -116,7 +118,7 @@ def ask(key, lang, cat, chunk):
             msg = e.read().decode('utf8', 'replace')[:300]
             if e.code in (400, 401, 403, 404):
                 sys.exit('Gemini error %s: %s' % (e.code, msg))
-            wait = 20 * (attempt + 1)
+            wait = min(120, 20 * (attempt + 1))
             print('  HTTP %s, retry in %ss' % (e.code, wait), flush=True)
             time.sleep(wait)
         except Exception as e:
@@ -145,10 +147,14 @@ def check(lang):
         cur.append((i, w))
     if cur:
         batches.append(cur)
+    sent = 0
     for n, chunk in enumerate(batches):
         tag = '%d-%d' % (chunk[0][0], chunk[-1][0])
         if tag in cache['done']:
             continue
+        if LIMIT and sent >= LIMIT:
+            break
+        sent += 1
         out = ask(key, lang, chunk[0][1]['cat'], chunk)
         valid = {i for i, _ in chunk}
         for fix in out:
