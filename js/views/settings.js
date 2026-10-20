@@ -183,6 +183,7 @@ function voiceCardHtml() {
       <section class="settings-card">
         <h2>🔊 ${App.t('set_voice')}</h2>
         <p class="settings-hint">${App.t('set_voice_hint')}</p>
+        ${toggleHtml('set-voice-online', '🌐 ' + App.t('set_voice_online'), s.onlineVoices !== false)}
         <div class="settings-row voice-gender">
           <span>${App.t('set_voice_gender')}</span>
           <button class="action-card${gender === 'male' ? ' active' : ''}" data-gender="male">👨 ${App.t('voice_male')}</button>
@@ -196,7 +197,7 @@ function voiceCardHtml() {
             ${voices.map(v => `<option value="${v.voiceURI.replace(/"/g, '&quot;')}" ${v.voiceURI === picked ? 'selected' : ''}>${label(v)}</option>`).join('')}
           </select>
         </label>
-        ${voices.some(v => App.voiceGender(v) === gender) ? '' : `<div class="settings-status">ℹ️ ${App.t('tts_gender_pitch')}</div>`}` : `<div class="settings-status">🔇 ${App.t('tts_no_voice')}</div>`}
+        ${s.onlineVoices !== false || voices.some(v => App.voiceGender(v) === gender) ? '' : `<div class="settings-status">ℹ️ ${App.t('tts_gender_pitch')}</div>`}` : `<div class="settings-status">🔇 ${App.t('tts_no_voice')}</div>`}
         <button class="action-card" id="set-voice-test" ${voices.length ? '' : 'disabled'}>▶️ ${App.t('set_voice_test')}</button>
       </section>`;
 }
@@ -211,6 +212,12 @@ function bindVoiceCard(root) {
     render(root);
     speakSample(code);
   }));
+  root.querySelector('#set-voice-online').addEventListener('change', e => {
+    s.onlineVoices = e.target.checked;
+    App.storage.save();
+    render(root);
+    speakSample(code);
+  });
   const sel = root.querySelector('#set-voice');
   if (sel) sel.addEventListener('change', () => {
     s.voices = Object.assign({}, s.voices, { [code]: sel.value });

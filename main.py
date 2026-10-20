@@ -18,6 +18,9 @@ import http.server
 import functools
 import re
 import time
+import asyncio
+import urllib.parse
+from collections import OrderedDict
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Built into one .exe by PyInstaller (build-exe.ps1), the app files are
@@ -54,6 +57,77 @@ def asset_version():
     return str(int(newest))
 
 
+# Online neural voices (Microsoft Edge read-aloud voices, via edge-tts): a
+# male and a female voice for every course language. Windows itself has
+# only some languages offline, often one voice (Czech: only male Jakub).
+ONLINE_VOICES = {
+    'en': ('en-GB-RyanNeural', 'en-GB-SoniaNeural'), 'de': ('de-DE-ConradNeural', 'de-DE-KatjaNeural'),
+    'nl': ('nl-NL-MaartenNeural', 'nl-NL-ColetteNeural'), 'sv': ('sv-SE-MattiasNeural', 'sv-SE-SofieNeural'),
+    'no': ('nb-NO-FinnNeural', 'nb-NO-PernilleNeural'), 'da': ('da-DK-JeppeNeural', 'da-DK-ChristelNeural'),
+    'fr': ('fr-FR-HenriNeural', 'fr-FR-DeniseNeural'), 'es': ('es-ES-AlvaroNeural', 'es-ES-ElviraNeural'),
+    'it': ('it-IT-DiegoNeural', 'it-IT-ElsaNeural'), 'pt': ('pt-PT-DuarteNeural', 'pt-PT-RaquelNeural'),
+    'ro': ('ro-RO-EmilNeural', 'ro-RO-AlinaNeural'), 'pl': ('pl-PL-MarekNeural', 'pl-PL-ZofiaNeural'),
+    'cs': ('cs-CZ-AntoninNeural', 'cs-CZ-VlastaNeural'), 'sk': ('sk-SK-LukasNeural', 'sk-SK-ViktoriaNeural'),
+    'uk': ('uk-UA-OstapNeural', 'uk-UA-PolinaNeural'), 'ru': ('ru-RU-DmitryNeural', 'ru-RU-SvetlanaNeural'),
+    'bg': ('bg-BG-BorislavNeural', 'bg-BG-KalinaNeural'), 'hr': ('hr-HR-SreckoNeural', 'hr-HR-GabrijelaNeural'),
+    'sr': ('sr-RS-NicholasNeural', 'sr-RS-SophieNeural'), 'el': ('el-GR-NestorasNeural', 'el-GR-AthinaNeural'),
+    'fi': ('fi-FI-HarriNeural', 'fi-FI-NooraNeural'), 'hu': ('hu-HU-TamasNeural', 'hu-HU-NoemiNeural'),
+}
+# Some listed voices don't answer at times (cs Antonín, sk Lukáš); then a
+# multilingual voice of the same gender reads the text instead.
+MULTILINGUAL = {'male': 'en-US-AndrewMultilingualNeural', 'female': 'en-US-AvaMultilingualNeural'}
+_tts_broken = {}
+_tts_cache = OrderedDict()
+_tts_lock = threading.Lock()
+
+
+def online_tts(lang, gender, text, rate):
+    """MP3 bytes for the text, or None (no internet, no edge-tts)."""
+    voices = ONLINE_VOICES.get(lang)
+    if not voices or not text:
+        return None
+    gender = 'female' if gender == 'female' else 'male'
+    voice = voices[1] if gender == 'female' else voices[0]
+    key = (voice, rate, text)
+    with _tts_lock:
+        if key in _tts_cache:
+            _tts_cache.move_to_end(key)
+            return _tts_cache[key]
+    try:
+        import edge_tts
+    except ImportError:
+        return None
+
+    async def run(v):
+        out = bytearray()
+        async for chunk in edge_tts.Communicate(text, v, rate=rate).stream():
+            if chunk.get('type') == 'audio':
+                out += chunk['data']
+        return bytes(out)
+    data = None
+    for v in (voice, MULTILINGUAL[gender]):
+        if time.time() < _tts_broken.get(v, 0):
+            continue
+        try:
+            data = asyncio.run(asyncio.wait_for(run(v), 15))
+        except Exception as e:
+            # A voice that sends no audio is skipped for 10 minutes; a
+            # network error just fails this request.
+            if type(e).__name__ == 'NoAudioReceived':
+                _tts_broken[v] = time.time() + 600
+                continue
+            return None
+        if data:
+            break
+    if not data:
+        return None
+    with _tts_lock:
+        _tts_cache[key] = data
+        while len(_tts_cache) > 600:
+            _tts_cache.popitem(last=False)
+    return data
+
+
 class AppRequestHandler(http.server.SimpleHTTPRequestHandler):
     # Some Windows registries map .js to text/plain; pin the right types.
     extensions_map = {
@@ -64,6 +138,23 @@ class AppRequestHandler(http.server.SimpleHTTPRequestHandler):
     }
 
     def do_GET(self):
+        if self.path.startswith('/tts?'):
+            q = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
+            rate = q.get('r', ['+0%'])[0]
+            if not re.fullmatch(r'[+-]\d{1,2}%', rate):
+                rate = '+0%'
+            data = online_tts(q.get('l', [''])[0], q.get('g', ['male'])[0], q.get('t', [''])[0][:400], rate)
+            if not data:
+                self.send_response(503)
+                self.send_header('Content-Length', '0')
+                self.end_headers()
+                return
+            self.send_response(200)
+            self.send_header('Content-Type', 'audio/mpeg')
+            self.send_header('Content-Length', str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+            return
         # index.html goes out with "?v=<version>" on every script and style,
         # so after an update WebView2 can't reuse stale cached copies — it
         # did, even with no-cache, mixing an old index.html/app.js with new

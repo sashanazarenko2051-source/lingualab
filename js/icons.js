@@ -610,18 +610,59 @@ let _speakToken = 0;
 // True when the system has a voice for this language — listening exercises
 // are only offered then.
 App.hasVoice = function (langCode) {
+  if (onlineWanted(langCode) && navigator.onLine !== false) return true;
   if (!('speechSynthesis' in window)) return false;
   return !!findVoice(App.TTS_LANG[langCode] || 'en-US');
 };
 
 // Stops what is being read, including a speak() still waiting to start.
 App.stopSpeech = function () {
+  if (_audio) { try { _audio.pause(); } catch (e) { /* ignore */ } _audio = null; }
   if (!('speechSynthesis' in window)) return;
   ++_speakToken;
   try { speechSynthesis.cancel(); } catch (e) { /* ignore */ }
 };
 
+// Online voices come from the app's own server (main.py /tts). They give a
+// real male and female voice for every language; without internet the
+// device voices are used. A device voice picked in Settings wins.
+let _onlineDown = 0;
+let _audio = null;
+function onlineWanted(langCode) {
+  const s = (App.storage && App.storage.state && App.storage.state.settings) || {};
+  if (s.onlineVoices === false) return false;
+  if ((s.voices || {})[langCode]) return false;
+  if (!/^https?:/.test(location.protocol)) return false;
+  return Date.now() > _onlineDown;
+}
+function speakOnline(text, langCode, rate, token, fallback) {
+  const s = (App.storage && App.storage.state && App.storage.state.settings) || {};
+  const pct = Math.round(((rate || 1) - 1) * 100);
+  const r = (pct >= 0 ? '+' : '') + Math.max(-50, Math.min(50, pct)) + '%';
+  const url = `/tts?l=${langCode}&g=${s.voiceGender === 'female' ? 'female' : 'male'}&r=${encodeURIComponent(r)}&t=${encodeURIComponent(String(text).replace(/\s*\/\s*/g, ', '))}`;
+  const a = new Audio(url);
+  _audio = a;
+  let done = false;
+  const fail = () => {
+    if (done) return; done = true;
+    _onlineDown = Date.now() + 60000;   // try online again in a minute
+    if (token === _speakToken) fallback();
+  };
+  a.onerror = fail;
+  a.play().then(() => { done = true; }).catch(fail);
+}
+
 App.speak = function (text, langCode, rate) {
+  if (onlineWanted(langCode)) {
+    App.stopSpeech();
+    const token = ++_speakToken;
+    speakOnline(text, langCode, rate, token, () => speakLocal(text, langCode, rate));
+    return;
+  }
+  speakLocal(text, langCode, rate);
+};
+
+function speakLocal(text, langCode, rate) {
   if (!('speechSynthesis' in window)) return;
   const lang = App.TTS_LANG[langCode] || 'en-US';
   const token = ++_speakToken;
@@ -659,4 +700,4 @@ App.speak = function (text, langCode, rate) {
       speechSynthesis.speak(u);
     } catch (e) { /* no TTS voice available — silently skip */ }
   }, 80);
-};
+}
