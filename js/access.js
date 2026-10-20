@@ -4,7 +4,7 @@ window.App = window.App || {};
 // opens once every word of the previous topic has been studied or its exam
 // (80%) is passed. A passed level exam (A1, A2, B1) opens the whole level it
 // tests plus the first topic of the new level. Topics already started stay
-// open, and the full unlock (support / donation) opens everything.
+// open, and topics bought in the shop (App.shop) are open.
 App.access = (function () {
   // The 34 shared topics grouped into CEFR levels (see course.js).
   const LEVEL_GROUPS = [
@@ -14,7 +14,7 @@ App.access = (function () {
     { code: 'B1', from: 33, to: 34 }
   ];
 
-  function isPremium() { return !!App.storage.state.premium; }
+  function isPremium(code) { return App.shop.ownsTopics(code); }
 
   function topicPassed(code, cat) {
     if (App.storage.isExamPassed(code, cat.id)) return true;
@@ -35,7 +35,7 @@ App.access = (function () {
   }
 
   function isUnlocked(code, catId) {
-    if (isPremium()) return true;
+    if (isPremium(code)) return true;
     const cats = App.data[code].categories;
     const i = cats.findIndex(c => c.id === catId);
     if (i <= 0) return true;
@@ -48,12 +48,6 @@ App.access = (function () {
     const cats = App.data[code].categories;
     const i = cats.findIndex(c => c.id === catId);
     return i > 0 ? cats[i - 1] : null;
-  }
-
-  // Full unlock hook: resolve true once the payment went through.
-  // TODO: connect a real payment / donation service here.
-  function purchaseAll() {
-    return Promise.resolve(false);
   }
 
   // Shown when a closed topic is opened from anywhere.
@@ -95,15 +89,11 @@ App.access = (function () {
       });
     }
     overlay.querySelector('#lock-premium').addEventListener('click', () => {
-      purchaseAll().then(ok => {
-        if (!ok) { App.effects.toast('💎 ' + App.t('lock_unlock_soon')); return; }
-        App.storage.state.premium = true;
-        App.storage.save();
-        close();
-        App.router.go('course');
-      });
+      close();
+      App.session.shopSection = 'topics';
+      App.router.go('shop');
     });
   }
 
-  return { LEVEL_GROUPS, isUnlocked, isPremium, prevTopic, showLocked, purchaseAll };
+  return { LEVEL_GROUPS, isUnlocked, isPremium, prevTopic, showLocked };
 })();

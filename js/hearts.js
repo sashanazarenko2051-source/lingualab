@@ -17,14 +17,17 @@ App.hearts = (function () {
   function emit() { listeners.forEach(fn => fn(count())); }
   function onChange(fn) { listeners.push(fn); }
 
+  // Bought hearts (shop) can go past MAX, up to HARD_MAX.
+  const HARD_MAX = 200;
   function set(n) {
-    st().count = Math.max(0, Math.min(MAX, n));
+    st().count = Math.max(0, Math.min(HARD_MAX, n));
     if (st().count >= MAX) st().refillAt = 0;
     App.storage.save();
     emit();
   }
   // The first heart lost from a full wallet starts a REFILL_MS countdown.
   function lose(n) {
+    if (App.shop && App.shop.heartsUnlimited()) return;
     const h = st();
     if (!h.refillAt) h.refillAt = Date.now() + REFILL_MS;
     set(count() - (n || 1));
@@ -207,7 +210,8 @@ App.hearts = (function () {
       wrap.innerHTML = `
         <div class="heart-popup" role="dialog">
           <button class="heart-popup-close" id="heart-popup-close">✕</button>
-          <div class="heart-popup-big">${iconSvg(count() === 0)}<b>${count()}</b><span>/ ${MAX}</span></div>
+          <div class="heart-popup-big">${iconSvg(count() === 0)}<b>${count()}</b><span>/ ${App.shop.heartsUnlimited() ? '∞' : count() > MAX ? HARD_MAX : MAX}</span></div>
+          ${App.shop.heartsUnlimited() ? `<div class="energy-unlimited-until">∞ ${App.t('energy_unlimited_until', { date: new Date(App.shop.state().heartsUntil).toLocaleDateString() })}</div>` : ''}
           <div class="heart-popup-rules">
             <div>❌ ${App.t('hearts_rule_mistake')}</div>
             <div>📺 ${App.t('hearts_rule_ad')}</div>
@@ -215,9 +219,11 @@ App.hearts = (function () {
             ${refillLeft() ? `<div class="heart-popup-timer">⏳ ${App.t('hearts_refill_in', { t: refillLeft() })}</div>` : ''}
           </div>
           <button class="heart-ad-btn" id="heart-popup-ad">${App.t('hearts_ad_btn')}</button>
+          <button class="action-card energy-pack shop-link" id="heart-popup-shop">🛒 ${App.t('nav_shop')}</button>
           <button class="heart-popup-more" id="heart-popup-more">ℹ️ ${App.t('help_more')}</button>
         </div>`;
       wrap.querySelector('#heart-popup-close').addEventListener('click', closePopup);
+      wrap.querySelector('#heart-popup-shop').addEventListener('click', () => { closePopup(); App.session.shopSection = 'hearts'; App.router.go('shop'); });
       wrap.querySelector('#heart-popup-more').addEventListener('click', () => { closePopup(); App.openHelp('hearts'); });
       bindAd(wrap.querySelector('#heart-popup-ad'), draw);
     };

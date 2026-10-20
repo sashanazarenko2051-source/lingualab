@@ -35,7 +35,39 @@ App.theme = (function () {
       bad: '#e11d48', 'bad-dark': '#b3123a'
     } }
   };
-  const ORDER = ['neon', 'ocean', 'sunset', 'forest', 'graphite', 'light'];
+  // Unique themes sold in the shop (App.shop); the rest are free.
+  Object.assign(PRESETS, {
+    gold: { light: false, vars: {
+      page: '#0f0b03', surface: '#1c1508', 'surface-2': '#2a1f0b', border: '#4a3812',
+      ink: '#fff8e6', 'ink-2': '#e3c98a', 'ink-muted': '#8f7a4a',
+      'brand-1': '#ffd23f', 'brand-2': '#ff9f1c', 'brand-3': '#fff3b0'
+    } },
+    aurora: { light: false, vars: {
+      page: '#030b14', surface: '#081a26', 'surface-2': '#0c2636', border: '#16405a',
+      ink: '#eafff8', 'ink-2': '#9be7d0', 'ink-muted': '#4f8a7c',
+      'brand-1': '#4dffb4', 'brand-2': '#8a6bff', 'brand-3': '#36d6ff'
+    } },
+    sakura: { light: true, vars: {
+      page: '#fff3f7', surface: '#ffffff', 'surface-2': '#ffe6ef', border: '#f6c3d5',
+      ink: '#3b1426', 'ink-2': '#8a4a66', 'ink-muted': '#c08aa2',
+      'brand-1': '#ff5d9e', 'brand-2': '#b05cff', 'brand-3': '#3dbf8a',
+      good: '#2fa86e', 'good-dark': '#1f7d50', warn: '#e09a00', 'warn-dark': '#b07800',
+      bad: '#e0245e', 'bad-dark': '#b0174a'
+    } },
+    lava: { light: false, vars: {
+      page: '#120403', surface: '#200a07', 'surface-2': '#2e0f0a', border: '#5a1d12',
+      ink: '#fff1ec', 'ink-2': '#f0a48f', 'ink-muted': '#9a5a4a',
+      'brand-1': '#ff4d1c', 'brand-2': '#ffb000', 'brand-3': '#ff7ab0'
+    } },
+    royal: { light: false, vars: {
+      page: '#07051a', surface: '#110c2e', 'surface-2': '#1a1342', border: '#2e2470',
+      ink: '#f2eeff', 'ink-2': '#b6a8ff', 'ink-muted': '#6c62a8',
+      'brand-1': '#c9a2ff', 'brand-2': '#ffd23f', 'brand-3': '#5ce1ff'
+    } }
+  });
+  const PREMIUM = ['gold', 'aurora', 'sakura', 'lava', 'royal'];
+  const ORDER = ['neon', 'ocean', 'sunset', 'forest', 'graphite', 'light', ...PREMIUM];
+  function isLocked(name) { return PREMIUM.includes(name) && !(App.shop && App.shop.ownsTheme(name)); }
   // Colors the learner can override, with the stylesheet defaults they start from.
   const CUSTOM_KEYS = ['brand-1', 'brand-2', 'brand-3', 'page', 'surface', 'ink'];
   const NEON = {
@@ -50,7 +82,7 @@ App.theme = (function () {
     const s = App.storage.state;
     if (!s.settings) s.settings = {};
     const st = s.settings;
-    if (!PRESETS[st.theme]) st.theme = 'neon';
+    if (!PRESETS[st.theme] || isLocked(st.theme)) st.theme = 'neon';
     if (!st.custom || typeof st.custom !== 'object') st.custom = {};
     if (typeof st.scale !== 'number') st.scale = 1;
     if (typeof st.bgAnim !== 'boolean') st.bgAnim = true;
@@ -90,10 +122,12 @@ App.theme = (function () {
   }
 
   function setTheme(name) {
+    if (isLocked(name)) return false;
     const st = settings();
     st.theme = PRESETS[name] ? name : 'neon';
     st.custom = {};
     App.storage.save(); apply();
+    return true;
   }
   function setCustom(key, v) {
     const st = settings();
@@ -116,5 +150,5 @@ App.theme = (function () {
     return [v.page, v.surface, v['brand-1'], v['brand-2'], v['brand-3']];
   }
 
-  return { ORDER, CUSTOM_KEYS, settings, value, apply, setTheme, setCustom, setOption, reset, swatch };
+  return { ORDER, PREMIUM, isLocked, CUSTOM_KEYS, settings, value, apply, setTheme, setCustom, setOption, reset, swatch };
 })();

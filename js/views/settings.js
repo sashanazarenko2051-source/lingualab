@@ -31,7 +31,7 @@ function render(root) {
           ${App.theme.ORDER.map(name => `
             <button class="theme-card${st.theme === name && !Object.keys(st.custom).length ? ' active' : ''}" data-theme="${name}">
               <span class="theme-swatch">${App.theme.swatch(name).map(c => `<i style="background:${c}"></i>`).join('')}</span>
-              <span class="theme-name">${App.t('theme_' + name)}${name === 'neon' ? ` <em>${App.t('set_standard')}</em>` : ''}</span>
+              <span class="theme-name">${App.theme.isLocked(name) ? '🔒 ' : App.theme.PREMIUM.includes(name) ? '💎 ' : ''}${App.t('theme_' + name)}${name === 'neon' ? ` <em>${App.t('set_standard')}</em>` : ''}</span>
             </button>`).join('')}
         </div>
       </section>
@@ -71,7 +71,8 @@ function render(root) {
 
   root.querySelector('#set-help').addEventListener('click', () => App.openHelp());
   root.querySelectorAll('.theme-card').forEach(btn => btn.addEventListener('click', () => {
-    App.theme.setTheme(btn.dataset.theme);
+    // A unique theme not bought yet opens its card in the shop.
+    if (!App.theme.setTheme(btn.dataset.theme)) { App.session.shopSection = 'themes'; App.router.go('shop'); return; }
     render(root);
   }));
   root.querySelectorAll('input[type=color]').forEach(inp => {

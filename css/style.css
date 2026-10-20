@@ -1804,3 +1804,29 @@ button { background: none; }
 .settings-help { display: flex !important; align-items: center; gap: 10px; align-self: stretch; font-weight: 800; }
 .settings-help span { color: var(--ink-muted); font-weight: 600; font-size: 12px; }
 .heart-popup-more { margin-top: 10px; background: none; border: none; color: var(--brand-1); font-weight: 700; cursor: pointer; }
+
+/* ---- Shop ---------------------------------------------------------------- */
+.shop-page { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.shop-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.shop-tab { border: 2px solid var(--border); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 14px; font-weight: 700; cursor: pointer; }
+.shop-tab:hover { border-color: var(--brand-1); }
+.shop-section { scroll-margin-top: 90px; }
+.shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; }
+.shop-card { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 14px 12px; border-radius: 16px; border: 2px solid var(--border); background: var(--surface-2); box-shadow: 0 4px 0 var(--border); }
+.shop-card.owned { border-color: var(--good); }
+.shop-card-icon { font-size: 34px; line-height: 1; min-height: 36px; display: flex; align-items: center; }
+.shop-card-title { font-weight: 800; font-size: 14px; }
+.shop-card-note { font-size: 12px; color: #ffd23f; font-weight: 700; }
+.shop-card-price { font-weight: 900; font-size: 18px; color: #ffd23f; }
+.shop-card-actions { display: flex; gap: 8px; align-items: center; margin-top: auto; }
+.shop-buy { padding: 8px 18px; font-size: 14px; }
+.shop-gift { display: inline-flex; padding: 6px 10px; font-size: 18px; }
+.shop-owned { font-weight: 800; color: var(--good); font-size: 13px; }
+.shop-apply { display: inline-flex; padding: 6px 12px; }
+.shop-term { width: 100%; padding: 6px 8px; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); color: var(--ink); font: inherit; font-weight: 700; font-size: 13px; }
+.shop-swatch { width: 100px; height: 30px; }
+.shop-modal { max-width: 460px; }
+.shop-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; max-height: 50vh; overflow: auto; margin: 12px 0; }
+.shop-pick-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 10px; background: var(--surface-2); cursor: pointer; font-weight: 600; }
+.shop-friend { display: inline-flex; justify-content: center; }
+.shop-link { margin-top: 10px; }

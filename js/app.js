@@ -76,6 +76,7 @@ function initTopbar() {
     <button data-view="words">📒 ${App.t('nav_words')}</button>
     <button data-view="friends">👥 ${App.t('nav_friends')}</button>
     <button data-view="leaderboard">${App.t('nav_leaderboard')}</button>
+    <button data-view="shop">🛒 ${App.t('nav_shop')}</button>
   `;
   nav.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => App.router.go(btn.dataset.view));
@@ -91,6 +92,7 @@ function initTopbar() {
   App.profile.renderTopbarBadge();
   App.hearts.mountTopbar();
   App.energy.mountTopbar();
+  App.shop.claimGifts();
   const gear = document.getElementById('topbar-gear');
   gear.title = App.t('set_title');
   gear.addEventListener('click', () => App.router.go('settings'));

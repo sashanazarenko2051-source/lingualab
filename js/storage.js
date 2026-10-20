@@ -49,6 +49,7 @@ App.storage = (function () {
         hearts: Object.assign({}, d.hearts, parsed.hearts),
         premium: !!parsed.premium,
         energy: parsed.energy || null,
+        shop: parsed.shop || {},
         settings: Object.assign({}, d.settings, parsed.settings)
       };
     } catch (e) {

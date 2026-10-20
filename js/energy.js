@@ -3,8 +3,8 @@ window.App = window.App || {};
 // Energy is the "stamina" for lessons (App.storage.state.energy). Every
 // COST_EVERY finished exercises cost COST energy; mistakes cost hearts, not
 // energy. It refills by REGEN per hour up to CAP. Rewarded ads (+AD_GIFT) and
-// support packs can raise it above CAP, up to MAX; the unlimited pack turns
-// the cost off for UNLIMITED_DAYS.
+// shop packs can raise it above CAP, up to MAX; unlimited (bought for a
+// term in the shop) turns the cost off.
 // the cost off. At zero energy a lesson can't go on.
 App.energy = (function () {
   const CAP = 50;
@@ -15,7 +15,6 @@ App.energy = (function () {
   const COST_EVERY = 15;
   const AD_GIFT = 10;
   const PACKS = [100, 200, 'unlimited'];
-  const UNLIMITED_DAYS = 30;
   const listeners = [];
 
   function st() {
@@ -25,6 +24,13 @@ App.energy = (function () {
   }
   function count() { return st().count; }
   function unlimited() { return Date.now() < (st().unlimitedUntil || 0); }
+  // Unlimited from the shop; a second purchase extends the running period.
+  function extendUnlimited(days) {
+    const e = st();
+    e.unlimitedUntil = Math.max(Date.now(), e.unlimitedUntil || 0) + days * 24 * HOUR;
+    App.storage.save();
+    emit();
+  }
   function emit() { listeners.forEach(fn => fn(count())); }
   function onChange(fn) { listeners.push(fn); }
 
@@ -77,26 +83,6 @@ App.energy = (function () {
       .then(ok => { if (ok) add(AD_GIFT); return !!ok; })
       .catch(() => false)
       .finally(() => { adBusy = false; });
-  }
-
-  // Support pack hook: resolve true once the payment went through.
-  // TODO: connect a real payment / donation service here.
-  function purchase(pack) {
-    return Promise.resolve(false);
-  }
-  function buy(pack) {
-    return purchase(pack).then(ok => {
-      if (!ok) { App.effects.toast('💎 ' + App.t('lock_unlock_soon')); return false; }
-      if (pack === 'unlimited') {
-        // A second purchase extends the running period.
-        const e = st();
-        e.unlimitedUntil = Math.max(Date.now(), e.unlimitedUntil || 0) + UNLIMITED_DAYS * 24 * HOUR;
-        App.storage.save();
-        emit();
-      }
-      else add(pack);
-      return true;
-    });
   }
 
   // ---- visuals ------------------------------------------------------------
@@ -154,9 +140,11 @@ App.energy = (function () {
         });
       });
     }
+    // Packs are sold in the shop.
     scope.querySelectorAll('[data-pack]').forEach(b => b.addEventListener('click', () => {
-      const p = b.dataset.pack === 'unlimited' ? 'unlimited' : Number(b.dataset.pack);
-      buy(p).then(ok => { if (ok) after(); });
+      closePopup();
+      App.session.shopSection = 'energy';
+      App.router.go('shop');
     }));
   }
 
@@ -218,5 +206,5 @@ App.energy = (function () {
     draw();
   }
 
-  return { CAP, MAX, COST, COST_EVERY, AD_GIFT, count, unlimited, empty, add, stepDone, watchAd, buy, onChange, pillHtml, updatePill, mountTopbar, openPopup, renderOut };
+  return { CAP, MAX, COST, COST_EVERY, AD_GIFT, count, unlimited, extendUnlimited, empty, add, stepDone, watchAd, onChange, pillHtml, updatePill, mountTopbar, openPopup, renderOut };
 })();

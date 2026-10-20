@@ -105,8 +105,28 @@ App.cloud = (function () {
       .then(snaps => [].concat(...snaps.map(s => s.docs.map(d => d.data()))));
   }
 
+  // A shop item bought for a friend: stored until the friend's app takes it.
+  function sendGift(toUid, gift) {
+    if (!configured || !uid || !db) return Promise.reject(new Error('offline'));
+    return db.collection('gifts').add({
+      to: toUid, from: uid, fromName: App.storage.getProfile().name || '',
+      itemId: gift.itemId, opts: gift.opts || {},
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+
+  // Gifts sent to this account; each is deleted once read so it's given once.
+  function takeGifts() {
+    if (!configured || !uid || !db) return Promise.resolve([]);
+    return db.collection('gifts').where('to', '==', uid).get().then(snap =>
+      Promise.all(snap.docs.map(d => d.ref.delete().then(() => d.data(), () => null)))
+        .then(list => list.filter(Boolean)));
+  }
+
   return {
     isConfigured: () => configured,
+    sendGift,
+    takeGifts,
     getFriendCode,
     findUsers,
     fetchUsers,
