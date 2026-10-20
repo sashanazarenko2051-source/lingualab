@@ -7911,7 +7911,27 @@ App.data.no = {
         { w: 'høyreorientert', t: 'правый (политически)', ex: 'De høyreorienterte partiene vant valget.', tex: 'Правые партии победили на выборах.' },
         { w: 'liberal', t: 'либеральный', ex: 'Hun har liberale synspunkter.', tex: 'У неё либеральные взгляды.' },
         { w: 'konservativ', t: 'консервативный', ex: 'Bestefaren min er veldig konservativ.', tex: 'Мой дедушка очень консервативен.' },
-        { w: 'sosialismen', t: 'социализм', ex: 'De leste bøker om sosialismen.', tex: 'Они читали книги о социализме.' }
+        { w: 'sosialismen', t: 'социализм', ex: 'De leste bøker om sosialismen.', tex: 'Они читали книги о социализме.' },
+        { w: 'kapitalismen', t: 'капитализм', ex: 'Kapitalismen bygger på privat eiendom.', tex: 'Капитализм основан на частной собственности.' },
+        { w: 'kommunismen', t: 'коммунизм', ex: 'Landet levde under kommunismen i førti år.', tex: 'Страна сорок лет жила при коммунизме.' },
+        { w: 'nasjonalismen', t: 'национализм', ex: 'Nasjonalismen vokser i Europa.', tex: 'Национализм в Европе растёт.' },
+        { w: 'revolusjonen', t: 'революция', ex: 'Revolusjonen forandret landet for alltid.', tex: 'Революция навсегда изменила страну.' },
+        { w: 'imperiet', t: 'империя', ex: 'Imperiet falt på 400-tallet.', tex: 'Империя пала в пятом веке.' },
+        { w: 'sivilsamfunnet', t: 'гражданское общество', ex: 'Sivilsamfunnet organiserte hjelp til ofrene.', tex: 'Гражданское общество организовало помощь пострадавшим.' },
+        { w: 'opptøyene', t: 'беспорядки', ex: 'Protesten utviklet seg til opptøyer.', tex: 'Протест перерос в беспорядки.' },
+        { w: 'grensekontrollen', t: 'пограничный контроль', ex: 'Det er grensekontroll igjen.', tex: 'Снова ввели пограничный контроль.' },
+        { w: 'folketellingen', t: 'перепись населения', ex: 'Folketelling holdes hvert tiende år.', tex: 'Перепись населения проходит раз в десять лет.' },
+        { w: 'funksjonsnedsettelsen', t: 'инвалидность', ex: 'Bygningen er tilgjengelig for personer med funksjonsnedsettelse.', tex: 'Здание доступно для людей с инвалидностью.' },
+        { w: 'kjønnet', t: 'пол (мужской/женский)', ex: 'Skjemaet spør om alder og kjønn.', tex: 'В анкете спрашивают возраст и пол.' },
+        { w: 'feminismen', t: 'феминизм', ex: 'Feminismen kjemper for kvinners rettigheter.', tex: 'Феминизм борется за права женщин.' },
+        { w: 'borgerrettighetene', t: 'гражданские права', ex: 'Borgerrettighetsbevegelsen forandret historien.', tex: 'Движение за гражданские права изменило историю.' },
+        { w: 'kolonien', t: 'колония', ex: 'Øya var en gang en koloni.', tex: 'Когда-то остров был колонией.' },
+        { w: 'de offentlige tjenestene', t: 'государственные услуги', ex: 'Offentlige tjenester må være tilgjengelige for alle.', tex: 'Государственные услуги должны быть доступны всем.' },
+        { w: 'statsoverhodet', t: 'глава государства', ex: 'Kongen er statsoverhode.', tex: 'Король — глава государства.' },
+        { w: 'statsrådet', t: 'кабинет министров', ex: 'Statsrådet møtes hver onsdag.', tex: 'Кабинет министров заседает каждую среду.' },
+        { w: 'senatet', t: 'сенат', ex: 'Senatet avviste forslaget.', tex: 'Сенат отклонил предложение.' },
+        { w: 'stemmeretten', t: 'избирательное право', ex: 'Kvinner fikk stemmerett i 1913.', tex: 'Женщины получили избирательное право.' },
+        { w: 'borgerkrigen', t: 'гражданская война', ex: 'Borgerkrigen splittet familier.', tex: 'Гражданская война разделила семьи.' }
       ]
     }
   ],

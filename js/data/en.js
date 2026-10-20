@@ -7877,7 +7877,27 @@ App.data.en = {
         { w: 'right-wing', t: 'правый (политически)', ex: 'The right-wing parties won the election.', tex: 'Правые партии победили на выборах.' },
         { w: 'liberal', t: 'либеральный', ex: 'She has liberal views.', tex: 'У неё либеральные взгляды.' },
         { w: 'conservative', t: 'консервативный', ex: 'My grandfather is very conservative.', tex: 'Мой дедушка очень консервативен.' },
-        { w: 'socialism', t: 'социализм', ex: 'They read books about socialism.', tex: 'Они читали книги о социализме.' }
+        { w: 'socialism', t: 'социализм', ex: 'They read books about socialism.', tex: 'Они читали книги о социализме.' },
+        { w: 'capitalism', t: 'капитализм', ex: 'Capitalism is based on private property.', tex: 'Капитализм основан на частной собственности.' },
+        { w: 'communism', t: 'коммунизм', ex: 'The country lived under communism for forty years.', tex: 'Страна сорок лет жила при коммунизме.' },
+        { w: 'nationalism', t: 'национализм', ex: 'Nationalism is growing in Europe.', tex: 'Национализм в Европе растёт.' },
+        { w: 'revolution', t: 'революция', ex: 'The revolution changed the country forever.', tex: 'Революция навсегда изменила страну.' },
+        { w: 'empire', t: 'империя', ex: 'The empire fell in the fifth century.', tex: 'Империя пала в пятом веке.' },
+        { w: 'civil society', t: 'гражданское общество', ex: 'Civil society organized help for the victims.', tex: 'Гражданское общество организовало помощь пострадавшим.' },
+        { w: 'riot', t: 'беспорядки', ex: 'The protest turned into a riot.', tex: 'Протест перерос в беспорядки.' },
+        { w: 'border control', t: 'пограничный контроль', ex: 'There are border controls again.', tex: 'Снова ввели пограничный контроль.' },
+        { w: 'census', t: 'перепись населения', ex: 'A census takes place every ten years.', tex: 'Перепись населения проходит раз в десять лет.' },
+        { w: 'disability', t: 'инвалидность', ex: 'The building is accessible for people with disabilities.', tex: 'Здание доступно для людей с инвалидностью.' },
+        { w: 'gender', t: 'пол (мужской/женский)', ex: 'The form asks about age and gender.', tex: 'В анкете спрашивают возраст и пол.' },
+        { w: 'feminism', t: 'феминизм', ex: 'Feminism fights for women\'s rights.', tex: 'Феминизм борется за права женщин.' },
+        { w: 'civil rights', t: 'гражданские права', ex: 'The civil rights movement changed history.', tex: 'Движение за гражданские права изменило историю.' },
+        { w: 'colony', t: 'колония', ex: 'The island was once a colony.', tex: 'Когда-то остров был колонией.' },
+        { w: 'public services', t: 'государственные услуги', ex: 'Public services must be available to everyone.', tex: 'Государственные услуги должны быть доступны всем.' },
+        { w: 'head of state', t: 'глава государства', ex: 'The king is the head of state.', tex: 'Король — глава государства.' },
+        { w: 'cabinet (government)', t: 'кабинет министров', ex: 'The cabinet meets every Wednesday.', tex: 'Кабинет министров заседает каждую среду.' },
+        { w: 'senate', t: 'сенат', ex: 'The senate rejected the proposal.', tex: 'Сенат отклонил предложение.' },
+        { w: 'right to vote', t: 'избирательное право', ex: 'Women won the right to vote in 1918.', tex: 'Женщины получили избирательное право.' },
+        { w: 'civil war', t: 'гражданская война', ex: 'The civil war divided families.', tex: 'Гражданская война разделила семьи.' }
       ]
     }
   ],

@@ -7877,7 +7877,27 @@ App.data.nl = {
         { w: 'rechts (politiek)', t: 'правый (политически)', ex: 'De rechtse partijen wonnen de verkiezingen.', tex: 'Правые партии победили на выборах.' },
         { w: 'liberaal', t: 'либеральный', ex: 'Ze heeft liberale opvattingen.', tex: 'У неё либеральные взгляды.' },
         { w: 'conservatief', t: 'консервативный', ex: 'Mijn opa is erg conservatief.', tex: 'Мой дедушка очень консервативен.' },
-        { w: 'het socialisme', t: 'социализм', ex: 'Ze lazen boeken over het socialisme.', tex: 'Они читали книги о социализме.' }
+        { w: 'het socialisme', t: 'социализм', ex: 'Ze lazen boeken over het socialisme.', tex: 'Они читали книги о социализме.' },
+        { w: 'het kapitalisme', t: 'капитализм', ex: 'Het kapitalisme is gebaseerd op privébezit.', tex: 'Капитализм основан на частной собственности.' },
+        { w: 'het communisme', t: 'коммунизм', ex: 'Het land leefde veertig jaar onder het communisme.', tex: 'Страна сорок лет жила при коммунизме.' },
+        { w: 'het nationalisme', t: 'национализм', ex: 'Het nationalisme groeit in Europa.', tex: 'Национализм в Европе растёт.' },
+        { w: 'de revolutie', t: 'революция', ex: 'De revolutie veranderde het land voorgoed.', tex: 'Революция навсегда изменила страну.' },
+        { w: 'het rijk', t: 'империя', ex: 'Het rijk viel in de vijfde eeuw.', tex: 'Империя пала в пятом веке.' },
+        { w: 'het maatschappelijk middenveld', t: 'гражданское общество', ex: 'Het maatschappelijk middenveld organiseerde hulp voor de slachtoffers.', tex: 'Гражданское общество организовало помощь пострадавшим.' },
+        { w: 'de rellen', t: 'беспорядки', ex: 'Het protest liep uit op rellen.', tex: 'Протест перерос в беспорядки.' },
+        { w: 'de grenscontrole', t: 'пограничный контроль', ex: 'Er zijn weer grenscontroles.', tex: 'Снова ввели пограничный контроль.' },
+        { w: 'de volkstelling', t: 'перепись населения', ex: 'Elke tien jaar is er een volkstelling.', tex: 'Перепись населения проходит раз в десять лет.' },
+        { w: 'de handicap', t: 'инвалидность', ex: 'Het gebouw is toegankelijk voor mensen met een handicap.', tex: 'Здание доступно для людей с инвалидностью.' },
+        { w: 'het geslacht', t: 'пол (мужской/женский)', ex: 'Het formulier vraagt naar leeftijd en geslacht.', tex: 'В анкете спрашивают возраст и пол.' },
+        { w: 'het feminisme', t: 'феминизм', ex: 'Het feminisme strijdt voor vrouwenrechten.', tex: 'Феминизм борется за права женщин.' },
+        { w: 'de burgerrechten', t: 'гражданские права', ex: 'De burgerrechtenbeweging veranderde de geschiedenis.', tex: 'Движение за гражданские права изменило историю.' },
+        { w: 'de kolonie', t: 'колония', ex: 'Het eiland was ooit een kolonie.', tex: 'Когда-то остров был колонией.' },
+        { w: 'de openbare diensten', t: 'государственные услуги', ex: 'Openbare diensten moeten voor iedereen toegankelijk zijn.', tex: 'Государственные услуги должны быть доступны всем.' },
+        { w: 'het staatshoofd', t: 'глава государства', ex: 'De koning is het staatshoofd.', tex: 'Король — глава государства.' },
+        { w: 'het kabinet', t: 'кабинет министров', ex: 'Het kabinet vergadert elke woensdag.', tex: 'Кабинет министров заседает каждую среду.' },
+        { w: 'de senaat', t: 'сенат', ex: 'De senaat verwierp het voorstel.', tex: 'Сенат отклонил предложение.' },
+        { w: 'het stemrecht', t: 'избирательное право', ex: 'Vrouwen kregen in 1918 stemrecht.', tex: 'Женщины получили избирательное право.' },
+        { w: 'de burgeroorlog', t: 'гражданская война', ex: 'De burgeroorlog verdeelde families.', tex: 'Гражданская война разделила семьи.' }
       ]
     }
   ],

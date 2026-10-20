@@ -7875,7 +7875,27 @@ App.data.fi = {
         { w: 'oikeistolainen', t: 'правый (политически)', ex: 'Oikeistolaiset puolueet voittivat vaalit.', tex: 'Правые партии победили на выборах.' },
         { w: 'liberaali', t: 'либеральный', ex: 'Hänellä on liberaalit näkemykset.', tex: 'У неё либеральные взгляды.' },
         { w: 'konservatiivinen', t: 'консервативный', ex: 'Isoisäni on hyvin konservatiivinen.', tex: 'Мой дедушка очень консервативен.' },
-        { w: 'sosialismi', t: 'социализм', ex: 'He lukivat kirjoja sosialismista.', tex: 'Они читали книги о социализме.' }
+        { w: 'sosialismi', t: 'социализм', ex: 'He lukivat kirjoja sosialismista.', tex: 'Они читали книги о социализме.' },
+        { w: 'kapitalismi', t: 'капитализм', ex: 'Kapitalismi perustuu yksityisomistukseen.', tex: 'Капитализм основан на частной собственности.' },
+        { w: 'kommunismi', t: 'коммунизм', ex: 'Maa eli neljäkymmentä vuotta kommunismin alla.', tex: 'Страна сорок лет жила при коммунизме.' },
+        { w: 'nationalismi', t: 'национализм', ex: 'Nationalismi kasvaa Euroopassa.', tex: 'Национализм в Европе растёт.' },
+        { w: 'vallankumous', t: 'революция', ex: 'Vallankumous muutti maan pysyvästi.', tex: 'Революция навсегда изменила страну.' },
+        { w: 'keisarikunta', t: 'империя', ex: 'Keisarikunta kaatui viidennellä vuosisadalla.', tex: 'Империя пала в пятом веке.' },
+        { w: 'kansalaisyhteiskunta', t: 'гражданское общество', ex: 'Kansalaisyhteiskunta järjesti apua uhreille.', tex: 'Гражданское общество организовало помощь пострадавшим.' },
+        { w: 'mellakka', t: 'беспорядки', ex: 'Mielenosoitus muuttui mellakaksi.', tex: 'Протест перерос в беспорядки.' },
+        { w: 'rajatarkastus', t: 'пограничный контроль', ex: 'Rajatarkastukset ovat taas käytössä.', tex: 'Снова ввели пограничный контроль.' },
+        { w: 'väestönlaskenta', t: 'перепись населения', ex: 'Väestönlaskenta tehdään kymmenen vuoden välein.', tex: 'Перепись населения проходит раз в десять лет.' },
+        { w: 'vamma', t: 'инвалидность', ex: 'Rakennus on esteetön vammaisille ihmisille.', tex: 'Здание доступно для людей с инвалидностью.' },
+        { w: 'sukupuoli', t: 'пол (мужской/женский)', ex: 'Lomakkeessa kysytään ikää ja sukupuolta.', tex: 'В анкете спрашивают возраст и пол.' },
+        { w: 'feminismi', t: 'феминизм', ex: 'Feminismi taistelee naisten oikeuksien puolesta.', tex: 'Феминизм борется за права женщин.' },
+        { w: 'kansalaisoikeudet', t: 'гражданские права', ex: 'Kansalaisoikeusliike muutti historian.', tex: 'Движение за гражданские права изменило историю.' },
+        { w: 'siirtomaa', t: 'колония', ex: 'Saari oli aikoinaan siirtomaa.', tex: 'Когда-то остров был колонией.' },
+        { w: 'julkiset palvelut', t: 'государственные услуги', ex: 'Julkisten palvelujen on oltava kaikkien saatavilla.', tex: 'Государственные услуги должны быть доступны всем.' },
+        { w: 'valtionpäämies', t: 'глава государства', ex: 'Kuningas on valtionpäämies.', tex: 'Король — глава государства.' },
+        { w: 'valtioneuvosto', t: 'кабинет министров', ex: 'Valtioneuvosto kokoontuu joka keskiviikko.', tex: 'Кабинет министров заседает каждую среду.' },
+        { w: 'senaatti', t: 'сенат', ex: 'Senaatti hylkäsi ehdotuksen.', tex: 'Сенат отклонил предложение.' },
+        { w: 'äänioikeus', t: 'избирательное право', ex: 'Naiset saivat äänioikeuden vuonna 1906.', tex: 'Женщины получили избирательное право.' },
+        { w: 'sisällissota', t: 'гражданская война', ex: 'Sisällissota jakoi perheitä.', tex: 'Гражданская война разделила семьи.' }
       ]
     }
   ],

@@ -7877,7 +7877,27 @@ App.data.hr = {
         { w: 'desničarski', t: 'правый (политически)', ex: 'Desničarske stranke pobijedile su na izborima.', tex: 'Правые партии победили на выборах.' },
         { w: 'liberalan', t: 'либеральный', ex: 'Ima liberalne stavove.', tex: 'У неё либеральные взгляды.' },
         { w: 'konzervativan', t: 'консервативный', ex: 'Moj djed je vrlo konzervativan.', tex: 'Мой дедушка очень консервативен.' },
-        { w: 'socijalizam', t: 'социализм', ex: 'Čitali su knjige o socijalizmu.', tex: 'Они читали книги о социализме.' }
+        { w: 'socijalizam', t: 'социализм', ex: 'Čitali su knjige o socijalizmu.', tex: 'Они читали книги о социализме.' },
+        { w: 'kapitalizam', t: 'капитализм', ex: 'Kapitalizam se temelji na privatnom vlasništvu.', tex: 'Капитализм основан на частной собственности.' },
+        { w: 'komunizam', t: 'коммунизм', ex: 'Zemlja je četrdeset godina živjela u komunizmu.', tex: 'Страна сорок лет жила при коммунизме.' },
+        { w: 'nacionalizam', t: 'национализм', ex: 'Nacionalizam u Europi raste.', tex: 'Национализм в Европе растёт.' },
+        { w: 'revolucija', t: 'революция', ex: 'Revolucija je zauvijek promijenila zemlju.', tex: 'Революция навсегда изменила страну.' },
+        { w: 'carstvo', t: 'империя', ex: 'Carstvo je propalo u petom stoljeću.', tex: 'Империя пала в пятом веке.' },
+        { w: 'civilno društvo', t: 'гражданское общество', ex: 'Civilno društvo organiziralo je pomoć žrtvama.', tex: 'Гражданское общество организовало помощь пострадавшим.' },
+        { w: 'neredi', t: 'беспорядки', ex: 'Prosvjed je prerastao u nerede.', tex: 'Протест перерос в беспорядки.' },
+        { w: 'granična kontrola', t: 'пограничный контроль', ex: 'Ponovno postoje granične kontrole.', tex: 'Снова ввели пограничный контроль.' },
+        { w: 'popis stanovništva', t: 'перепись населения', ex: 'Popis stanovništva provodi se svakih deset godina.', tex: 'Перепись населения проходит раз в десять лет.' },
+        { w: 'invaliditet', t: 'инвалидность', ex: 'Zgrada je pristupačna osobama s invaliditetom.', tex: 'Здание доступно для людей с инвалидностью.' },
+        { w: 'spol', t: 'пол (мужской/женский)', ex: 'Obrazac traži dob i spol.', tex: 'В анкете спрашивают возраст и пол.' },
+        { w: 'feminizam', t: 'феминизм', ex: 'Feminizam se bori za prava žena.', tex: 'Феминизм борется за права женщин.' },
+        { w: 'građanska prava', t: 'гражданские права', ex: 'Pokret za građanska prava promijenio je povijest.', tex: 'Движение за гражданские права изменило историю.' },
+        { w: 'kolonija', t: 'колония', ex: 'Otok je nekoć bio kolonija.', tex: 'Когда-то остров был колонией.' },
+        { w: 'javne usluge', t: 'государственные услуги', ex: 'Javne usluge moraju biti dostupne svima.', tex: 'Государственные услуги должны быть доступны всем.' },
+        { w: 'šef države', t: 'глава государства', ex: 'Kralj je šef države.', tex: 'Король — глава государства.' },
+        { w: 'kabinet', t: 'кабинет министров', ex: 'Kabinet zasjeda svake srijede.', tex: 'Кабинет министров заседает каждую среду.' },
+        { w: 'senat', t: 'сенат', ex: 'Senat je odbio prijedlog.', tex: 'Сенат отклонил предложение.' },
+        { w: 'pravo glasa', t: 'избирательное право', ex: 'Žene su dobile pravo glasa.', tex: 'Женщины получили избирательное право.' },
+        { w: 'građanski rat', t: 'гражданская война', ex: 'Građanski rat podijelio je obitelji.', tex: 'Гражданская война разделила семьи.' }
       ]
     }
   ],

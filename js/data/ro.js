@@ -7875,7 +7875,27 @@ App.data.ro = {
         { w: 'de dreapta', t: 'правый (политически)', ex: 'Partidele de dreapta au câștigat alegerile.', tex: 'Правые партии победили на выборах.' },
         { w: 'liberal', t: 'либеральный', ex: 'Are vederi liberale.', tex: 'У неё либеральные взгляды.' },
         { w: 'conservator', t: 'консервативный', ex: 'Bunicul meu este foarte conservator.', tex: 'Мой дедушка очень консервативен.' },
-        { w: 'socialismul', t: 'социализм', ex: 'Au citit cărți despre socialism.', tex: 'Они читали книги о социализме.' }
+        { w: 'socialismul', t: 'социализм', ex: 'Au citit cărți despre socialism.', tex: 'Они читали книги о социализме.' },
+        { w: 'capitalismul', t: 'капитализм', ex: 'Capitalismul se bazează pe proprietatea privată.', tex: 'Капитализм основан на частной собственности.' },
+        { w: 'comunismul', t: 'коммунизм', ex: 'Țara a trăit patruzeci de ani sub comunism.', tex: 'Страна сорок лет жила при коммунизме.' },
+        { w: 'naționalismul', t: 'национализм', ex: 'Naționalismul crește în Europa.', tex: 'Национализм в Европе растёт.' },
+        { w: 'revoluția', t: 'революция', ex: 'Revoluția a schimbat țara pentru totdeauna.', tex: 'Революция навсегда изменила страну.' },
+        { w: 'imperiul', t: 'империя', ex: 'Imperiul a căzut în secolul al cincilea.', tex: 'Империя пала в пятом веке.' },
+        { w: 'societatea civilă', t: 'гражданское общество', ex: 'Societatea civilă a organizat ajutor pentru victime.', tex: 'Гражданское общество организовало помощь пострадавшим.' },
+        { w: 'revolta (de stradă)', t: 'беспорядки', ex: 'Protestul s-a transformat într-o revoltă.', tex: 'Протест перерос в беспорядки.' },
+        { w: 'controlul la frontieră', t: 'пограничный контроль', ex: 'Există din nou controale la frontieră.', tex: 'Снова ввели пограничный контроль.' },
+        { w: 'recensământul', t: 'перепись населения', ex: 'Recensământul are loc o dată la zece ani.', tex: 'Перепись населения проходит раз в десять лет.' },
+        { w: 'dizabilitatea', t: 'инвалидность', ex: 'Clădirea este accesibilă persoanelor cu dizabilități.', tex: 'Здание доступно для людей с инвалидностью.' },
+        { w: 'genul', t: 'пол (мужской/женский)', ex: 'Formularul cere vârsta și genul.', tex: 'В анкете спрашивают возраст и пол.' },
+        { w: 'feminismul', t: 'феминизм', ex: 'Feminismul luptă pentru drepturile femeilor.', tex: 'Феминизм борется за права женщин.' },
+        { w: 'drepturile civile', t: 'гражданские права', ex: 'Mișcarea pentru drepturile civile a schimbat istoria.', tex: 'Движение за гражданские права изменило историю.' },
+        { w: 'colonia', t: 'колония', ex: 'Insula a fost cândva o colonie.', tex: 'Когда-то остров был колонией.' },
+        { w: 'serviciile publice', t: 'государственные услуги', ex: 'Serviciile publice trebuie să fie accesibile tuturor.', tex: 'Государственные услуги должны быть доступны всем.' },
+        { w: 'șeful statului', t: 'глава государства', ex: 'Regele este șeful statului.', tex: 'Король — глава государства.' },
+        { w: 'cabinetul', t: 'кабинет министров', ex: 'Cabinetul se întrunește în fiecare miercuri.', tex: 'Кабинет министров заседает каждую среду.' },
+        { w: 'senatul', t: 'сенат', ex: 'Senatul a respins propunerea.', tex: 'Сенат отклонил предложение.' },
+        { w: 'dreptul de vot', t: 'избирательное право', ex: 'Femeile au obținut dreptul de vot.', tex: 'Женщины получили избирательное право.' },
+        { w: 'războiul civil', t: 'гражданская война', ex: 'Războiul civil a dezbinat familii.', tex: 'Гражданская война разделила семьи.' }
       ]
     }
   ],

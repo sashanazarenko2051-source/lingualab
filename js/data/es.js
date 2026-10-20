@@ -7876,7 +7876,27 @@ App.data.es = {
         { w: 'de derechas', t: 'правый (политически)', ex: 'Los partidos de derechas ganaron las elecciones.', tex: 'Правые партии победили на выборах.' },
         { w: 'liberal', t: 'либеральный', ex: 'Tiene opiniones liberales.', tex: 'У неё либеральные взгляды.' },
         { w: 'conservador', t: 'консервативный', ex: 'Mi abuelo es muy conservador.', tex: 'Мой дедушка очень консервативен.' },
-        { w: 'el socialismo', t: 'социализм', ex: 'Leyeron libros sobre el socialismo.', tex: 'Они читали книги о социализме.' }
+        { w: 'el socialismo', t: 'социализм', ex: 'Leyeron libros sobre el socialismo.', tex: 'Они читали книги о социализме.' },
+        { w: 'el capitalismo', t: 'капитализм', ex: 'El capitalismo se basa en la propiedad privada.', tex: 'Капитализм основан на частной собственности.' },
+        { w: 'el comunismo', t: 'коммунизм', ex: 'El país vivió cuarenta años bajo el comunismo.', tex: 'Страна сорок лет жила при коммунизме.' },
+        { w: 'el nacionalismo', t: 'национализм', ex: 'El nacionalismo crece en Europa.', tex: 'Национализм в Европе растёт.' },
+        { w: 'la revolución', t: 'революция', ex: 'La revolución cambió el país para siempre.', tex: 'Революция навсегда изменила страну.' },
+        { w: 'el imperio', t: 'империя', ex: 'El imperio cayó en el siglo quinto.', tex: 'Империя пала в пятом веке.' },
+        { w: 'la sociedad civil', t: 'гражданское общество', ex: 'La sociedad civil organizó ayuda para las víctimas.', tex: 'Гражданское общество организовало помощь пострадавшим.' },
+        { w: 'los disturbios', t: 'беспорядки', ex: 'La protesta acabó en disturbios.', tex: 'Протест перерос в беспорядки.' },
+        { w: 'el control fronterizo', t: 'пограничный контроль', ex: 'Vuelve a haber controles fronterizos.', tex: 'Снова ввели пограничный контроль.' },
+        { w: 'el censo', t: 'перепись населения', ex: 'Cada diez años se hace un censo.', tex: 'Перепись населения проходит раз в десять лет.' },
+        { w: 'la discapacidad', t: 'инвалидность', ex: 'El edificio es accesible para personas con discapacidad.', tex: 'Здание доступно для людей с инвалидностью.' },
+        { w: 'el género', t: 'пол (мужской/женский)', ex: 'El formulario pregunta la edad y el género.', tex: 'В анкете спрашивают возраст и пол.' },
+        { w: 'el feminismo', t: 'феминизм', ex: 'El feminismo lucha por los derechos de las mujeres.', tex: 'Феминизм борется за права женщин.' },
+        { w: 'los derechos civiles', t: 'гражданские права', ex: 'El movimiento por los derechos civiles cambió la historia.', tex: 'Движение за гражданские права изменило историю.' },
+        { w: 'la colonia', t: 'колония', ex: 'La isla fue una colonia.', tex: 'Когда-то остров был колонией.' },
+        { w: 'los servicios públicos', t: 'государственные услуги', ex: 'Los servicios públicos deben estar al alcance de todos.', tex: 'Государственные услуги должны быть доступны всем.' },
+        { w: 'el jefe de Estado', t: 'глава государства', ex: 'El rey es el jefe de Estado.', tex: 'Король — глава государства.' },
+        { w: 'el consejo de ministros', t: 'кабинет министров', ex: 'El consejo de ministros se reúne cada miércoles.', tex: 'Кабинет министров заседает каждую среду.' },
+        { w: 'el senado', t: 'сенат', ex: 'El senado rechazó la propuesta.', tex: 'Сенат отклонил предложение.' },
+        { w: 'el derecho al voto', t: 'избирательное право', ex: 'Las mujeres consiguieron el derecho al voto en 1931.', tex: 'Женщины получили избирательное право.' },
+        { w: 'la guerra civil', t: 'гражданская война', ex: 'La guerra civil dividió familias.', tex: 'Гражданская война разделила семьи.' }
       ]
     }
   ],

@@ -7808,7 +7808,27 @@ App.data.sk = {
       { w: 'pravicový', t: 'правый (политически)', ex: 'Pravicové strany vyhrali voľby.', tex: 'Правые партии победили на выборах.' },
       { w: 'liberálny', t: 'либеральный', ex: 'Má liberálne názory.', tex: 'У неё либеральные взгляды.' },
       { w: 'konzervatívny', t: 'консервативный', ex: 'Môj starý otec je veľmi konzervatívny.', tex: 'Мой дедушка очень консервативен.' },
-      { w: 'socializmus', t: 'социализм', ex: 'Čítali knihy o socializme.', tex: 'Они читали книги о социализме.' }
+      { w: 'socializmus', t: 'социализм', ex: 'Čítali knihy o socializme.', tex: 'Они читали книги о социализме.' },
+      { w: 'kapitalizmus', t: 'капитализм', ex: 'Kapitalizmus je založený na súkromnom vlastníctve.', tex: 'Капитализм основан на частной собственности.' },
+      { w: 'komunizmus', t: 'коммунизм', ex: 'Krajina žila štyridsať rokov v komunizme.', tex: 'Страна сорок лет жила при коммунизме.' },
+      { w: 'nacionalizmus', t: 'национализм', ex: 'Nacionalizmus v Európe silnie.', tex: 'Национализм в Европе растёт.' },
+      { w: 'revolúcia', t: 'революция', ex: 'Revolúcia zmenila krajinu navždy.', tex: 'Революция навсегда изменила страну.' },
+      { w: 'ríša', t: 'империя', ex: 'Ríša padla v piatom storočí.', tex: 'Империя пала в пятом веке.' },
+      { w: 'občianska spoločnosť', t: 'гражданское общество', ex: 'Občianska spoločnosť zorganizovala pomoc obetiam.', tex: 'Гражданское общество организовало помощь пострадавшим.' },
+      { w: 'nepokoje', t: 'беспорядки', ex: 'Protest prerástol do nepokojov.', tex: 'Протест перерос в беспорядки.' },
+      { w: 'hraničná kontrola', t: 'пограничный контроль', ex: 'Znova sú hraničné kontroly.', tex: 'Снова ввели пограничный контроль.' },
+      { w: 'sčítanie obyvateľov', t: 'перепись населения', ex: 'Sčítanie obyvateľov sa koná každých desať rokov.', tex: 'Перепись населения проходит раз в десять лет.' },
+      { w: 'zdravotné postihnutie', t: 'инвалидность', ex: 'Budova je prístupná ľuďom so zdravotným postihnutím.', tex: 'Здание доступно для людей с инвалидностью.' },
+      { w: 'pohlavie', t: 'пол (мужской/женский)', ex: 'Formulár sa pýta na vek a pohlavie.', tex: 'В анкете спрашивают возраст и пол.' },
+      { w: 'feminizmus', t: 'феминизм', ex: 'Feminizmus bojuje za práva žien.', tex: 'Феминизм борется за права женщин.' },
+      { w: 'občianske práva', t: 'гражданские права', ex: 'Hnutie za občianske práva zmenilo dejiny.', tex: 'Движение за гражданские права изменило историю.' },
+      { w: 'kolónia', t: 'колония', ex: 'Ostrov bol kedysi kolóniou.', tex: 'Когда-то остров был колонией.' },
+      { w: 'verejné služby', t: 'государственные услуги', ex: 'Verejné služby musia byť dostupné všetkým.', tex: 'Государственные услуги должны быть доступны всем.' },
+      { w: 'hlava štátu', t: 'глава государства', ex: 'Kráľ je hlavou štátu.', tex: 'Король — глава государства.' },
+      { w: 'kabinet', t: 'кабинет министров', ex: 'Kabinet zasadá každú stredu.', tex: 'Кабинет министров заседает каждую среду.' },
+      { w: 'senát', t: 'сенат', ex: 'Senát návrh zamietol.', tex: 'Сенат отклонил предложение.' },
+      { w: 'volebné právo', t: 'избирательное право', ex: 'Ženy získali volebné právo v roku 1918.', tex: 'Женщины получили избирательное право.' },
+      { w: 'občianska vojna', t: 'гражданская война', ex: 'Občianska vojna rozdelila rodiny.', tex: 'Гражданская война разделила семьи.' }
     ] }
   ],
   dialogues: [

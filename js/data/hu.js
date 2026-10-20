@@ -7875,7 +7875,27 @@ App.data.hu = {
         { w: 'jobboldali', t: 'правый (политически)', ex: 'A jobboldali pártok nyerték a választást.', tex: 'Правые партии победили на выборах.' },
         { w: 'liberális', t: 'либеральный', ex: 'Liberális nézetei vannak.', tex: 'У неё либеральные взгляды.' },
         { w: 'konzervatív', t: 'консервативный', ex: 'A nagyapám nagyon konzervatív.', tex: 'Мой дедушка очень консервативен.' },
-        { w: 'a szocializmus', t: 'социализм', ex: 'Könyveket olvastak a szocializmusról.', tex: 'Они читали книги о социализме.' }
+        { w: 'a szocializmus', t: 'социализм', ex: 'Könyveket olvastak a szocializmusról.', tex: 'Они читали книги о социализме.' },
+        { w: 'a kapitalizmus', t: 'капитализм', ex: 'A kapitalizmus a magántulajdonon alapul.', tex: 'Капитализм основан на частной собственности.' },
+        { w: 'a kommunizmus', t: 'коммунизм', ex: 'Az ország negyven évig élt kommunizmusban.', tex: 'Страна сорок лет жила при коммунизме.' },
+        { w: 'a nacionalizmus', t: 'национализм', ex: 'Európában erősödik a nacionalizmus.', tex: 'Национализм в Европе растёт.' },
+        { w: 'a forradalom', t: 'революция', ex: 'A forradalom örökre megváltoztatta az országot.', tex: 'Революция навсегда изменила страну.' },
+        { w: 'a birodalom', t: 'империя', ex: 'A birodalom az ötödik században bukott el.', tex: 'Империя пала в пятом веке.' },
+        { w: 'a civil társadalom', t: 'гражданское общество', ex: 'A civil társadalom segítséget szervezett az áldozatoknak.', tex: 'Гражданское общество организовало помощь пострадавшим.' },
+        { w: 'a zavargás', t: 'беспорядки', ex: 'A tüntetés zavargásba torkollott.', tex: 'Протест перерос в беспорядки.' },
+        { w: 'a határellenőrzés', t: 'пограничный контроль', ex: 'Újra van határellenőrzés.', tex: 'Снова ввели пограничный контроль.' },
+        { w: 'a népszámlálás', t: 'перепись населения', ex: 'Tízévente népszámlálást tartanak.', tex: 'Перепись населения проходит раз в десять лет.' },
+        { w: 'a fogyatékosság', t: 'инвалидность', ex: 'Az épület akadálymentes a fogyatékossággal élők számára.', tex: 'Здание доступно для людей с инвалидностью.' },
+        { w: 'a nem (biológiai)', t: 'пол (мужской/женский)', ex: 'Az űrlap a korra és a nemre kérdez rá.', tex: 'В анкете спрашивают возраст и пол.' },
+        { w: 'a feminizmus', t: 'феминизм', ex: 'A feminizmus a nők jogaiért harcol.', tex: 'Феминизм борется за права женщин.' },
+        { w: 'a polgárjogok', t: 'гражданские права', ex: 'A polgárjogi mozgalom megváltoztatta a történelmet.', tex: 'Движение за гражданские права изменило историю.' },
+        { w: 'a gyarmat', t: 'колония', ex: 'A sziget egykor gyarmat volt.', tex: 'Когда-то остров был колонией.' },
+        { w: 'a közszolgáltatások', t: 'государственные услуги', ex: 'A közszolgáltatásoknak mindenki számára elérhetőnek kell lenniük.', tex: 'Государственные услуги должны быть доступны всем.' },
+        { w: 'az államfő', t: 'глава государства', ex: 'A király az államfő.', tex: 'Король — глава государства.' },
+        { w: 'a kabinet', t: 'кабинет министров', ex: 'A kabinet minden szerdán ülésezik.', tex: 'Кабинет министров заседает каждую среду.' },
+        { w: 'a szenátus', t: 'сенат', ex: 'A szenátus elutasította a javaslatot.', tex: 'Сенат отклонил предложение.' },
+        { w: 'a választójog', t: 'избирательное право', ex: 'A nők megkapták a választójogot.', tex: 'Женщины получили избирательное право.' },
+        { w: 'a polgárháború', t: 'гражданская война', ex: 'A polgárháború családokat szakított szét.', tex: 'Гражданская война разделила семьи.' }
       ]
     }
   ],
