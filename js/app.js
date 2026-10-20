@@ -78,6 +78,7 @@ App.UI_LANG_ORDER = App.LANG_ORDER.slice().sort((a, b) => (a === 'ru' ? -1 : b =
 
 function initTopbar() {
   document.title = App.t('app_title');
+  document.getElementById('brand-name').textContent = App.t('brand_name');
 
   const nav = document.getElementById('nav');
   nav.innerHTML = `
