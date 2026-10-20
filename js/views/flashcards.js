@@ -32,6 +32,7 @@ App.views.flashcards = {
         root, steps: App.lesson.buildCustomSession(words), code, lessonId: App.lesson.newLessonId(),
         onFinish: (state) => renderResult(root, state, meta),
         onOutOfHearts: (state) => renderOutOfHearts(root, state, meta),
+        onOutOfEnergy: (state) => App.energy.renderOut(root, { summary: summaryHtml(state), onRetry: () => restart(meta) }),
         onExit: () => App.router.go(customFrom)
       });
       return;
@@ -62,6 +63,7 @@ App.views.flashcards = {
       root, steps, code, lessonId: App.lesson.newLessonId(),
       onFinish: (state) => renderResult(root, state, meta),
       onOutOfHearts: (state) => renderOutOfHearts(root, state, meta),
+        onOutOfEnergy: (state) => App.energy.renderOut(root, { summary: summaryHtml(state), onRetry: () => restart(meta) }),
       onExit: () => App.router.go(mistakesMode ? 'dashboard' : 'course')
     });
   }

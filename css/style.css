@@ -1554,6 +1554,30 @@ button { background: none; }
   * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
+/* ---- Energy ------------------------------------------------------------- */
+.energy-pill {
+  display: inline-flex; align-items: center; gap: 4px; flex: none;
+  padding: 4px 10px 4px 6px; border-radius: 999px;
+  background: color-mix(in srgb, #ffc93c 14%, rgba(0,0,0,.35));
+  border: 1px solid color-mix(in srgb, #ffc93c 50%, transparent);
+  font-weight: 800; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.6);
+  white-space: nowrap; user-select: none;
+}
+.energy-pill b { min-width: 1.2em; text-align: center; font-size: 15px; }
+.energy-pill.clickable { cursor: pointer; transition: transform .15s ease; }
+.energy-pill.clickable:hover { transform: scale(1.06); }
+.energy-pill.low .energy-ico { animation: heartBeat .8s ease-in-out infinite; }
+.energy-pill.empty { background: rgba(0,0,0,.35); border-color: var(--border); color: var(--ink-muted); }
+.energy-ico { font-size: 18px; line-height: 1; filter: drop-shadow(0 0 4px rgba(255,201,60,.7)); }
+.energy-pill.empty .energy-ico { filter: grayscale(1); }
+.topbar-hearts + .topbar-hearts { margin-left: 8px; }
+.ex-energy { margin-right: 6px; }
+.energy-big .energy-ico { font-size: 44px; }
+.energy-out-icon { font-size: 72px; line-height: 1; filter: drop-shadow(0 0 12px rgba(255,201,60,.6)); }
+.energy-packs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.energy-pack { display: inline-flex; border-color: #ffd23f; color: #ffd23f; padding: 8px 14px; }
+[data-theme="light"] .energy-pill { background: color-mix(in srgb, #ffc93c 18%, #fff); color: var(--ink); text-shadow: none; }
+
 /* ---- Hearts wallet ------------------------------------------------------ */
 .heart-pill {
   display: inline-flex; align-items: center; gap: 6px; flex: none;

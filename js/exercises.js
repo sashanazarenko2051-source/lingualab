@@ -98,7 +98,7 @@ App.exercises = (function () {
   }
 
   // ---- runner -------------------------------------------------------------
-  // opts: { root, steps, code, lessonId, hearts (bool), onFinish(state), onOutOfHearts(state), onExit() }
+  // opts: { root, steps, code, lessonId, hearts (bool), onFinish(state), onOutOfHearts(state), onOutOfEnergy(state), onExit() }
   function run(opts) {
     const state = {
       steps: opts.steps, index: 0, code: opts.code, lessonId: opts.lessonId,
@@ -106,8 +106,9 @@ App.exercises = (function () {
       correct: 0, tested: 0, learned: 0, seen: new Set(), repeats: {}, tally: { added: 0, fixed: 0 },
       startedAt: Date.now()
     };
-    // An empty wallet can't start a lesson with hearts.
+    // An empty wallet (or no energy) can't start a lesson with hearts.
     if (state.useHearts && state.hearts === 0) opts.onOutOfHearts(state);
+    else if (state.useHearts && App.energy.empty()) (opts.onOutOfEnergy || opts.onOutOfHearts)(state);
     else renderStep(opts, state);
     return state;
   }
@@ -118,7 +119,7 @@ App.exercises = (function () {
       <div class="ex-topbar">
         <button class="ex-close" id="ex-close" title="${App.t('back_btn_title')}">✕</button>
         <div class="ex-progress"><div class="ex-progress-fill" style="width:${pct}%; background:${accent}"></div></div>
-        ${state.useHearts ? App.hearts.pillHtml('ex-hearts', 'ex-hearts') : ''}
+        ${state.useHearts ? App.energy.pillHtml('ex-energy', 'ex-energy') + App.hearts.pillHtml('ex-hearts', 'ex-hearts') : ''}
         ${state.combo >= 2 ? `<span class="combo-badge">🔥${state.combo}</span>` : ''}
       </div>
     `;
@@ -182,20 +183,14 @@ App.exercises = (function () {
         // exercise, where it sounds like the new word's pronunciation.
         App.stopSpeech();
         state.index += 1;
-        // Every DRAIN_EVERY finished exercises cost a heart too.
-        const drained = state.useHearts && App.hearts.stepDone();
-        if (drained) {
-          state.hearts = App.hearts.count();
-          App.effects.heartLoss();
-          App.effects.toast(App.t('hearts_drain_toast', { n: App.hearts.DRAIN_EVERY }), 'heart-toast');
-        }
+        // Every App.energy.COST_EVERY finished exercises cost energy.
+        const spent = state.useHearts && App.energy.stepDone();
+        if (spent) App.effects.toast(App.t('energy_drain_toast', { cost: App.energy.COST, n: App.energy.COST_EVERY }), 'energy-toast');
         if (state.useHearts) state.hearts = App.hearts.count();
         if (state.useHearts && state.hearts === 0) opts.onOutOfHearts(state);
+        else if (state.useHearts && App.energy.empty() && state.index < state.steps.length) (opts.onOutOfEnergy || opts.onOutOfHearts)(state);
         else if (state.index >= state.steps.length) opts.onFinish(state);
-        else {
-          renderStep(opts, state);
-          if (drained) App.hearts.breakAt(root.querySelector('#ex-hearts .heart-ico'));
-        }
+        else renderStep(opts, state);
       }
     };
 

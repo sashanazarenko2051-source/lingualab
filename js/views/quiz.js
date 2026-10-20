@@ -47,6 +47,7 @@ App.views.quiz = {
       root, steps, code, lessonId: App.lesson.newLessonId(), hearts: !meta.isExam,
       onFinish: (state) => renderResult(root, state, meta),
       onOutOfHearts: (state) => renderOutOfHearts(root, meta),
+      onOutOfEnergy: () => App.energy.renderOut(root, { onRetry: () => restart(meta) }),
       onExit: () => App.router.go('course')
     });
   }

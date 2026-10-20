@@ -1,12 +1,11 @@
 window.App = window.App || {};
 
 // Hearts are one shared wallet kept between lessons (App.storage.state.hearts).
-// A wrong answer costs a heart, and every DRAIN_EVERY finished exercises cost
-// one more. Watching a rewarded ad gives one back (watchAd is the hook for the
+// A wrong answer costs a heart (the per-exercise cost is energy, see
+// energy.js). Watching a rewarded ad gives one back (watchAd is the hook for the
 // ad SDK). At zero hearts lessons with hearts can't be played.
 App.hearts = (function () {
   const MAX = 20;
-  const DRAIN_EVERY = 10;
   const listeners = [];
 
   function st() {
@@ -58,16 +57,6 @@ App.hearts = (function () {
     checkRefill();
     setInterval(checkRefill, 60 * 1000);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) checkRefill(); });
-  }
-
-  // Called once per finished exercise; returns true when the drain took a heart.
-  function stepDone() {
-    const h = st();
-    h.steps = (h.steps || 0) + 1;
-    if (h.steps < DRAIN_EVERY) { App.storage.save(); return false; }
-    h.steps = 0;
-    lose(1);
-    return true;
   }
 
   // Rewarded ad hook: resolve true when the viewer earned the reward.
@@ -221,7 +210,6 @@ App.hearts = (function () {
           <div class="heart-popup-big">${iconSvg(count() === 0)}<b>${count()}</b><span>/ ${MAX}</span></div>
           <div class="heart-popup-rules">
             <div>❌ ${App.t('hearts_rule_mistake')}</div>
-            <div>🔟 ${App.t('hearts_rule_drain', { n: DRAIN_EVERY })}</div>
             <div>📺 ${App.t('hearts_rule_ad')}</div>
             <div>🕐 ${App.t('hearts_rule_refill', { n: MAX })}</div>
             ${refillLeft() ? `<div class="heart-popup-timer">⏳ ${App.t('hearts_refill_in', { t: refillLeft() })}</div>` : ''}
@@ -239,5 +227,5 @@ App.hearts = (function () {
   }
   function closePopup() { const p = document.getElementById('heart-popup'); if (p) p.remove(); }
 
-  return { MAX, DRAIN_EVERY, count, lose, add, stepDone, watchAd, onChange, pillHtml, updatePill, breakAt, renderOut, mountTopbar, iconSvg };
+  return { MAX, count, lose, add, watchAd, onChange, pillHtml, updatePill, breakAt, renderOut, mountTopbar, iconSvg };
 })();

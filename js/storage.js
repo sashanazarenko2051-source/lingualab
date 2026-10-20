@@ -48,6 +48,7 @@ App.storage = (function () {
         profile: Object.assign({}, d.profile, parsed.profile),
         hearts: Object.assign({}, d.hearts, parsed.hearts),
         premium: !!parsed.premium,
+        energy: parsed.energy || null,
         settings: Object.assign({}, d.settings, parsed.settings)
       };
     } catch (e) {

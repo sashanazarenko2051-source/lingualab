@@ -90,6 +90,7 @@ function initTopbar() {
   avatarBtn.addEventListener('click', () => App.profile.openEditor());
   App.profile.renderTopbarBadge();
   App.hearts.mountTopbar();
+  App.energy.mountTopbar();
   const gear = document.getElementById('topbar-gear');
   gear.title = App.t('set_title');
   gear.addEventListener('click', () => App.router.go('settings'));
