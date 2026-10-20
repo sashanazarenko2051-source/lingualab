@@ -161,7 +161,7 @@ App.energy = (function () {
       wrap.innerHTML = `
         <div class="heart-popup" role="dialog">
           <button class="heart-popup-close" id="energy-popup-close">✕</button>
-          <div class="heart-popup-big energy-big"><span class="energy-ico">⚡</span><b>${unlimited() ? '∞' : count()}</b><span>/ ${CAP}</span></div>
+          <div class="heart-popup-big energy-big"><span class="energy-ico">⚡</span><b>${unlimited() ? '∞' : count()}</b>${unlimited() || count() > CAP ? '' : `<span>/ ${CAP}</span>`}</div>
           ${rulesHtml()}
           ${adButton()}
           ${packsHtml()}

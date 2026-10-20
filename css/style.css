@@ -1574,7 +1574,7 @@ button { background: none; }
 .ex-energy { margin-right: 6px; }
 .energy-big .energy-ico { font-size: 44px; }
 .energy-out-icon { font-size: 72px; line-height: 1; filter: drop-shadow(0 0 12px rgba(255,201,60,.6)); }
-.energy-packs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.energy-packs { display: flex; flex-wrap: wrap; gap: 14px 10px; justify-content: center; margin-top: 14px; padding-bottom: 4px; }
 .energy-pack { display: inline-flex; border-color: #ffd23f; color: #ffd23f; padding: 8px 14px; }
 [data-theme="light"] .energy-pill { background: color-mix(in srgb, #ffc93c 18%, #fff); color: var(--ink); text-shadow: none; }
 
