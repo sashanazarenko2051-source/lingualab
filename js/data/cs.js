@@ -7568,6 +7568,28 @@ App.data.cs = {
       { w: 'němý film', t: 'немое кино', ex: 'Němé filmy doprovázela živá hudba.', tex: 'Немое кино сопровождала живая музыка.' },
       { w: 'červený koberec', t: 'красная дорожка', ex: 'Hvězdy prošly po červeném koberci.', tex: 'Звёзды прошли по красной дорожке.' }
     ] },
+    { id: 'society', name: 'Общество и политика', words: [
+      { w: 'společnost', t: 'общество', ex: 'Společnost se mění s každou generací.', tex: 'Общество меняется с каждым поколением.' },
+      { w: 'vláda', t: 'правительство', ex: 'Vláda oznámila nová opatření.', tex: 'Правительство объявило новые меры.' },
+      { w: 'politika', t: 'политика', ex: 'Zajímá se o politiku.', tex: 'Она интересуется политикой.' },
+      { w: 'politik', t: 'политик', ex: 'Politik odpověděl na otázky novinářů.', tex: 'Политик ответил на вопросы журналистов.' },
+      { w: 'volby', t: 'выборы', ex: 'Volby proběhnou na podzim.', tex: 'Выборы пройдут осенью.' },
+      { w: 'volit', t: 'голосовать', ex: 'Volit může každý starší osmnácti let.', tex: 'Голосовать может каждый старше восемнадцати.' },
+      { w: 'volič', t: 'избиратель', ex: 'Mnoho voličů zůstalo doma.', tex: 'Многие избиратели остались дома.' },
+      { w: 'kandidát', t: 'кандидат', ex: 'Každý kandidát pronesl krátký projev.', tex: 'Каждый кандидат произнёс короткую речь.' },
+      { w: 'volební kampaň', t: 'предвыборная кампания', ex: 'Volební kampaň trvala dva měsíce.', tex: 'Предвыборная кампания длилась два месяца.' },
+      { w: 'politická strana', t: 'политическая партия', ex: 'Vstoupila do politické strany.', tex: 'Она вступила в политическую партию.' },
+      { w: 'parlament', t: 'парламент', ex: 'Parlament zasedá v úterý.', tex: 'Парламент заседает по вторникам.' },
+      { w: 'poslanec', t: 'депутат', ex: 'Poslanec se setkal s voliči.', tex: 'Депутат встретился с избирателями.' },
+      { w: 'ministr', t: 'министр', ex: 'Ministr navštívil novou nemocnici.', tex: 'Министр посетил новую больницу.' },
+      { w: 'premiér', t: 'премьер-министр', ex: 'Premiér poskytl rozhovor.', tex: 'Премьер-министр дал интервью.' },
+      { w: 'prezident', t: 'президент', ex: 'Prezident podepsal zákon.', tex: 'Президент подписал закон.' },
+      { w: 'starosta', t: 'мэр', ex: 'Starosta otevřel nový park.', tex: 'Мэр открыл новый парк.' },
+      { w: 'ústava', t: 'конституция', ex: 'Ústava chrání naše práva.', tex: 'Конституция защищает наши права.' },
+      { w: 'zákon', t: 'закон', ex: 'Každý musí dodržovat zákon.', tex: 'Каждый должен соблюдать закон.' },
+      { w: 'návrh zákona', t: 'законопроект', ex: 'Parlament projednává nový návrh zákona.', tex: 'Парламент обсуждает новый законопроект.' },
+      { w: 'lidská práva', t: 'права человека', ex: 'Organizace hájí lidská práva.', tex: 'Организация защищает права человека.' }
+    ] },
     { id: 'law_society', name: 'Общество и право', words: [
       { w: 'zákon', t: 'закон', ex: 'Musíme dodržovat zákon.', tex: 'Мы должны соблюдать закон.' },
       { w: 'vláda', t: 'правительство', ex: 'Vláda přijala nový zákon.', tex: 'Правительство приняло новый закон.' },

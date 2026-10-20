@@ -7633,6 +7633,30 @@ App.data.pl = {
         { w: 'film niemy', t: 'немое кино', ex: 'Filmom niemym towarzyszyła muzyka na żywo.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'czerwony dywan', t: 'красная дорожка', ex: 'Gwiazdy przeszły po czerwonym dywanie.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'społeczeństwo', t: 'общество', ex: 'Społeczeństwo zmienia się z każdym pokoleniem.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'rząd', t: 'правительство', ex: 'Rząd ogłosił nowe środki.', tex: 'Правительство объявило новые меры.' },
+        { w: 'polityka', t: 'политика', ex: 'Interesuje się polityką.', tex: 'Она интересуется политикой.' },
+        { w: 'polityk', t: 'политик', ex: 'Polityk odpowiedział na pytania dziennikarzy.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'wybory', t: 'выборы', ex: 'Wybory odbędą się jesienią.', tex: 'Выборы пройдут осенью.' },
+        { w: 'głosować', t: 'голосовать', ex: 'Każdy powyżej osiemnastu lat może głosować.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'wyborca', t: 'избиратель', ex: 'Wielu wyborców zostało w domu.', tex: 'Многие избиратели остались дома.' },
+        { w: 'kandydat', t: 'кандидат', ex: 'Każdy kandydat wygłosił krótkie przemówienie.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'kampania wyborcza', t: 'предвыборная кампания', ex: 'Kampania wyborcza trwała dwa miesiące.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'partia polityczna', t: 'политическая партия', ex: 'Wstąpiła do partii politycznej.', tex: 'Она вступила в политическую партию.' },
+        { w: 'parlament', t: 'парламент', ex: 'Parlament obraduje we wtorki.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'poseł', t: 'депутат', ex: 'Poseł spotkał się z wyborcami.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'minister', t: 'министр', ex: 'Minister odwiedził nowy szpital.', tex: 'Министр посетил новую больницу.' },
+        { w: 'premier', t: 'премьер-министр', ex: 'Premier udzielił wywiadu.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'prezydent', t: 'президент', ex: 'Prezydent podpisał ustawę.', tex: 'Президент подписал закон.' },
+        { w: 'burmistrz', t: 'мэр', ex: 'Burmistrz otworzył nowy park.', tex: 'Мэр открыл новый парк.' },
+        { w: 'konstytucja', t: 'конституция', ex: 'Konstytucja chroni nasze prawa.', tex: 'Конституция защищает наши права.' },
+        { w: 'prawo', t: 'закон', ex: 'Każdy musi przestrzegać prawa.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'projekt ustawy', t: 'законопроект', ex: 'Parlament omawia nowy projekt ustawy.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'prawa człowieka', t: 'права человека', ex: 'Organizacja broni praw człowieka.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

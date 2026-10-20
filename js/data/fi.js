@@ -7633,6 +7633,30 @@ App.data.fi = {
         { w: 'mykkäelokuva', t: 'немое кино', ex: 'Mykkäelokuvia säesti elävä musiikki.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'punainen matto', t: 'красная дорожка', ex: 'Tähdet kävelivät punaisella matolla.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'yhteiskunta', t: 'общество', ex: 'Yhteiskunta muuttuu jokaisen sukupolven myötä.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'hallitus', t: 'правительство', ex: 'Hallitus ilmoitti uusista toimista.', tex: 'Правительство объявило новые меры.' },
+        { w: 'politiikka', t: 'политика', ex: 'Häntä kiinnostaa politiikka.', tex: 'Она интересуется политикой.' },
+        { w: 'poliitikko', t: 'политик', ex: 'Poliitikko vastasi toimittajien kysymyksiin.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'vaalit', t: 'выборы', ex: 'Vaalit pidetään syksyllä.', tex: 'Выборы пройдут осенью.' },
+        { w: 'äänestää', t: 'голосовать', ex: 'Kaikki yli kahdeksantoistavuotiaat voivat äänestää.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'äänestäjä', t: 'избиратель', ex: 'Monet äänestäjät jäivät kotiin.', tex: 'Многие избиратели остались дома.' },
+        { w: 'ehdokas', t: 'кандидат', ex: 'Jokainen ehdokas piti lyhyen puheen.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'vaalikampanja', t: 'предвыборная кампания', ex: 'Vaalikampanja kesti kaksi kuukautta.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'poliittinen puolue', t: 'политическая партия', ex: 'Hän liittyi poliittiseen puolueeseen.', tex: 'Она вступила в политическую партию.' },
+        { w: 'eduskunta', t: 'парламент', ex: 'Eduskunta kokoontuu tiistaisin.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'kansanedustaja', t: 'депутат', ex: 'Kansanedustaja tapasi äänestäjiä.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'ministeri', t: 'министр', ex: 'Ministeri vieraili uudessa sairaalassa.', tex: 'Министр посетил новую больницу.' },
+        { w: 'pääministeri', t: 'премьер-министр', ex: 'Pääministeri antoi haastattelun.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'presidentti', t: 'президент', ex: 'Presidentti allekirjoitti lain.', tex: 'Президент подписал закон.' },
+        { w: 'pormestari', t: 'мэр', ex: 'Pormestari avasi uuden puiston.', tex: 'Мэр открыл новый парк.' },
+        { w: 'perustuslaki', t: 'конституция', ex: 'Perustuslaki suojaa oikeuksiamme.', tex: 'Конституция защищает наши права.' },
+        { w: 'laki', t: 'закон', ex: 'Jokaisen on noudatettava lakia.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'lakiesitys', t: 'законопроект', ex: 'Eduskunta käsittelee uutta lakiesitystä.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'ihmisoikeudet', t: 'права человека', ex: 'Järjestö puolustaa ihmisoikeuksia.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

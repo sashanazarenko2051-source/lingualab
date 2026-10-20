@@ -7567,6 +7567,28 @@ App.data.sk = {
       { w: 'žonglér', t: 'жонглёр', ex: 'Žonglér vyhadzoval päť loptičiek naraz.', tex: 'Жонглёр подбрасывал пять мячей одновременно.' },
       { w: 'nemý film', t: 'немое кино', ex: 'Nemé filmy sprevádzala živá hudba.', tex: 'Немое кино сопровождала живая музыка.' },
       { w: 'červený koberec', t: 'красная дорожка', ex: 'Hviezdy prešli po červenom koberci.', tex: 'Звёзды прошли по красной дорожке.' }
+    ] },
+    { id: 'society', name: 'Общество и политика', words: [
+      { w: 'spoločnosť', t: 'общество', ex: 'Spoločnosť sa mení s každou generáciou.', tex: 'Общество меняется с каждым поколением.' },
+      { w: 'vláda', t: 'правительство', ex: 'Vláda oznámila nové opatrenia.', tex: 'Правительство объявило новые меры.' },
+      { w: 'politika', t: 'политика', ex: 'Zaujíma sa o politiku.', tex: 'Она интересуется политикой.' },
+      { w: 'politik', t: 'политик', ex: 'Politik odpovedal na otázky novinárov.', tex: 'Политик ответил на вопросы журналистов.' },
+      { w: 'voľby', t: 'выборы', ex: 'Voľby sa uskutočnia na jeseň.', tex: 'Выборы пройдут осенью.' },
+      { w: 'voliť', t: 'голосовать', ex: 'Voliť môže každý starší ako osemnásť rokov.', tex: 'Голосовать может каждый старше восемнадцати.' },
+      { w: 'volič', t: 'избиратель', ex: 'Mnoho voličov zostalo doma.', tex: 'Многие избиратели остались дома.' },
+      { w: 'kandidát', t: 'кандидат', ex: 'Každý kandidát predniesol krátky prejav.', tex: 'Каждый кандидат произнёс короткую речь.' },
+      { w: 'volebná kampaň', t: 'предвыборная кампания', ex: 'Volebná kampaň trvala dva mesiace.', tex: 'Предвыборная кампания длилась два месяца.' },
+      { w: 'politická strana', t: 'политическая партия', ex: 'Vstúpila do politickej strany.', tex: 'Она вступила в политическую партию.' },
+      { w: 'parlament', t: 'парламент', ex: 'Parlament zasadá v utorok.', tex: 'Парламент заседает по вторникам.' },
+      { w: 'poslanec', t: 'депутат', ex: 'Poslanec sa stretol s voličmi.', tex: 'Депутат встретился с избирателями.' },
+      { w: 'minister', t: 'министр', ex: 'Minister navštívil novú nemocnicu.', tex: 'Министр посетил новую больницу.' },
+      { w: 'premiér', t: 'премьер-министр', ex: 'Premiér poskytol rozhovor.', tex: 'Премьер-министр дал интервью.' },
+      { w: 'prezident', t: 'президент', ex: 'Prezident podpísal zákon.', tex: 'Президент подписал закон.' },
+      { w: 'starosta', t: 'мэр', ex: 'Starosta otvoril nový park.', tex: 'Мэр открыл новый парк.' },
+      { w: 'ústava', t: 'конституция', ex: 'Ústava chráni naše práva.', tex: 'Конституция защищает наши права.' },
+      { w: 'zákon', t: 'закон', ex: 'Každý musí dodržiavať zákon.', tex: 'Каждый должен соблюдать закон.' },
+      { w: 'návrh zákona', t: 'законопроект', ex: 'Parlament prerokúva nový návrh zákona.', tex: 'Парламент обсуждает новый законопроект.' },
+      { w: 'ľudské práva', t: 'права человека', ex: 'Organizácia obhajuje ľudské práva.', tex: 'Организация защищает права человека.' }
     ] }
   ],
   dialogues: [

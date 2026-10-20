@@ -7635,6 +7635,30 @@ App.data.de = {
         { w: 'Stummfilm', t: 'немое кино', ex: 'Stummfilme wurden von Live-Musik begleitet.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'roter Teppich', t: 'красная дорожка', ex: 'Die Stars liefen über den roten Teppich.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'die Gesellschaft', t: 'общество', ex: 'Die Gesellschaft verändert sich mit jeder Generation.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'die Regierung', t: 'правительство', ex: 'Die Regierung hat neue Maßnahmen angekündigt.', tex: 'Правительство объявило новые меры.' },
+        { w: 'die Politik', t: 'политика', ex: 'Sie interessiert sich für Politik.', tex: 'Она интересуется политикой.' },
+        { w: 'der Politiker', t: 'политик', ex: 'Der Politiker beantwortete die Fragen der Journalisten.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'die Wahl', t: 'выборы', ex: 'Die Wahl findet im Herbst statt.', tex: 'Выборы пройдут осенью.' },
+        { w: 'wählen', t: 'голосовать', ex: 'Jeder über achtzehn darf wählen.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'der Wähler', t: 'избиратель', ex: 'Viele Wähler sind zu Hause geblieben.', tex: 'Многие избиратели остались дома.' },
+        { w: 'der Kandidat', t: 'кандидат', ex: 'Jeder Kandidat hielt eine kurze Rede.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'der Wahlkampf', t: 'предвыборная кампания', ex: 'Der Wahlkampf dauerte zwei Monate.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'die Partei', t: 'политическая партия', ex: 'Sie ist einer Partei beigetreten.', tex: 'Она вступила в политическую партию.' },
+        { w: 'das Parlament', t: 'парламент', ex: 'Das Parlament tagt dienstags.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'der Abgeordnete', t: 'депутат', ex: 'Der Abgeordnete traf sich mit den Wählern.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'der Minister', t: 'министр', ex: 'Der Minister besuchte das neue Krankenhaus.', tex: 'Министр посетил новую больницу.' },
+        { w: 'der Premierminister', t: 'премьер-министр', ex: 'Der Premierminister gab ein Interview.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'der Präsident', t: 'президент', ex: 'Der Präsident hat das Gesetz unterschrieben.', tex: 'Президент подписал закон.' },
+        { w: 'der Bürgermeister', t: 'мэр', ex: 'Der Bürgermeister hat den neuen Park eröffnet.', tex: 'Мэр открыл новый парк.' },
+        { w: 'die Verfassung', t: 'конституция', ex: 'Die Verfassung schützt unsere Rechte.', tex: 'Конституция защищает наши права.' },
+        { w: 'das Gesetz', t: 'закон', ex: 'Jeder muss das Gesetz befolgen.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'der Gesetzentwurf', t: 'законопроект', ex: 'Das Parlament berät den neuen Gesetzentwurf.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'die Menschenrechte', t: 'права человека', ex: 'Die Organisation verteidigt die Menschenrechte.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

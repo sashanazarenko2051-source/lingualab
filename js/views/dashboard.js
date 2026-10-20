@@ -194,7 +194,7 @@ function renderLangGroups(root, currentLang, filter) {
 // Rough, commonly-cited linguistic benchmark for CEFR C2 (fluent/near-native)
 // vocabulary size — not computed from app data, just a reference point shown
 // in the third badge's tooltip so learners can gauge how far 2000ish words go.
-const C2_VOCAB_ESTIMATE = '8–10k';
+const C2_VOCAB_ESTIMATE = 'B2 · 8k';
 
 function langCardHtml(code, currentLang) {
   const lang = App.data[code];

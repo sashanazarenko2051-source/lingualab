@@ -7633,6 +7633,30 @@ App.data.hu = {
         { w: 'némafilm', t: 'немое кино', ex: 'A némafilmeket élő zene kísérte.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'vörös szőnyeg', t: 'красная дорожка', ex: 'A sztárok végigvonultak a vörös szőnyegen.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'a társadalom', t: 'общество', ex: 'A társadalom minden nemzedékkel változik.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'a kormány', t: 'правительство', ex: 'A kormány új intézkedéseket jelentett be.', tex: 'Правительство объявило новые меры.' },
+        { w: 'a politika', t: 'политика', ex: 'Érdekli a politika.', tex: 'Она интересуется политикой.' },
+        { w: 'a politikus', t: 'политик', ex: 'A politikus válaszolt az újságírók kérdéseire.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'a választás', t: 'выборы', ex: 'A választást ősszel tartják.', tex: 'Выборы пройдут осенью.' },
+        { w: 'szavazni', t: 'голосовать', ex: 'Tizennyolc év felett mindenki szavazhat.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'a választó', t: 'избиратель', ex: 'Sok választó otthon maradt.', tex: 'Многие избиратели остались дома.' },
+        { w: 'a jelölt', t: 'кандидат', ex: 'Minden jelölt rövid beszédet mondott.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'a választási kampány', t: 'предвыборная кампания', ex: 'A választási kampány két hónapig tartott.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'a politikai párt', t: 'политическая партия', ex: 'Belépett egy politikai pártba.', tex: 'Она вступила в политическую партию.' },
+        { w: 'a parlament', t: 'парламент', ex: 'A parlament kedden ülésezik.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'a képviselő', t: 'депутат', ex: 'A képviselő találkozott a választókkal.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'a miniszter', t: 'министр', ex: 'A miniszter meglátogatta az új kórházat.', tex: 'Министр посетил новую больницу.' },
+        { w: 'a miniszterelnök', t: 'премьер-министр', ex: 'A miniszterelnök interjút adott.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'az elnök', t: 'президент', ex: 'Az elnök aláírta a törvényt.', tex: 'Президент подписал закон.' },
+        { w: 'a polgármester', t: 'мэр', ex: 'A polgármester megnyitotta az új parkot.', tex: 'Мэр открыл новый парк.' },
+        { w: 'az alkotmány', t: 'конституция', ex: 'Az alkotmány védi a jogainkat.', tex: 'Конституция защищает наши права.' },
+        { w: 'a törvény', t: 'закон', ex: 'Mindenkinek be kell tartania a törvényt.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'a törvényjavaslat', t: 'законопроект', ex: 'A parlament az új törvényjavaslatot vitatja.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'az emberi jogok', t: 'права человека', ex: 'A szervezet védi az emberi jogokat.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

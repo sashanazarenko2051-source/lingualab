@@ -7669,6 +7669,30 @@ App.data.no = {
         { w: 'stumfilm', t: 'немое кино', ex: 'Stumfilmer ble akkompagnert av levende musikk.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'den røde løperen', t: 'красная дорожка', ex: 'Stjernene gikk på den røde løperen.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'samfunnet', t: 'общество', ex: 'Samfunnet endrer seg med hver generasjon.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'regjeringen', t: 'правительство', ex: 'Regjeringen kunngjorde nye tiltak.', tex: 'Правительство объявило новые меры.' },
+        { w: 'politikk', t: 'политика', ex: 'Hun er interessert i politikk.', tex: 'Она интересуется политикой.' },
+        { w: 'politikeren', t: 'политик', ex: 'Politikeren svarte på journalistenes spørsmål.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'valget', t: 'выборы', ex: 'Valget finner sted til høsten.', tex: 'Выборы пройдут осенью.' },
+        { w: 'stemme', t: 'голосовать', ex: 'Alle over atten kan stemme.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'velgeren', t: 'избиратель', ex: 'Mange velgere ble hjemme.', tex: 'Многие избиратели остались дома.' },
+        { w: 'kandidaten', t: 'кандидат', ex: 'Hver kandidat holdt en kort tale.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'valgkampen', t: 'предвыборная кампания', ex: 'Valgkampen varte i to måneder.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'partiet', t: 'политическая партия', ex: 'Hun meldte seg inn i et parti.', tex: 'Она вступила в политическую партию.' },
+        { w: 'stortinget', t: 'парламент', ex: 'Stortinget møtes på tirsdager.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'stortingsrepresentanten', t: 'депутат', ex: 'Stortingsrepresentanten møtte velgerne.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'ministeren', t: 'министр', ex: 'Ministeren besøkte det nye sykehuset.', tex: 'Министр посетил новую больницу.' },
+        { w: 'statsministeren', t: 'премьер-министр', ex: 'Statsministeren ga et intervju.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'presidenten', t: 'президент', ex: 'Presidenten signerte loven.', tex: 'Президент подписал закон.' },
+        { w: 'ordføreren', t: 'мэр', ex: 'Ordføreren åpnet den nye parken.', tex: 'Мэр открыл новый парк.' },
+        { w: 'grunnloven', t: 'конституция', ex: 'Grunnloven beskytter rettighetene våre.', tex: 'Конституция защищает наши права.' },
+        { w: 'loven', t: 'закон', ex: 'Alle må følge loven.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'lovforslaget', t: 'законопроект', ex: 'Stortinget diskuterer det nye lovforslaget.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'menneskerettighetene', t: 'права человека', ex: 'Organisasjonen forsvarer menneskerettighetene.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

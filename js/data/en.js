@@ -7635,6 +7635,30 @@ App.data.en = {
         { w: 'silent film', t: 'немое кино', ex: 'Silent films were accompanied by live music.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'red carpet', t: 'красная дорожка', ex: 'The stars walked down the red carpet.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'society', t: 'общество', ex: 'Society changes with every generation.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'government', t: 'правительство', ex: 'The government announced new measures.', tex: 'Правительство объявило новые меры.' },
+        { w: 'politics', t: 'политика', ex: 'She is interested in politics.', tex: 'Она интересуется политикой.' },
+        { w: 'politician', t: 'политик', ex: 'The politician answered the journalists\' questions.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'election', t: 'выборы', ex: 'The election will take place in autumn.', tex: 'Выборы пройдут осенью.' },
+        { w: 'to vote', t: 'голосовать', ex: 'Everyone over eighteen can vote.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'voter', t: 'избиратель', ex: 'Many voters stayed at home.', tex: 'Многие избиратели остались дома.' },
+        { w: 'candidate', t: 'кандидат', ex: 'Each candidate gave a short speech.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'election campaign', t: 'предвыборная кампания', ex: 'The election campaign lasted two months.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'political party', t: 'политическая партия', ex: 'She joined a political party.', tex: 'Она вступила в политическую партию.' },
+        { w: 'parliament', t: 'парламент', ex: 'Parliament meets on Tuesdays.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'member of parliament', t: 'депутат', ex: 'The member of parliament met the voters.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'minister', t: 'министр', ex: 'The minister visited the new hospital.', tex: 'Министр посетил новую больницу.' },
+        { w: 'prime minister', t: 'премьер-министр', ex: 'The prime minister gave an interview.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'president', t: 'президент', ex: 'The president signed the law.', tex: 'Президент подписал закон.' },
+        { w: 'mayor', t: 'мэр', ex: 'The mayor opened the new park.', tex: 'Мэр открыл новый парк.' },
+        { w: 'constitution', t: 'конституция', ex: 'The constitution protects our rights.', tex: 'Конституция защищает наши права.' },
+        { w: 'law', t: 'закон', ex: 'Everyone must obey the law.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'bill (draft law)', t: 'законопроект', ex: 'Parliament is discussing the new bill.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'human rights', t: 'права человека', ex: 'The organization defends human rights.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

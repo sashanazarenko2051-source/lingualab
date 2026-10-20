@@ -7633,6 +7633,30 @@ App.data.ro = {
         { w: 'film mut', t: 'немое кино', ex: 'Filmele mute erau însoțite de muzică live.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'covorul roșu', t: 'красная дорожка', ex: 'Vedetele au pășit pe covorul roșu.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'societatea', t: 'общество', ex: 'Societatea se schimbă cu fiecare generație.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'guvernul', t: 'правительство', ex: 'Guvernul a anunțat măsuri noi.', tex: 'Правительство объявило новые меры.' },
+        { w: 'politica', t: 'политика', ex: 'Ea este interesată de politică.', tex: 'Она интересуется политикой.' },
+        { w: 'politicianul', t: 'политик', ex: 'Politicianul a răspuns la întrebările jurnaliștilor.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'alegerile', t: 'выборы', ex: 'Alegerile vor avea loc toamna.', tex: 'Выборы пройдут осенью.' },
+        { w: 'a vota', t: 'голосовать', ex: 'Toți cei peste optsprezece ani pot vota.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'alegătorul', t: 'избиратель', ex: 'Mulți alegători au rămas acasă.', tex: 'Многие избиратели остались дома.' },
+        { w: 'candidatul', t: 'кандидат', ex: 'Fiecare candidat a ținut un scurt discurs.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'campania electorală', t: 'предвыборная кампания', ex: 'Campania electorală a durat două luni.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'partidul politic', t: 'политическая партия', ex: 'Ea s-a înscris într-un partid politic.', tex: 'Она вступила в политическую партию.' },
+        { w: 'parlamentul', t: 'парламент', ex: 'Parlamentul se întrunește marțea.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'deputatul', t: 'депутат', ex: 'Deputatul s-a întâlnit cu alegătorii.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'ministrul', t: 'министр', ex: 'Ministrul a vizitat noul spital.', tex: 'Министр посетил новую больницу.' },
+        { w: 'prim-ministrul', t: 'премьер-министр', ex: 'Prim-ministrul a dat un interviu.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'președintele', t: 'президент', ex: 'Președintele a semnat legea.', tex: 'Президент подписал закон.' },
+        { w: 'primarul', t: 'мэр', ex: 'Primarul a inaugurat noul parc.', tex: 'Мэр открыл новый парк.' },
+        { w: 'constituția', t: 'конституция', ex: 'Constituția ne protejează drepturile.', tex: 'Конституция защищает наши права.' },
+        { w: 'legea', t: 'закон', ex: 'Toată lumea trebuie să respecte legea.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'proiectul de lege', t: 'законопроект', ex: 'Parlamentul dezbate noul proiect de lege.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'drepturile omului', t: 'права человека', ex: 'Organizația apără drepturile omului.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

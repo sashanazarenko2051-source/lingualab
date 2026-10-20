@@ -7635,6 +7635,30 @@ App.data.hr = {
         { w: 'nijemi film', t: 'немое кино', ex: 'Nijeme filmove pratila je glazba uživo.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'crveni tepih', t: 'красная дорожка', ex: 'Zvijezde su prošetale crvenim tepihom.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'društvo', t: 'общество', ex: 'Društvo se mijenja sa svakom generacijom.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'vlada', t: 'правительство', ex: 'Vlada je najavila nove mjere.', tex: 'Правительство объявило новые меры.' },
+        { w: 'politika', t: 'политика', ex: 'Zanima je politika.', tex: 'Она интересуется политикой.' },
+        { w: 'političar', t: 'политик', ex: 'Političar je odgovorio na pitanja novinara.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'izbori', t: 'выборы', ex: 'Izbori će se održati na jesen.', tex: 'Выборы пройдут осенью.' },
+        { w: 'glasati', t: 'голосовать', ex: 'Svatko stariji od osamnaest godina može glasati.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'birač', t: 'избиратель', ex: 'Mnogi birači ostali su kod kuće.', tex: 'Многие избиратели остались дома.' },
+        { w: 'kandidat', t: 'кандидат', ex: 'Svaki kandidat održao je kratak govor.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'izborna kampanja', t: 'предвыборная кампания', ex: 'Izborna kampanja trajala je dva mjeseca.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'politička stranka', t: 'политическая партия', ex: 'Učlanila se u političku stranku.', tex: 'Она вступила в политическую партию.' },
+        { w: 'parlament', t: 'парламент', ex: 'Parlament zasjeda utorkom.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'zastupnik', t: 'депутат', ex: 'Zastupnik se sastao s biračima.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'ministar', t: 'министр', ex: 'Ministar je posjetio novu bolnicu.', tex: 'Министр посетил новую больницу.' },
+        { w: 'premijer', t: 'премьер-министр', ex: 'Premijer je dao intervju.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'predsjednik', t: 'президент', ex: 'Predsjednik je potpisao zakon.', tex: 'Президент подписал закон.' },
+        { w: 'gradonačelnik', t: 'мэр', ex: 'Gradonačelnik je otvorio novi park.', tex: 'Мэр открыл новый парк.' },
+        { w: 'ustav', t: 'конституция', ex: 'Ustav štiti naša prava.', tex: 'Конституция защищает наши права.' },
+        { w: 'zakon', t: 'закон', ex: 'Svatko mora poštovati zakon.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'prijedlog zakona', t: 'законопроект', ex: 'Parlament raspravlja o novom prijedlogu zakona.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'ljudska prava', t: 'права человека', ex: 'Organizacija brani ljudska prava.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

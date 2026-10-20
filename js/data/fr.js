@@ -7634,6 +7634,30 @@ App.data.fr = {
         { w: 'film muet', t: 'немое кино', ex: 'Les films muets étaient accompagnés de musique en direct.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'tapis rouge', t: 'красная дорожка', ex: 'Les stars ont défilé sur le tapis rouge.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'la société', t: 'общество', ex: 'La société change à chaque génération.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'le gouvernement', t: 'правительство', ex: 'Le gouvernement a annoncé de nouvelles mesures.', tex: 'Правительство объявило новые меры.' },
+        { w: 'la politique', t: 'политика', ex: 'Elle s\'intéresse à la politique.', tex: 'Она интересуется политикой.' },
+        { w: 'l\'homme politique', t: 'политик', ex: 'L\'homme politique a répondu aux questions des journalistes.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'l\'élection', t: 'выборы', ex: 'L\'élection aura lieu en automne.', tex: 'Выборы пройдут осенью.' },
+        { w: 'voter', t: 'голосовать', ex: 'Tout le monde peut voter dès dix-huit ans.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'l\'électeur', t: 'избиратель', ex: 'Beaucoup d\'électeurs sont restés chez eux.', tex: 'Многие избиратели остались дома.' },
+        { w: 'le candidat', t: 'кандидат', ex: 'Chaque candidat a fait un court discours.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'la campagne électorale', t: 'предвыборная кампания', ex: 'La campagne électorale a duré deux mois.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'le parti politique', t: 'политическая партия', ex: 'Elle a adhéré à un parti politique.', tex: 'Она вступила в политическую партию.' },
+        { w: 'le parlement', t: 'парламент', ex: 'Le parlement se réunit le mardi.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'le député', t: 'депутат', ex: 'Le député a rencontré les électeurs.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'le ministre', t: 'министр', ex: 'Le ministre a visité le nouvel hôpital.', tex: 'Министр посетил новую больницу.' },
+        { w: 'le Premier ministre', t: 'премьер-министр', ex: 'Le Premier ministre a donné une interview.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'le président', t: 'президент', ex: 'Le président a signé la loi.', tex: 'Президент подписал закон.' },
+        { w: 'le maire', t: 'мэр', ex: 'Le maire a inauguré le nouveau parc.', tex: 'Мэр открыл новый парк.' },
+        { w: 'la constitution', t: 'конституция', ex: 'La constitution protège nos droits.', tex: 'Конституция защищает наши права.' },
+        { w: 'la loi', t: 'закон', ex: 'Tout le monde doit respecter la loi.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'le projet de loi', t: 'законопроект', ex: 'Le parlement examine le nouveau projet de loi.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'les droits de l\'homme', t: 'права человека', ex: 'L\'organisation défend les droits de l\'homme.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

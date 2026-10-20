@@ -7635,6 +7635,30 @@ App.data.nl = {
         { w: 'stomme film', t: 'немое кино', ex: 'Stomme films werden begeleid door livemuziek.', tex: 'Немое кино сопровождала живая музыка.' },
         { w: 'rode loper', t: 'красная дорожка', ex: 'De sterren liepen over de rode loper.', tex: 'Звёзды прошли по красной дорожке.' }
       ]
+    },
+    {
+      id: 'society', name: 'Общество и политика', words: [
+        { w: 'de maatschappij', t: 'общество', ex: 'De maatschappij verandert met elke generatie.', tex: 'Общество меняется с каждым поколением.' },
+        { w: 'de regering', t: 'правительство', ex: 'De regering heeft nieuwe maatregelen aangekondigd.', tex: 'Правительство объявило новые меры.' },
+        { w: 'de politiek', t: 'политика', ex: 'Ze is geïnteresseerd in politiek.', tex: 'Она интересуется политикой.' },
+        { w: 'de politicus', t: 'политик', ex: 'De politicus beantwoordde de vragen van de journalisten.', tex: 'Политик ответил на вопросы журналистов.' },
+        { w: 'de verkiezing', t: 'выборы', ex: 'De verkiezing vindt in de herfst plaats.', tex: 'Выборы пройдут осенью.' },
+        { w: 'stemmen', t: 'голосовать', ex: 'Iedereen boven de achttien mag stemmen.', tex: 'Голосовать может каждый старше восемнадцати.' },
+        { w: 'de kiezer', t: 'избиратель', ex: 'Veel kiezers bleven thuis.', tex: 'Многие избиратели остались дома.' },
+        { w: 'de kandidaat', t: 'кандидат', ex: 'Elke kandidaat hield een korte toespraak.', tex: 'Каждый кандидат произнёс короткую речь.' },
+        { w: 'de verkiezingscampagne', t: 'предвыборная кампания', ex: 'De verkiezingscampagne duurde twee maanden.', tex: 'Предвыборная кампания длилась два месяца.' },
+        { w: 'de politieke partij', t: 'политическая партия', ex: 'Ze werd lid van een politieke partij.', tex: 'Она вступила в политическую партию.' },
+        { w: 'het parlement', t: 'парламент', ex: 'Het parlement vergadert op dinsdag.', tex: 'Парламент заседает по вторникам.' },
+        { w: 'het parlementslid', t: 'депутат', ex: 'Het parlementslid ontmoette de kiezers.', tex: 'Депутат встретился с избирателями.' },
+        { w: 'de minister', t: 'министр', ex: 'De minister bezocht het nieuwe ziekenhuis.', tex: 'Министр посетил новую больницу.' },
+        { w: 'de premier', t: 'премьер-министр', ex: 'De premier gaf een interview.', tex: 'Премьер-министр дал интервью.' },
+        { w: 'de president', t: 'президент', ex: 'De president heeft de wet ondertekend.', tex: 'Президент подписал закон.' },
+        { w: 'de burgemeester', t: 'мэр', ex: 'De burgemeester opende het nieuwe park.', tex: 'Мэр открыл новый парк.' },
+        { w: 'de grondwet', t: 'конституция', ex: 'De grondwet beschermt onze rechten.', tex: 'Конституция защищает наши права.' },
+        { w: 'de wet', t: 'закон', ex: 'Iedereen moet zich aan de wet houden.', tex: 'Каждый должен соблюдать закон.' },
+        { w: 'het wetsvoorstel', t: 'законопроект', ex: 'Het parlement bespreekt het nieuwe wetsvoorstel.', tex: 'Парламент обсуждает новый законопроект.' },
+        { w: 'de mensenrechten', t: 'права человека', ex: 'De organisatie verdedigt de mensenrechten.', tex: 'Организация защищает права человека.' }
+      ]
     }
   ],
   dialogues: [

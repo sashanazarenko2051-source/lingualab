@@ -7,12 +7,15 @@ window.App = window.App || {};
 // once the last topic of its level is open; dialogues open after the first
 // topic is passed. Topics bought in the shop (App.shop) are open.
 App.access = (function () {
-  // The 34 shared topics grouped into CEFR levels (see course.js).
+  // The 36 shared topics grouped into CEFR levels by the words they add up
+  // to: A0 about 150-220 words, A1 up to ~1500, A2 up to ~2500, B1 up to
+  // ~4500, B2 (free conversation) up to 8000 (see course.js).
   const LEVEL_GROUPS = [
-    { code: 'A0', from: 0, to: 8 },
-    { code: 'A1', from: 8, to: 16 },
-    { code: 'A2', from: 16, to: 33 },
-    { code: 'B1', from: 33, to: 34 }
+    { code: 'A0', from: 0, to: 1 },
+    { code: 'A1', from: 1, to: 7 },
+    { code: 'A2', from: 7, to: 11 },
+    { code: 'B1', from: 11, to: 20 },
+    { code: 'B2', from: 20, to: 36 }
   ];
 
   function isPremium(code) { return App.shop.ownsTopics(code); }

@@ -175,8 +175,8 @@ function levelExamNodeHtml(enteringLevel, testedCatIds, side, accent, code) {
 function renderPath(root, code, lang, accent) {
   const el = root.querySelector('#skill-path');
   const cats = lang.categories;
-  const coreCats = cats.slice(0, 34);
-  const extraCats = cats.slice(34); // Czech-only bonus categories, not part of the level scheme
+  const coreCats = cats.slice(0, 36);
+  const extraCats = cats.slice(36); // Czech-only bonus categories, not part of the level scheme
 
   const coreStats = coreCats.map(cat => categoryStats(code, cat));
 

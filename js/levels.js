@@ -3,11 +3,14 @@ window.App = window.App || {};
 // CEFR tier lookup shared by the course path, the mascot's contextual tips,
 // and the weekly leaderboard (which groups competitors by tier).
 App.levels = (function () {
+  // Mastered words at which a level starts (the end of the previous level's
+  // topics, see App.access.LEVEL_GROUPS): A0 → A1 → A2 → B1 → B2.
   const THRESHOLDS = [
     { code: 'A0', min: 0 },
-    { code: 'A1', min: 1760 },
-    { code: 'A2', min: 3520 },
-    { code: 'B1', min: 7260 }
+    { code: 'A1', min: 220 },
+    { code: 'A2', min: 1540 },
+    { code: 'B1', min: 2420 },
+    { code: 'B2', min: 4400 }
   ];
 
   function forWordCount(masteredWords) {
