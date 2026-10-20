@@ -1977,3 +1977,22 @@ button { background: none; }
 .country-suggest-item:hover, .country-suggest-item:first-child { background: color-mix(in srgb, var(--brand-1) 22%, transparent); }
 .country-suggest-none { padding: 8px 10px; color: var(--ink-muted); }
 .country-current { margin-top: 10px; }
+
+/* Dialogs never get cut off at the sides (they scroll instead), and
+   scrolling inside one doesn't scroll the page behind it. */
+.modal-overlay { overflow: auto; }
+.modal-overlay > .modal-card { margin: auto; overscroll-behavior: contain; min-width: 0; }
+body:has(.modal-overlay) { overflow: hidden; }
+html:has(.modal-overlay) { overflow: hidden; }
+/* Profile editor: one column whenever the dialog itself is narrow
+   (small window or a large interface size). */
+.modal-card.profile-card { container-type: inline-size; }
+.profile-card .profile-animal-opt, .profile-card .profile-pattern-opt, .profile-card .profile-color-opt { min-width: 0; }
+.profile-card .profile-animal-grid, .profile-card .profile-pattern-row { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+.profile-card .profile-color-row { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+@container (max-width: 720px) {
+  .profile-cols { grid-template-columns: minmax(0, 1fr); }
+  .profile-side { position: static; }
+  .profile-card .profile-animal-grid, .profile-card .profile-pattern-row { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .profile-card .profile-color-row { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+}
