@@ -6,6 +6,8 @@ App.views = App.views || {};
 // The shop page: cards grouped by section. Each card buys for yourself, and
 // most can be gifted to a friend (picked from the friends list).
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// Languages picked on the "5 languages" card, kept while the page is redrawn.
+let chosen5 = [];
 const SECTIONS = [
   ['topics', '🔓', 'shop_sec_topics'],
   ['hearts', '❤️', 'shop_sec_hearts'],
@@ -65,11 +67,19 @@ function untilNote(ts) {
 
 function sectionHtml(id) {
   const code = App.storage.getCurrentLang();
-  if (id === 'topics') return [
-    card('unlock_1', { title: App.t('shop_unlock_1', { lang: App.ui.langName(code) }), opts: { lang: code }, owned: App.shop.ownsTopics(code) }),
-    card('unlock_5', { title: App.t('shop_unlock_5'), owned: App.shop.ownsAllTopics() }),
+  if (id === 'topics') {
+    // One language of your choice; only languages not open yet are listed.
+    const open = App.LANG_ORDER.filter(c => !App.shop.ownsTopics(c));
+    const pick = `<select class="shop-term" data-lang-pick>${open.map(c =>
+      `<option value="${c}" ${c === code ? 'selected' : ''}>${App.ui.langName(c)}</option>`).join('')}</select>`;
+    return [
+    card('unlock_1', { title: App.t('shop_unlock_1_pick'), owned: !open.length, extra: open.length ? pick : '' }),
+    card('unlock_5', { title: App.t('shop_unlock_5'), owned: App.shop.ownsAllTopics(), extra: App.shop.ownsAllTopics() ? '' : `
+      <button class="action-card shop-pick5" data-pick5>🌍 ${App.t('shop_pick_langs', { n: chosen5.length })}</button>
+      ${chosen5.length ? `<div class="shop-chosen">${chosen5.map(c => App.ui.flagChip(c)).join('')}</div>` : ''}` }),
     card('unlock_all', { title: App.t('shop_unlock_all'), owned: App.shop.ownsAllTopics() })
   ].join('');
+  }
   if (id === 'hearts') return [
     card('hearts_200', { title: App.t('shop_hearts_200') }),
     card('hearts_unl', { title: App.t('shop_hearts_unl'), note: untilNote(App.shop.state().heartsUntil || 0) })
@@ -97,6 +107,7 @@ function readOpts(btn, root) {
   const opts = JSON.parse(btn.dataset.opts || '{}');
   const itemId = btn.dataset.buy || btn.dataset.gift;
   if (App.shop.ITEMS[itemId].term) opts.term = root.querySelector(`[data-term-for="${itemId}"]`).value;
+  if (itemId === 'unlock_1') opts.lang = root.querySelector('[data-lang-pick]').value;
   return { itemId, opts };
 }
 
@@ -104,8 +115,15 @@ function bind(root) {
   const rerender = () => render(root);
   root.querySelectorAll('[data-buy]').forEach(b => b.addEventListener('click', () => {
     const { itemId, opts } = readOpts(b, root);
-    if (itemId === 'unlock_5') { pickLanguages(langs => App.shop.buy('unlock_5', { langs }).then(ok => ok && rerender())); return; }
+    if (itemId === 'unlock_5') {
+      const go = () => App.shop.buy('unlock_5', { langs: chosen5 }).then(ok => { if (ok) { chosen5 = []; rerender(); } });
+      if (chosen5.length === 5) go(); else pickLanguages(langs => { chosen5 = langs; rerender(); go(); });
+      return;
+    }
     App.shop.buy(itemId, opts).then(ok => ok && rerender());
+  }));
+  root.querySelectorAll('[data-pick5]').forEach(b => b.addEventListener('click', () => {
+    pickLanguages(langs => { chosen5 = langs; rerender(); });
   }));
   root.querySelectorAll('[data-gift]').forEach(b => b.addEventListener('click', () => {
     const { itemId, opts } = readOpts(b, root);
@@ -130,7 +148,7 @@ function pickLanguages(done) {
   const langs = App.LANG_ORDER.filter(c => !App.shop.ownsTopics(c));
   const ov = modal(`
     <h3 id="pick-title">${App.t('shop_pick_langs', { n: 0 })}</h3>
-    <div class="shop-pick">${langs.map(c => `<label class="shop-pick-item"><input type="checkbox" value="${c}"> ${App.ui.langLabel(c)}</label>`).join('')}</div>
+    <div class="shop-pick">${langs.map(c => `<label class="shop-pick-item"><input type="checkbox" value="${c}" ${chosen5.includes(c) ? 'checked' : ''}> ${App.ui.langLabel(c)}</label>`).join('')}</div>
     <div class="profile-modal-actions">
       <button class="action-card" id="pick-cancel" style="display:inline-flex">${App.t('profile_cancel')}</button>
       <button class="quiz-next" id="pick-ok" disabled>${App.t('shop_confirm')}</button>
@@ -143,6 +161,7 @@ function pickLanguages(done) {
     ov.querySelector('#pick-ok').disabled = n !== Math.min(5, boxes.length);
   };
   boxes.forEach(x => x.addEventListener('change', sync));
+  sync();
   ov.querySelector('#pick-cancel').addEventListener('click', () => ov.remove());
   ov.querySelector('#pick-ok').addEventListener('click', () => { const sel = boxes.filter(x => x.checked).map(x => x.value); ov.remove(); done(sel); });
 }

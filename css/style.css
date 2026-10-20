@@ -1830,3 +1830,12 @@ button { background: none; }
 .shop-pick-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 10px; background: var(--surface-2); cursor: pointer; font-weight: 600; }
 .shop-friend { display: inline-flex; justify-content: center; }
 .shop-link { margin-top: 10px; }
+.shop-pick5 { display: inline-flex; padding: 6px 10px; font-size: 13px; justify-content: center; }
+.shop-chosen { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+
+.family-note { margin: -4px 0 8px 4px; font-size: 12px; color: var(--ink-muted); }
+.family-sub { margin: 6px 0 8px 4px; font-size: 12px; font-weight: 800; color: var(--brand-1); }
+.ads-left { text-align: center; font-size: 12px; color: var(--ink-muted); margin-top: 6px; }
+.minichart-bar.is-empty { background: var(--border); }
+.minichart-total { margin-top: 10px; text-align: center; font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.minichart-total[hidden] { display: none; }

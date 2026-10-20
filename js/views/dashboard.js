@@ -71,6 +71,7 @@ App.views.dashboard = {
           </div>
         </div>
         <div class="minichart" id="minichart"></div>
+        <div class="minichart-total" id="week-total"></div>
         <div class="month-view" id="month-view" hidden></div>
       </section>
 
@@ -90,6 +91,7 @@ App.views.dashboard = {
       const month = b.dataset.chart === 'month';
       root.querySelectorAll('[data-chart]').forEach(x => x.classList.toggle('active', x === b));
       root.querySelector('#minichart').hidden = month;
+      root.querySelector('#week-total').hidden = month;
       root.querySelector('#month-view').hidden = !month;
       root.querySelector('#chart-title').textContent = month ? App.t('chart_month_title') : App.t('dash_activity_7d');
       if (month) { monthOffset = 0; renderMonth(root); }
@@ -160,17 +162,21 @@ function repeatLessonHtml(lastLesson) {
 
 function renderLangGroups(root, currentLang, filter) {
   const wrap = root.querySelector('#lang-groups');
+  const match = code => {
+    if (!filter) return true;
+    const l = App.data[code];
+    return l.name.toLowerCase().includes(filter) || App.ui.langName(code).toLowerCase().includes(filter) || code.includes(filter);
+  };
   const groups = App.LANG_FAMILIES.map(fam => {
-    const codes = fam.codes.filter(code => {
-      if (!filter) return true;
-      const l = App.data[code];
-      return l.name.toLowerCase().includes(filter) || App.ui.langName(code).toLowerCase().includes(filter) || code.includes(filter);
-    });
-    if (!codes.length) return '';
+    const subs = fam.subs.map(sub => ({ key: sub.key, codes: sub.codes.filter(match) })).filter(sub => sub.codes.length);
+    if (!subs.length) return '';
     return `
       <div class="family-group">
         <p class="family-title">${App.t(fam.key)}</p>
-        <div class="lang-grid">${codes.map(code => langCardHtml(code, currentLang)).join('')}</div>
+        ${fam.note ? `<p class="family-note">${App.t(fam.note)}</p>` : ''}
+        ${subs.map(sub => `
+          ${sub.key ? `<p class="family-sub">${App.t(sub.key)}</p>` : ''}
+          <div class="lang-grid">${sub.codes.map(code => langCardHtml(code, currentLang)).join('')}</div>`).join('')}
       </div>
     `;
   }).join('');
@@ -259,14 +265,20 @@ function renderMiniChart(root) {
     return { label: App.t(k), reviews: e.reviews || 0, correct: e.correct || 0, today: i === (now.getDay() + 6) % 7, future: d > now };
   });
   const max = Math.max(1, ...days.map(d => d.reviews));
+  const total = days.reduce((a, d) => a + d.reviews, 0);
+  const correct = days.reduce((a, d) => a + d.correct, 0);
+  const totalEl = root.querySelector('#week-total');
+  if (totalEl) totalEl.textContent = App.t('chart_week_total', { n: total, c: correct });
 
+  // Days without answers get a grey baseline and "0" (none for days ahead),
+  // so an empty day doesn't look like a small bar.
   el.innerHTML = days.map(d => {
     const h = Math.round((d.reviews / max) * 100);
     const tip = App.t('tooltip_reviews_correct', { reviews: d.reviews, correct: d.correct });
     return `
       <div class="minichart-col ${d.today ? 'is-today' : ''} ${d.future ? 'is-future' : ''}">
-        <div class="minichart-n">${d.reviews || ''}</div>
-        <div class="minichart-bar" style="height:${Math.max(h, d.reviews ? 6 : 2)}%" title="${tip}"></div>
+        <div class="minichart-n">${d.reviews || (d.future ? '' : '0')}</div>
+        <div class="minichart-bar${d.reviews ? '' : ' is-empty'}" style="height:${d.reviews ? Math.max(h, 6) : 2}%" title="${tip}"></div>
         <div class="minichart-label">${d.label}</div>
       </div>
     `;

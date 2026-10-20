@@ -69,10 +69,10 @@ App.hearts = (function () {
     return new Promise(resolve => setTimeout(() => resolve(true), 600));
   }
   function watchAd() {
-    if (adBusy) return Promise.resolve(false);
+    if (adBusy || !App.adLimit.left('hearts')) return Promise.resolve(false);
     adBusy = true;
     return showRewardedAd()
-      .then(ok => { if (ok) add(1); return !!ok; })
+      .then(ok => { if (ok) { App.adLimit.use('hearts'); add(1); } return !!ok; })
       .catch(() => false)
       .finally(() => { adBusy = false; });
   }
@@ -176,15 +176,17 @@ App.hearts = (function () {
   function bindAd(btn, after) {
     if (!btn) return;
     const full = count() >= MAX;
-    btn.disabled = full;
+    const noAds = !App.adLimit.left('hearts');
+    btn.disabled = full || noAds;
     if (full) btn.textContent = App.t('hearts_full');
+    else btn.insertAdjacentHTML('afterend', `<div class="ads-left">${App.adLimit.label('hearts')}</div>`);
     btn.addEventListener('click', () => {
       btn.disabled = true;
       btn.classList.add('loading');
       watchAd().then(ok => {
         btn.classList.remove('loading');
         if (ok) App.effects.toast(`${iconSvgInline()} +1`, 'heart-toast');
-        if (after) after(); else btn.disabled = count() >= MAX;
+        if (after) after(); else btn.disabled = count() >= MAX || !App.adLimit.left('hearts');
       });
     });
   }

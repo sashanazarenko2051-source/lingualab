@@ -77,10 +77,10 @@ App.energy = (function () {
   // TODO: replace the stub with the real ad SDK call.
   let adBusy = false;
   function watchAd() {
-    if (adBusy) return Promise.resolve(false);
+    if (adBusy || !App.adLimit.left('energy')) return Promise.resolve(false);
     adBusy = true;
     return new Promise(resolve => setTimeout(() => resolve(true), 600))
-      .then(ok => { if (ok) add(AD_GIFT); return !!ok; })
+      .then(ok => { if (ok) { App.adLimit.use('energy'); add(AD_GIFT); } return !!ok; })
       .catch(() => false)
       .finally(() => { adBusy = false; });
   }
@@ -121,7 +121,8 @@ App.energy = (function () {
   }
 
   function adButton() {
-    return `<button class="heart-ad-btn energy-ad-btn" id="energy-ad">📺 ${App.t('energy_ad_btn', { n: AD_GIFT })}</button>`;
+    return `<button class="heart-ad-btn energy-ad-btn" id="energy-ad">📺 ${App.t('energy_ad_btn', { n: AD_GIFT })}</button>
+      <div class="ads-left">${App.adLimit.label('energy')}</div>`;
   }
   function packsHtml() {
     return `<div class="energy-packs">${PACKS.map(p => `<button class="action-card energy-pack" data-pack="${p}">💎 ${p === 'unlimited' ? App.t('energy_pack_unlimited') : '+' + p + ' ⚡'}</button>`).join('')}</div>`;
@@ -129,7 +130,7 @@ App.energy = (function () {
   function bindButtons(scope, after) {
     const ad = scope.querySelector('#energy-ad');
     if (ad) {
-      ad.disabled = unlimited() || count() >= MAX;
+      ad.disabled = unlimited() || count() >= MAX || !App.adLimit.left('energy');
       ad.addEventListener('click', () => {
         ad.disabled = true;
         ad.classList.add('loading');
@@ -168,7 +169,9 @@ App.energy = (function () {
           ${rulesHtml()}
           ${adButton()}
           ${packsHtml()}
+          <button class="action-card energy-pack shop-link" id="energy-popup-shop">🛒 ${App.t('nav_shop')}</button>
         </div>`;
+      wrap.querySelector('#energy-popup-shop').addEventListener('click', () => { closePopup(); App.session.shopSection = 'energy'; App.router.go('shop'); });
       wrap.querySelector('#energy-popup-close').addEventListener('click', closePopup);
       bindButtons(wrap, draw);
     };

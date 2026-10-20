@@ -134,10 +134,21 @@ function categoryNodeHtml(s, side, accent, code) {
 
 // The node placed at a level boundary: its icon is the level you're ENTERING
 // (e.g. "A1"), and clicking it exams every word from the level you just
-// FINISHED (e.g. all A0 categories) — a cumulative checkpoint, not a lock.
+// FINISHED (e.g. all A0 categories). It opens once the level's last topic does.
 function levelExamNodeHtml(enteringLevel, testedCatIds, side, accent, code) {
   const passed = App.storage.isExamPassed(code, enteringLevel);
   const catsAttr = testedCatIds.join(',');
+  if (!App.access.levelExamUnlocked(code, enteringLevel)) return `
+    <div class="skill-node-row side-${side} locked">
+      <button class="skill-node skill-node-level-exam skill-node-locked" data-locked-note="exam" style="--node-accent:${accent}">
+        <span class="skill-node-level-text">${enteringLevel}</span><span class="skill-node-lock">🔒</span>
+      </button>
+      <div class="skill-node-label">
+        ${App.t('course_level_exam_label', { level: enteringLevel })}<br>
+        <span class="skill-node-meta">🔒 ${App.t('lock_short')}</span>
+      </div>
+    </div>
+  `;
   return `
     <div class="skill-node-row side-${side}">
       <button class="skill-node skill-node-level-exam ${passed ? 'done' : ''}"
@@ -182,12 +193,13 @@ function renderPath(root, code, lang, accent) {
     side++;
   });
 
+  const dlgOpen = App.access.dialoguesUnlocked(code);
   const dialoguesNode = `
-    <div class="skill-node-row side-${side % 2 === 0 ? 'left' : 'right'}">
-      <button class="skill-node skill-node-bonus" data-dlg="1" style="--node-accent:${accent}">
-        <span class="skill-node-icon">💬</span>
+    <div class="skill-node-row side-${side % 2 === 0 ? 'left' : 'right'}${dlgOpen ? '' : ' locked'}">
+      <button class="skill-node skill-node-bonus${dlgOpen ? '' : ' skill-node-locked'}" ${dlgOpen ? 'data-dlg="1"' : 'data-locked-note="dlg"'} style="--node-accent:${accent}">
+        <span class="skill-node-icon">💬</span>${dlgOpen ? '' : '<span class="skill-node-lock">🔒</span>'}
       </button>
-      <div class="skill-node-label">${App.t('course_dialogues')}</div>
+      <div class="skill-node-label">${App.t('course_dialogues')}${dlgOpen ? '' : `<br><span class="skill-node-meta">🔒 ${App.t('lock_short')}</span>`}</div>
     </div>
   `;
 
@@ -201,6 +213,9 @@ function renderPath(root, code, lang, accent) {
   });
   el.querySelectorAll('[data-locked]').forEach(btn => {
     btn.addEventListener('click', () => App.access.showLocked(code, btn.dataset.locked));
+  });
+  el.querySelectorAll('[data-locked-note]').forEach(btn => {
+    btn.addEventListener('click', () => App.access.showLockedNote(App.t(btn.dataset.lockedNote === 'dlg' ? 'lock_dlg_text' : 'lock_exam_text')));
   });
   el.querySelectorAll('[data-exam]').forEach(btn => {
     btn.addEventListener('click', (e) => {

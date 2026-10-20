@@ -9,17 +9,26 @@ App.LANG_ORDER = [
   'el', 'fi', 'hu'
 ];
 
+// Language families for the home page, split into their branches.
 App.LANG_FAMILIES = [
-  { key: 'family_germanic', codes: ['en', 'de', 'nl', 'sv', 'no', 'da'] },
-  { key: 'family_romance', codes: ['fr', 'es', 'it', 'pt', 'ro'] },
-  { key: 'family_slavic', codes: ['pl', 'cs', 'sk', 'uk', 'ru', 'bg', 'hr', 'sr'] },
-  { key: 'family_other', codes: ['el', 'fi', 'hu'] }
+  { key: 'family_germanic', subs: [
+    { key: 'family_germanic_west', codes: ['en', 'de', 'nl'] },
+    { key: 'family_germanic_north', codes: ['sv', 'no', 'da'] }
+  ] },
+  { key: 'family_romance', note: 'family_romance_note', subs: [{ codes: ['fr', 'es', 'it', 'pt', 'ro'] }] },
+  { key: 'family_slavic', subs: [
+    { key: 'family_slavic_west', codes: ['pl', 'cs', 'sk'] },
+    { key: 'family_slavic_east', codes: ['uk', 'ru'] },
+    { key: 'family_slavic_south', codes: ['bg', 'hr', 'sr'] }
+  ] },
+  { key: 'family_greek', note: 'family_greek_note', subs: [{ codes: ['el'] }] },
+  { key: 'family_uralic', note: 'family_uralic_note', subs: [{ codes: ['fi', 'hu'] }] }
 ];
 
 // If a language's data file failed to load, drop it instead of letting one
 // missing App.data entry crash every view that loops over all languages.
 App.LANG_ORDER = App.LANG_ORDER.filter(code => App.data[code]);
-App.LANG_FAMILIES.forEach(fam => { fam.codes = fam.codes.filter(code => App.data[code]); });
+App.LANG_FAMILIES.forEach(fam => fam.subs.forEach(sub => { sub.codes = sub.codes.filter(code => App.data[code]); }));
 
 App.router = (function () {
   let current = 'dashboard';

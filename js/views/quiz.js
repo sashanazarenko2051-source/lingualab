@@ -28,6 +28,12 @@ App.views.quiz = {
     App.session.examMode = false;
     App.session.examCategoryIds = null;
     App.session.examLevel = null;
+    // A closed level exam can't be started from anywhere.
+    if (meta.examLevel && !App.access.levelExamUnlocked(code, meta.examLevel)) {
+      App.router.go('course');
+      App.access.showLockedNote(App.t('lock_exam_text'));
+      return;
+    }
 
     let steps;
     if (meta.examCategoryIds && meta.examCategoryIds.length) {

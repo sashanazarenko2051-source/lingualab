@@ -50,6 +50,7 @@ App.storage = (function () {
         premium: !!parsed.premium,
         energy: parsed.energy || null,
         shop: parsed.shop || {},
+        ads: parsed.ads || null,
         settings: Object.assign({}, d.settings, parsed.settings)
       };
     } catch (e) {

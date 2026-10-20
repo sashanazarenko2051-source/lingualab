@@ -10,6 +10,11 @@ App.views.dialogues = {
   render(root) {
     const code = App.storage.getCurrentLang();
     const lang = App.data[code];
+    if (!App.access.dialoguesUnlocked(code)) {
+      App.router.go('course');
+      App.access.showLockedNote(App.t('lock_dlg_text'));
+      return;
+    }
     let selectedId = App.session.dialogueId || (lang.dialogues[0] && lang.dialogues[0].id);
     App.session.dialogueId = null;
 
