@@ -186,6 +186,9 @@ App.exercises = (function () {
       },
       next() {
         onKey(null);
+        // The answer read out at the end must not run on into the next
+        // exercise, where it sounds like the new word's pronunciation.
+        App.stopSpeech();
         state.index += 1;
         // Every DRAIN_EVERY finished exercises cost a heart too.
         const drained = state.useHearts && App.hearts.stepDone();
@@ -355,8 +358,8 @@ App.exercises = (function () {
   const RENDER = {
     // New word as a two-sided card: first only the picture and the word (try
     // to guess the meaning), then a tap flips in the translation and the
-    // example with the word highlighted. Three dots fill as you listen —
-    // a nudge to say it aloud three times.
+    // example with the word highlighted. A dot fills once you have listened —
+    // a nudge to say it aloud once.
     intro(ctx, word) {
       const m = App.words.localizedMeaning(word);
       const letters = Array.from(word.w.normalize('NFC'))
@@ -369,7 +372,7 @@ App.exercises = (function () {
             <button class="ex-speak ex-star ${App.storage.inReview(word.id) ? 'on' : ''}" id="ex-star" title="${App.t('words_add')}">${App.storage.inReview(word.id) ? '⭐' : '☆'}</button></div>
           <div class="ex-say">
             <span>🗣 ${App.t('ex_say_aloud')}</span>
-            <span class="ex-say-dots"><i></i><i></i><i></i></span>
+            <span class="ex-say-dots"><i></i></span>
           </div>
           <div class="ex-intro-hint" id="ex-hint">👆 ${App.t('ex_tap_reveal')}</div>
           <div class="ex-intro-back" id="ex-back" hidden>

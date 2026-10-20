@@ -20,40 +20,38 @@ App.hearts = (function () {
 
   function set(n) {
     st().count = Math.max(0, Math.min(MAX, n));
+    if (st().count >= MAX) st().refillAt = 0;
     App.storage.save();
     emit();
   }
-  function lose(n) { set(count() - (n || 1)); }
+  // The first heart lost from a full wallet starts a REFILL_MS countdown.
+  function lose(n) {
+    const h = st();
+    if (!h.refillAt) h.refillAt = Date.now() + REFILL_MS;
+    set(count() - (n || 1));
+  }
   function add(n) { set(count() + (n || 1)); }
 
-  // Free refill: at REFILL_HOURS (local time) the wallet is topped up to
-  // REFILL_TO. Hearts above that (from ads) are kept. Missed refill moments
-  // (app closed) are applied on the next check.
-  const REFILL_TO = 12;
-  const REFILL_HOURS = [1, 13];
-
-  // The latest refill moment that is not in the future.
-  function lastRefillMoment(now) {
-    const d = new Date(now);
-    for (let back = 0; back < 2; back++) {
-      const hours = REFILL_HOURS.slice().sort((a, b) => b - a);
-      for (const h of hours) {
-        const t = new Date(d.getFullYear(), d.getMonth(), d.getDate() - back, h).getTime();
-        if (t <= now) return t;
-      }
-    }
-    return 0;
-  }
+  // Free refill: REFILL_MS after the first heart is lost, the wallet is
+  // filled back to MAX. Checked every minute, so it also catches up after
+  // the app was closed.
+  const REFILL_MS = 24 * 60 * 60 * 1000;
 
   function checkRefill() {
     const h = st();
-    const now = Date.now();
-    const moment = lastRefillMoment(now);
-    if ((h.refilledAt || 0) >= moment) return false;
-    h.refilledAt = now;
-    if (h.count < REFILL_TO) { set(REFILL_TO); return true; }
-    App.storage.save();
-    return false;
+    if (h.count >= MAX) { if (h.refillAt) { h.refillAt = 0; App.storage.save(); } return false; }
+    // A wallet below MAX without a countdown (saved by an older version) refills now.
+    if (h.refillAt && Date.now() < h.refillAt) return false;
+    set(MAX);
+    return true;
+  }
+
+  // Time left until the refill, as "h:mm", or '' when the wallet is full.
+  function refillLeft() {
+    const h = st();
+    if (h.count >= MAX || !h.refillAt) return '';
+    const min = Math.max(0, Math.ceil((h.refillAt - Date.now()) / 60000));
+    return Math.floor(min / 60) + ':' + String(min % 60).padStart(2, '0');
   }
 
   function startRefillTimer() {
@@ -225,7 +223,8 @@ App.hearts = (function () {
             <div>❌ ${App.t('hearts_rule_mistake')}</div>
             <div>🔟 ${App.t('hearts_rule_drain', { n: DRAIN_EVERY })}</div>
             <div>📺 ${App.t('hearts_rule_ad')}</div>
-            <div>🕐 ${App.t('hearts_rule_refill', { n: REFILL_TO })}</div>
+            <div>🕐 ${App.t('hearts_rule_refill', { n: MAX })}</div>
+            ${refillLeft() ? `<div class="heart-popup-timer">⏳ ${App.t('hearts_refill_in', { t: refillLeft() })}</div>` : ''}
           </div>
           <button class="heart-ad-btn" id="heart-popup-ad">${App.t('hearts_ad_btn')}</button>
           <button class="heart-popup-more" id="heart-popup-more">ℹ️ ${App.t('help_more')}</button>

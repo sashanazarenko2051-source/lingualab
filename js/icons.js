@@ -614,6 +614,13 @@ App.hasVoice = function (langCode) {
   return !!findVoice(App.TTS_LANG[langCode] || 'en-US');
 };
 
+// Stops what is being read, including a speak() still waiting to start.
+App.stopSpeech = function () {
+  if (!('speechSynthesis' in window)) return;
+  ++_speakToken;
+  try { speechSynthesis.cancel(); } catch (e) { /* ignore */ }
+};
+
 App.speak = function (text, langCode, rate) {
   if (!('speechSynthesis' in window)) return;
   const lang = App.TTS_LANG[langCode] || 'en-US';
