@@ -92,7 +92,7 @@ App.gamification = (function () {
     { id: 'words_2000', icon: '🗼', titleKey: 'ach_t_words', howKey: 'ach_how_words', goal: 2000, value: masteredCount },
     { id: 'words_3000', icon: '🏔️', titleKey: 'ach_t_words', howKey: 'ach_how_words', goal: 3000, value: masteredCount },
     { id: 'words_5000', icon: '🌋', titleKey: 'ach_t_words', howKey: 'ach_how_words', goal: 5000, value: masteredCount },
-    { id: 'words_7480', icon: '🪐', titleKey: 'ach_t_words', howKey: 'ach_how_words', goal: 7480, value: masteredCount },
+    { id: 'words_7480', icon: '🪐', titleKey: 'ach_t_words', howKey: 'ach_how_words', goal: 8000, value: masteredCount },
     { id: 'streak_3', icon: '🔥', titleKey: 'ach_streak_3', howKey: 'ach_how_streak', goal: 3, value: streakOf },
     { id: 'streak_7', icon: '🔥', titleKey: 'ach_streak_7', howKey: 'ach_how_streak', goal: 7, value: streakOf },
     { id: 'streak_14', icon: '⚡', titleKey: 'ach_t_streak', howKey: 'ach_how_streak', goal: 14, value: streakOf },

@@ -12,7 +12,14 @@ const HELP = {
     intro: 'Короткая инструкция: как устроен курс, сколько учить в день и зачем нужны сердечки.',
     sections: [
       ['course', '🎓', 'Курс', `
-        <p>В каждом языке <b>34 темы по 220 слов</b> — всего 7480 слов. Темы идут по уровням <b>A0 → A1 → A2 → B1</b>: от приветствий и чисел к работе, здоровью и технологиям.</p>
+        <p>В каждом языке <b>36 тем</b> — всего <b>8000 слов</b>. Темы идут по уровням <b>A0 → A1 → A2 → B1 → B2</b>: от приветствий и чисел к работе, здоровью, обществу и науке.</p>
+        <ul>
+          <li><b>A0</b> — первые шаги: около 150 слов.</li>
+          <li><b>A1</b> — до 1500 слов: простые фразы о себе и быте.</li>
+          <li><b>A2</b> — 1500–2500 слов: повседневные ситуации.</li>
+          <li><b>B1</b> — 2700–4500 слов: работа, учёба, путешествия.</li>
+          <li><b>B2</b> — 5000–8000 слов: <b>свободный разговор</b> на любые темы.</li>
+        </ul>
         <p>Начните с кнопки <b>«Начать урок»</b> на главной — приложение само выберет следующую тему. Весь путь виден на странице курса. Следующая тема открывается, когда в предыдущей изучены все слова или сдан её экзамен.</p>`],
       ['lesson', '📝', 'Урок', `
         <p>Урок начинается с <b>разминки</b>: слова, в которых вы ошибались, и слова, которые пора повторить.</p>
@@ -57,8 +64,8 @@ const HELP = {
       ['badges', '🏷️', 'Значки под флагом', `
         <ul>
           <li><b>✅</b> — слова этого языка, на которые вы уже ответили правильно.</li>
-          <li><b>📚</b> — сколько всего слов в курсе (7480).</li>
-          <li><b>🎓 8–10k</b> — примерно столько слов нужно для уровня C2 (свободное владение). Это ориентир, чтобы видеть, сколько пути покрывает курс.</li>
+          <li><b>📚</b> — сколько всего слов в курсе (8000).</li>
+          <li><b>🎓 B2 · 8k</b> — 8000 слов дают уровень B2: свободный разговор. Это цель всего курса.</li>
         </ul>`],
       ['settings', '⚙️', 'Настройки', `
         <p>В <b>⚙️ Настройках</b> можно выбрать тему оформления или свои цвета, размер интерфейса и включить или выключить напоминания вроде «вы давно не учились».</p>`]
@@ -69,7 +76,14 @@ const HELP = {
     intro: 'Коротка інструкція: як влаштований курс, скільки вчити на день і навіщо потрібні сердечка.',
     sections: [
       ['course', '🎓', 'Курс', `
-        <p>У кожній мові <b>34 теми по 220 слів</b> — усього 7480 слів. Теми йдуть за рівнями <b>A0 → A1 → A2 → B1</b>: від привітань і чисел до роботи, здоров'я й технологій.</p>
+        <p>У кожній мові <b>36 тем</b> — усього <b>8000 слів</b>. Теми йдуть за рівнями <b>A0 → A1 → A2 → B1 → B2</b>: від привітань і чисел до роботи, здоров'я, суспільства й науки.</p>
+        <ul>
+          <li><b>A0</b> — перші кроки: близько 150 слів.</li>
+          <li><b>A1</b> — до 1500 слів: прості фрази про себе й побут.</li>
+          <li><b>A2</b> — 1500–2500 слів: повсякденні ситуації.</li>
+          <li><b>B1</b> — 2700–4500 слів: робота, навчання, подорожі.</li>
+          <li><b>B2</b> — 5000–8000 слів: <b>вільна розмова</b> на будь-які теми.</li>
+        </ul>
         <p>Почніть із кнопки <b>«Почати урок»</b> на головній — застосунок сам обере наступну тему. Увесь шлях видно на сторінці курсу. Наступна тема відкривається, коли в попередній вивчено всі слова або складено її іспит.</p>`],
       ['lesson', '📝', 'Урок', `
         <p>Урок починається з <b>розминки</b>: слова, у яких ви помилялися, і слова, які час повторити.</p>
@@ -112,8 +126,8 @@ const HELP = {
       ['badges', '🏷️', 'Значки під прапором', `
         <ul>
           <li><b>✅</b> — слова цієї мови, на які ви вже відповіли правильно.</li>
-          <li><b>📚</b> — скільки всього слів у курсі (7480).</li>
-          <li><b>🎓 8–10k</b> — приблизно стільки слів потрібно для рівня C2 (вільне володіння). Це орієнтир, щоб бачити, яку частину шляху покриває курс.</li>
+          <li><b>📚</b> — скільки всього слів у курсі (8000).</li>
+          <li><b>🎓 B2 · 8k</b> — 8000 слів дають рівень B2: вільна розмова. Це мета всього курсу.</li>
         </ul>`],
       ['settings', '⚙️', 'Налаштування', `
         <p>У <b>⚙️ Налаштуваннях</b> можна обрати тему оформлення чи свої кольори, розмір інтерфейсу та ввімкнути або вимкнути нагадування на кшталт «ви давно не вчилися».</p>`]
@@ -124,7 +138,14 @@ const HELP = {
     intro: 'A quick guide: how the course is built, how much to learn a day and what hearts are for.',
     sections: [
       ['course', '🎓', 'The course', `
-        <p>Every language has <b>34 topics of 220 words</b> — 7480 words in total. Topics follow the levels <b>A0 → A1 → A2 → B1</b>: from greetings and numbers to work, health and technology.</p>
+        <p>Every language has <b>36 topics</b> — <b>8000 words</b> in total. Topics follow the levels <b>A0 → A1 → A2 → B1 → B2</b>: from greetings and numbers to work, health, society and science.</p>
+        <ul>
+          <li><b>A0</b> — first steps: about 150 words.</li>
+          <li><b>A1</b> — up to 1500 words: simple phrases about yourself and daily life.</li>
+          <li><b>A2</b> — 1500–2500 words: everyday situations.</li>
+          <li><b>B1</b> — 2700–4500 words: work, study, travel.</li>
+          <li><b>B2</b> — 5000–8000 words: <b>free conversation</b> on any topic.</li>
+        </ul>
         <p>Start with <b>“Start lesson”</b> on the home page — the app picks the next topic for you. The whole path is on the course page. The next topic opens once every word of the previous one is studied or its exam is passed.</p>`],
       ['lesson', '📝', 'A lesson', `
         <p>Each lesson starts with a <b>warm-up</b>: words you got wrong and words that are due for review.</p>
@@ -167,8 +188,8 @@ const HELP = {
       ['badges', '🏷️', 'Badges under the flag', `
         <ul>
           <li><b>✅</b> — words of this language you've already answered correctly.</li>
-          <li><b>📚</b> — total words in the course (7480).</li>
-          <li><b>🎓 8–10k</b> — roughly the vocabulary needed for C2 (fluency). A reference point to see how much of the way the course covers.</li>
+          <li><b>📚</b> — total words in the course (8000).</li>
+          <li><b>🎓 B2 · 8k</b> — 8000 words give you B2: free conversation. That is the goal of the whole course.</li>
         </ul>`],
       ['settings', '⚙️', 'Settings', `
         <p>In <b>⚙️ Settings</b> you can pick a theme or your own colors, change the interface size and turn reminders like “you haven't studied in a while” on or off.</p>`]
