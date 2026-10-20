@@ -91,6 +91,16 @@ App.profile = (function () {
     });
   }
 
+  // Hats on the avatar: some free, the rest bought in the shop.
+  const HATS = { cap: '🧢', sunhat: '👒', grad: '🎓', bow: '🎀', tophat: '🎩', crown: '👑', helmet: '🪖', rescue: '⛑️', flower: '🌸' };
+  const SHOP_HATS = ['tophat', 'crown', 'helmet', 'rescue', 'flower'];
+  function ownsHat(h) {
+    if (!h || !SHOP_HATS.includes(h)) return true;
+    if ((App.storage.getProfile() || {}).owner) return true;
+    const sh = App.storage.state.shop || {};
+    return !!(sh.hats && sh.hats[h]);
+  }
+
   function avatarBadgeHtml(profile, size) {
     size = size || 40;
     const p = normalize(profile);
@@ -100,12 +110,68 @@ App.profile = (function () {
       ? `background: radial-gradient(circle at 35% 30%, color-mix(in srgb, ${p.bgColor} 45%, var(--surface-2)), color-mix(in srgb, ${p.bgColor} 14%, var(--surface-2)) 75%);`
       : '';
     const flagBadge = p.flag ? `<span class="avatar-flag-badge">${App.ui.flagChip(p.flag)}</span>` : '';
-    return `<span class="avatar-badge${patternClass}" style="--avatar-size:${size}px; --avatar-color:${p.outlineColor}; ${bgStyle}"><span class="avatar-badge-emoji" style="filter:${tintFilter(p.animalColor)}">${emoji}</span>${flagBadge}</span>`;
+    const hat = p.hat && HATS[p.hat] ? `<span class="avatar-hat">${HATS[p.hat]}</span>` : '';
+    return `<span class="avatar-badge${patternClass}" style="--avatar-size:${size}px; --avatar-color:${p.outlineColor}; ${bgStyle}"><span class="avatar-badge-emoji" style="filter:${tintFilter(p.animalColor)}">${emoji}</span>${hat}${flagBadge}</span>`;
   }
 
+  // ---- the app's own name is reserved for its owner ----
+  // Compared after lower-casing, swapping Cyrillic look-alike letters and
+  // dropping spaces and punctuation, so "W0 Lingua-Lab" or "WО Lingua Lab"
+  // (Cyrillic О) count too.
+  const LOOKALIKE = { 'о': 'o', 'а': 'a', 'е': 'e', 'і': 'i', 'с': 'c', 'р': 'p', 'х': 'x', 'у': 'y', 'к': 'k', 'м': 'm', 'т': 't', 'в': 'b', 'н': 'h', 'л': 'l', '0': 'o', '1': 'l', '|': 'l' };
+  function nameKey(name) {
+    return String(name || '').toLowerCase().split('').map(c => LOOKALIKE[c] || c).join('').replace(/[^a-z0-9]/g, '');
+  }
+  function isReservedName(name) {
+    const k = nameKey(name);
+    return k.includes('lingualab') || k.includes('wolingua');
+  }
+  // SHA-256 of the owner code, so another device can be made the owner.
+  const OWNER_HASH = '1b06485ecb6865472638d005f7e5bdb50b52219f977c5d876136d39a6481af56';
+  function checkOwnerCode(code) {
+    if (!(window.crypto && crypto.subtle)) return Promise.resolve(false);
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(code).trim().toUpperCase()))
+      .then(buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('') === OWNER_HASH)
+      .catch(() => false);
+  }
+  function isOwner() { return !!(App.storage.getProfile() || {}).owner; }
+
   function ensureProfile() {
-    const p = App.storage.getProfile();
-    if (!p || !p.animal || !p.animalColor) App.storage.setProfile(normalize(p));
+    let p = App.storage.getProfile();
+    if (!p || !p.animal || !p.animalColor) { App.storage.setProfile(normalize(p)); p = App.storage.getProfile(); }
+    // Once, when this version first runs: whoever already had the app's name
+    // here is its owner (that's the creator's own computer).
+    if (p && !p.ownerChecked) {
+      App.storage.setProfile(Object.assign({}, p, { ownerChecked: true, owner: !!p.owner || isReservedName(p.name) }));
+    }
+  }
+
+  // Asks for the owner code; resolves true when it's right.
+  function askOwnerCode() {
+    return new Promise(resolve => {
+      const ov = document.createElement('div');
+      ov.className = 'modal-overlay';
+      ov.innerHTML = `
+        <div class="modal-card restart-card">
+          <div class="restart-icon">👑</div>
+          <p>${App.t('name_reserved')}</p>
+          <input type="password" class="country-search" id="owner-code" placeholder="${App.t('owner_code')}" autocomplete="off">
+          <div class="profile-modal-actions">
+            <button class="action-card" id="owner-no" style="display:inline-flex">${App.t('profile_cancel')}</button>
+            <button class="quiz-next" id="owner-yes">OK</button>
+          </div>
+        </div>`;
+      document.body.appendChild(ov);
+      const input = ov.querySelector('#owner-code');
+      input.focus();
+      const done = ok => { ov.remove(); resolve(ok); };
+      ov.querySelector('#owner-no').addEventListener('click', () => done(false));
+      const tryCode = () => checkOwnerCode(input.value).then(ok => {
+        if (ok) done(true); else { App.effects.toast('⛔ ' + App.t('owner_code_wrong')); input.value = ''; input.focus(); }
+      });
+      ov.querySelector('#owner-yes').addEventListener('click', tryCode);
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') tryCode(); });
+    });
   }
 
   function renderTopbarBadge() {
@@ -132,6 +198,7 @@ App.profile = (function () {
         <div class="profile-cols">
         <div class="profile-side">
         <div class="profile-preview" id="profile-preview">${avatarBadgeHtml(draft, 96)}</div>
+        ${draft.owner ? `<div class="owner-badge">👑 ${App.t('owner_badge')}</div>` : ''}
         <label class="profile-name-label">${App.t('profile_name_label')}
           <input type="text" id="profile-name-input" maxlength="18" value="${escapeHtml(draft.name)}" placeholder="${escapeHtml(App.t('profile_name_placeholder'))}">
         </label>
@@ -148,6 +215,12 @@ App.profile = (function () {
         <div class="profile-section-label">${App.t('profile_animal_label')}</div>
         <div class="profile-animal-grid" id="profile-animal-grid">
           ${ANIMALS.map(a => `<button type="button" class="profile-animal-opt ${a === draft.animal ? 'active' : ''}" data-animal="${a}">${ANIMAL_EMOJI[a]}</button>`).join('')}
+        </div>
+
+        <div class="profile-section-label">${App.t('profile_hat_label')}</div>
+        <div class="profile-animal-grid profile-hat-grid" id="profile-hat-grid">
+          <button type="button" class="profile-animal-opt profile-hat-opt ${!draft.hat ? 'active' : ''}" data-hat="">✕</button>
+          ${Object.keys(HATS).map(h => `<button type="button" class="profile-animal-opt profile-hat-opt ${h === draft.hat ? 'active' : ''} ${ownsHat(h) ? '' : 'locked'}" data-hat="${h}">${HATS[h]}${ownsHat(h) ? '' : '<i class="hat-lock">🔒</i>'}</button>`).join('')}
         </div>
 
         <div class="profile-section-label">${App.t('profile_bg_pattern_label')}</div>
@@ -189,6 +262,7 @@ App.profile = (function () {
       overlay.querySelectorAll('#profile-color-row-bg .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.bgColor));
       overlay.querySelectorAll('#profile-color-row-outline .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.outlineColor));
       overlay.querySelectorAll('.profile-flag-opt').forEach(b => b.classList.toggle('active', b.dataset.flag === (draft.flag || '')));
+      overlay.querySelectorAll('.profile-hat-opt').forEach(b => b.classList.toggle('active', b.dataset.hat === (draft.hat || '')));
       updateBgColorRowVisibility();
     }
 
@@ -207,6 +281,20 @@ App.profile = (function () {
         refreshPreview();
       });
     });
+    overlay.querySelectorAll('.profile-hat-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const h = btn.dataset.hat;
+        if (!ownsHat(h)) {
+          // A shop hat: open the hats in the shop.
+          overlay.remove();
+          App.session.shopSection = 'hats';
+          App.router.go('shop');
+          return;
+        }
+        draft.hat = h || null;
+        refreshPreview();
+      });
+    });
     overlay.querySelectorAll('.profile-flag-opt').forEach(btn => {
       btn.addEventListener('click', () => { draft.flag = btn.dataset.flag || null; refreshPreview(); });
     });
@@ -222,8 +310,12 @@ App.profile = (function () {
     overlay.querySelector('#profile-cancel').addEventListener('click', close);
     overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
 
-    overlay.querySelector('#profile-save').addEventListener('click', () => {
+    overlay.querySelector('#profile-save').addEventListener('click', async () => {
       const name = overlay.querySelector('#profile-name-input').value.trim().slice(0, 18);
+      if (isReservedName(name) && !draft.owner) {
+        if (!(await askOwnerCode())) return;
+        draft.owner = true;
+      }
       draft.name = name || App.t('profile_default_name');
       const country = overlay.querySelector('#profile-country').value;
       if (country) draft.country = country;
@@ -235,5 +327,5 @@ App.profile = (function () {
     });
   }
 
-  return { ANIMALS, ANIMAL_EMOJI, COLORS, BG_PATTERNS, avatarBadgeHtml, ensureProfile, renderTopbarBadge, openEditor };
+  return { ANIMALS, ANIMAL_EMOJI, COLORS, BG_PATTERNS, HATS, SHOP_HATS, ownsHat, avatarBadgeHtml, ensureProfile, renderTopbarBadge, openEditor, isReservedName, isOwner };
 })();

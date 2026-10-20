@@ -28,7 +28,8 @@ App.shop = (function () {
     energy_unl:  { section: 'energy', icon: '🔋', term: true, gift: true },
     ach:         { section: 'ach', icon: '🏆', price: 0.99, gift: true },
     ach_all:     { section: 'ach', icon: '🏆', price: 9.99, gift: true },
-    theme:       { section: 'themes', icon: '🎨', price: 1.49, gift: true }
+    theme:       { section: 'themes', icon: '🎨', price: 1.49, gift: true },
+    hat:         { section: 'hats', icon: '🎩', price: 0.99, gift: true }
   };
 
   function st() {
@@ -37,6 +38,7 @@ App.shop = (function () {
     const sh = s.shop;
     sh.langs = sh.langs || {};
     sh.themes = sh.themes || {};
+    sh.hats = sh.hats || {};
     return sh;
   }
 
@@ -72,6 +74,7 @@ App.shop = (function () {
       }
       case 'ach_all': return App.t('shop_ach_all');
       case 'theme': return App.t('theme_' + opts.theme);
+      case 'hat': return (App.profile.HATS[opts.hat] || '🎩') + ' ' + App.t('shop_hat');
     }
     return itemId;
   }
@@ -93,6 +96,7 @@ App.shop = (function () {
       case 'ach': giveAchievements([opts.id]); break;
       case 'ach_all': giveAchievements(App.gamification.ACHIEVEMENTS.map(a => a.id)); break;
       case 'theme': sh.themes[opts.theme] = true; break;
+      case 'hat': sh.hats[opts.hat] = true; break;
     }
     App.storage.save();
   }

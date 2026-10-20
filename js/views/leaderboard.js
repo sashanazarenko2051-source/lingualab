@@ -57,7 +57,7 @@ function loadBoard(root, level) {
       <div class="lb-row ${r.uid === App.cloud.getUid() ? 'me' : ''}">
         <span class="lb-rank">${i + 1}</span>
         ${App.profile.avatarBadgeHtml(r, 32)}
-        <span class="lb-name">${escapeHtml(r.name || '?')}</span>
+        <span class="lb-name">${r.owner ? '👑 ' : ''}${escapeHtml(r.name || '?')}</span>
         ${App.achievements.badgesHtml(r.achievements, r.showcase)}
         <span class="lb-xp">${r.weeklyXP || 0} XP</span>
       </div>

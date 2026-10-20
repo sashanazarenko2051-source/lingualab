@@ -641,14 +641,17 @@ function speakOnline(text, langCode, rate, token, fallback) {
   const r = (pct >= 0 ? '+' : '') + Math.max(-50, Math.min(50, pct)) + '%';
   const url = `/tts?l=${langCode}&g=${s.voiceGender === 'female' ? 'female' : 'male'}&r=${encodeURIComponent(r)}&t=${encodeURIComponent(String(text).replace(/\s*\/\s*/g, ', '))}`;
   const a = new Audio(url);
+  a.preload = 'auto';
   _audio = a;
   let done = false;
-  const fail = () => {
+  const fail = (e) => {
     if (done) return; done = true;
-    _onlineDown = Date.now() + 60000;   // try online again in a minute
-    if (token === _speakToken) fallback();
+    // Stopped on purpose (next word, next exercise): not a failure.
+    if (token !== _speakToken || (e && e.name === 'AbortError')) return;
+    _onlineDown = Date.now() + 30000;   // try online again in half a minute
+    fallback();
   };
-  a.onerror = fail;
+  a.onerror = () => fail(a.error);
   a.play().then(() => { done = true; }).catch(fail);
 }
 

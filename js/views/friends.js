@@ -82,7 +82,7 @@ function rowHtml(r, action) {
     <div class="lb-row fr-row">
       ${App.profile.avatarBadgeHtml(r, 36)}
       <span class="fr-info">
-        <span class="lb-name">${esc(r.name || '?')}</span>
+        <span class="lb-name">${r.owner ? '👑 ' : ''}${esc(r.name || '?')}</span>
         <span class="fr-meta">⭐ ${App.t('dash_level')} ${esc(r.xpLevel || '—')} · 🔥 ${esc(r.streak || 0)} · ${esc(r.weeklyXP || 0)} XP ${App.t('fr_this_week')}</span>
       </span>
       ${App.achievements.badgesHtml(r.achievements, r.showcase)}

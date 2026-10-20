@@ -46,7 +46,7 @@ App.cloud = (function () {
       outlineColor: profile.outlineColor, bgPattern: profile.bgPattern, flag: profile.flag || null,
       achievements: App.storage.state.stats.achievements || [], showcase: profile.showcase || null,
       level, weeklyXP, week,
-      friendCode: getFriendCode(), nameLower: String(profile.name || '').trim().toLowerCase(),
+      friendCode: getFriendCode(), nameLower: String(profile.name || '').trim().toLowerCase(), owner: !!profile.owner,
       xpLevel: App.gamification.levelForXP(App.storage.state.stats.xp), streak: App.storage.state.stats.streak || 0,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });

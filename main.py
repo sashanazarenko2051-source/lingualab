@@ -81,8 +81,9 @@ _tts_cache = OrderedDict()
 _tts_lock = threading.Lock()
 
 
-def online_tts(lang, gender, text, rate):
-    """MP3 bytes for the text, or None (no internet, no edge-tts)."""
+def online_tts(lang, gender, text, rate, handler=None):
+    """MP3 bytes for the text, or None (no internet, no edge-tts). With a
+    handler, a new text is streamed to it as it arrives ('streamed')."""
     voices = ONLINE_VOICES.get(lang)
     if not voices or not text:
         return None
@@ -98,11 +99,27 @@ def online_tts(lang, gender, text, rate):
     except ImportError:
         return None
 
+    sent = [False]
+    out_h = [handler]
+
     async def run(v):
         out = bytearray()
         async for chunk in edge_tts.Communicate(text, v, rate=rate).stream():
-            if chunk.get('type') == 'audio':
-                out += chunk['data']
+            if chunk.get('type') != 'audio':
+                continue
+            out += chunk['data']
+            if out_h[0] is not None:
+                if not sent[0]:
+                    out_h[0].send_response(200)
+                    out_h[0].send_header('Content-Type', 'audio/mpeg')
+                    out_h[0].send_header('Connection', 'close')
+                    out_h[0].end_headers()
+                    sent[0] = True
+                try:
+                    out_h[0].wfile.write(chunk['data'])
+                    out_h[0].wfile.flush()
+                except OSError:
+                    out_h[0] = None    # the app stopped listening; keep caching
         return bytes(out)
     data = None
     for v in (voice, MULTILINGUAL[gender]):
@@ -111,6 +128,8 @@ def online_tts(lang, gender, text, rate):
         try:
             data = asyncio.run(asyncio.wait_for(run(v), 15))
         except Exception as e:
+            if sent[0]:
+                return 'streamed'
             # A voice that sends no audio is skipped for 10 minutes; a
             # network error just fails this request.
             if type(e).__name__ == 'NoAudioReceived':
@@ -125,7 +144,7 @@ def online_tts(lang, gender, text, rate):
         _tts_cache[key] = data
         while len(_tts_cache) > 600:
             _tts_cache.popitem(last=False)
-    return data
+    return 'streamed' if sent[0] else data
 
 
 class AppRequestHandler(http.server.SimpleHTTPRequestHandler):
@@ -143,7 +162,9 @@ class AppRequestHandler(http.server.SimpleHTTPRequestHandler):
             rate = q.get('r', ['+0%'])[0]
             if not re.fullmatch(r'[+-]\d{1,2}%', rate):
                 rate = '+0%'
-            data = online_tts(q.get('l', [''])[0], q.get('g', ['male'])[0], q.get('t', [''])[0][:400], rate)
+            data = online_tts(q.get('l', [''])[0], q.get('g', ['male'])[0], q.get('t', [''])[0][:400], rate, self)
+            if data == 'streamed':
+                return
             if not data:
                 self.send_response(503)
                 self.send_header('Content-Length', '0')

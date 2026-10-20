@@ -19,7 +19,7 @@ App.storage = (function () {
       missCount: {},
       friends: [],
       profile: { name: '', animal: 'wolf', color: '#00e5ff' },
-      hearts: { count: 20, steps: 0 },
+      hearts: { count: 25, steps: 0 },
       premium: false,
       settings: { theme: 'neon', custom: {}, scale: 1, bgAnim: true, motion: true, notify: true, notified: {} }
     };

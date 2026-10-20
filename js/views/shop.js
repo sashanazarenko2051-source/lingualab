@@ -13,7 +13,8 @@ const SECTIONS = [
   ['hearts', '❤️', 'shop_sec_hearts'],
   ['energy', '⚡', 'shop_sec_energy'],
   ['ach', '🏆', 'shop_sec_ach'],
-  ['themes', '🎨', 'shop_sec_themes']
+  ['themes', '🎨', 'shop_sec_themes'],
+  ['hats', '🎩', 'shop_sec_hats']
 ];
 
 function render(root) {
@@ -99,6 +100,10 @@ function sectionHtml(id) {
     title: App.t('theme_' + name), icon: `<span class="theme-swatch shop-swatch">${App.theme.swatch(name).map(c => `<i style="background:${c}"></i>`).join('')}</span>`,
     opts: { theme: name }, owned: App.shop.ownsTheme(name),
     extra: App.shop.ownsTheme(name) ? `<button class="action-card shop-apply" data-apply-theme="${name}">${App.t('shop_apply')}</button>` : ''
+  })).join('');
+  if (id === 'hats') return App.profile.SHOP_HATS.map(h => card('hat', {
+    title: App.t('shop_hat'), icon: `<span class="shop-hat-icon">${App.profile.HATS[h]}</span>`,
+    opts: { hat: h }, owned: App.profile.ownsHat(h)
   })).join('');
   return '';
 }

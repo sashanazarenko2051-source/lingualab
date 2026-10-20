@@ -5,7 +5,7 @@ window.App = window.App || {};
 // energy.js). Watching a rewarded ad gives one back (watchAd is the hook for the
 // ad SDK). At zero hearts lessons with hearts can't be played.
 App.hearts = (function () {
-  const MAX = 20;
+  const MAX = 25;
   const listeners = [];
 
   function st() {

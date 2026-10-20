@@ -1996,3 +1996,18 @@ html:has(.modal-overlay) { overflow: hidden; }
   .profile-card .profile-animal-grid, .profile-card .profile-pattern-row { grid-template-columns: repeat(8, minmax(0, 1fr)); }
   .profile-card .profile-color-row { grid-template-columns: repeat(12, minmax(0, 1fr)); }
 }
+
+.owner-badge { display: table; margin: -4px auto 12px; padding: 3px 12px; border-radius: 999px; font-weight: 800; font-size: 13px;
+  background: linear-gradient(120deg, #ffd23f, #ff9f1c); color: #2a1a00; box-shadow: 0 0 12px rgba(255, 210, 63, .45); }
+
+/* Hats on avatars */
+.avatar-hat {
+  position: absolute; left: 50%; top: calc(var(--avatar-size, 40px) * -0.36);
+  transform: translateX(-50%) rotate(-12deg); font-size: calc(var(--avatar-size, 40px) * 0.5); line-height: 1;
+  pointer-events: none; filter: drop-shadow(0 2px 3px rgba(0,0,0,.45));
+}
+.profile-hat-opt { position: relative; }
+.profile-hat-opt.locked { opacity: .75; }
+.hat-lock { position: absolute; right: -4px; bottom: -4px; font-size: 11px; font-style: normal; }
+.shop-hat-icon { font-size: 40px; line-height: 1; }
+.profile-side .profile-preview { padding-top: 22px; }
