@@ -44,6 +44,8 @@ App.router = (function () {
       btn.classList.toggle('active', btn.dataset.view === current);
     });
     if (App.exercises) App.exercises.stop();
+    // A theme preview ends when you leave the page it was started on.
+    if (App.theme && current !== 'shop' && current !== 'settings') App.theme.endPreview();
     const root = document.getElementById('view-root');
     root.innerHTML = '';
     window.scrollTo(0, 0);

@@ -38,6 +38,16 @@ App.contrast = (function () {
     return out;
   }
 
+  function topLayer(img) {
+    let depth = 0;
+    for (let i = 0; i < img.length; i++) {
+      if (img[i] === '(') depth++;
+      else if (img[i] === ')') depth--;
+      else if (img[i] === ',' && depth === 0) return img.slice(0, i);
+    }
+    return img;
+  }
+
   // The color behind an element: the nearest solid background (or the
   // average of the nearest gradient), blended over what lies further back.
   function backgroundOf(el) {
@@ -45,7 +55,9 @@ App.contrast = (function () {
     for (let n = el; n && n.nodeType === 1; n = n.parentElement) {
       const cs = getComputedStyle(n);
       if (cs.backgroundImage && cs.backgroundImage !== 'none' && n !== document.body && n !== document.documentElement) {
-        const g = gradientColors(cs.backgroundImage);
+        // Only the top layer sits behind the text: a lower layer may just
+        // paint a gradient frame (border-box), as on the mascot's bubble.
+        const g = gradientColors(topLayer(cs.backgroundImage));
         if (g.length) { const avg = [0, 1, 2].map(i => g.reduce((s, c) => s + c[i], 0) / g.length); layers.push(avg.concat(1)); break; }
       }
       const bg = parse(cs.backgroundColor);
@@ -117,6 +129,15 @@ App.contrast = (function () {
     if (ratio(eff, bg) >= need) return;
     el.style.setProperty('color', css(fixColor(eff, bg, need)), 'important');
     el.dataset.cfix = '1';
+    el.dataset.cbg = css(bg);
+  }
+
+  function unfix(el) {
+    el.style.removeProperty('color');
+    el.style.removeProperty('background');
+    el.style.removeProperty('-webkit-text-fill-color');
+    delete el.dataset.cfix;
+    delete el.dataset.cbg;
   }
 
   function run() {
@@ -125,7 +146,12 @@ App.contrast = (function () {
     if (!root) return;
     const all = root.querySelectorAll('*:not(script):not(style):not(svg *)');
     for (const el of all) {
-      if (el.dataset.cfix) continue;
+      // A fix made for another background (a tab that was active, a
+      // bubble that changed) is dropped and the text checked again.
+      if (el.dataset.cfix) {
+        if (!el.dataset.cbg || css(backgroundOf(el)) === el.dataset.cbg) continue;
+        unfix(el);
+      }
       if (hasOwnText(el) || el.matches('input, select, textarea, .brand > span')) check(el);
     }
   }
@@ -135,17 +161,12 @@ App.contrast = (function () {
 
   // After a theme change: drop old fixes and check everything again.
   function refresh() {
-    document.querySelectorAll('[data-cfix]').forEach(el => {
-      el.style.removeProperty('color');
-      el.style.removeProperty('background');
-      el.style.removeProperty('-webkit-text-fill-color');
-      delete el.dataset.cfix;
-    });
+    document.querySelectorAll('[data-cfix]').forEach(unfix);
     schedule();
   }
 
   function start() {
-    new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true });
+    new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['class', 'hidden'] });
     schedule();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();

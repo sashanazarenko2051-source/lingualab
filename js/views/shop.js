@@ -12,24 +12,27 @@ const SECTIONS = [
   ['topics', '🔓', 'shop_sec_topics'],
   ['hearts', '❤️', 'shop_sec_hearts'],
   ['energy', '⚡', 'shop_sec_energy'],
+  ['hints', '💡', 'shop_sec_hints'],
   ['ach', '🏆', 'shop_sec_ach'],
   ['themes', '🎨', 'shop_sec_themes'],
   ['hats', '🎩', 'shop_sec_hats'],
-  ['hints', '💡', 'shop_sec_hints']
+  ['owned', '🛍️', 'shop_sec_owned']
 ];
 
 function render(root) {
   const focus = App.session.shopSection;
   App.session.shopSection = null;
+  // Sections where everything is already bought are left out.
+  const shown = SECTIONS.map(sec => [...sec, sectionHtml(sec[0])]).filter(sec => sec[3]);
   root.innerHTML = `
     <div class="shop-page">
       <h1 class="settings-title">🛒 ${App.t('nav_shop')}</h1>
       <p class="settings-hint">${App.t('shop_sub')}</p>
-      <div class="shop-tabs">${SECTIONS.map(([id, icon, key]) => `<button class="shop-tab" data-jump="${id}">${icon} ${App.t(key)}</button>`).join('')}</div>
-      ${SECTIONS.map(([id, icon, key]) => `
+      <div class="shop-tabs">${shown.map(([id, icon, key]) => `<button class="shop-tab" data-jump="${id}">${icon} ${App.t(key)}</button>`).join('')}</div>
+      ${shown.map(([id, icon, key, html]) => `
         <section class="settings-card shop-section" id="shop-${id}">
           <h2>${icon} ${App.t(key)}</h2>
-          <div class="shop-grid">${sectionHtml(id)}</div>
+          <div class="shop-grid">${html}</div>
         </section>`).join('')}
     </div>`;
   bind(root);
@@ -101,18 +104,49 @@ function sectionHtml(id) {
     return card('ach_all', { title: App.t('shop_ach_all'), owned: all.every(a => have.includes(a.id)) }) +
       all.map(a => card('ach', { title: esc(App.t(a.titleKey, { n: a.goal })), icon: a.icon, opts: { id: a.id }, owned: have.includes(a.id), ownedLabel: App.t('ach_unlocked') })).join('');
   }
-  if (id === 'themes') return App.theme.PREMIUM.map(name => card('theme', {
-    title: App.t('theme_' + name), icon: `<span class="theme-swatch shop-swatch">${App.theme.swatch(name).map(c => `<i style="background:${c}"></i>`).join('')}</span>`,
-    opts: { theme: name }, owned: App.shop.ownsTheme(name),
-    extra: (App.shop.ownsTheme(name) ? `<button class="action-card shop-apply" data-apply-theme="${name}">${App.t('shop_apply')}</button>` : '')
-      + `<button class="action-card shop-apply" data-preview-theme="${name}">👁 ${App.t('theme_preview')}</button>`
+  if (id === 'themes') return App.theme.PREMIUM.filter(name => !App.shop.ownsTheme(name)).map(name => card('theme', {
+    title: App.t('theme_' + name), icon: themeSwatch(name), opts: { theme: name },
+    extra: `<button class="action-card shop-apply" data-preview-theme="${name}">👁 ${App.t('theme_preview')}</button>`
   })).join('');
   if (id === 'hints') return [10, 30, 100].map(n => card('hints_' + n, { title: App.t('shop_hints_n', { n }) })).join('');
-  if (id === 'hats') return App.profile.SHOP_HATS.map(h => card('hat', {
-    title: App.t('shop_hat'), icon: `<span class="shop-hat-icon">${App.profile.HATS[h]}</span>`,
-    opts: { hat: h }, owned: App.profile.ownsHat(h)
+  if (id === 'hats') return App.profile.SHOP_HATS.filter(h => !App.profile.ownsHat(h)).map(h => card('hat', {
+    title: App.t('shop_hat'), icon: `<span class="shop-hat-icon">${App.profile.HATS[h]}</span>`, opts: { hat: h }
   })).join('');
+  if (id === 'owned') return ownedHtml();
   return '';
+}
+
+function themeSwatch(name) {
+  return `<span class="theme-swatch shop-swatch">${App.theme.swatch(name).map(c => `<i style="background:${c}"></i>`).join('')}</span>`;
+}
+
+// Everything bought: open topics, running unlimited packs, themes and hats.
+function ownedHtml() {
+  const tile = (icon, title, extra) => `
+    <div class="shop-card owned">
+      <div class="shop-card-icon">${icon}</div>
+      <div class="shop-card-title">${title}</div>
+      ${extra || `<span class="shop-owned">✅ ${App.t('shop_owned')}</span>`}
+    </div>`;
+  const out = [];
+  const langs = App.shop.ownsAllTopics() ? App.LANG_ORDER : App.LANG_ORDER.filter(c => App.shop.ownsTopics(c));
+  if (langs.length) out.push(tile('🔓', App.shop.ownsAllTopics() ? App.t('shop_unlock_all') : App.t('shop_owned_topics'),
+    `<div class="shop-chosen">${langs.map(c => App.ui.flagChip(c)).join('')}</div>`));
+  const half = App.LANG_ORDER.filter(c => App.shop.ownsHalf(c) && !App.shop.ownsTopics(c));
+  if (half.length) out.push(tile('🔓', App.t('shop_unlock_half_pick'), `<div class="shop-chosen">${half.map(c => App.ui.flagChip(c)).join('')}</div>`));
+  const hearts = untilNote(App.shop.state().heartsUntil || 0);
+  if (hearts) out.push(tile('💖', App.t('shop_hearts_unl'), `<div class="shop-card-note">${hearts}</div>`));
+  const energy = untilNote((App.storage.state.energy || {}).unlimitedUntil || 0);
+  if (energy) out.push(tile('🔋', App.t('shop_energy_unl'), `<div class="shop-card-note">${energy}</div>`));
+  const current = App.theme.settings().theme;
+  App.theme.PREMIUM.filter(name => App.shop.ownsTheme(name)).forEach(name => out.push(tile(themeSwatch(name), App.t('theme_' + name),
+    name === current ? `<span class="shop-owned">✅ ${App.t('shop_owned')}</span>`
+      : `<button class="action-card shop-apply" data-apply-theme="${name}">${App.t('shop_apply')}</button>`)));
+  const hat = (App.storage.getProfile() || {}).hat;
+  App.profile.SHOP_HATS.filter(h => App.profile.ownsHat(h)).forEach(h => out.push(tile(`<span class="shop-hat-icon">${App.profile.HATS[h]}</span>`, App.t('shop_hat'),
+    h === hat ? `<span class="shop-owned">✅ ${App.t('shop_worn')}</span>`
+      : `<button class="action-card shop-apply" data-wear-hat="${h}">🎩 ${App.t('shop_wear')}</button>`)));
+  return out.join('') || `<p class="shop-owned-empty">${App.t('shop_owned_empty')}</p>`;
 }
 
 function readOpts(btn, root) {
@@ -152,7 +186,13 @@ function bind(root) {
   }));
   root.querySelectorAll('[data-preview-theme]').forEach(b => b.addEventListener('click', () => App.theme.preview(b.dataset.previewTheme)));
   root.querySelectorAll('[data-apply-theme]').forEach(b => b.addEventListener('click', () => {
-    App.theme.setTheme(b.dataset.applyTheme);
+    if (App.theme.setTheme(b.dataset.applyTheme)) rerender();
+  }));
+  root.querySelectorAll('[data-wear-hat]').forEach(b => b.addEventListener('click', () => {
+    App.storage.setProfile({ hat: b.dataset.wearHat });
+    App.profile.renderTopbarBadge();
+    if (App.cloud && App.cloud.scheduleSync) App.cloud.scheduleSync();
+    rerender();
   }));
 }
 

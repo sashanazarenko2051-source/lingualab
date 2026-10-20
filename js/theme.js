@@ -100,7 +100,8 @@ App.theme = (function () {
   });
   PRESETS.gold.fx = 'sparkle'; PRESETS.aurora.fx = 'aurora'; PRESETS.sakura.fx = 'petals'; PRESETS.lava.fx = 'embers'; PRESETS.royal.fx = 'stars';
   const PREMIUM = ['gold', 'aurora', 'sakura', 'lava', 'royal', 'cyber', 'galaxy', 'candy', 'emerald', 'coffee', 'arctic', 'abyss'];
-  let previewing = false;
+  // Name of the theme being previewed; it is only shown, never stored.
+  let previewName = null;
   const ORDER = ['neon', 'ocean', 'sunset', 'forest', 'graphite', 'light', ...PREMIUM];
   function isLocked(name) { return PREMIUM.includes(name) && !(App.shop && App.shop.ownsTheme(name)); }
   // Colors the learner can override, with the stylesheet defaults they start from.
@@ -128,7 +129,7 @@ App.theme = (function () {
     const s = App.storage.state;
     if (!s.settings) s.settings = {};
     const st = s.settings;
-    if (!PRESETS[st.theme] || (!previewing && isLocked(st.theme))) st.theme = 'neon';
+    if (!PRESETS[st.theme] || isLocked(st.theme)) st.theme = 'neon';
     if (!st.custom || typeof st.custom !== 'object') st.custom = {};
     if (typeof st.scale !== 'number') st.scale = 1;
     if (typeof st.bgAnim !== 'boolean') st.bgAnim = true;
@@ -139,23 +140,30 @@ App.theme = (function () {
   }
 
   // The value a key has right now (preset value, else the neon default).
-  function value(key) {
+  // While previewing, the previewed theme without the learner's own colors.
+  function shown() {
     const st = settings();
-    return st.custom[key] || PRESETS[st.theme].vars[key] || NEON[key];
+    return previewName ? { theme: previewName, custom: {} } : { theme: st.theme, custom: st.custom };
+  }
+
+  function value(key) {
+    const sh = shown();
+    return sh.custom[key] || PRESETS[sh.theme].vars[key] || NEON[key];
   }
 
   function apply() {
     const st = settings();
     const el = document.documentElement;
-    const preset = PRESETS[st.theme];
+    const sh = shown();
+    const preset = PRESETS[sh.theme];
     ALL_KEYS.forEach(k => {
-      const v = st.custom[k] || preset.vars[k];
+      const v = sh.custom[k] || preset.vars[k];
       if (v) el.style.setProperty('--' + k, v); else el.style.removeProperty('--' + k);
     });
     // A custom surface needs a matching second surface and border.
-    if (st.custom.surface) {
-      el.style.setProperty('--surface-2', `color-mix(in srgb, ${st.custom.surface} 82%, ${value('ink')})`);
-      el.style.setProperty('--border', `color-mix(in srgb, ${st.custom.surface} 70%, ${value('ink')})`);
+    if (sh.custom.surface) {
+      el.style.setProperty('--surface-2', `color-mix(in srgb, ${sh.custom.surface} 82%, ${value('ink')})`);
+      el.style.setProperty('--border', `color-mix(in srgb, ${sh.custom.surface} 70%, ${value('ink')})`);
     }
     // Secondary text stays close to the main text colour so it's readable
     // on any theme (it used to fade into the cards).
@@ -178,12 +186,10 @@ App.theme = (function () {
   }
 
   // Shows a theme for a few seconds without choosing it (also locked ones).
-  let previewTimer = null, previewBack = null;
+  let previewTimer = null;
   function preview(name, ms) {
-    const st = settings();
-    if (!previewBack) previewBack = { theme: st.theme, custom: st.custom };
-    previewing = true;
-    st.theme = name; st.custom = {};
+    if (!PRESETS[name]) return;
+    previewName = name;
     apply();
     clearTimeout(previewTimer);
     document.getElementById('theme-preview-bar')?.remove();
@@ -198,15 +204,13 @@ App.theme = (function () {
   function endPreview() {
     clearTimeout(previewTimer);
     document.getElementById('theme-preview-bar')?.remove();
-    if (!previewBack) return;
-    const st = settings();
-    st.theme = previewBack.theme; st.custom = previewBack.custom;
-    previewBack = null; previewing = false;
+    if (!previewName) return;
+    previewName = null;
     apply();
   }
 
   function setTheme(name) {
-    if (previewBack) endPreview();
+    if (previewName) endPreview();
     if (isLocked(name)) return false;
     const st = settings();
     st.theme = PRESETS[name] ? name : 'neon';

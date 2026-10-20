@@ -68,11 +68,13 @@ App.views.dashboard = {
           <div class="chart-tabs">
             <button class="chart-tab active" data-chart="week">${App.t('chart_week')}</button>
             <button class="chart-tab" data-chart="month">${App.t('chart_month')}</button>
+            <button class="chart-tab" data-chart="year">${App.t('chart_year')}</button>
           </div>
         </div>
         <div class="minichart" id="minichart"></div>
         <div class="minichart-total" id="week-total"></div>
         <div class="month-view" id="month-view" hidden></div>
+        <div class="year-view" id="year-view" hidden></div>
       </section>
 
       <section class="panel">
@@ -88,13 +90,15 @@ App.views.dashboard = {
     renderDailyGoal(root);
     renderMiniChart(root);
     root.querySelectorAll('[data-chart]').forEach(b => b.addEventListener('click', () => {
-      const month = b.dataset.chart === 'month';
+      const mode = b.dataset.chart;
       root.querySelectorAll('[data-chart]').forEach(x => x.classList.toggle('active', x === b));
-      root.querySelector('#minichart').hidden = month;
-      root.querySelector('#week-total').hidden = month;
-      root.querySelector('#month-view').hidden = !month;
-      root.querySelector('#chart-title').textContent = month ? App.t('chart_month_title') : App.t('dash_activity_7d');
-      if (month) { monthOffset = 0; renderMonth(root); }
+      root.querySelector('#minichart').hidden = mode !== 'week';
+      root.querySelector('#week-total').hidden = mode !== 'week';
+      root.querySelector('#month-view').hidden = mode !== 'month';
+      root.querySelector('#year-view').hidden = mode !== 'year';
+      root.querySelector('#chart-title').textContent = App.t({ week: 'dash_activity_7d', month: 'chart_month_title', year: 'chart_year_title' }[mode]);
+      if (mode === 'month') { monthOffset = 0; renderMonth(root); }
+      if (mode === 'year') { yearOffset = 0; renderYear(root); }
     }));
     renderAchievements(root);
     App.mascot.renderWidget(root);
@@ -345,6 +349,67 @@ function renderMonth(root) {
   el.querySelector('#mv-next').disabled = monthOffset >= 4;
   el.querySelector('#mv-prev').addEventListener('click', () => { if (monthOffset > -12) { monthOffset -= 1; renderMonth(root); } });
   el.querySelector('#mv-next').addEventListener('click', () => { if (monthOffset < 4) { monthOffset += 1; renderMonth(root); } });
+}
+
+// Year: twelve small month calendars (Mon–Sun rows), each day shaded by its
+// answers like the month view. Clicking a month opens it in the month view.
+let yearOffset = 0;
+function renderYear(root) {
+  const el = root.querySelector('#year-view');
+  const now = new Date();
+  const year = now.getFullYear() + yearOffset;
+  const history = App.storage.state.stats.history || {};
+  const pad = (n) => String(n).padStart(2, '0');
+  const entry = (m, d) => history[year + '-' + pad(m + 1) + '-' + pad(d)] || {};
+  const daysIn = (m) => new Date(year, m + 1, 0).getDate();
+  let max = 1, total = 0, active = 0;
+  for (let m = 0; m < 12; m++) {
+    for (let d = 1; d <= daysIn(m); d++) {
+      const n = entry(m, d).reviews || 0;
+      if (n) { max = Math.max(max, n); total += n; active++; }
+    }
+  }
+  const lang = App.storage.getUILang();
+  const monthName = (m) => { try { return new Date(year, m, 1).toLocaleString(lang, { month: 'long' }); } catch (e) { return String(m + 1); } };
+  const dayKeys = ['day_mon', 'day_tue', 'day_wed', 'day_thu', 'day_fri', 'day_sat', 'day_sun'];
+  const months = [];
+  for (let m = 0; m < 12; m++) {
+    const lead = (new Date(year, m, 1).getDay() + 6) % 7;
+    let cells = '', sum = 0;
+    for (let i = 0; i < lead; i++) cells += '<i class="yv-day yv-blank"></i>';
+    for (let d = 1; d <= daysIn(m); d++) {
+      const e = entry(m, d), n = e.reviews || 0;
+      sum += n;
+      const date = new Date(year, m, d);
+      const lvl = n ? Math.min(4, 1 + Math.floor((n / max) * 3.999)) : 0;
+      const cls = 'yv-day mv-l' + lvl + (date.toDateString() === now.toDateString() ? ' yv-today' : '') + (date > now ? ' yv-future' : '');
+      const tip = d + ' ' + monthName(m) + ': ' + App.t('tooltip_reviews_correct', { reviews: n, correct: e.correct || 0 });
+      cells += `<i class="${cls}" title="${tip}"></i>`;
+    }
+    months.push(`<button type="button" class="yv-month" data-m="${m}">
+      <span class="yv-head"><span class="yv-name">${monthName(m)}</span><span class="yv-sum">${sum || ''}</span></span>
+      <span class="yv-grid">${dayKeys.map(k => `<b class="yv-dow">${App.t(k).slice(0, 1)}</b>`).join('')}${cells}</span>
+    </button>`);
+  }
+  el.innerHTML = `
+    <div class="mv-nav">
+      <button class="browse-arrow" id="yv-prev">‹</button>
+      <span class="mv-title">${year}</span>
+      <button class="browse-arrow" id="yv-next">›</button>
+    </div>
+    <div class="yv-months">${months.join('')}</div>
+    <div class="mv-total">${App.t('chart_year_total', { n: total, d: active })}</div>
+  `;
+  el.querySelector('#yv-prev').disabled = yearOffset <= -5;
+  el.querySelector('#yv-next').disabled = yearOffset >= 0;
+  el.querySelector('#yv-prev').addEventListener('click', () => { if (yearOffset > -5) { yearOffset -= 1; renderYear(root); } });
+  el.querySelector('#yv-next').addEventListener('click', () => { if (yearOffset < 0) { yearOffset += 1; renderYear(root); } });
+  el.querySelectorAll('.yv-month').forEach(b => b.addEventListener('click', () => {
+    const m = +b.dataset.m;
+    root.querySelector('[data-chart="month"]').click();
+    monthOffset = Math.max(-12, Math.min(4, (year - now.getFullYear()) * 12 + (m - now.getMonth())));
+    renderMonth(root);
+  }));
 }
 
 function renderLevelRow(root) {

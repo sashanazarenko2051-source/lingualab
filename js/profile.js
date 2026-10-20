@@ -92,8 +92,10 @@ App.profile = (function () {
   }
 
   // Hats on the avatar: some free, the rest bought in the shop.
-  const HATS = { cap: '🧢', sunhat: '👒', grad: '🎓', bow: '🎀', tophat: '🎩', crown: '👑', helmet: '🪖', rescue: '⛑️', flower: '🌸' };
-  const SHOP_HATS = ['tophat', 'crown', 'helmet', 'rescue', 'flower'];
+  const HATS = { cap: '🧢', sunhat: '👒', grad: '🎓', bow: '🎀', tophat: '🎩', crown: '👑', helmet: '🪖', rescue: '⛑️', flower: '🌸',
+    headphones: '🎧', sunflower: '🌻', butterfly: '🦋', star: '⭐', goggles: '🥽', feather: '🪶', mushroom: '🍄',
+    pumpkin: '🎃', snowflake: '❄️', gem: '💎', chick: '🐣', fire: '🔥', rainbow: '🌈', cherry: '🍒' };
+  const SHOP_HATS = ['tophat', 'crown', 'helmet', 'rescue', 'flower', 'goggles', 'feather', 'mushroom', 'pumpkin', 'snowflake', 'gem', 'chick', 'fire', 'rainbow'];
   function ownsHat(h) {
     if (!h || !SHOP_HATS.includes(h)) return true;
     if ((App.storage.getProfile() || {}).owner) return true;
@@ -262,7 +264,7 @@ App.profile = (function () {
 
     function refreshPreview() {
       overlay.querySelector('#profile-preview').innerHTML = avatarBadgeHtml(draft, 96);
-      overlay.querySelectorAll('.profile-animal-opt').forEach(b => b.classList.toggle('active', b.dataset.animal === draft.animal));
+      overlay.querySelectorAll('[data-animal]').forEach(b => b.classList.toggle('active', b.dataset.animal === draft.animal));
       overlay.querySelectorAll('.profile-pattern-opt').forEach(b => b.classList.toggle('active', b.dataset.pattern === draft.bgPattern));
       overlay.querySelectorAll('#profile-color-row-animal .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.animalColor));
       overlay.querySelectorAll('#profile-color-row-bg .profile-color-opt').forEach(b => b.classList.toggle('active', b.dataset.color === draft.bgColor));
@@ -272,7 +274,7 @@ App.profile = (function () {
       updateBgColorRowVisibility();
     }
 
-    overlay.querySelectorAll('.profile-animal-opt').forEach(btn => {
+    overlay.querySelectorAll('[data-animal]').forEach(btn => {
       btn.addEventListener('click', () => { draft.animal = btn.dataset.animal; refreshPreview(); });
     });
     overlay.querySelectorAll('.profile-pattern-opt').forEach(btn => {
