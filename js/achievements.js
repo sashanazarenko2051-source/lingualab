@@ -34,7 +34,7 @@ App.achievements = (function () {
         <div class="profile-modal-actions">
           ${unlocked ? `
             <button class="action-card" id="ach-copy" style="display:inline-flex">📋 ${App.t('ach_copy')}</button>
-            <button class="action-card ach-share ${shared ? 'on' : ''}" id="ach-share" style="display:inline-flex">${shared ? '✅ ' + App.t('ach_shared') : '📣 ' + App.t('ach_share')}</button>` : ''}
+            <button class="action-card ach-share ${shared ? 'on' : ''}" id="ach-share" style="display:inline-flex">${shared ? '✅ ' + App.t('ach_pinned') : '📌 ' + App.t('ach_pin')}</button>` : ''}
           <button class="action-card" id="ach-close" style="display:inline-flex">${App.t('ach_close')}</button>
         </div>
         ${unlocked ? `<div class="ach-card-note">${App.t('ach_share_note')}</div>` : ''}
@@ -51,7 +51,8 @@ App.achievements = (function () {
       App.storage.setProfile(Object.assign({}, profile, { showcase: on ? id : null }));
       if (App.cloud && App.cloud.scheduleSync) App.cloud.scheduleSync();
       e.currentTarget.classList.toggle('on', on);
-      e.currentTarget.textContent = on ? '✅ ' + App.t('ach_shared') : '📣 ' + App.t('ach_share');
+      e.currentTarget.textContent = on ? '✅ ' + App.t('ach_pinned') : '📌 ' + App.t('ach_pin');
+      if (App.profile) App.profile.renderTopbarBadge();
       if (on) App.effects.confetti();
     });
     overlay.querySelector('#ach-copy')?.addEventListener('click', (e) => {

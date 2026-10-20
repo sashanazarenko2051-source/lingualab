@@ -65,7 +65,42 @@ App.theme = (function () {
       'brand-1': '#c9a2ff', 'brand-2': '#ffd23f', 'brand-3': '#5ce1ff'
     } }
   });
-  const PREMIUM = ['gold', 'aurora', 'sakura', 'lava', 'royal'];
+  // More unique themes, each with its own animated background effect (fx).
+  Object.assign(PRESETS, {
+    cyber: { light: false, fx: 'grid', vars: {
+      page: '#0a0014', surface: '#140726', 'surface-2': '#1e0b38', border: '#3d1670',
+      ink: '#fdf0ff', 'brand-1': '#ff2bd6', 'brand-2': '#00f0ff', 'brand-3': '#f9ff3d'
+    } },
+    galaxy: { light: false, fx: 'stars', vars: {
+      page: '#05031a', surface: '#0e0a2c', 'surface-2': '#17113f', border: '#2c2266',
+      ink: '#eef0ff', 'brand-1': '#9d7bff', 'brand-2': '#ff7bd5', 'brand-3': '#7bdcff'
+    } },
+    candy: { light: true, fx: 'bubbles', vars: {
+      page: '#fff4fb', surface: '#ffffff', 'surface-2': '#ffe8f6', border: '#f5c6e3',
+      ink: '#3a1035', 'brand-1': '#ff4fb8', 'brand-2': '#7a5cff', 'brand-3': '#00c2a8',
+      good: '#16b67a', 'good-dark': '#0d8a5b', warn: '#e39a00', 'warn-dark': '#b07800', bad: '#e5245e', 'bad-dark': '#b0174a'
+    } },
+    emerald: { light: false, fx: 'sparkle', vars: {
+      page: '#02110b', surface: '#062116', 'surface-2': '#0a2e1f', border: '#145238',
+      ink: '#eafff4', 'brand-1': '#2ee59d', 'brand-2': '#ffd23f', 'brand-3': '#9dffcf'
+    } },
+    coffee: { light: false, fx: 'steam', vars: {
+      page: '#120a05', surface: '#20140b', 'surface-2': '#2d1d10', border: '#4d331d',
+      ink: '#fff4e8', 'brand-1': '#e0a96d', 'brand-2': '#c2703d', 'brand-3': '#f5deb3'
+    } },
+    arctic: { light: true, fx: 'snow', vars: {
+      page: '#eef7ff', surface: '#ffffff', 'surface-2': '#e2f0fb', border: '#bcd8ef',
+      ink: '#0b2338', 'brand-1': '#2a9df4', 'brand-2': '#6c63ff', 'brand-3': '#16c0b0',
+      good: '#12b76a', 'good-dark': '#0b8a50', warn: '#e0a100', 'warn-dark': '#b07d00', bad: '#e11d48', 'bad-dark': '#b3123a'
+    } },
+    abyss: { light: false, fx: 'waves', vars: {
+      page: '#000a12', surface: '#021725', 'surface-2': '#052236', border: '#0b3a57',
+      ink: '#e6f7ff', 'brand-1': '#00d4ff', 'brand-2': '#0077ff', 'brand-3': '#55ffcf'
+    } }
+  });
+  PRESETS.gold.fx = 'sparkle'; PRESETS.aurora.fx = 'aurora'; PRESETS.sakura.fx = 'petals'; PRESETS.lava.fx = 'embers'; PRESETS.royal.fx = 'stars';
+  const PREMIUM = ['gold', 'aurora', 'sakura', 'lava', 'royal', 'cyber', 'galaxy', 'candy', 'emerald', 'coffee', 'arctic', 'abyss'];
+  let previewing = false;
   const ORDER = ['neon', 'ocean', 'sunset', 'forest', 'graphite', 'light', ...PREMIUM];
   function isLocked(name) { return PREMIUM.includes(name) && !(App.shop && App.shop.ownsTheme(name)); }
   // Colors the learner can override, with the stylesheet defaults they start from.
@@ -93,7 +128,7 @@ App.theme = (function () {
     const s = App.storage.state;
     if (!s.settings) s.settings = {};
     const st = s.settings;
-    if (!PRESETS[st.theme] || isLocked(st.theme)) st.theme = 'neon';
+    if (!PRESETS[st.theme] || (!previewing && isLocked(st.theme))) st.theme = 'neon';
     if (!st.custom || typeof st.custom !== 'object') st.custom = {};
     if (typeof st.scale !== 'number') st.scale = 1;
     if (typeof st.bgAnim !== 'boolean') st.bgAnim = true;
@@ -122,11 +157,14 @@ App.theme = (function () {
       el.style.setProperty('--surface-2', `color-mix(in srgb, ${st.custom.surface} 82%, ${value('ink')})`);
       el.style.setProperty('--border', `color-mix(in srgb, ${st.custom.surface} 70%, ${value('ink')})`);
     }
-    if (st.custom.ink) {
-      el.style.setProperty('--ink-2', `color-mix(in srgb, ${st.custom.ink} 70%, ${value('page')})`);
-      el.style.setProperty('--ink-muted', `color-mix(in srgb, ${st.custom.ink} 45%, ${value('page')})`);
-    }
+    // Secondary text stays close to the main text colour so it's readable
+    // on any theme (it used to fade into the cards).
+    el.style.setProperty('--ink-2', `color-mix(in srgb, ${value('ink')} 86%, ${value('surface')})`);
+    el.style.setProperty('--ink-muted', `color-mix(in srgb, ${value('ink')} 68%, ${value('surface')})`);
     el.dataset.theme = preset.light ? 'light' : 'dark';
+    // The theme's background effect.
+    [...el.classList].filter(c => c.startsWith('fx-')).forEach(c => el.classList.remove(c));
+    if (preset.fx) el.classList.add('fx-' + preset.fx);
     el.classList.toggle('no-bg-anim', !st.bgAnim);
     el.classList.toggle('reduce-motion', !st.motion);
     el.style.zoom = st.scale === 1 ? '' : String(st.scale);
@@ -139,7 +177,36 @@ App.theme = (function () {
     if (meta) meta.setAttribute('content', value('surface'));
   }
 
+  // Shows a theme for a few seconds without choosing it (also locked ones).
+  let previewTimer = null, previewBack = null;
+  function preview(name, ms) {
+    const st = settings();
+    if (!previewBack) previewBack = { theme: st.theme, custom: st.custom };
+    previewing = true;
+    st.theme = name; st.custom = {};
+    apply();
+    clearTimeout(previewTimer);
+    document.getElementById('theme-preview-bar')?.remove();
+    const bar = document.createElement('div');
+    bar.id = 'theme-preview-bar';
+    bar.className = 'theme-preview-bar';
+    bar.innerHTML = `👁 ${App.t('theme_preview_bar', { name: App.t('theme_' + name) })} <button class="action-card" id="tp-stop">✕</button>`;
+    document.body.appendChild(bar);
+    bar.querySelector('#tp-stop').addEventListener('click', endPreview);
+    previewTimer = setTimeout(endPreview, ms || 8000);
+  }
+  function endPreview() {
+    clearTimeout(previewTimer);
+    document.getElementById('theme-preview-bar')?.remove();
+    if (!previewBack) return;
+    const st = settings();
+    st.theme = previewBack.theme; st.custom = previewBack.custom;
+    previewBack = null; previewing = false;
+    apply();
+  }
+
   function setTheme(name) {
+    if (previewBack) endPreview();
     if (isLocked(name)) return false;
     const st = settings();
     st.theme = PRESETS[name] ? name : 'neon';
@@ -168,5 +235,5 @@ App.theme = (function () {
     return [v.page, v.surface, v['brand-1'], v['brand-2'], v['brand-3']];
   }
 
-  return { ORDER, PREMIUM, isLocked, FONTS, CUSTOM_KEYS, settings, value, apply, setTheme, setCustom, setOption, reset, swatch };
+  return { ORDER, PREMIUM, preview, endPreview, isLocked, FONTS, CUSTOM_KEYS, settings, value, apply, setTheme, setCustom, setOption, reset, swatch };
 })();

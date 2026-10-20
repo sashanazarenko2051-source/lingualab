@@ -2056,3 +2056,124 @@ html:has(.modal-overlay) { overflow: hidden; }
 .page-sub { margin: -6px 0 12px; font-weight: 600; }
 .shop-card-actions .shop-coins { padding: 0 12px; flex: none; border-color: #ffd23f; font-weight: 800; }
 .shop-card-actions { flex-wrap: wrap; row-gap: 8px; }
+
+/* ---- Top menu: icon + label in one row; where space is short only the
+   open page shows its label (the others show it on hover) ---- */
+#nav button { display: inline-flex; align-items: center; gap: 6px; }
+.nav-ico { font-size: 17px; line-height: 1; }
+@media (min-width: 721px) and (max-width: 1750px) {
+  #nav button:not(.active) .nav-label { display: none; }
+  #nav button { padding: 8px 11px; }
+}
+@media (max-width: 720px) {
+  #nav { grid-template-columns: repeat(7, 1fr) !important; }
+  #nav button { flex-direction: column; gap: 2px; }
+  #nav button::first-letter { font-size: inherit; }
+  .nav-label { font-size: 9.5px; }
+}
+/* Dropdown lists scroll on their own, not the page behind them */
+.lang-dd-list, .country-suggest, .shop-pick, .profile-flag-row, .modal-card { overscroll-behavior: contain; }
+
+/* ---- Readable text on every theme: secondary text is mixed closer to the
+   main text colour, and text sitting right on the moving background gets a
+   dark outline ---- */
+.settings-hint, .help-intro, .page-sub, .settings-title, .shop-page > .settings-hint {
+  text-shadow: 0 1px 2px rgba(0,0,0,.75), 0 0 8px rgba(0,0,0,.45);
+}
+.help-intro, .page-sub, .shop-page > .settings-hint { color: var(--ink) !important; font-weight: 600; }
+
+/* ---- Exercise "Check" button: dark text on the green button ---- */
+.ex-footer .quiz-next, .ex-check { color: #08121e !important; text-shadow: none !important; }
+.ex-footer .quiz-next:disabled { background: var(--surface-2) !important; color: var(--ink-2) !important; box-shadow: 0 4px 0 var(--border) !important; filter: none !important; opacity: 1 !important; }
+.ex-btn { color: #050a08; text-shadow: 0 1px 0 rgba(255,255,255,.35); }
+.ex-btn:disabled { color: var(--ink-2); text-shadow: none; }
+
+.avatar-ach-pin { position: absolute; left: -10%; bottom: -8%; width: 40%; height: 40%; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: calc(var(--avatar-size, 40px) * 0.24);
+  background: var(--surface); border: 2px solid #ffd23f; box-shadow: 0 0 8px rgba(255,210,63,.6); }
+/* Stats rows: the numbers line up in columns */
+.cat-bar-pct { display: grid; grid-template-columns: 62px 62px 62px 42px; align-items: center; min-width: 0; font-variant-numeric: tabular-nums; }
+.cat-bar-pct > span { text-align: right; white-space: nowrap; }
+.cat-bar-pct .cb-m { text-align: left; }
+@media (max-width: 640px) { .cat-bar-pct { grid-template-columns: 50px 50px 54px 36px; font-size: 11px; } }
+
+/* My words: jump chips, progress dots, add/remove animations */
+.words-jump { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+.words-jump button { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px; border-radius: 16px;
+  border: 2px solid var(--border); background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; transition: transform .12s ease, border-color .12s ease; }
+.words-jump button:hover { transform: translateY(-2px); border-color: var(--brand-1); }
+.words-jump b { font-size: 22px; }
+.words-jump span { font-size: 11px; font-weight: 700; color: var(--ink-2); text-align: center; }
+.word-dots { display: inline-flex; gap: 3px; margin-left: 6px; }
+.word-dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); }
+.word-dots i.on { background: var(--good); border-color: var(--good); box-shadow: 0 0 6px var(--good); }
+.word-row { transition: transform .3s ease, opacity .3s ease; }
+.word-row.row-out { animation: rowOut .36s ease forwards; }
+.word-row.row-in { animation: rowIn .5s cubic-bezier(.34,1.56,.64,1); }
+@keyframes rowOut { to { transform: translateX(60px) scale(.95); opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; margin: 0; } }
+@keyframes rowIn { from { transform: scale(.85); background: color-mix(in srgb, #ffd23f 30%, var(--surface)); } to { transform: none; } }
+.word-star.star-pop { animation: starPop .38s ease; }
+.word-star.star-drop { animation: starDrop .38s ease; }
+@keyframes starPop { 50% { transform: scale(1.6) rotate(25deg); } }
+@keyframes starDrop { 50% { transform: scale(.5) rotate(-30deg); opacity: .4; } }
+@media (max-width: 640px) { .words-jump { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Leaderboard periods, my own result; friends tabs and filters */
+.lb-periods { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 12px; }
+.lb-period { border: 2px solid var(--border); background: var(--surface-2); color: var(--ink); font: inherit; font-weight: 800; padding: 8px 16px; border-radius: 999px; cursor: pointer; }
+.lb-period.active { background: var(--brand-1); border-color: var(--brand-1); color: #fff; }
+.lb-mine { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); border: 2px solid var(--border); margin-bottom: 10px; }
+.lb-mine-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 4px; font-weight: 700; color: var(--ink-2); }
+.lb-mine-row b { color: var(--ink); }
+.lb-sub { color: var(--ink-2); font-weight: 600; margin: 6px 0 10px; }
+.fr-filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.fr-filters label { display: flex; align-items: center; gap: 8px; font-weight: 800; }
+.fr-filters select { width: auto; min-width: 160px; }
+.profile-gender { margin-left: 0; display: flex; }
+.profile-gender .seg-btn { flex: 1; }
+
+/* Preview bar */
+.theme-preview-bar { position: fixed; left: 50%; top: 74px; transform: translateX(-50%); z-index: 300; display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px 8px 16px; border-radius: 999px; background: var(--surface); border: 2px solid var(--brand-1); font-weight: 800; box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+.theme-preview-bar .action-card { display: inline-flex; padding: 4px 10px; margin: 0; }
+
+/* Theme background effects (premium themes) */
+html[class*="fx-"] body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .55; }
+html.no-bg-anim[class*="fx-"] body::after, html.reduce-motion[class*="fx-"] body::after { animation: none !important; }
+html.fx-stars body::after { background-image: radial-gradient(1.5px 1.5px at 20% 30%, #fff, transparent), radial-gradient(1px 1px at 70% 60%, #fff, transparent), radial-gradient(2px 2px at 40% 80%, #fff, transparent), radial-gradient(1px 1px at 85% 15%, #fff, transparent), radial-gradient(1.5px 1.5px at 55% 45%, #fff, transparent); background-size: 260px 260px; animation: fxTwinkle 4s ease-in-out infinite alternate; }
+html.fx-sparkle body::after { background-image: radial-gradient(2px 2px at 30% 20%, var(--brand-2), transparent), radial-gradient(1.5px 1.5px at 75% 70%, var(--brand-3), transparent), radial-gradient(2px 2px at 50% 50%, var(--brand-1), transparent); background-size: 200px 200px; animation: fxTwinkle 2.5s ease-in-out infinite alternate; }
+html.fx-grid body::after { background: linear-gradient(transparent 0 96%, color-mix(in srgb, var(--brand-1) 60%, transparent) 96%) 0 0 / 100% 48px, linear-gradient(90deg, transparent 0 96%, color-mix(in srgb, var(--brand-2) 50%, transparent) 96%) 0 0 / 48px 100%; animation: fxGrid 6s linear infinite; opacity: .25; }
+html.fx-bubbles body::after { background-image: radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--brand-1) 30%, transparent) 0 18px, transparent 19px), radial-gradient(circle at 70% 30%, color-mix(in srgb, var(--brand-2) 25%, transparent) 0 26px, transparent 27px), radial-gradient(circle at 45% 55%, color-mix(in srgb, var(--brand-3) 25%, transparent) 0 12px, transparent 13px); background-size: 320px 320px; animation: fxRise 18s linear infinite; }
+html.fx-petals body::after { background-image: radial-gradient(ellipse 7px 4px at 20% 10%, #ff8fbf, transparent), radial-gradient(ellipse 6px 3px at 60% 40%, #ffb3d1, transparent), radial-gradient(ellipse 8px 4px at 80% 70%, #ff7aa8, transparent); background-size: 300px 300px; animation: fxFall 14s linear infinite; }
+html.fx-embers body::after { background-image: radial-gradient(2px 2px at 25% 90%, #ffb000, transparent), radial-gradient(1.5px 1.5px at 65% 70%, #ff4d1c, transparent), radial-gradient(2.5px 2.5px at 85% 95%, #ff7a00, transparent); background-size: 240px 240px; animation: fxRise 7s linear infinite; }
+html.fx-snow body::after { background-image: radial-gradient(3px 3px at 20% 20%, #fff, transparent), radial-gradient(2px 2px at 60% 50%, #fff, transparent), radial-gradient(2.5px 2.5px at 85% 80%, #fff, transparent); background-size: 220px 220px; animation: fxFall 12s linear infinite; opacity: .9; filter: drop-shadow(0 0 1px #8fc3ff); }
+html.fx-steam body::after { background: radial-gradient(ellipse 120px 300px at 30% 110%, color-mix(in srgb, var(--brand-3) 18%, transparent), transparent 70%), radial-gradient(ellipse 100px 260px at 75% 110%, color-mix(in srgb, var(--brand-1) 15%, transparent), transparent 70%); animation: fxSteam 9s ease-in-out infinite alternate; }
+html.fx-waves body::after { background: repeating-linear-gradient(170deg, transparent 0 38px, color-mix(in srgb, var(--brand-1) 14%, transparent) 38px 40px); animation: fxGrid 10s linear infinite; }
+html.fx-aurora body::after { background: linear-gradient(115deg, transparent 20%, color-mix(in srgb, var(--brand-1) 25%, transparent) 40%, color-mix(in srgb, var(--brand-2) 22%, transparent) 55%, transparent 75%); background-size: 300% 100%; animation: fxAurora 12s ease-in-out infinite alternate; }
+@keyframes fxTwinkle { from { opacity: .25; } to { opacity: .7; } }
+@keyframes fxGrid { to { background-position: 0 48px, 48px 0; } }
+@keyframes fxRise { to { background-position: 0 -320px, 0 -320px, 0 -320px; } }
+@keyframes fxFall { to { background-position: 40px 300px, -30px 300px, 20px 300px; } }
+@keyframes fxSteam { from { transform: translateY(0); opacity: .35; } to { transform: translateY(-30px); opacity: .6; } }
+@keyframes fxAurora { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+#app { position: relative; z-index: 1; }
+
+/* Mascot speech bubble: comic style with a glowing gradient frame */
+.mascot-bubble {
+  background: linear-gradient(var(--surface), var(--surface)) padding-box,
+              linear-gradient(135deg, var(--brand-1), var(--brand-2), var(--brand-3)) border-box !important;
+  border: 3px solid transparent !important; border-radius: 22px 22px 6px 22px !important;
+  padding: 12px 16px !important; font-size: 14px !important; letter-spacing: .01em;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 22px color-mix(in srgb, var(--brand-2) 35%, transparent) !important;
+  animation: bubbleFloat 3.2s ease-in-out infinite;
+}
+.mascot-bubble::after { border-right: 3px solid var(--brand-3) !important; border-top: 3px solid var(--brand-3) !important; right: -10px !important; }
+.mascot-bubble.typing::after { animation: none; }
+.mascot-bubble.typing { min-width: 120px; }
+@keyframes bubbleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+/* Wolf: breathing, ear twitches and shiny eyes */
+.wolf-figure .wolf-head { animation: wolfEarTwitch 6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 90%; }
+@keyframes wolfEarTwitch { 0%, 88%, 100% { transform: rotate(0); } 91% { transform: rotate(-4deg); } 94% { transform: rotate(3deg); } }
+.mascot-avatar:hover .wolf-figure { filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand-1) 70%, transparent)); }
+.reduce-motion .mascot-bubble, .reduce-motion .wolf-figure .wolf-head { animation: none !important; }
+.profile-gender .seg-btn { white-space: nowrap; font-size: 12px; padding: 6px 4px; min-width: 0; }

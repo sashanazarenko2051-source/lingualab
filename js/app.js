@@ -90,15 +90,12 @@ function initTopbar() {
   document.title = App.t('app_title');
 
   const nav = document.getElementById('nav');
-  nav.innerHTML = `
-    <button data-view="dashboard">${App.t('nav_home')}</button>
-    <button data-view="words">📒 ${App.t('nav_words')}</button>
-    <button data-view="friends">👥 ${App.t('nav_friends')}</button>
-    <button data-view="quests">🎯 ${App.t('nav_quests')}</button>
-    <button data-view="leaderboard">${App.t('nav_leaderboard')}</button>
-    <button data-view="shop">🛒 ${App.t('nav_shop')}</button>
-    <button data-view="help">ℹ️ ${App.t('nav_info')}</button>
-  `;
+  // Some labels carry their own emoji in the translations; strip it, the icon is separate.
+  const label = key => App.t(key).replace(/^[^\p{L}\p{N}]+/u, '');
+  const items = [['dashboard', '🏠', 'nav_home'], ['words', '📒', 'nav_words'], ['friends', '👥', 'nav_friends'],
+    ['quests', '🎯', 'nav_quests'], ['leaderboard', '🏆', 'nav_leaderboard'], ['shop', '🛒', 'nav_shop'], ['help', 'ℹ️', 'nav_info']];
+  nav.innerHTML = items.map(([view, icon, key]) =>
+    `<button data-view="${view}" title="${label(key)}"><span class="nav-ico">${icon}</span><span class="nav-label">${label(key)}</span></button>`).join('');
   nav.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => App.router.go(btn.dataset.view));
   });

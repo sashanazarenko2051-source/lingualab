@@ -111,7 +111,10 @@ App.profile = (function () {
       : '';
     const flagBadge = p.flag ? `<span class="avatar-flag-badge">${App.ui.flagChip(p.flag)}</span>` : '';
     const hat = p.hat && HATS[p.hat] ? `<span class="avatar-hat">${HATS[p.hat]}</span>` : '';
-    return `<span class="avatar-badge${patternClass}" style="--avatar-size:${size}px; --avatar-color:${p.outlineColor}; ${bgStyle}"><span class="avatar-badge-emoji" style="filter:${tintFilter(p.animalColor)}">${emoji}</span>${hat}${flagBadge}</span>`;
+    // An achievement pinned to the avatar shows in its top-left corner.
+    const ach = p.showcase && App.gamification ? App.gamification.ACHIEVEMENTS.find(a => a.id === p.showcase) : null;
+    const pin = ach ? `<span class="avatar-ach-pin" title="${App.t(ach.titleKey, { n: ach.goal })}">${ach.icon}</span>` : '';
+    return `<span class="avatar-badge${patternClass}" style="--avatar-size:${size}px; --avatar-color:${p.outlineColor}; ${bgStyle}"><span class="avatar-badge-emoji" style="filter:${tintFilter(p.animalColor)}">${emoji}</span>${hat}${pin}${flagBadge}</span>`;
   }
 
   // ---- the app's own name is reserved for its owner ----
@@ -205,6 +208,9 @@ App.profile = (function () {
         <div class="profile-section-label">🌍 ${App.t('country_title')}</div>
         ${App.regions.searchHtml('profile-country-search')}
         <select class="shop-term" id="profile-country">${App.regions.optionsHtml(App.regions.country() || 'OTHER')}</select>
+        <div class="profile-section-label">🧑 ${App.t('profile_gender_label')}</div>
+        <div class="seg profile-gender">${[['m', 'gender_m'], ['f', 'gender_f'], ['', 'gender_none']].map(([v, k]) =>
+          `<button type="button" class="seg-btn ${(draft.gender || '') === v ? 'active' : ''}" data-gender="${v}">${App.t(k)}</button>`).join('')}</div>
         <div class="profile-section-label">${App.t('profile_flag_label')}</div>
         <div class="profile-flag-row" id="profile-flag-row">
           <button type="button" class="profile-flag-opt profile-flag-none ${!draft.flag ? 'active' : ''}" data-flag="">✕</button>
@@ -281,6 +287,10 @@ App.profile = (function () {
         refreshPreview();
       });
     });
+    overlay.querySelectorAll('[data-gender]').forEach(btn => btn.addEventListener('click', () => {
+      draft.gender = btn.dataset.gender || null;
+      overlay.querySelectorAll('[data-gender]').forEach(b => b.classList.toggle('active', b === btn));
+    }));
     overlay.querySelectorAll('.profile-hat-opt').forEach(btn => {
       btn.addEventListener('click', () => {
         const h = btn.dataset.hat;

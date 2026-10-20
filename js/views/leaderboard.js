@@ -15,11 +15,20 @@ App.views.leaderboard = {
     App.profile.ensureProfile();
     const activeLevel = App.session.leaderboardLevel || App.levels.forCurrentLang();
     App.session.leaderboardLevel = activeLevel;
+    const period = App.session.leaderboardPeriod || 'week';
+    const mine = App.storage.periodXP();
 
     root.innerHTML = `
       <div class="panel">
-        <h3>${App.t('lb_title')}</h3>
-        <p class="empty-hint">${App.t('lb_subtitle')}</p>
+        <h3>🏆 ${App.t('nav_leaderboard').replace(/^[^\p{L}]+/u, '')}</h3>
+        <div class="lb-periods">${['day', 'week', 'month'].map(p => `<button class="lb-period ${p === period ? 'active' : ''}" data-period="${p}">${App.t('lb_' + p)}</button>`).join('')}</div>
+        <div class="lb-mine">
+          ${App.profile.avatarBadgeHtml(App.storage.getProfile(), 40)}
+          <div><b>${App.t('lb_local_title')}</b><div class="lb-mine-row">
+            <span>☀️ ${App.t('lb_day')}: <b>${mine.day}</b> XP</span><span>📅 ${App.t('lb_week')}: <b>${mine.week}</b> XP</span><span>🗓 ${App.t('lb_month')}: <b>${mine.month}</b> XP</span>
+          </div></div>
+        </div>
+        <p class="lb-sub">${App.t('lb_subtitle')}</p>
         <div class="lb-tabs" id="lb-tabs">
           ${App.levels.ALL.map(l => `<button class="lb-tab ${l === activeLevel ? 'active' : ''}" data-level="${l}">${l}</button>`).join('')}
         </div>
@@ -27,6 +36,10 @@ App.views.leaderboard = {
       </div>
     `;
 
+    root.querySelectorAll('.lb-period').forEach(btn => btn.addEventListener('click', () => {
+      App.session.leaderboardPeriod = btn.dataset.period;
+      App.views.leaderboard.render(root);
+    }));
     root.querySelectorAll('.lb-tab').forEach(btn => {
       btn.addEventListener('click', () => {
         App.session.leaderboardLevel = btn.dataset.level;
@@ -48,7 +61,7 @@ function loadBoard(root, level) {
   }
 
   body.innerHTML = `<p class="empty-hint">${App.t('lb_loading')}</p>`;
-  App.cloud.fetchLeaderboard(level).then(rows => {
+  App.cloud.fetchLeaderboard(level, App.session.leaderboardPeriod || 'week').then(rows => {
     if (!rows.length) {
       body.innerHTML = `<p class="empty-hint">${App.t('lb_empty')}</p>`;
       return;
@@ -59,7 +72,7 @@ function loadBoard(root, level) {
         ${App.profile.avatarBadgeHtml(r, 32)}
         <span class="lb-name">${r.owner ? '👑 ' : ''}${escapeHtml(r.name || '?')}</span>
         ${App.achievements.badgesHtml(r.achievements, r.showcase)}
-        <span class="lb-xp">${r.weeklyXP || 0} XP</span>
+        <span class="lb-xp">${r.xp || 0} XP</span>
       </div>
     `).join('');
   }).catch(() => {

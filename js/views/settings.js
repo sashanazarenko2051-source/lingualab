@@ -94,7 +94,8 @@ function render(root) {
 
   root.querySelectorAll('.theme-card').forEach(btn => btn.addEventListener('click', () => {
     // A unique theme not bought yet opens its card in the shop.
-    if (!App.theme.setTheme(btn.dataset.theme)) { App.session.shopSection = 'themes'; App.router.go('shop'); return; }
+    // A locked theme: a few seconds of preview, then the shop.
+    if (!App.theme.setTheme(btn.dataset.theme)) { App.theme.preview(btn.dataset.theme); return; }
     render(root);
   }));
   root.querySelectorAll('input[type=color]').forEach(inp => {

@@ -104,7 +104,8 @@ function sectionHtml(id) {
   if (id === 'themes') return App.theme.PREMIUM.map(name => card('theme', {
     title: App.t('theme_' + name), icon: `<span class="theme-swatch shop-swatch">${App.theme.swatch(name).map(c => `<i style="background:${c}"></i>`).join('')}</span>`,
     opts: { theme: name }, owned: App.shop.ownsTheme(name),
-    extra: App.shop.ownsTheme(name) ? `<button class="action-card shop-apply" data-apply-theme="${name}">${App.t('shop_apply')}</button>` : ''
+    extra: (App.shop.ownsTheme(name) ? `<button class="action-card shop-apply" data-apply-theme="${name}">${App.t('shop_apply')}</button>` : '')
+      + `<button class="action-card shop-apply" data-preview-theme="${name}">👁 ${App.t('theme_preview')}</button>`
   })).join('');
   if (id === 'hints') return [10, 30, 100].map(n => card('hints_' + n, { title: App.t('shop_hints_n', { n }) })).join('');
   if (id === 'hats') return App.profile.SHOP_HATS.map(h => card('hat', {
@@ -149,6 +150,7 @@ function bind(root) {
     }
     pickFriend(uid => App.shop.buy(itemId, opts, uid));
   }));
+  root.querySelectorAll('[data-preview-theme]').forEach(b => b.addEventListener('click', () => App.theme.preview(b.dataset.previewTheme)));
   root.querySelectorAll('[data-apply-theme]').forEach(b => b.addEventListener('click', () => {
     App.theme.setTheme(b.dataset.applyTheme);
   }));

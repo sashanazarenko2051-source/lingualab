@@ -126,6 +126,21 @@ App.storage = (function () {
       state.stats.weeklyXP = 0;
     }
     state.stats.weeklyXP = (state.stats.weeklyXP || 0) + amount;
+    // The same for today and this month (daily / monthly leaderboards).
+    const day = todayKey(), month = day.slice(0, 7);
+    if (state.stats.dayKey !== day) { state.stats.dayKey = day; state.stats.dayXP = 0; }
+    if (state.stats.monthKey !== month) { state.stats.monthKey = month; state.stats.monthXP = 0; }
+    state.stats.dayXP = (state.stats.dayXP || 0) + amount;
+    state.stats.monthXP = (state.stats.monthXP || 0) + amount;
+  }
+  function periodXP() {
+    const day = todayKey(), month = day.slice(0, 7);
+    const s = state.stats;
+    return {
+      day: s.dayKey === day ? s.dayXP || 0 : 0,
+      week: s.weekKey === isoWeekKey(new Date()) ? s.weeklyXP || 0 : 0,
+      month: s.monthKey === month ? s.monthXP || 0 : 0
+    };
   }
 
   function getHistory(days) {
@@ -165,25 +180,24 @@ App.storage = (function () {
       save();
     },
     isoWeekKey,
+    periodXP,
     addWeeklyXP,
     getWeeklyXP() {
       return { xp: state.stats.weeklyXP || 0, week: state.stats.weekKey };
     },
-    // Mistakes bank: every wrong answer lands here and keeps coming back in
-    // later lessons until it's answered right in two different lessons in a
-    // row. Keyed by word id: { misses, streak, lesson, at }.
+    // Mistakes bank: every wrong answer lands here and keeps coming back
+    // until the word is answered right MISTAKE_FIXED times in a row.
+    // Keyed by word id: { misses, streak, lesson, at }.
     recordMistakeAnswer(wordId, correct, lessonId) {
       const rec = state.mistakes[wordId];
       let result = null;
       if (!correct) {
         state.mistakes[wordId] = { misses: (rec ? rec.misses : 0) + 1, streak: 0, lesson: lessonId, at: Date.now() };
         result = rec ? 'again' : 'added';
-      } else if (rec && rec.lesson !== lessonId) {
-        // Only one correct answer per lesson counts, so a word re-asked a
-        // minute later in the same lesson can't clear itself.
+      } else if (rec) {
         rec.streak += 1;
         rec.lesson = lessonId;
-        if (rec.streak >= 2) { delete state.mistakes[wordId]; result = 'fixed'; }
+        if (rec.streak >= 3) { delete state.mistakes[wordId]; result = 'fixed'; }
       }
       save();
       return result;
@@ -194,13 +208,14 @@ App.storage = (function () {
         .sort((a, b) => state.mistakes[b].misses - state.mistakes[a].misses || state.mistakes[a].at - state.mistakes[b].at);
     },
     isMistake(wordId) { return !!state.mistakes[wordId]; },
+    mistakeStreak(wordId) { return (state.mistakes[wordId] && state.mistakes[wordId].streak) || 0; },
     removeMistake(wordId) { delete state.mistakes[wordId]; save(); },
 
     // Personal review list ("My words"). Learners add words themselves;
     // words reaching AUTO_REVIEW_MISSES total mistakes are added
     // automatically and leave again after AUTO_REVIEW_CORRECT correct answers.
-    AUTO_REVIEW_MISSES: 5,
-    AUTO_REVIEW_CORRECT: 5,
+    AUTO_REVIEW_MISSES: 3,
+    AUTO_REVIEW_CORRECT: 3,
     trackReviewList(wordId, correct) {
       const rec = state.reviewList[wordId];
       if (!correct) {

@@ -19,7 +19,14 @@ App.views.course = {
     const lang = App.data[code];
     const words = App.words.allWords(code);
     const mastered = words.filter(w => App.srs.isMastered(w.id)).length;
-    const pct = words.length ? Math.round((mastered / words.length) * 100) : 0;
+    // Each topic is an equal share of the path; a topic's share fills with
+    // the part of its words already studied.
+    const cats = lang.categories;
+    const raw = cats.reduce((sum, c) => {
+      const ws = App.words.byCategory(code, c.id);
+      return sum + (ws.length ? ws.filter(w => !App.srs.isNew(w.id)).length / ws.length : 0);
+    }, 0) / (cats.length || 1) * 100;
+    const pct = raw >= 10 || raw === 0 ? Math.round(raw) : Math.round(raw * 10) / 10;
     const accent = `var(--slot-${lang.slot})`;
     const level = App.levels.forWordCount(mastered);
 

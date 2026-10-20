@@ -111,7 +111,7 @@ function barRow(labelHtml, c, color) {
         <div class="cat-bar-fill" style="width:${shown(c.mastered)}%; background:${color}"></div>
         <div class="cat-bar-fill cat-bar-learning" style="width:${shown(c.learning)}%; background:${color}"></div>
       </div>
-      <div class="cat-bar-pct">✅ <b>${c.mastered}</b>${c.learning ? ` · 📖 ${c.learning}` : ''} / ${c.total} · ${whole}%</div>
+      <div class="cat-bar-pct"><span class="cb-m">✅ <b>${c.mastered}</b></span><span class="cb-l">${c.learning ? `📖 ${c.learning}` : ''}</span><span class="cb-t">/ ${c.total}</span><span class="cb-p">${whole}%</span></div>
     </div>
   `;
 }

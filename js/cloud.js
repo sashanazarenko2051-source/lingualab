@@ -47,6 +47,9 @@ App.cloud = (function () {
       achievements: App.storage.state.stats.achievements || [], showcase: profile.showcase || null,
       level, weeklyXP, week,
       friendCode: getFriendCode(), nameLower: String(profile.name || '').trim().toLowerCase(), owner: !!profile.owner,
+      country: profile.country || null, gender: profile.gender || null,
+      day: App.storage.state.stats.dayKey || null, dayXP: App.storage.periodXP().day,
+      month: App.storage.state.stats.monthKey || null, monthXP: App.storage.periodXP().month,
       xpLevel: App.gamification.levelForXP(App.storage.state.stats.xp), streak: App.storage.state.stats.streak || 0,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
@@ -69,25 +72,36 @@ App.cloud = (function () {
     }, 4000);
   }
 
-  function fetchLeaderboard(level) {
+  // period: 'day' | 'week' | 'month'.
+  function fetchLeaderboard(level, period) {
     if (!configured || !db) return Promise.resolve([]);
-    const week = App.storage.isoWeekKey(new Date());
+    const now = new Date();
+    const day = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+    const key = period === 'day' ? ['day', day, 'dayXP'] : period === 'month' ? ['month', day.slice(0, 7), 'monthXP'] : ['week', App.storage.isoWeekKey(now), 'weeklyXP'];
     return db.collection('users')
-      .where('week', '==', week)
+      .where(key[0], '==', key[1])
       .where('level', '==', level)
-      .orderBy('weeklyXP', 'desc')
+      .orderBy(key[2], 'desc')
       .limit(50)
       .get()
-      .then(snap => snap.docs.map(d => d.data()));
+      .then(snap => snap.docs.map(d => Object.assign(d.data(), { xp: d.data()[key[2]] || 0 })));
+  }
+
+  // Recently active players (for "Other players"), newest first.
+  function fetchRecent() {
+    if (!configured || !db) return Promise.resolve([]);
+    return db.collection('users').orderBy('updatedAt', 'desc').limit(60).get().then(s => s.docs.map(d => d.data()));
   }
 
   // Search by friend code or by exact name (case-insensitive).
   function findUsers(q) {
     if (!configured || !db) return Promise.resolve([]);
     const users = db.collection('users');
+    const lq = q.toLowerCase();
     return Promise.all([
       users.where('friendCode', '==', q.toUpperCase()).limit(5).get(),
-      users.where('nameLower', '==', q.toLowerCase()).limit(10).get()
+      // names starting with what was typed
+      users.where('nameLower', '>=', lq).where('nameLower', '<=', lq + '\uf8ff').limit(20).get()
     ]).then(snaps => {
       const seen = {};
       snaps.forEach(s => s.docs.forEach(d => { seen[d.id] = d.data(); }));
@@ -133,6 +147,7 @@ App.cloud = (function () {
     onReady,
     scheduleSync,
     fetchLeaderboard,
+    fetchRecent,
     getUid: () => uid
   };
 })();

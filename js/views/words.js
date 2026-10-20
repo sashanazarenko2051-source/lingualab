@@ -110,10 +110,11 @@ function renderBody(root) {
   const reviewExtra = (w) => {
     const rec = App.storage.inReview(w.id);
     return rec.auto
-      ? `<span class="word-tag word-tag-auto" title="${App.t('words_auto_hint', { n: App.storage.AUTO_REVIEW_MISSES })}">${App.t('words_auto', { ok: rec.ok || 0, need })}</span>`
+      ? `<span class="word-tag word-tag-auto" title="${App.t('words_auto_hint', { n: App.storage.AUTO_REVIEW_MISSES })}">${App.t('words_auto', { ok: rec.ok || 0, need })}</span>${dots(rec.ok || 0, need)}`
       : `<span class="word-tag">${App.t('words_manual')}</span>`;
   };
-  const missExtra = (w) => `<span class="word-tag word-tag-miss">❌ ${App.storage.getMissCount(w.id) || 1}</span>`;
+  const dots = (n, of) => `<span class="word-dots" title="${n}/${of}">${Array.from({ length: of }, (_, i) => `<i class="${i < n ? 'on' : ''}"></i>`).join('')}</span>`;
+  const missExtra = (w) => `<span class="word-tag word-tag-miss">❌ ${App.storage.getMissCount(w.id) || 1}</span>${dots(App.storage.mistakeStreak(w.id), 3)}`;
 
   // learned words grouped by topic, in course order
   const groups = App.data[code].categories.map(cat => ({
@@ -121,6 +122,12 @@ function renderBody(root) {
   })).filter(g => g.words.length);
 
   root.querySelector('#words-body').innerHTML = `
+    <div class="words-jump">
+      <button data-jump="review">⭐ <b>${review.length}</b> <span>${App.t('words_review_list')}</span></button>
+      <button data-jump="mistakes">🔁 <b>${mistakes.length}</b> <span>${App.t('words_mistakes')}</span></button>
+      <button data-jump="due">🕐 <b>${due.length}</b> <span>${App.t('words_due')}</span></button>
+      <button data-jump="all">📚 <b>${seen.length}</b> <span>${App.t('words_all')}</span></button>
+    </div>
     ${section('review', '⭐ ' + App.t('words_review_list'), review, {
       note: App.t('words_review_note', { miss: App.storage.AUTO_REVIEW_MISSES, ok: need }),
       empty: App.t('words_review_empty'),
@@ -152,19 +159,31 @@ function renderBody(root) {
   body.querySelectorAll('[data-say]').forEach(b => b.addEventListener('click', () => App.speak(b.dataset.say, code)));
   body.querySelectorAll('[data-star]').forEach(b => b.addEventListener('click', () => {
     const id = b.dataset.star;
-    if (App.storage.inReview(id)) App.storage.removeFromReview(id);
+    const adding = !App.storage.inReview(id);
+    if (!adding) App.storage.removeFromReview(id);
     else { App.storage.addToReview(id); App.effects.toast(`⭐ ${App.t('words_added_toast')}`); }
-    const y = window.scrollY;
-    renderBody(root);
-    window.scrollTo(0, y);
+    b.classList.add(adding ? 'star-pop' : 'star-drop');
+    setTimeout(() => {
+      const y = window.scrollY;
+      renderBody(root);
+      window.scrollTo(0, y);
+      if (adding) root.querySelector(`#sec-review [data-id="${id}"]`)?.closest('.word-row')?.classList.add('row-in');
+    }, 380);
   }));
   body.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => {
     if (b.dataset.del === 'review') App.storage.removeFromReview(b.dataset.id);
     else App.storage.removeMistake(b.dataset.id);
     App.effects.toast(`🗑 ${App.t('words_removed_toast')}`);
-    const y = window.scrollY;
-    renderBody(root);
-    window.scrollTo(0, y);
+    // The row slides away before the list is redrawn.
+    b.closest('.word-row').classList.add('row-out');
+    setTimeout(() => {
+      const y = window.scrollY;
+      renderBody(root);
+      window.scrollTo(0, y);
+    }, 360);
+  }));
+  body.querySelectorAll('[data-jump]').forEach(b => b.addEventListener('click', () => {
+    root.querySelector('#sec-' + b.dataset.jump)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }));
   body.querySelectorAll('[data-practice]').forEach(b => b.addEventListener('click', () => {
     App.storage.setCurrentLang(code);

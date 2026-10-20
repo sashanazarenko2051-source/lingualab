@@ -173,6 +173,22 @@ App.mascot = (function () {
     `;
   }
 
+  // Plain messages appear letter by letter, like the wolf is saying them.
+  let typeTimer = null;
+  function typewrite(el) {
+    clearInterval(typeTimer);
+    if (el.querySelector('.mascot-word') || document.documentElement.classList.contains('reduce-motion')) return;
+    const full = el.textContent;
+    let i = 0;
+    el.textContent = '';
+    el.classList.add('typing');
+    typeTimer = setInterval(() => {
+      i += 2;
+      el.textContent = full.slice(0, i);
+      if (i >= full.length) { clearInterval(typeTimer); el.classList.remove('typing'); }
+    }, 22);
+  }
+
   function renderWidget(root) {
     root.querySelectorAll('.mascot-widget').forEach(el => el.remove());
 
@@ -195,6 +211,7 @@ App.mascot = (function () {
       const look = next.look;
       svg.setAttribute('class', `wolf-figure skin-${skin} mood-${look.mood} ${look.acc ? 'acc-on-' + look.acc : ''}`);
       bubble.innerHTML = bubbleHtml(next);
+      typewrite(bubble);
       bubble.classList.remove('pop'); void bubble.offsetWidth; bubble.classList.add('pop');
       el.className = 'mascot-widget';
       void el.offsetWidth;
