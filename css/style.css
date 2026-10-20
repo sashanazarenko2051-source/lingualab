@@ -31,7 +31,7 @@
 html, body {
   margin: 0; padding: 0; min-height: 100%;
   color: var(--ink);
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body, 'Segoe UI', system-ui, -apple-system, sans-serif);
   font-size: 14px;
 }
 /* Background scene. Everything that moves here animates only transform /
@@ -1898,3 +1898,35 @@ button { background: none; }
 .mascot-widget.anim-peek .wolf-figure { animation: wolfPeek 1.8s ease-in-out; }
 @keyframes wolfPeek { 0%, 100% { transform: translateY(0); } 30%, 60% { transform: translateY(46px) scaleY(.9); } 75% { transform: translateY(-8px); } }
 .reduce-motion .mascot-widget .wolf-figure { animation: none !important; }
+
+/* Font picker in Settings: each choice is shown in its own font. */
+.font-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 6px 0 14px; }
+.font-card {
+  border: 2px solid var(--border); background: var(--surface-2); color: var(--ink); border-radius: 12px;
+  padding: 10px 12px; cursor: pointer; text-align: left; display: flex; flex-direction: column; gap: 2px;
+}
+.font-card b { font-size: 22px; line-height: 1.1; }
+.font-card span { font-size: 13px; color: var(--ink-2); }
+.font-card:hover { border-color: var(--brand-2); }
+.font-card.active { border-color: var(--brand-1); box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand-1) 40%, transparent); }
+.settings-sub { margin: 14px 0 6px; font-size: 15px; color: var(--ink); }
+
+/* Shop cards: titles, prices, pickers and buttons line up across a row. */
+.shop-card-title { min-height: 2.7em; line-height: 1.35; display: flex; align-items: center; justify-content: center; }
+.shop-card .shop-term, .shop-card .shop-pick5 { width: 100%; height: 40px; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; justify-content: center; margin: 0; }
+.shop-card .shop-term { display: block; text-align-last: center; }
+.shop-card-actions { justify-content: center; width: 100%; }
+.shop-card-actions > * { height: 42px; margin: 0; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.shop-card-actions .shop-gift { width: 42px; padding: 0; flex: none; }
+
+/* Achievements on the home page, grouped by kind. */
+#achievements-row { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px 18px; }
+#achievements-row .ach-hint { grid-column: 1 / -1; }
+.ach-group-name { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-2); margin: 0 0 6px 2px; }
+.ach-group-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.ach-badge { position: relative; }
+.ach-goal {
+  position: absolute; right: -4px; bottom: -6px; min-width: 18px; padding: 0 4px; border-radius: 999px;
+  font-size: 10px; font-weight: 800; line-height: 16px; text-align: center;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--border);
+}

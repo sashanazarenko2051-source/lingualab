@@ -174,6 +174,35 @@ class Api:
             return False
 
 
+def window_size(width=1200, height=800):
+    """The window size, shrunk to fit above the taskbar on small or scaled
+    screens (pywebview centers the window on the whole screen, taskbar
+    included, so the bottom edge could end up under the taskbar)."""
+    if sys.platform != 'win32':
+        return width, height
+    try:
+        import ctypes
+        from ctypes import wintypes
+        user32 = ctypes.windll.user32
+        area = wintypes.RECT()
+        user32.SystemParametersInfoW(0x30, 0, ctypes.byref(area), 0)  # SPI_GETWORKAREA
+        screen_h = user32.GetSystemMetrics(1)
+        # Work in logical pixels: when the process is DPI-aware the numbers
+        # above are physical, so divide by the display scale.
+        scale = ctypes.windll.shcore.GetScaleFactorForDevice(0) / 100
+        hdc = user32.GetDC(0)
+        physical_w = ctypes.windll.gdi32.GetDeviceCaps(hdc, 118)  # DESKTOPHORZRES
+        user32.ReleaseDC(0, hdc)
+        k = scale if user32.GetSystemMetrics(0) == physical_w and scale > 1 else 1
+        top, bottom, left, right = area.top / k, area.bottom / k, area.left / k, area.right / k
+        screen_h /= k
+        # Centered on the screen, the window must still end above the taskbar.
+        fit_h = min(bottom - top, 2 * bottom - screen_h, screen_h - 2 * top) - 12
+        return int(min(width, right - left - 24)), int(min(height, fit_h))
+    except Exception:
+        return width, height
+
+
 def main():
     server = start_server(wait=4)
     if server:
@@ -182,12 +211,13 @@ def main():
     # kept serving a stale cached /index.html without even asking the server.
     url = f'http://127.0.0.1:{LAN_PORT}/index.html?v={asset_version()}'
 
+    width, height = window_size()
     window = webview.create_window(
         'WO Lingua Lab',
         url,
-        width=1200,
-        height=800,
-        min_size=(960, 640),
+        width=width,
+        height=height,
+        min_size=(min(960, width), min(640, height)),
         js_api=Api(),
     )
     # A second window reuses the running instance's server (same origin, so

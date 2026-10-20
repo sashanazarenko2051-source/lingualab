@@ -69,6 +69,17 @@ App.theme = (function () {
   const ORDER = ['neon', 'ocean', 'sunset', 'forest', 'graphite', 'light', ...PREMIUM];
   function isLocked(name) { return PREMIUM.includes(name) && !(App.shop && App.shop.ownsTheme(name)); }
   // Colors the learner can override, with the stylesheet defaults they start from.
+  // Interface fonts (all come with Windows, so they work offline).
+  const FONTS = {
+    standard: '',
+    rounded: "'Trebuchet MS', 'Segoe UI', sans-serif",
+    verdana: "Verdana, Tahoma, sans-serif",
+    calibri: "Calibri, Carlito, 'Segoe UI', sans-serif",
+    bahnschrift: "Bahnschrift, 'Segoe UI', sans-serif",
+    georgia: "Georgia, 'Times New Roman', serif",
+    comic: "'Comic Sans MS', 'Comic Neue', cursive",
+    mono: "'Cascadia Code', Consolas, monospace"
+  };
   const CUSTOM_KEYS = ['brand-1', 'brand-2', 'brand-3', 'page', 'surface', 'ink'];
   const NEON = {
     page: '#060b16', surface: '#0d1526', 'surface-2': '#142238', border: '#223757',
@@ -87,6 +98,7 @@ App.theme = (function () {
     if (typeof st.scale !== 'number') st.scale = 1;
     if (typeof st.bgAnim !== 'boolean') st.bgAnim = true;
     if (typeof st.motion !== 'boolean') st.motion = true;
+    if (!(st.font in FONTS)) st.font = 'standard';
     return st;
   }
 
@@ -117,6 +129,8 @@ App.theme = (function () {
     el.classList.toggle('no-bg-anim', !st.bgAnim);
     el.classList.toggle('reduce-motion', !st.motion);
     el.style.zoom = st.scale === 1 ? '' : String(st.scale);
+    if (FONTS[st.font]) el.style.setProperty('--font-body', FONTS[st.font]); else el.style.removeProperty('--font-body');
+    if (App.contrast) App.contrast.refresh();
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', value('surface'));
   }
@@ -140,7 +154,7 @@ App.theme = (function () {
   }
   function reset() {
     const st = settings();
-    st.theme = 'neon'; st.custom = {}; st.scale = 1; st.bgAnim = true; st.motion = true;
+    st.theme = 'neon'; st.custom = {}; st.scale = 1; st.bgAnim = true; st.motion = true; st.font = 'standard';
     App.storage.save(); apply();
   }
 
@@ -150,5 +164,5 @@ App.theme = (function () {
     return [v.page, v.surface, v['brand-1'], v['brand-2'], v['brand-3']];
   }
 
-  return { ORDER, PREMIUM, isLocked, CUSTOM_KEYS, settings, value, apply, setTheme, setCustom, setOption, reset, swatch };
+  return { ORDER, PREMIUM, isLocked, FONTS, CUSTOM_KEYS, settings, value, apply, setTheme, setCustom, setOption, reset, swatch };
 })();

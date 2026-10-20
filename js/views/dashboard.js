@@ -364,9 +364,21 @@ function renderDailyGoal(root) {
 function renderAchievements(root) {
   const el = root.querySelector('#achievements-row');
   const unlocked = App.storage.state.stats.achievements || [];
-  el.innerHTML = App.gamification.ACHIEVEMENTS.map(a => {
+  // Grouped by what they count, each group from the smallest goal up.
+  const GROUPS = [
+    ['words', '📚', ['first_word', 'words_']], ['streak', '🔥', ['streak_']], ['answers', '✍️', ['answers_']],
+    ['day', '🎯', ['day_']], ['topic', '🏁', ['topic_', 'exam_']], ['level', '⭐', ['level_']],
+    ['poly', '🌍', ['polyglot_']], ['list', '📌', ['list_']]
+  ];
+  const all = App.gamification.ACHIEVEMENTS;
+  const badge = a => {
     const isUnlocked = unlocked.includes(a.id);
-    return `<button class="ach-badge ${isUnlocked ? 'unlocked' : 'locked'}" data-ach="${a.id}" title="${App.t(a.titleKey, { n: a.goal })}">${a.icon}</button>`;
+    return `<button class="ach-badge ${isUnlocked ? 'unlocked' : 'locked'}" data-ach="${a.id}" title="${App.t(a.titleKey, { n: a.goal })}">${a.icon}<small class="ach-goal">${a.goal}</small></button>`;
+  };
+  el.innerHTML = GROUPS.map(([key, icon, prefixes]) => {
+    const items = all.filter(a => prefixes.some(p => a.id.startsWith(p)));
+    if (!items.length) return '';
+    return `<div class="ach-group"><div class="ach-group-name">${icon} ${App.t('ach_cat_' + key)}</div><div class="ach-group-row">${items.map(badge).join('')}</div></div>`;
   }).join('') + `<div class="ach-hint">👆 ${App.t('ach_hint_tap')}</div>`;
   el.querySelectorAll('[data-ach]').forEach(b => b.addEventListener('click', () => App.achievements.openInfo(b.dataset.ach)));
 }

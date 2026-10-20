@@ -46,6 +46,13 @@ function render(root) {
               <span>${App.t(CUSTOM_LABELS[k])}</span>
             </label>`).join('')}
         </div>
+        <h3 class="settings-sub">🔤 ${App.t('set_font')}</h3>
+        <div class="font-grid">
+          ${Object.keys(App.theme.FONTS).map(f => `
+            <button class="font-card${st.font === f ? ' active' : ''}" data-font="${f}" style="font-family:${(App.theme.FONTS[f] || "'Segoe UI', sans-serif").replace(/"/g, '&quot;')}">
+              <b>Aa Бб</b><span>${f === 'standard' ? App.t('font_standard') : f === 'rounded' ? 'Trebuchet' : f === 'mono' ? 'Cascadia' : f === 'comic' ? 'Comic' : f[0].toUpperCase() + f.slice(1)}</span>
+            </button>`).join('')}
+        </div>
         <div class="settings-row">
           <span>🔎 ${App.t('set_scale')}</span>
           <input type="range" id="set-scale" min="0.85" max="1.3" step="0.05" value="${st.scale}">
@@ -86,6 +93,10 @@ function render(root) {
     inp.addEventListener('input', () => App.theme.setCustom(inp.dataset.key, inp.value));
     inp.addEventListener('change', () => render(root));
   });
+  root.querySelectorAll('.font-card').forEach(b => b.addEventListener('click', () => {
+    App.theme.setOption('font', b.dataset.font);
+    root.querySelectorAll('.font-card').forEach(x => x.classList.toggle('active', x === b));
+  }));
   const scale = root.querySelector('#set-scale');
   scale.addEventListener('input', () => { root.querySelector('#set-scale-val').textContent = Math.round(scale.value * 100) + '%'; });
   scale.addEventListener('change', () => App.theme.setOption('scale', Number(scale.value)));

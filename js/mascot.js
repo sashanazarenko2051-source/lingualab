@@ -20,45 +20,52 @@ App.mascot = (function () {
         </linearGradient>
       </defs>
       <g class="wolf-tail-grp">
-        <path d="M70,64 C82,60 92,50 94,32 C99,48 92,62 78,68 C75,67 72,65 70,64 Z" fill="url(#wolfBodyGrad)" stroke="#2b303f" stroke-width="2.2" stroke-linejoin="round"/>
-        <ellipse cx="91" cy="34" rx="5.5" ry="4.5" fill="#f2f1ee"/>
+        <path d="M64,98 C86,98 99,82 95,58 C93,48 88,43 84,38 C89,52 85,63 76,68 C69,72 63,78 61,88 Z" fill="url(#wolfBodyGrad)" stroke="#2b303f" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M84,38 C89,44 93,50 94,57 C89,56 86,51 85,46 Z" fill="#f2f1ee"/>
       </g>
-      <g class="wolf-leg-l"><rect x="32" y="90" width="14" height="26" rx="7" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="39" cy="118" rx="9" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
-      <g class="wolf-leg-r"><rect x="54" y="90" width="14" height="26" rx="7" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="61" cy="118" rx="9" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
-      <ellipse cx="50" cy="68" rx="27" ry="26" fill="url(#wolfBodyGrad)" stroke="#2b303f" stroke-width="2.2"/>
-      <ellipse cx="50" cy="77" rx="15" ry="13" style="fill:var(--wf-belly)"/>
-      <g class="wolf-arm-l"><rect x="16" y="58" width="11" height="24" rx="5.5" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="21.5" cy="84" rx="6" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
-      <g class="wolf-arm-r"><rect x="73" y="58" width="11" height="24" rx="5.5" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="78.5" cy="84" rx="6" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
-      <path d="M27,49 Q50,59 73,49 L73,56 Q50,66 27,56 Z" fill="#00c8dc" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
-      <path d="M63,57 L70,57 L67,69 Z" fill="#00a5b9" stroke="#2b303f" stroke-width="1.5" stroke-linejoin="round"/>
+      <g class="wolf-leg-l"><rect x="35" y="102" width="13" height="17" rx="6.5" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="41.5" cy="120" rx="8.5" ry="4.8" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
+      <g class="wolf-leg-r"><rect x="52" y="102" width="13" height="17" rx="6.5" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="58.5" cy="120" rx="8.5" ry="4.8" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
+      <ellipse cx="50" cy="86" rx="23" ry="24" fill="url(#wolfBodyGrad)" stroke="#2b303f" stroke-width="2.2"/>
+      <ellipse cx="50" cy="92" rx="13.5" ry="13" style="fill:var(--wf-belly)"/>
+      <path d="M50,104 l-3.4-3.4 a2 2 0 0 1 3.4-2.4 a2 2 0 0 1 3.4 2.4 Z" fill="#ff7a93" opacity=".8"/>
+      <g class="wolf-arm-l"><rect x="22" y="74" width="10" height="20" rx="5" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="27" cy="95" rx="6" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
+      <g class="wolf-arm-r"><rect x="68" y="74" width="10" height="20" rx="5" style="fill:var(--wf-limb)" stroke="#2b303f" stroke-width="2.2"/><ellipse cx="73" cy="95" rx="6" ry="5" style="fill:var(--wf-paw)" stroke="#2b303f" stroke-width="1.8"/></g>
+      <path d="M29,61 Q50,72 71,61 L50,86 Z" fill="#ff4f6d" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
+      <circle cx="42" cy="68" r="1.6" fill="#fff"/><circle cx="56" cy="69" r="1.6" fill="#fff"/><circle cx="49" cy="76" r="1.6" fill="#fff"/>
       <g class="wolf-head">
-        <path d="M27,26 L29,-3 L46,14 Z" style="fill:var(--wf-ear)" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
-        <path d="M73,26 L71,-3 L54,14 Z" style="fill:var(--wf-ear)" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
-        <path d="M31,19 L31.5,5 L41,14 Z" fill="#f2b8c6"/>
-        <path d="M69,19 L68.5,5 L59,14 Z" fill="#f2b8c6"/>
-        <path d="M50,9 C64,9 73,17 74,27 L81,35 L73,37 L77,44 L66,45 C61,52 39,52 34,45 L23,44 L27,37 L19,35 L26,27 C27,17 36,9 50,9 Z" fill="url(#wolfHeadGrad)" stroke="#2b303f" stroke-width="2.2" stroke-linejoin="round"/>
-        <path d="M50,17 C46,22 44,27 45,31 L36,34 C35,42 41,50 50,50 C59,50 65,42 64,34 L55,31 C56,27 54,22 50,17 Z" style="fill:var(--wf-mask)" opacity=".9"/>
-        <ellipse cx="39" cy="21" rx="3.5" ry="2" fill="#ffffff" opacity=".22"/>
-        <ellipse class="wolf-cheek" cx="34" cy="39" rx="4" ry="2.5" fill="#ff8fab" opacity=".55"/>
-        <ellipse class="wolf-cheek" cx="66" cy="39" rx="4" ry="2.5" fill="#ff8fab" opacity=".55"/>
-        <path d="M50,32 C57,32 62,36 62,41.5 C62,47.5 56,50.5 50,50.5 C44,50.5 38,47.5 38,41.5 C38,36 43,32 50,32 Z" fill="#f4f6f8" stroke="#2b303f" stroke-width="1.8"/>
-        <path d="M36,22 L45,24 M64,22 L55,24" stroke="#2b303f" stroke-width="1.8" stroke-linecap="round" opacity=".7"/>
+        <path d="M22,30 L23,-9 L46,11 Z" style="fill:var(--wf-ear)" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M78,30 L77,-9 L54,11 Z" style="fill:var(--wf-ear)" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M27,21 L27.5,0 L40,12 Z" fill="#f2b8c6"/>
+        <path d="M73,21 L72.5,0 L60,12 Z" fill="#f2b8c6"/>
+        <path d="M50,6 C68,6 80,18 81,31 L89,39 L80,42 L85,50 L72,51 C66,61 34,61 28,51 L15,50 L20,42 L11,39 L19,31 C20,18 32,6 50,6 Z" fill="url(#wolfHeadGrad)" stroke="#2b303f" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M43,8 L46,-1 L50,6 L54,-2 L57,8 Z" fill="url(#wolfHeadGrad)" stroke="#2b303f" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M50,13 L44,31 L56,31 Z" style="fill:var(--wf-mask)" opacity=".9"/>
+        <ellipse cx="50" cy="46" rx="17" ry="12.5" style="fill:var(--wf-mask)"/>
+        <ellipse class="wolf-cheek" cx="30" cy="43" rx="4.6" ry="2.8" fill="#ff8fab" opacity=".6"/>
+        <ellipse class="wolf-cheek" cx="70" cy="43" rx="4.6" ry="2.8" fill="#ff8fab" opacity=".6"/>
+        <path d="M34,20 Q39,17 44,20 M56,20 Q61,17 66,20" stroke="#2b303f" stroke-width="1.7" fill="none" stroke-linecap="round" opacity=".8"/>
         <!-- eyes: default / wink (right closed) / closed / hearts / big -->
         <g class="eyes-open">
-          <g class="wolf-eye"><circle cx="41" cy="28" r="3" fill="#23272f"/><circle cx="42.2" cy="26.8" r="1" fill="#fff" opacity=".85"/></g>
-          <g class="wolf-eye wolf-eye-r"><circle cx="59" cy="28" r="3" fill="#23272f"/><circle cx="60.2" cy="26.8" r="1" fill="#fff" opacity=".85"/></g>
+          <g class="wolf-eye"><ellipse cx="40" cy="30" rx="6" ry="6.8" fill="#fff" stroke="#23272f" stroke-width="1.2"/><ellipse cx="40.6" cy="31" rx="4.1" ry="4.7" fill="#23272f"/><circle cx="38.8" cy="29" r="1.7" fill="#fff"/><circle cx="42.2" cy="33.2" r=".8" fill="#fff"/></g>
+          <g class="wolf-eye wolf-eye-r"><ellipse cx="60" cy="30" rx="6" ry="6.8" fill="#fff" stroke="#23272f" stroke-width="1.2"/><ellipse cx="60.6" cy="31" rx="4.1" ry="4.7" fill="#23272f"/><circle cx="58.8" cy="29" r="1.7" fill="#fff"/><circle cx="62.2" cy="33.2" r=".8" fill="#fff"/></g>
         </g>
-        <path class="eye-wink" d="M55 29 Q59 25 63 29" stroke="#23272f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-        <g class="eyes-closed"><path d="M37 28 Q41 31 45 28" stroke="#23272f" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M55 28 Q59 31 63 28" stroke="#23272f" stroke-width="2.2" fill="none" stroke-linecap="round"/></g>
-        <g class="eyes-heart" fill="#ff3d6e"><path d="M41 32 l-4.5-4.5 a2.6 2.6 0 0 1 4.5-3 a2.6 2.6 0 0 1 4.5 3 Z"/><path d="M59 32 l-4.5-4.5 a2.6 2.6 0 0 1 4.5-3 a2.6 2.6 0 0 1 4.5 3 Z"/></g>
-        <g class="eyes-big"><circle cx="41" cy="28" r="4.6" fill="#fff" stroke="#23272f" stroke-width="1.6"/><circle cx="41" cy="28.5" r="2.4" fill="#23272f"/><circle cx="59" cy="28" r="4.6" fill="#fff" stroke="#23272f" stroke-width="1.6"/><circle cx="59" cy="28.5" r="2.4" fill="#23272f"/></g>
-        <ellipse cx="50" cy="38" rx="3.6" ry="2.5" fill="#23272f"/>
+        <path class="eye-wink" d="M54 31 Q60 26 66 31" stroke="#23272f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <g class="eyes-closed"><path d="M34 30 Q40 35 46 30" stroke="#23272f" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M54 30 Q60 35 66 30" stroke="#23272f" stroke-width="2.4" fill="none" stroke-linecap="round"/></g>
+        <g class="eyes-heart" fill="#ff3d6e" stroke="#23272f" stroke-width=".8"><path d="M40 36 l-5.5-5.5 a3.1 3.1 0 0 1 5.5-3.6 a3.1 3.1 0 0 1 5.5 3.6 Z"/><path d="M60 36 l-5.5-5.5 a3.1 3.1 0 0 1 5.5-3.6 a3.1 3.1 0 0 1 5.5 3.6 Z"/></g>
+        <g class="eyes-big"><circle cx="40" cy="30" r="7.2" fill="#fff" stroke="#23272f" stroke-width="1.4"/><circle cx="40" cy="30.5" r="2.6" fill="#23272f"/><circle cx="60" cy="30" r="7.2" fill="#fff" stroke="#23272f" stroke-width="1.4"/><circle cx="60" cy="30.5" r="2.6" fill="#23272f"/></g>
+        <path d="M45.2,40.5 Q50,37.8 54.8,40.5 Q54.3,44.8 50,45.8 Q45.7,44.8 45.2,40.5 Z" fill="#23272f"/>
+        <ellipse cx="48.3" cy="40.6" rx="1.4" ry=".7" fill="#fff" opacity=".6"/>
         <g class="mouth-smile">
-          <path d="M50 40 Q46 46 41 43" stroke="#23272f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          <path d="M50 40 Q54 46 59 43" stroke="#23272f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <path d="M50 45.8 L50 48" stroke="#23272f" stroke-width="1.4"/>
+          <path d="M43.5,48 Q50,56.5 56.5,48 Z" fill="#8f1d3c" stroke="#23272f" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M46.6,51.6 Q50,55.6 53.4,51.6 Q50,50.2 46.6,51.6 Z" fill="#ff7a93"/>
         </g>
-        <ellipse class="mouth-o" cx="50" cy="45.5" rx="3" ry="3.6" fill="#23272f"/>
-        <g class="mouth-grin"><path d="M42 42 Q50 52 58 42 Z" fill="#23272f"/><path d="M45 45 Q50 49 55 45" fill="#ff8fab"/></g>
+        <ellipse class="mouth-o" cx="50" cy="51" rx="3.2" ry="3.8" fill="#23272f"/>
+        <g class="mouth-grin">
+          <path d="M40.5,47 Q50,61 59.5,47 Z" fill="#8f1d3c" stroke="#23272f" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M45,52.5 Q50,58 55,52.5 Q50,50.5 45,52.5 Z" fill="#ff7a93"/>
+          <path d="M43.2,47.6 L44.6,51 L46,47.9 Z M56.8,47.6 L55.4,51 L54,47.9 Z" fill="#fff"/>
+        </g>
         <!-- accessories -->
         <g class="acc acc-party"><path d="M38 12 L50 -20 L62 12 Z" fill="#ff3d6e" stroke="#2b303f" stroke-width="1.8" stroke-linejoin="round"/><path d="M41 4 L59 4 M44 -4 L56 -4" stroke="#ffcf3f" stroke-width="3"/><circle cx="50" cy="-21" r="4" fill="#ffcf3f" stroke="#2b303f" stroke-width="1.4"/></g>
         <g class="acc acc-grad"><path d="M24 6 L50 -6 L76 6 L50 18 Z" fill="#23272f" stroke="#111" stroke-width="1.4"/><rect x="38" y="8" width="24" height="9" rx="2" fill="#23272f"/><path d="M50 6 L70 12 L70 24" stroke="#ffcf3f" stroke-width="2" fill="none"/><circle cx="70" cy="25" r="2.6" fill="#ffcf3f"/></g>

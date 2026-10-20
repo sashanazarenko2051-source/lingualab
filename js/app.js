@@ -88,7 +88,6 @@ function freshEl(selector) {
 
 function initTopbar() {
   document.title = App.t('app_title');
-  document.getElementById('brand-name').textContent = App.t('brand_name');
 
   const nav = document.getElementById('nav');
   nav.innerHTML = `
