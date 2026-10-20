@@ -262,11 +262,15 @@ def status():
         allb = batch_count(words)
         cp = os.path.join(CACHE, lg + '.json')
         c = json.load(open(cp, encoding='utf8')) if os.path.exists(cp) else {'done': [], 'fixes': {}}
-        done, fixes = len(c['done']), len(c['fixes'])
-        total_done += done; total_all += allb; total_fix += fixes
-        rows.append('%s %3d/%d %3d%%  fixes %d' % (lg, done, allb, 100 * done // allb, fixes))
+        covered = set()
+        for t in c['done']:
+            x, y = map(int, t.split('-'))
+            covered.update(range(x, y + 1))
+        done, allw, fixes = len(covered), len(words), len(c['fixes'])
+        total_done += done; total_all += allw; total_fix += fixes
+        rows.append('%s %5d/%d words %3d%%  fixes %d' % (lg, done, allw, 100 * done // allw, fixes))
     print('\n'.join(rows))
-    print('TOTAL %d/%d batches (%.1f%%), fixes %d' % (total_done, total_all, 100.0 * total_done / total_all, total_fix))
+    print('TOTAL %d/%d words (%.1f%%), fixes %d' % (total_done, total_all, 100.0 * total_done / total_all, total_fix))
 
 
 if __name__ == '__main__':
