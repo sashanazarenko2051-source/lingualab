@@ -1976,3 +1976,4 @@ button { background: none; }
 .country-suggest-item { text-align: left; border: none; background: transparent; color: var(--ink); font: inherit; font-weight: 700; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
 .country-suggest-item:hover, .country-suggest-item:first-child { background: color-mix(in srgb, var(--brand-1) 22%, transparent); }
 .country-suggest-none { padding: 8px 10px; color: var(--ink-muted); }
+.country-current { margin-top: 10px; }

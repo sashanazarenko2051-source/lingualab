@@ -78,11 +78,8 @@ function render(root) {
         <h2>🌍 ${App.t('set_country')}</h2>
         <p class="settings-hint">${App.t('country_hint')}</p>
         ${App.regions.searchHtml('set-country-search')}
-        <select class="shop-term country-list" id="set-country" size="6">${App.regions.optionsHtml(App.regions.country() || 'OTHER')}</select>
-        <div class="country-save-row">
-          <span class="country-current" id="set-country-current">✅ ${App.regions.countryName(App.regions.country() || 'OTHER')}</span>
-          <button class="quiz-next country-save" id="set-country-save">${App.t('profile_save')}</button>
-        </div>
+        <select class="shop-term" id="set-country">${App.regions.optionsHtml(App.regions.country() || 'OTHER')}</select>
+        <div class="country-current" id="set-country-current">✅ ${App.regions.countryName(App.regions.country() || 'OTHER')}</div>
       </section>
 
       ${voiceCardHtml()}
@@ -132,7 +129,6 @@ function render(root) {
     App.effects.toast('✅ ' + App.regions.countryName(v));
   };
   App.regions.bindSearch(root.querySelector('#set-country-search'), root.querySelector('#set-country'), saveCountry);
-  root.querySelector('#set-country-save').addEventListener('click', () => saveCountry(root.querySelector('#set-country').value));
   bindVoiceCard(root);
 
   root.querySelector('#set-save-all').addEventListener('click', () => {
