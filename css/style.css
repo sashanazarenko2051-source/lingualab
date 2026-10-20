@@ -1868,3 +1868,6 @@ button { background: none; }
 }
 .family-note { color: var(--ink-2); margin: -2px 0 10px 2px; }
 .family-sub { color: var(--brand-1); margin: 8px 0 10px 2px; }
+
+/* Family and branch labels on the home page are yellow, so they stand out. */
+.family-title, .family-note, .family-sub { color: #ffd23f; }
