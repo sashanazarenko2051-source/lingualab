@@ -14,15 +14,20 @@ in t ("мир, покой").
 
 The API key is read from the GEMINI_API_KEY environment variable or from
 tools/.gemini_key (both kept out of git). The model can be set with
-GEMINI_MODEL, and GEMINI_LIMIT=N stops after N batches (a trial run).
+GEMINI_MODEL (a comma-separated list), and GEMINI_LIMIT=N stops after N batches (a trial run).
 """
 import json, os, re, sys, time, urllib.request, urllib.error
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HERE = os.path.join(ROOT, 'tools')
 CACHE = os.path.join(HERE, 'gemini_cache')
-BATCH = 80
-MODEL = os.environ.get('GEMINI_MODEL', 'gemini-3.5-flash')
+BATCH = 220  # a whole topic per request: the free tier counts requests, not words
+# Tried in this order; an overloaded one passes the batch to the next.
+MODELS = os.environ.get('GEMINI_MODEL', 'gemini-3.5-flash,gemini-3.8-flash,gemini-3.7-flash,gemini-3.6-flash,'
+                        'gemini-3-flash-preview,gemini-flash-latest,gemini-3.5-flash-lite,gemini-flash-lite-latest,'
+                        'gemini-3.1-flash-lite,gemma-4-31b-it').split(',')
+RESET = 3 * 3600  # how long a model with a used-up daily quota is skipped
+exhausted = {}
 # Stop after this many new batches (0 = no limit), for a trial run.
 LIMIT = int(os.environ.get('GEMINI_LIMIT', '0'))
 
@@ -102,30 +107,47 @@ def ask(key, lang, cat, chunk):
         'contents': [{'role': 'user', 'parts': [{'text': PROMPT.format(lang=LANGS[lang], cat=cat, items=items)}]}],
         'generationConfig': {'temperature': 0, 'responseMimeType': 'application/json'},
     }
-    url = 'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent' % MODEL
-    req = urllib.request.Request(url, json.dumps(body).encode('utf8'),
-                                 {'Content-Type': 'application/json', 'x-goog-api-key': key})
-    for attempt in range(10):
-        try:
-            with urllib.request.urlopen(req, timeout=180) as r:
-                data = json.loads(r.read().decode('utf8'))
-            text = data['candidates'][0]['content']['parts'][0]['text']
-            out = json.loads(text)
-            if not isinstance(out, list):
-                raise ValueError('not a list')
-            return out
-        except urllib.error.HTTPError as e:
-            msg = e.read().decode('utf8', 'replace')[:300]
-            if e.code in (400, 401, 403, 404):
-                sys.exit('Gemini error %s: %s' % (e.code, msg))
-            wait = min(120, 20 * (attempt + 1))
-            print('  HTTP %s, retry in %ss' % (e.code, wait), flush=True)
-            time.sleep(wait)
-        except Exception as e:
-            wait = 10 * (attempt + 1)
-            print('  %s, retry in %ss' % (e, wait), flush=True)
-            time.sleep(wait)
-    sys.exit('Gemini kept failing; run again to continue')
+    data = json.dumps(body).encode('utf8')
+    # An overloaded model hands the batch to the next one. A model whose
+    # daily quota is used up (429) is left out until RESET seconds pass;
+    # when every model is out, the run waits for the quota to come back.
+    while True:
+        now = time.time()
+        live = [m for m in MODELS if exhausted.get(m, 0) <= now]
+        if not live:
+            wake = min(exhausted.values())
+            print('  daily quota used up on every model, waiting %d min' % ((wake - now) // 60 + 1), flush=True)
+            time.sleep(max(60, wake - now))
+            continue
+        busy = 0
+        for model in live:
+            url = 'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent' % model
+            req = urllib.request.Request(url, data, {'Content-Type': 'application/json', 'x-goog-api-key': key})
+            try:
+                with urllib.request.urlopen(req, timeout=300) as r:
+                    resp = json.loads(r.read().decode('utf8'))
+                parts = [x.get('text', '') for x in resp['candidates'][0]['content']['parts'] if not x.get('thought')]
+                out = json.loads(parts[-1])
+                if not isinstance(out, list):
+                    raise ValueError('not a list')
+                print('  answered by %s' % model, flush=True)
+                return out
+            except urllib.error.HTTPError as e:
+                msg = e.read().decode('utf8', 'replace')
+                if e.code in (400, 401, 403):
+                    sys.exit('Gemini error %s: %s' % (e.code, msg[:300]))
+                if e.code == 404 or (e.code == 429 and ('PerDay' in msg or 'limit: 0' in msg)):
+                    exhausted[model] = time.time() + (365 * 86400 if e.code == 404 or 'limit: 0' in msg else RESET)
+                    print('  %s: out for today' % model, flush=True)
+                else:
+                    busy += 1
+                    print('  %s: HTTP %s' % (model, e.code), flush=True)
+            except Exception as e:
+                busy += 1
+                print('  %s: %s' % (model, e), flush=True)
+        if busy:
+            print('  models busy, retry in 60s', flush=True)
+            time.sleep(60)
 
 
 def cache_path(lang):
@@ -147,11 +169,18 @@ def check(lang):
         cur.append((i, w))
     if cur:
         batches.append(cur)
+    # word indexes already checked (also by runs with another batch size)
+    covered = set()
+    for t in cache['done']:
+        a, b = map(int, t.split('-'))
+        covered.update(range(a, b + 1))
     sent = 0
     for n, chunk in enumerate(batches):
         tag = '%d-%d' % (chunk[0][0], chunk[-1][0])
-        if tag in cache['done']:
+        if all(i in covered for i, _ in chunk):
             continue
+        chunk = [(i, w) for i, w in chunk if i not in covered]
+        tag = '%d-%d' % (chunk[0][0], chunk[-1][0])
         if LIMIT and sent >= LIMIT:
             break
         sent += 1
@@ -171,24 +200,43 @@ def check(lang):
         print('%s %d/%d  fixes so far: %d' % (lang, n + 1, len(batches), len(cache['fixes'])), flush=True)
 
 
+def similar(a, b):
+    """True when b is a spelling fix of a (accents, a letter or two), not another word."""
+    import difflib, unicodedata
+    fold = lambda s: ''.join(c for c in unicodedata.normalize('NFD', s.lower()) if not unicodedata.combining(c))
+    if fold(a) == fold(b):
+        return True
+    return difflib.SequenceMatcher(None, fold(a), fold(b)).ratio() >= 0.75
+
+
 def apply(lang):
     path, lines, words = load(lang)
     cp = cache_path(lang)
     if not os.path.exists(cp):
         sys.exit('nothing cached for ' + lang)
     cache = json.load(open(cp, encoding='utf8'))
-    n = 0
+    n, held = 0, []
     for i, ch in cache['fixes'].items():
         w = words[int(i)]
         if any(w[f] != ch['was'][f] for f in ch['was']):
             continue  # the line changed since the check; leave it
+        if ch.get('skip'):
+            continue
+        # A different word (not a spelling fix) would break the alignment
+        # with the other languages and the icon: held back for review.
+        if 'w' in ch and not ch.get('ok') and not similar(w['w'], ch['w']):
+            held.append('%s %s: %s -> %s (%s)' % (lang, i, w['w'], ch['w'], ch.get('why', '')))
+            continue
         m = LINE.match(lines[w['line']])
         vals = {f: ch.get(f, w[f]) for f in FIELDS}
         lines[w['line']] = '%s{ w: %s, t: %s, ex: %s, tex: %s }%s%s' % (
             m.group(1), quote(vals['w']), quote(vals['t']), quote(vals['ex']), quote(vals['tex']), m.group(6), m.group(7))
         n += 1
     open(path, 'w', encoding='utf8', newline='').write('\n'.join(lines))
-    print('%s: %d entries updated' % (lang, n))
+    print('%s: %d entries updated, %d held for review' % (lang, n, len(held)))
+    if held:
+        with open(os.path.join(CACHE, 'held.txt'), 'a', encoding='utf8') as f:
+            f.write('\n'.join(held) + '\n')
 
 
 def report(lang):
@@ -197,7 +245,34 @@ def report(lang):
         print(i, ' | '.join('%s: %s -> %s' % (f, ch['was'][f], ch[f]) for f in FIELDS if f in ch), '|', ch.get('why', ''))
 
 
+def batch_count(words):
+    n, prev, size = 0, None, 0
+    for w in words:
+        if size == 0 or size == BATCH or w['cat'] != prev:
+            n, size = n + 1, 0
+        size, prev = size + 1, w['cat']
+    return n
+
+
+def status():
+    total_done = total_all = total_fix = 0
+    rows = []
+    for lg in LANGS:
+        _, _, words = load(lg)
+        allb = batch_count(words)
+        cp = os.path.join(CACHE, lg + '.json')
+        c = json.load(open(cp, encoding='utf8')) if os.path.exists(cp) else {'done': [], 'fixes': {}}
+        done, fixes = len(c['done']), len(c['fixes'])
+        total_done += done; total_all += allb; total_fix += fixes
+        rows.append('%s %3d/%d %3d%%  fixes %d' % (lg, done, allb, 100 * done // allb, fixes))
+    print('\n'.join(rows))
+    print('TOTAL %d/%d batches (%.1f%%), fixes %d' % (total_done, total_all, 100.0 * total_done / total_all, total_fix))
+
+
 if __name__ == '__main__':
+    if len(sys.argv) == 2 and sys.argv[1] == 'status':
+        status()
+        sys.exit()
     if len(sys.argv) < 3 or sys.argv[1] not in ('check', 'apply', 'report'):
         sys.exit(__doc__)
     langs = list(LANGS) if sys.argv[2] == 'all' else sys.argv[2:]
