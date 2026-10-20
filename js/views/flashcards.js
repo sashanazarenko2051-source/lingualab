@@ -95,6 +95,8 @@ function summaryHtml(state) {
 
 function renderResult(root, state, meta) {
   const pct = state.tested ? Math.round((state.correct / state.tested) * 100) : 100;
+  App.quests.bump('lessons');
+  if (state.learned) App.quests.bump('words', state.learned);
   if (state.tested && pct === 100) {
     setTimeout(() => {
       App.effects.perfectToast();

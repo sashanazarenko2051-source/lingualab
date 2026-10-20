@@ -2011,3 +2011,48 @@ html:has(.modal-overlay) { overflow: hidden; }
 .hat-lock { position: absolute; right: -4px; bottom: -4px; font-size: 11px; font-style: normal; }
 .shop-hat-icon { font-size: 40px; line-height: 1; }
 .profile-side .profile-preview { padding-top: 22px; }
+
+/* Daily hint button in exercises */
+.ex-hint-row { display: flex; justify-content: flex-end; margin: -4px 0 10px; }
+.ex-option.ex-eliminated { opacity: .25; filter: grayscale(1); text-decoration: line-through; }
+
+/* Streak flame colours */
+.flame { display: inline-block; animation: flameFlicker 1.6s ease-in-out infinite; transform-origin: 50% 90%; }
+.flame-gray { filter: grayscale(1) brightness(.85); animation: none; opacity: .8; }
+.flame-blue { filter: hue-rotate(185deg) saturate(1.6) drop-shadow(0 0 6px #3da5ff); }
+.flame-purple { filter: hue-rotate(245deg) saturate(1.8) drop-shadow(0 0 8px #b829ff); }
+.flame-normal { filter: drop-shadow(0 0 6px #ff9f1c); }
+@keyframes flameFlicker { 0%, 100% { transform: scale(1) rotate(-2deg); } 50% { transform: scale(1.12, 1.18) rotate(3deg); } }
+.reduce-motion .flame { animation: none; }
+.streak-restore { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px; border-radius: 14px; border: 2px dashed var(--border); background: var(--surface); font-weight: 700; }
+.streak-restore .heart-ad-btn { margin: 0; }
+/* XP bar fills up with the XP just earned */
+.xp-fill-anim { transition: width 1.4s cubic-bezier(.2,.8,.2,1); }
+.xp-gain { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; font-size: 12px; background: var(--brand-3); color: #0b1020; animation: popIn .4s ease both; }
+
+/* Coins and quests */
+.coin-pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px 4px 6px; border-radius: 999px; flex: none;
+  background: color-mix(in srgb, #ffd23f 14%, rgba(0,0,0,.35)); border: 1px solid color-mix(in srgb, #ffd23f 55%, transparent);
+  font-weight: 800; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.6); cursor: pointer; white-space: nowrap; }
+.coin-pill span { font-size: 17px; line-height: 1; }
+.coin-pill b { font-size: 15px; }
+.quests-page { max-width: 900px; margin: 0 auto; }
+.quests-balance { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: var(--surface); border: 2px solid #ffd23f; font-size: 20px; margin-bottom: 14px; }
+.quests-balance span { font-size: 13px; color: var(--ink-2); font-weight: 700; }
+.quest-card { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px; border: 2px solid var(--border); background: var(--surface-2); margin-top: 10px; }
+.quest-card.tier-easy { border-left: 6px solid #39d98a; }
+.quest-card.tier-medium { border-left: 6px solid #ffc93c; }
+.quest-card.tier-hard { border-left: 6px solid #ff5b6e; }
+.quest-card.claimed { opacity: .65; }
+.quest-main { flex: 1; min-width: 0; }
+.quest-title { font-weight: 800; }
+.quest-bar { height: 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); margin: 6px 0 4px; overflow: hidden; }
+.quest-bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--brand-1), var(--brand-3)); transition: width .8s ease; }
+.quest-meta { font-size: 12px; color: var(--ink-2); font-weight: 700; }
+.quest-claim { margin: 0; padding: 10px 18px; }
+.quest-done { font-weight: 800; color: var(--good); white-space: nowrap; }
+.quest-note { margin-top: 10px; font-weight: 700; color: var(--ink-2); }
+.page-sub { margin: -6px 0 12px; font-weight: 600; }
+.shop-card-actions .shop-coins { padding: 0 12px; flex: none; border-color: #ffd23f; font-weight: 800; }
+.shop-card-actions { flex-wrap: wrap; row-gap: 8px; }

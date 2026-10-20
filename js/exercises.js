@@ -268,6 +268,7 @@ App.exercises = (function () {
   function choice(ctx, { headHtml, options, correctKey, gridClass, detail, word, onPick }) {
     ctx.body.innerHTML = `
       ${headHtml}
+      <div class="ex-hint-row">${App.hints.buttonHtml()}</div>
       <div class="ex-options ${gridClass || ''}">
         ${options.map((o, i) => `<button class="ex-option" data-key="${esc(o.key)}" ${o.say ? `data-option-say="${esc(o.say)}"` : ''}><span class="ex-num">${i + 1}</span>${o.say ? '<span class="ex-option-voice">🔊</span>' : ''}${o.html}</button>`).join('')}
       </div>
@@ -297,6 +298,17 @@ App.exercises = (function () {
       if (onPick) onPick(b);
     };
     btns.forEach(b => b.addEventListener('click', () => pick(b)));
+    // A daily hint takes away two wrong answers.
+    const hintBtn = ctx.body.querySelector('#ex-daily-hint');
+    hintBtn.addEventListener('click', () => {
+      const wrong = btns.filter(b => b.dataset.key !== correctKey && !b.disabled);
+      if (wrong.length < 2) return;
+      App.hints.ask(() => {
+        shuffle(wrong).slice(0, Math.min(2, wrong.length - 1 || 1)).forEach(b => { b.disabled = true; b.classList.add('ex-eliminated'); b.classList.remove('selected'); if (picked === b.dataset.key) { picked = null; footer.enable(false); } });
+        hintBtn.disabled = true;
+        App.hints.paint(hintBtn);
+      });
+    });
     onKey(e => {
       const n = parseInt(e.key, 10);
       if (n >= 1 && n <= btns.length) pick(btns[n - 1]);
@@ -489,7 +501,7 @@ App.exercises = (function () {
           <div class="ex-prompt"><span class="ex-prompt-icon">${App.ui.wordIcon(word.icon)}</span><span class="ex-prompt-text">${esc(meaningOf(word))}</span></div>`)}
         <div class="ex-input-row">
           <input class="ex-input" id="ex-input" type="text" autocomplete="off" spellcheck="false" placeholder="${App.t('ex_type_placeholder')}">
-          <button class="ex-hint-btn" id="ex-hint-btn" title="${App.t('ex_hint')}">💡 ${App.t('ex_hint')} <span class="ex-hint-left"></span></button>
+          <button class="ex-hint-btn" id="ex-hint-btn" title="${App.t('hints_rule', { n: App.hints.DAILY })}">💡 ${App.t('ex_hint')} <span class="ex-hint-left"></span></button>
           <button class="ex-hint-btn ex-reveal-btn" id="ex-reveal-btn" title="${App.t('ex_reveal')}">👁 ${App.t('ex_reveal')}</button>
         </div>
         <div class="ex-length">${Array.from(target).map(ch => ch === ' ' ? '<i class="sp"></i>' : '<i></i>').join('')}</div>
@@ -499,9 +511,10 @@ App.exercises = (function () {
       const hintBtn = ctx.body.querySelector('#ex-hint-btn');
       const revealBtn = ctx.body.querySelector('#ex-reveal-btn');
       const cells = [...ctx.body.querySelectorAll('.ex-length i')];
-      let hintsLeft = Math.floor(Array.from(target.replace(/\s/g, '')).length / 3);
+      // Each letter hint costs one daily hint, at most a third of the word.
+      let hintsLeft = Math.max(1, Math.floor(Array.from(target.replace(/\s/g, '')).length / 3));
       const paintHint = () => {
-        hintBtn.querySelector('.ex-hint-left').textContent = hintsLeft > 0 ? `×${hintsLeft}` : '';
+        hintBtn.querySelector('.ex-hint-left').textContent = '×' + App.hints.left();
         hintBtn.disabled = done || hintsLeft <= 0;
       };
       input.focus();
@@ -559,11 +572,13 @@ App.exercises = (function () {
         let k = 0;
         while (k < typed.length && k < goal.length && typed[k] === goal[k].toLowerCase()) k += 1;
         if (k >= goal.length - 1) return;
-        input.value = goal.slice(0, k + 1).join('');
-        hintsLeft -= 1;
-        paintHint();
-        input.focus();
-        changed();
+        App.hints.ask(() => {
+          input.value = goal.slice(0, k + 1).join('');
+          hintsLeft -= 1;
+          paintHint();
+          input.focus();
+          changed();
+        });
       });
       revealBtn.addEventListener('click', () => {
         if (done) return;
@@ -597,6 +612,7 @@ App.exercises = (function () {
       const chosen = [];
       ctx.body.innerHTML = `
         ${headHtml(App.t(step.phrase ? 'ex_build_phrase' : 'ex_build'), `<div class="ex-prompt">${step.phrase ? `<span class="ex-prompt-icon">${App.ui.wordIcon(word.icon)}</span>` : ''}<span class="ex-prompt-text ex-prompt-sentence">${esc(promptText)}</span></div>`)}
+        <div class="ex-hint-row">${App.hints.buttonHtml()}</div>
         <div class="ex-answer-line" id="ex-line"></div>
         <div class="ex-bank" id="ex-bank"></div>
       `;
@@ -627,6 +643,21 @@ App.exercises = (function () {
       };
       const footer = footerCheck(ctx, false, check);
       draw();
+      const hintBtn = ctx.body.querySelector('#ex-daily-hint');
+      hintBtn.addEventListener('click', () => {
+        if (locked) return;
+        // Keep the right beginning, then add the next right word.
+        let k = 0;
+        while (k < chosen.length && k < target.length && norm(chosen[k].t) === norm(target[k])) k += 1;
+        if (k >= target.length) return;
+        App.hints.ask(() => {
+          chosen.splice(k);
+          const next = bank.find(c => !chosen.includes(c) && norm(c.t) === norm(target[k]));
+          if (next) { chosen.push(next); App.speak(next.t, word.lang); }
+          draw();
+          App.hints.paint(hintBtn);
+        });
+      });
       onKey(e => { if (e.key === 'Enter') { e.preventDefault(); footer.trigger(); } });
     },
 

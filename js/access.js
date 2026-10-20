@@ -38,6 +38,7 @@ App.access = (function () {
     const i = cats.findIndex(c => c.id === catId);
     if (i <= 0) return true;
     if (i < levelSkipTo(code)) return true;
+    if (App.shop.ownsHalf(code) && i < Math.ceil(cats.length / 2)) return true;
     return App.storage.isExamPassed(code, catId) || topicPassed(code, cats[i - 1]);
   }
 

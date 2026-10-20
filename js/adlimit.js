@@ -1,10 +1,10 @@
 window.App = window.App || {};
 
-// Rewarded ads are limited per day and per reward (hearts / energy), so they
-// can't be watched endlessly. Counts live in App.storage.state.ads and reset
-// at local midnight.
+// Rewarded ads per day and per reward (hearts / energy / hints). Ads have
+// no daily limit now; the counts are only kept (App.storage.state.ads,
+// reset at local midnight).
 App.adLimit = (function () {
-  const PER_DAY = { hearts: 5, energy: 5 };
+  const PER_DAY = { hearts: Infinity, energy: Infinity, hints: Infinity };
 
   function today() {
     const d = new Date();
@@ -12,7 +12,7 @@ App.adLimit = (function () {
   }
   function st() {
     const s = App.storage.state;
-    if (!s.ads || s.ads.day !== today()) s.ads = { day: today(), hearts: 0, energy: 0 };
+    if (!s.ads || s.ads.day !== today()) s.ads = { day: today(), hearts: 0, energy: 0, hints: 0 };
     return s.ads;
   }
   function left(kind) { return Math.max(0, PER_DAY[kind] - (st()[kind] || 0)); }
@@ -20,6 +20,7 @@ App.adLimit = (function () {
   // Text under an ad button: ads left today, or that they're used up.
   function label(kind) {
     const n = left(kind);
+    if (n === Infinity) return '';
     return n ? App.t('ads_left', { n }) : App.t('ads_none');
   }
 

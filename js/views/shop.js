@@ -14,7 +14,8 @@ const SECTIONS = [
   ['energy', '⚡', 'shop_sec_energy'],
   ['ach', '🏆', 'shop_sec_ach'],
   ['themes', '🎨', 'shop_sec_themes'],
-  ['hats', '🎩', 'shop_sec_hats']
+  ['hats', '🎩', 'shop_sec_hats'],
+  ['hints', '💡', 'shop_sec_hints']
 ];
 
 function render(root) {
@@ -58,6 +59,7 @@ function card(itemId, { title, icon, opts, owned, note, extra, ownedLabel }) {
         ${owned ? `<span class="shop-owned">✅ ${ownedLabel || App.t('shop_owned')}</span>`
           : `<button class="quiz-next shop-buy" data-buy="${itemId}" data-opts="${o}">${App.t('shop_buy')}</button>`}
         ${it.gift ? `<button class="action-card shop-gift" data-gift="${itemId}" data-opts="${o}" title="${App.t('shop_gift')}">🎁</button>` : ''}
+        ${App.shop.COIN_PRICES[itemId] ? `<button class="action-card shop-coins" data-coinbuy="${itemId}" title="${App.t('shop_buy_coins')}">🪙 ${App.shop.COIN_PRICES[itemId]}</button>` : ''}
       </div>
     </div>`;
 }
@@ -73,7 +75,11 @@ function sectionHtml(id) {
     const open = App.LANG_ORDER.filter(c => !App.shop.ownsTopics(c));
     const pick = `<select class="shop-term" data-lang-pick>${open.map(c =>
       `<option value="${c}" ${c === code ? 'selected' : ''}>${App.ui.langName(c)}</option>`).join('')}</select>`;
+    const openHalf = App.LANG_ORDER.filter(c => !App.shop.ownsHalf(c));
+    const pickHalf = `<select class="shop-term" data-lang-pick-half>${openHalf.map(c =>
+      `<option value="${c}" ${c === code ? 'selected' : ''}>${App.ui.langName(c)}</option>`).join('')}</select>`;
     return [
+    card('unlock_half', { title: App.t('shop_unlock_half_pick'), owned: !openHalf.length, extra: openHalf.length ? pickHalf : '' }),
     card('unlock_1', { title: App.t('shop_unlock_1_pick'), owned: !open.length, extra: open.length ? pick : '' }),
     card('unlock_5', { title: App.t('shop_unlock_5'), owned: App.shop.ownsAllTopics(), extra: App.shop.ownsAllTopics() ? '' : `
       <button class="action-card shop-pick5" data-pick5>🌍 ${App.t('shop_pick_langs', { n: chosen5.length })}</button>
@@ -82,12 +88,11 @@ function sectionHtml(id) {
   ].join('');
   }
   if (id === 'hearts') return [
-    card('hearts_200', { title: App.t('shop_hearts_200') }),
+    ...[10, 25, 100, 200].map(n => card('hearts_' + n, { title: App.t('shop_hearts_n', { n }) })),
     card('hearts_unl', { title: App.t('shop_hearts_unl'), note: untilNote(App.shop.state().heartsUntil || 0) })
   ].join('');
   if (id === 'energy') return [
-    card('energy_100', { title: App.t('shop_energy_n', { n: 100 }) }),
-    card('energy_200', { title: App.t('shop_energy_n', { n: 200 }) }),
+    ...[50, 100, 150, 200].map(n => card('energy_' + n, { title: App.t('shop_energy_n', { n }) })),
     card('energy_unl', { title: App.t('shop_energy_unl'), note: untilNote((App.storage.state.energy || {}).unlimitedUntil || 0) })
   ].join('');
   if (id === 'ach') {
@@ -101,6 +106,7 @@ function sectionHtml(id) {
     opts: { theme: name }, owned: App.shop.ownsTheme(name),
     extra: App.shop.ownsTheme(name) ? `<button class="action-card shop-apply" data-apply-theme="${name}">${App.t('shop_apply')}</button>` : ''
   })).join('');
+  if (id === 'hints') return [10, 30, 100].map(n => card('hints_' + n, { title: App.t('shop_hints_n', { n }) })).join('');
   if (id === 'hats') return App.profile.SHOP_HATS.map(h => card('hat', {
     title: App.t('shop_hat'), icon: `<span class="shop-hat-icon">${App.profile.HATS[h]}</span>`,
     opts: { hat: h }, owned: App.profile.ownsHat(h)
@@ -113,6 +119,7 @@ function readOpts(btn, root) {
   const itemId = btn.dataset.buy || btn.dataset.gift;
   if (App.shop.ITEMS[itemId].term) opts.term = root.querySelector(`[data-term-for="${itemId}"]`).value;
   if (itemId === 'unlock_1') opts.lang = root.querySelector('[data-lang-pick]').value;
+  if (itemId === 'unlock_half') opts.lang = root.querySelector('[data-lang-pick-half]').value;
   return { itemId, opts };
 }
 
@@ -127,11 +134,19 @@ function bind(root) {
     }
     App.shop.buy(itemId, opts).then(ok => ok && rerender());
   }));
+  root.querySelectorAll('[data-coinbuy]').forEach(b => b.addEventListener('click', () => {
+    if (App.shop.buyWithCoins(b.dataset.coinbuy, {})) rerender();
+  }));
   root.querySelectorAll('[data-pick5]').forEach(b => b.addEventListener('click', () => {
     pickLanguages(langs => { chosen5 = langs; rerender(); });
   }));
   root.querySelectorAll('[data-gift]').forEach(b => b.addEventListener('click', () => {
     const { itemId, opts } = readOpts(b, root);
+    if (itemId === 'unlock_5') {
+      const gift = langs => pickFriend(uid => App.shop.buy('unlock_5', { langs }, uid));
+      if (chosen5.length === 5) gift(chosen5); else pickLanguages(langs => { chosen5 = langs; rerender(); gift(langs); });
+      return;
+    }
     pickFriend(uid => App.shop.buy(itemId, opts, uid));
   }));
   root.querySelectorAll('[data-apply-theme]').forEach(b => b.addEventListener('click', () => {

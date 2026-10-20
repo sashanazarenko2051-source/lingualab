@@ -17,8 +17,8 @@ App.hearts = (function () {
   function emit() { listeners.forEach(fn => fn(count())); }
   function onChange(fn) { listeners.push(fn); }
 
-  // Bought hearts (shop) can go past MAX, up to HARD_MAX.
-  const HARD_MAX = 200;
+  // Ads and the shop can take the wallet past MAX (40 ads at 25 hearts = 65).
+  const HARD_MAX = 99999;
   function set(n) {
     st().count = Math.max(0, Math.min(HARD_MAX, n));
     if (st().count >= MAX) st().refillAt = 0;
@@ -29,7 +29,7 @@ App.hearts = (function () {
   function lose(n) {
     if (App.shop && App.shop.heartsUnlimited()) return;
     const h = st();
-    if (!h.refillAt) h.refillAt = Date.now() + REFILL_MS;
+    if (!h.refillAt) { h.refillAt = Date.now() + REFILL_MS; h.halfAt = Date.now() + HALF_MS; }
     set(count() - (n || 1));
   }
   function add(n) { set(count() + (n || 1)); }
@@ -37,22 +37,37 @@ App.hearts = (function () {
   // Free refill: REFILL_MS after the first heart is lost, the wallet is
   // filled back to MAX. Checked every minute, so it also catches up after
   // the app was closed.
+  // HALF_MS after the first loss half of MAX comes back; at REFILL_MS the
+  // wallet is full again, even if that half was used up meanwhile.
   const REFILL_MS = 24 * 60 * 60 * 1000;
+  const HALF_MS = 16 * 60 * 60 * 1000;
+  const HALF = Math.ceil(MAX / 2);
 
   function checkRefill() {
     const h = st();
-    if (h.count >= MAX) { if (h.refillAt) { h.refillAt = 0; App.storage.save(); } return false; }
+    if (h.count >= MAX) { if (h.refillAt) { h.refillAt = 0; h.halfAt = 0; App.storage.save(); } return false; }
     // A wallet below MAX without a countdown (saved by an older version) refills now.
-    if (h.refillAt && Date.now() < h.refillAt) return false;
+    if (h.refillAt && Date.now() < h.refillAt) {
+      if (h.halfAt && Date.now() >= h.halfAt) {
+        h.halfAt = 0;
+        h.count = Math.min(MAX, h.count + HALF);
+        App.storage.save();
+        emit();
+        return true;
+      }
+      return false;
+    }
+    h.refillAt = 0; h.halfAt = 0;
     set(MAX);
     return true;
   }
 
   // Time left until the refill, as "h:mm", or '' when the wallet is full.
-  function refillLeft() {
+  function refillLeft(half) {
     const h = st();
-    if (h.count >= MAX || !h.refillAt) return '';
-    const min = Math.max(0, Math.ceil((h.refillAt - Date.now()) / 60000));
+    const at = half ? h.halfAt : h.refillAt;
+    if (h.count >= MAX || !at) return '';
+    const min = Math.max(0, Math.ceil((at - Date.now()) / 60000));
     return Math.floor(min / 60) + ':' + String(min % 60).padStart(2, '0');
   }
 
@@ -175,18 +190,15 @@ App.hearts = (function () {
 
   function bindAd(btn, after) {
     if (!btn) return;
-    const full = count() >= MAX;
-    const noAds = !App.adLimit.left('hearts');
-    btn.disabled = full || noAds;
-    if (full) btn.textContent = App.t('hearts_full');
-    else btn.insertAdjacentHTML('afterend', `<div class="ads-left">${App.adLimit.label('hearts')}</div>`);
+    // Ads can be watched any number of times, even with a full wallet.
+    btn.disabled = false;
     btn.addEventListener('click', () => {
       btn.disabled = true;
       btn.classList.add('loading');
       watchAd().then(ok => {
         btn.classList.remove('loading');
         if (ok) App.effects.toast(`${iconSvgInline()} +1`, 'heart-toast');
-        if (after) after(); else btn.disabled = count() >= MAX || !App.adLimit.left('hearts');
+        if (after) after(); else btn.disabled = false;
       });
     });
   }
@@ -207,6 +219,7 @@ App.hearts = (function () {
 
   function openPopup() {
     closePopup();
+    checkRefill();
     const wrap = document.createElement('div');
     wrap.className = 'heart-popup-backdrop';
     wrap.id = 'heart-popup';
@@ -214,20 +227,25 @@ App.hearts = (function () {
       wrap.innerHTML = `
         <div class="heart-popup" role="dialog">
           <button class="heart-popup-close" id="heart-popup-close">✕</button>
-          <div class="heart-popup-big">${iconSvg(count() === 0)}<b>${count()}</b><span>/ ${App.shop.heartsUnlimited() ? '∞' : count() > MAX ? HARD_MAX : MAX}</span></div>
+          <div class="heart-popup-big">${iconSvg(count() === 0)}<b>${count()}</b>${App.shop.heartsUnlimited() ? '<span>/ ∞</span>' : count() > MAX ? '' : `<span>/ ${MAX}</span>`}</div>
           ${App.shop.heartsUnlimited() ? `<div class="energy-unlimited-until">∞ ${App.t('energy_unlimited_until', { date: new Date(App.shop.state().heartsUntil).toLocaleDateString() })}</div>` : ''}
           <div class="heart-popup-rules">
             <div>❌ ${App.t('hearts_rule_mistake')}</div>
-            <div>📺 ${App.t('hearts_rule_ad')}</div>
-            <div>🕐 ${App.t('hearts_rule_refill', { n: MAX })}</div>
+            <div>📺 ${App.t('hearts_rule_ad2')}</div>
+            <div>🕐 ${App.t('hearts_rule_refill2', { half: HALF, n: MAX })}</div>
+            ${refillLeft(true) ? `<div class="heart-popup-timer">⏳ +${HALF}: ${refillLeft(true)}</div>` : ''}
             ${refillLeft() ? `<div class="heart-popup-timer">⏳ ${App.t('hearts_refill_in', { t: refillLeft() })}</div>` : ''}
           </div>
           <button class="heart-ad-btn" id="heart-popup-ad">${App.t('hearts_ad_btn')}</button>
-          <button class="action-card energy-pack shop-link" id="heart-popup-shop">🛒 ${App.t('nav_shop')}</button>
+          <div class="energy-packs">
+            <button class="action-card energy-pack" id="heart-popup-unl">💎 ${App.t('hearts_pack_unlimited')}</button>
+            <button class="action-card energy-pack shop-link" id="heart-popup-shop">🛒 ${App.t('nav_shop')}</button>
+          </div>
           <button class="heart-popup-more" id="heart-popup-more">ℹ️ ${App.t('help_more')}</button>
         </div>`;
       wrap.querySelector('#heart-popup-close').addEventListener('click', closePopup);
       wrap.querySelector('#heart-popup-shop').addEventListener('click', () => { closePopup(); App.session.shopSection = 'hearts'; App.router.go('shop'); });
+      wrap.querySelector('#heart-popup-unl').addEventListener('click', () => { closePopup(); App.session.shopSection = 'hearts'; App.router.go('shop'); });
       wrap.querySelector('#heart-popup-more').addEventListener('click', () => { closePopup(); App.openHelp('hearts'); });
       bindAd(wrap.querySelector('#heart-popup-ad'), draw);
     };
@@ -237,5 +255,5 @@ App.hearts = (function () {
   }
   function closePopup() { const p = document.getElementById('heart-popup'); if (p) p.remove(); }
 
-  return { MAX, count, lose, add, watchAd, onChange, pillHtml, updatePill, breakAt, renderOut, mountTopbar, iconSvg };
+  return { MAX, HALF, count, lose, add, watchAd, onChange, pillHtml, updatePill, breakAt, renderOut, mountTopbar, iconSvg };
 })();

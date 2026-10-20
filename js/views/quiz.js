@@ -22,8 +22,10 @@ App.views.quiz = {
       categoryId: App.session.quizCategory,
       examCategoryIds: App.session.examCategoryIds,
       examLevel: App.session.examLevel,
-      isExam: !!App.session.examMode
+      isExam: !!App.session.examMode || !!App.session.weeklyExam,
+      weekly: !!App.session.weeklyExam
     };
+    App.session.weeklyExam = false;
     App.session.quizCategory = null;
     App.session.examMode = false;
     App.session.examCategoryIds = null;
@@ -36,7 +38,10 @@ App.views.quiz = {
     }
 
     let steps;
-    if (meta.examCategoryIds && meta.examCategoryIds.length) {
+    if (meta.weekly) {
+      const words = App.quests.weeklyExamWords(code);
+      steps = words ? App.lesson.buildExam(words) : [];
+    } else if (meta.examCategoryIds && meta.examCategoryIds.length) {
       steps = App.lesson.buildExam(meta.examCategoryIds.flatMap(id => App.words.byCategory(code, id)));
     } else if (meta.isExam) {
       steps = App.lesson.buildExam(App.words.byCategory(code, meta.categoryId));
@@ -79,10 +84,12 @@ function renderResult(root, state, meta) {
     }, 300);
   }
 
+  if (!meta.isExam) App.quests.bump('lessons');
   if (meta.isExam) {
     const examKey = meta.examLevel || meta.categoryId;
     const passed = pct >= EXAM_PASS_PCT;
-    if (passed) App.storage.setExamPassed(meta.code, examKey);
+    if (passed && meta.weekly) App.quests.weeklyExamPassed();
+    else if (passed) { App.storage.setExamPassed(meta.code, examKey); App.quests.bump('exams'); }
     examBanner = `
       <div class="exam-banner ${passed ? 'exam-pass' : 'exam-fail'}">
         ${passed ? '🎓 ' + App.t('exam_result_pass') : App.t('exam_result_fail', { pct: EXAM_PASS_PCT })}

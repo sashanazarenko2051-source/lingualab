@@ -31,7 +31,7 @@ App.storage = (function () {
       if (!raw) return defaults();
       const parsed = JSON.parse(raw);
       const d = defaults();
-      return {
+      return Object.assign({}, parsed, {
         currentLang: parsed.currentLang || d.currentLang,
         uiLang: parsed.uiLang || d.uiLang,
         srs: parsed.srs || {},
@@ -52,7 +52,7 @@ App.storage = (function () {
         shop: parsed.shop || {},
         ads: parsed.ads || null,
         settings: Object.assign({}, d.settings, parsed.settings)
-      };
+      });
     } catch (e) {
       return defaults();
     }
@@ -78,6 +78,8 @@ App.storage = (function () {
     if (state.stats.lastActiveDate === yesterday) {
       state.stats.streak = (state.stats.streak || 0) + 1;
     } else {
+      // Remember a streak broken by 1-2 missed days, so an ad can bring it back today.
+      if (App.streak && state.stats.lastActiveDate) App.streak.noteLost(state.stats.streak || 0, App.streak.gap() - 1);
       state.stats.streak = 1;
     }
     state.stats.lastActiveDate = today;
@@ -89,6 +91,7 @@ App.storage = (function () {
   // wordId (optional) also tallies the answer under its language, so the
   // stats page can show accuracy per language.
   function recordReview(correct, wordId) {
+    if (App.quests) setTimeout(() => App.quests.afterReview(), 0);
     const key = todayKey();
     if (!state.stats.history[key]) state.stats.history[key] = { reviews: 0, correct: 0 };
     const day = state.stats.history[key];

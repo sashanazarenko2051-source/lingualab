@@ -231,8 +231,9 @@ function renderStatRow(root, currentLang) {
     [App.t('dash_stat_due'), due, '📌', 'due'],
     [App.t('dash_stat_new'), fresh, '🌱', 'learn'],
     [App.t('dash_stat_mastered'), mastered, '🏆', 'all'],
-    [App.t('dash_stat_streak'), streak, '🔥', 'stats']
+    [App.t('dash_stat_streak'), streak, App.streak.flameHtml(), 'stats']
   ];
+  const lost = App.streak.restorable();
 
   row.innerHTML = tiles.map(([label, value, icon, go]) => `
     <button class="stat-tile stat-tile-link" data-tile="${go}">
@@ -242,6 +243,17 @@ function renderStatRow(root, currentLang) {
       <div class="stat-go">${App.t(go === 'learn' ? 'dash_tile_read' : go === 'stats' ? 'dash_tile_stats' : 'dash_tile_open')} →</div>
     </button>
   `).join('');
+  if (lost) {
+    row.insertAdjacentHTML('beforeend', `
+      <div class="streak-restore">
+        <span>${App.streak.flameHtml(28)} ${App.t('streak_lost_note', { d: lost.days, n: lost.value })}</span>
+        <button class="heart-ad-btn" id="streak-restore">${App.t('streak_restore_btn', { n: lost.value })}</button>
+      </div>`);
+    row.querySelector('#streak-restore').addEventListener('click', e => {
+      e.target.disabled = true;
+      App.streak.restoreByAd().then(() => renderStatRow(root, currentLang));
+    });
+  }
   row.querySelectorAll('[data-tile]').forEach(b => b.addEventListener('click', () => {
     const go = b.dataset.tile;
     if (go === 'learn') App.router.go('browse');
@@ -329,8 +341,10 @@ function renderMonth(root) {
     </div>
     <div class="mv-total">${App.t('chart_month_total', { n: total, d: active })}</div>
   `;
-  el.querySelector('#mv-prev').addEventListener('click', () => { monthOffset -= 1; renderMonth(root); });
-  el.querySelector('#mv-next').addEventListener('click', () => { if (monthOffset < 0) { monthOffset += 1; renderMonth(root); } });
+  el.querySelector('#mv-prev').disabled = monthOffset <= -12;
+  el.querySelector('#mv-next').disabled = monthOffset >= 4;
+  el.querySelector('#mv-prev').addEventListener('click', () => { if (monthOffset > -12) { monthOffset -= 1; renderMonth(root); } });
+  el.querySelector('#mv-next').addEventListener('click', () => { if (monthOffset < 4) { monthOffset += 1; renderMonth(root); } });
 }
 
 function renderLevelRow(root) {
@@ -339,14 +353,24 @@ function renderLevelRow(root) {
   const progress = App.gamification.xpProgress(xp);
   const pct = progress.needed ? Math.round((progress.current / progress.needed) * 100) : 100;
 
+  const seen = App.session.xpSeen == null ? xp : App.session.xpSeen;
+  const gained = xp - seen;
+  const prev = App.gamification.xpProgress(seen);
+  const fromPct = prev.level !== progress.level ? 0 : (prev.needed ? Math.round((prev.current / prev.needed) * 100) : 100);
+  App.session.xpSeen = xp;
   row.innerHTML = `
     <div class="level-badge">${progress.level}</div>
     <div class="level-info">
-      <div class="level-title">${App.t('dash_level')} ${progress.level}</div>
-      <div class="xp-track"><div class="xp-fill" style="width:${pct}%"></div></div>
+      <div class="level-title">${App.t('dash_level')} ${progress.level}${gained > 0 ? ` <span class="xp-gain">+${gained} XP</span>` : ''}</div>
+      <div class="xp-track"><div class="xp-fill" style="width:${gained > 0 ? fromPct : pct}%"></div></div>
       <div class="xp-label">${App.t('dash_xp_to_next', { current: progress.current, needed: progress.needed })}</div>
     </div>
   `;
+  if (gained > 0) {
+    const fill = row.querySelector('.xp-fill');
+    fill.classList.add('xp-fill-anim');
+    requestAnimationFrame(() => requestAnimationFrame(() => { fill.style.width = pct + '%'; }));
+  }
 }
 
 function renderDailyGoal(root) {

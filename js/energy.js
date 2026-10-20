@@ -1,20 +1,21 @@
 window.App = window.App || {};
 
 // Energy is the "stamina" for lessons (App.storage.state.energy). Every
-// COST_EVERY finished exercises cost COST energy; mistakes cost hearts, not
-// energy. It refills by REGEN per hour up to CAP. Rewarded ads (+AD_GIFT) and
-// shop packs can raise it above CAP, up to MAX; unlimited (bought for a
-// term in the shop) turns the cost off.
-// the cost off. At zero energy a lesson can't go on.
+// COST_EVERY words practised cost COST energy; mistakes cost hearts, not
+// energy. It refills by REGEN per hour up to CAP, and 24 hours after it first
+// dropped below CAP it is back at CAP. Rewarded ads (+AD_GIFT, no limit) and
+// shop packs add on top, with no upper limit; unlimited (bought for a term
+// in the shop) turns the cost off. At zero energy a lesson can't go on.
 App.energy = (function () {
-  const CAP = 50;
-  const MAX = 200;
-  const REGEN = 3;
+  const CAP = 200;
+  const MAX = 99999;
+  const REGEN = 5;
   const HOUR = 60 * 60 * 1000;
+  const FULL_MS = 24 * HOUR;
   const COST = 5;
-  const COST_EVERY = 15;
-  const AD_GIFT = 10;
-  const PACKS = [100, 200, 'unlimited'];
+  const COST_EVERY = 10;
+  const AD_GIFT = 15;
+  const PACKS = ['unlimited'];
   const listeners = [];
 
   function st() {
@@ -37,7 +38,7 @@ App.energy = (function () {
   function set(n) {
     const e = st();
     // Regen time starts counting from the moment energy drops below CAP.
-    if (e.count >= CAP && n < CAP) e.tickAt = Date.now();
+    if (e.count >= CAP && n < CAP) { e.tickAt = Date.now(); e.fullAt = Date.now() + FULL_MS; }
     e.count = Math.max(0, Math.min(MAX, n));
     App.storage.save();
     emit();
@@ -47,7 +48,9 @@ App.energy = (function () {
   // +REGEN for every full hour since the last tick, while below CAP.
   function regen() {
     const e = st();
-    if (e.count >= CAP) { e.tickAt = Date.now(); return; }
+    if (e.count >= CAP) { e.tickAt = Date.now(); e.fullAt = 0; return; }
+    if (!e.fullAt) e.fullAt = (e.tickAt || Date.now()) + FULL_MS;
+    if (Date.now() >= e.fullAt) { e.fullAt = 0; set(CAP); return; }
     const hours = Math.floor((Date.now() - (e.tickAt || Date.now())) / HOUR);
     if (hours <= 0) return;
     e.tickAt += hours * HOUR;
@@ -117,7 +120,8 @@ App.energy = (function () {
       <div class="heart-popup-rules">
         <div>📘 ${App.t('energy_rule_cost', { cost: COST, n: COST_EVERY })}</div>
         <div>🕐 ${App.t('energy_rule_regen', { n: REGEN, cap: CAP })}</div>
-        <div>📺 ${App.t('energy_rule_ad', { n: AD_GIFT, max: MAX })}</div>
+        <div>🌅 ${App.t('energy_rule_full', { cap: CAP })}</div>
+        <div>📺 ${App.t('energy_rule_ad2', { n: AD_GIFT })}</div>
         ${tick ? `<div class="heart-popup-timer">⏳ ${App.t('energy_next', { n: REGEN, m: tick })}</div>` : ''}
       </div>`;
   }
@@ -132,7 +136,7 @@ App.energy = (function () {
   function bindButtons(scope, after) {
     const ad = scope.querySelector('#energy-ad');
     if (ad) {
-      ad.disabled = unlimited() || count() >= MAX || !App.adLimit.left('energy');
+      ad.disabled = unlimited();
       ad.addEventListener('click', () => {
         ad.disabled = true;
         ad.classList.add('loading');
@@ -154,7 +158,7 @@ App.energy = (function () {
   // What the count is out of: ∞ during unlimited, MAX once above CAP.
   function limitLabel() {
     if (unlimited()) return '∞';
-    return count() > CAP ? MAX : CAP;
+    return count() > CAP ? '' : CAP;
   }
 
   function openPopup() {
@@ -166,12 +170,12 @@ App.energy = (function () {
       wrap.innerHTML = `
         <div class="heart-popup" role="dialog">
           <button class="heart-popup-close" id="energy-popup-close">✕</button>
-          <div class="heart-popup-big energy-big"><span class="energy-ico">⚡</span><b>${count()}</b><span>/ ${limitLabel()}</span></div>
+          <div class="heart-popup-big energy-big"><span class="energy-ico">⚡</span><b>${count()}</b>${limitLabel() === '' ? '' : `<span>/ ${limitLabel()}</span>`}</div>
           ${unlimited() ? `<div class="energy-unlimited-until">∞ ${App.t('energy_unlimited_until', { date: new Date(st().unlimitedUntil).toLocaleDateString() })}</div>` : ''}
           ${rulesHtml()}
           ${adButton()}
-          ${packsHtml()}
-          <button class="action-card energy-pack shop-link" id="energy-popup-shop">🛒 ${App.t('nav_shop')}</button>
+          <div class="energy-packs">${PACKS.map(p => `<button class="action-card energy-pack" data-pack="${p}">💎 ${App.t('energy_pack_unlimited')}</button>`).join('')}
+          <button class="action-card energy-pack shop-link" id="energy-popup-shop">🛒 ${App.t('nav_shop')}</button></div>
         </div>`;
       wrap.querySelector('#energy-popup-shop').addEventListener('click', () => { closePopup(); App.session.shopSection = 'energy'; App.router.go('shop'); });
       wrap.querySelector('#energy-popup-close').addEventListener('click', closePopup);
