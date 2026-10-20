@@ -86,6 +86,7 @@ function initTopbar() {
     <button data-view="friends">👥 ${App.t('nav_friends')}</button>
     <button data-view="leaderboard">${App.t('nav_leaderboard')}</button>
     <button data-view="shop">🛒 ${App.t('nav_shop')}</button>
+    <button data-view="help">ℹ️ ${App.t('nav_info')}</button>
   `;
   nav.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => App.router.go(btn.dataset.view));
@@ -184,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const startView = App.views[location.hash.slice(1)] ? location.hash.slice(1) : 'dashboard';
   App.router.go(startView);
   if (!App.storage.hasProfile()) App.profile.openEditor();
+  App.regions.askIfNeeded();
   App.notify.start();
   // Offline cache for the installed phone app (needs https or localhost).
   if ('serviceWorker' in navigator && window.isSecureContext && !window.pywebview) {

@@ -153,9 +153,95 @@ const HELP = {
   }
 };
 
+// Where each course language comes from, shown as the last section.
+const LANG_HISTORY = {
+ "ru": {
+  "title": "Откуда языки",
+  "intro": "Откуда пришёл каждый язык курса и когда он появился.",
+  "en": "Западногерманский. Принесён в Британию англами, саксами и ютами в V веке; первые тексты — VII век. После 1066 года впитал тысячи французских слов.",
+  "de": "Западногерманский. Первые тексты — VIII век (древневерхненемецкий). Единый литературный язык сложился после перевода Библии Лютером в XVI веке.",
+  "nl": "Западногерманский, вырос из франкских диалектов. Самая известная ранняя фраза записана около 1100 года.",
+  "sv": "Северогерманский, из древнескандинавского языка эпохи викингов (VIII–XI века). Как отдельный язык — с XIII века.",
+  "no": "Северогерманский, из древнескандинавского. Сегодня у него две письменные нормы — букмол и нюношк (XIX–XX века).",
+  "da": "Северогерманский, из древнескандинавского; отделился около XII века. Ближайшие родственники — шведский и норвежский.",
+  "fr": "Романский, из народной латыни Галлии. Первый памятник — Страсбургские клятвы 842 года.",
+  "es": "Романский, из народной латыни Кастилии. Ранние записи — X–XI века; норму закрепил король Альфонсо X в XIII веке.",
+  "it": "Романский, основан на флорентийском (тосканском) диалекте. Литературный язык — со времён Данте, XIV век.",
+  "pt": "Романский, из галисийско-португальского. Первые документы — XII–XIII века.",
+  "ro": "Романский, из латыни римской провинции Дакия (II–III века). Первый известный текст — письмо Някшу, 1521 год; до XIX века писали кириллицей.",
+  "pl": "Западнославянский. Первое записанное предложение — 1270 год. Пишется латиницей.",
+  "cs": "Западнославянский. Письменность — с XIII века; Ян Гус в XV веке ввёл значки над буквами (háček).",
+  "sk": "Западнославянский, очень близок к чешскому. Литературную норму создал Людовит Штур в 1843 году.",
+  "uk": "Восточнославянский, из древнерусского языка Киевской Руси. Современный литературный язык — с «Энеиды» Котляревского (1798).",
+  "ru": "Восточнославянский, из древнерусского языка. Кириллица — с X века; современная норма сложилась в XVIII–XIX веках.",
+  "bg": "Южнославянский. Здесь в IX веке ученики Кирилла и Мефодия создали славянскую письменность, а затем и кириллицу.",
+  "hr": "Южнославянский. Древние тексты писали глаголицей (Башчанская плита, около 1100 года); сегодня — латиница.",
+  "sr": "Южнославянский. Письменность — с XII века; Вук Караджич в XIX веке ввёл правило «пиши, как говоришь». Кириллица и латиница.",
+  "el": "Отдельная индоевропейская ветвь. Записи — с XIV–XIII веков до н. э.; алфавит — с VIII века до н. э. Один из древнейших письменных языков.",
+  "fi": "Финно-угорский (уральская семья). Письменность — с XVI века, первая книга Микаэля Агриколы вышла в 1543 году. Ближайший родственник — эстонский.",
+  "hu": "Финно-угорский. Венгры пришли на Дунай около 896 года; первый связный текст — «Надгробная речь», около 1195 года."
+ },
+ "uk": {
+  "title": "Звідки мови",
+  "intro": "Звідки походить кожна мова курсу і коли вона з’явилася.",
+  "en": "Західногерманська. Принесена до Британії англами, саксами та ютами в V столітті; перші тексти — VII століття. Після 1066 року ввібрала тисячі французьких слів.",
+  "de": "Західногерманська. Перші тексти — VIII століття (давньоверхньонімецька). Єдина літературна мова склалася після перекладу Біблії Лютером у XVI столітті.",
+  "nl": "Західногерманська, виросла з франкських діалектів. Найвідомішу ранню фразу записано близько 1100 року.",
+  "sv": "Північногерманська, з давньоскандинавської мови доби вікінгів (VIII–XI століття). Як окрема мова — з XIII століття.",
+  "no": "Північногерманська, з давньоскандинавської. Сьогодні має дві письмові норми — букмол і нюношк (XIX–XX століття).",
+  "da": "Північногерманська, з давньоскандинавської; відокремилася близько XII століття. Найближчі родичі — шведська й норвезька.",
+  "fr": "Романська, з народної латини Галлії. Перша пам’ятка — Страсбурзькі клятви 842 року.",
+  "es": "Романська, з народної латини Кастилії. Ранні записи — X–XI століття; норму закріпив король Альфонсо X у XIII столітті.",
+  "it": "Романська, заснована на флорентійському (тосканському) діалекті. Літературна мова — з часів Данте, XIV століття.",
+  "pt": "Романська, з галісійсько-португальської. Перші документи — XII–XIII століття.",
+  "ro": "Романська, з латини римської провінції Дакія (II–III століття). Перший відомий текст — лист Някшу, 1521 рік; до XIX століття писали кирилицею.",
+  "pl": "Західнослов’янська. Перше записане речення — 1270 рік. Пишеться латиницею.",
+  "cs": "Західнослов’янська. Писемність — з XIII століття; Ян Гус у XV столітті запровадив значки над літерами (háček).",
+  "sk": "Західнослов’янська, дуже близька до чеської. Літературну норму створив Людовит Штур у 1843 році.",
+  "uk": "Східнослов’янська, з давньоруської мови Київської Русі. Сучасна літературна мова — з «Енеїди» Котляревського (1798).",
+  "ru": "Східнослов’янська, з давньоруської мови. Кирилиця — з X століття; сучасна норма склалася у XVIII–XIX століттях.",
+  "bg": "Південнослов’янська. Тут у IX столітті учні Кирила й Мефодія створили слов’янську писемність, а згодом і кирилицю.",
+  "hr": "Південнослов’янська. Давні тексти писали глаголицею (Башчанська плита, близько 1100 року); сьогодні — латиниця.",
+  "sr": "Південнослов’янська. Писемність — з XII століття; Вук Караджич у XIX столітті запровадив правило «пиши, як говориш». Кирилиця й латиниця.",
+  "el": "Окрема індоєвропейська гілка. Записи — з XIV–XIII століть до н. е.; алфавіт — з VIII століття до н. е. Одна з найдавніших письмових мов.",
+  "fi": "Фіно-угорська (уральська сім’я). Писемність — з XVI століття, перша книжка Мікаеля Агріколи вийшла 1543 року. Найближча родичка — естонська.",
+  "hu": "Фіно-угорська. Угорці прийшли на Дунай близько 896 року; перший зв’язний текст — «Надгробна промова», близько 1195 року."
+ },
+ "en": {
+  "title": "Where the languages come from",
+  "intro": "Where each course language comes from and when it appeared.",
+  "en": "West Germanic. Brought to Britain by the Angles, Saxons and Jutes in the 5th century; first texts from the 7th century. After 1066 it took in thousands of French words.",
+  "de": "West Germanic. First texts from the 8th century (Old High German). A common written standard formed after Luther’s Bible translation in the 16th century.",
+  "nl": "West Germanic, grown out of Frankish dialects. Its best-known early sentence was written around 1100.",
+  "sv": "North Germanic, from the Old Norse of the Viking Age (8th–11th centuries). A separate language since the 13th century.",
+  "no": "North Germanic, from Old Norse. Today it has two written standards, Bokmål and Nynorsk (19th–20th centuries).",
+  "da": "North Germanic, from Old Norse; it split off around the 12th century. Its closest relatives are Swedish and Norwegian.",
+  "fr": "Romance, from the Vulgar Latin of Gaul. The first written record is the Oaths of Strasbourg, 842.",
+  "es": "Romance, from the Vulgar Latin of Castile. Early records from the 10th–11th centuries; King Alfonso X set the standard in the 13th century.",
+  "it": "Romance, based on the Florentine (Tuscan) dialect. A literary language since Dante, 14th century.",
+  "pt": "Romance, from Galician-Portuguese. First documents from the 12th–13th centuries.",
+  "ro": "Romance, from the Latin of the Roman province of Dacia (2nd–3rd centuries). The oldest known text is Neacșu’s letter, 1521; it was written in Cyrillic until the 19th century.",
+  "pl": "West Slavic. The first written sentence dates from 1270. Written in the Latin alphabet.",
+  "cs": "West Slavic. Written since the 13th century; Jan Hus introduced the marks over letters (háček) in the 15th century.",
+  "sk": "West Slavic, very close to Czech. Ľudovít Štúr created the literary standard in 1843.",
+  "uk": "East Slavic, from the Old East Slavic of Kyivan Rus. The modern literary language dates from Kotliarevsky’s Eneida (1798).",
+  "ru": "East Slavic, from Old East Slavic. Cyrillic since the 10th century; the modern standard formed in the 18th–19th centuries.",
+  "bg": "South Slavic. Here, in the 9th century, the disciples of Cyril and Methodius created Slavic writing and then the Cyrillic alphabet.",
+  "hr": "South Slavic. Early texts were written in Glagolitic (the Baška tablet, around 1100); today it uses the Latin alphabet.",
+  "sr": "South Slavic. Written since the 12th century; in the 19th century Vuk Karadžić set the rule “write as you speak”. Uses Cyrillic and Latin.",
+  "el": "Its own Indo-European branch. Records from the 14th–13th centuries BC; the alphabet since the 8th century BC. One of the oldest written languages.",
+  "fi": "Finno-Ugric (Uralic family). Written since the 16th century; Mikael Agricola’s first book appeared in 1543. Its closest relative is Estonian.",
+  "hu": "Finno-Ugric. Hungarians reached the Danube around 896; the first connected text, the Funeral Sermon, dates from about 1195."
+ }
+};
+
 function content() {
   const ui = (App.storage.getUILang && App.storage.getUILang()) || 'ru';
-  return HELP[ui] || HELP.en;
+  const h = HELP[ui] || HELP.en;
+  const lh = LANG_HISTORY[ui] || LANG_HISTORY.en;
+  const langs = `<p>${lh.intro}</p><div class="help-langs">${App.LANG_ORDER.map(c => `
+    <div class="help-lang"><b>${App.ui.flagChip(c)} ${App.ui.langName(c)}</b><span>${lh[c] || ''}</span></div>`).join('')}</div>`;
+  return Object.assign({}, h, { sections: h.sections.concat([['langs', '🌍', lh.title, langs]]) });
 }
 
 function render(root) {

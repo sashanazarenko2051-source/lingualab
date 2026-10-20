@@ -64,6 +64,12 @@ function render(root) {
         <button class="action-card" id="set-notify-test">📨 ${App.t('set_notify_test')}</button>
       </section>
 
+      <section class="settings-card">
+        <h2>🌍 ${App.t('set_country')}</h2>
+        <p class="settings-hint">${App.t('country_hint')}</p>
+        <select class="shop-term" id="set-country">${App.regions.optionsHtml(App.regions.country() || 'OTHER')}</select>
+      </section>
+
       ${voiceCardHtml()}
 
     </div>
@@ -91,6 +97,7 @@ function render(root) {
   });
   root.querySelector('#set-notify-test').addEventListener('click', () => App.notify.test().then(() => render(root)));
 
+  root.querySelector('#set-country').addEventListener('change', e => App.regions.setCountry(e.target.value));
   bindVoiceCard(root);
 }
 

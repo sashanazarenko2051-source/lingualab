@@ -6,7 +6,6 @@ window.App = window.App || {};
 // until a payment service is connected. Gifts travel through App.cloud
 // (Firestore "gifts"), and the friend's app claims them on start.
 App.shop = (function () {
-  const CURRENCY = '€';
   const DAY = 24 * 60 * 60 * 1000;
   // Terms for the unlimited hearts / energy cards, with their prices.
   const TERMS = [
@@ -16,7 +15,8 @@ App.shop = (function () {
     { id: '3m', days: 90, price: 12.99 },
     { id: '1y', days: 365, price: 34.99 }
   ];
-  // Prices are placeholders to set before payments go live.
+  // Base prices in euros (placeholders to set before payments go live);
+  // App.regions turns them into local prices.
   const ITEMS = {
     unlock_1:    { section: 'topics', icon: '🔓', price: 2.99, gift: false },
     unlock_5:    { section: 'topics', icon: '🗝️', price: 9.99, gift: false },
@@ -45,7 +45,8 @@ App.shop = (function () {
     if (it.term) return (TERMS.find(t => t.id === (opts && opts.term)) || TERMS[0]).price;
     return it.price;
   }
-  function priceLabel(p) { return p.toFixed(2).replace('.', ',') + ' ' + CURRENCY; }
+  // Prices are set in euros and shown in the learner's local currency.
+  function priceLabel(p) { return App.regions.price(p); }
 
   function ownsAllTopics() { return !!(App.storage.state.premium || st().allLangs); }
   function ownsTopics(code) { return ownsAllTopics() || !!st().langs[code]; }
@@ -137,5 +138,5 @@ App.shop = (function () {
     });
   }
 
-  return { TERMS, ITEMS, CURRENCY, price, priceLabel, itemName, ownsTopics, ownsAllTopics, ownsTheme, heartsUnlimited, grant, buy, claimGifts, state: st };
+  return { TERMS, ITEMS, price, priceLabel, itemName, ownsTopics, ownsAllTopics, ownsTheme, heartsUnlimited, grant, buy, claimGifts, state: st };
 })();

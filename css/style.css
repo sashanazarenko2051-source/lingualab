@@ -1839,3 +1839,9 @@ button { background: none; }
 .minichart-bar.is-empty { background: var(--border); }
 .minichart-total { margin-top: 10px; text-align: center; font-size: 13px; font-weight: 700; color: var(--ink-2); }
 .minichart-total[hidden] { display: none; }
+.help-langs { display: flex; flex-direction: column; gap: 10px; }
+.help-lang { display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; border-radius: 10px; background: var(--surface-2); }
+.help-lang b { display: flex; align-items: center; gap: 6px; }
+.help-lang span { font-size: 13px; color: var(--ink-2); }
+.country-card { max-width: 380px; text-align: center; }
+.country-card select { margin: 8px 0 4px; }
