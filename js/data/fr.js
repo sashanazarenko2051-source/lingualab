@@ -211,7 +211,7 @@ App.data.fr = {
         { w: 'Tu as une minute ?', t: 'У тебя есть минутка?', ex: 'Tu as une minute ? Je dois te parler.', tex: 'У тебя есть минутка? Мне нужно с тобой поговорить.' },
         { w: 'Vas-y (je t\'en prie)', t: 'Пожалуйста, давай (можно)', ex: '« Je peux prendre ton stylo ? » – « Vas-y. »', tex: '— Можно взять твою ручку? — Пожалуйста, бери.' },
         { w: 'Je ne l\'ai pas fait exprès', t: 'Я не хотел(а) (нечаянно)', ex: 'Pardon, je ne voulais pas te blesser.', tex: 'Прости, я не хотел тебя обидеть.' },
-        { w: 'Excusez mon français', t: 'Простите мой английский', ex: 'Excusez mon français, j\'apprends encore.', tex: 'Простите мой английский, я только учусь.' },
+        { w: 'Excusez mon français', t: 'Простите мой французский', ex: 'Excusez mon français, j\'apprends encore.', tex: 'Простите мой французский, я только учусь.' },
         { w: 'Qu\'est-ce que ça veut dire ?', t: 'Что это значит?', ex: 'Qu\'est-ce que ce mot veut dire ?', tex: 'Что значит это слово?' },
         { w: 'Comment dit-on… ?', t: 'Как сказать по-…?', ex: 'Comment dit-on « merci » en grec ?', tex: 'Как сказать «спасибо» по-гречески?' },
         { w: 'Pourriez-vous l\'écrire ?', t: 'Не могли бы вы записать?', ex: 'Pourriez-vous m\'écrire l\'adresse ?', tex: 'Не могли бы вы записать адрес?' },
