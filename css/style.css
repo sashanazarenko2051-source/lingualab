@@ -1969,3 +1969,10 @@ button { background: none; }
 
 .settings-bottom { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 6px 0 24px; }
 .settings-bottom .quiz-next, .settings-bottom .action-card { margin: 0; display: inline-flex; align-items: center; padding: 12px 22px; }
+
+/* Country suggestions under the search field */
+.country-suggest { display: flex; flex-direction: column; gap: 2px; margin: -2px 0 8px; padding: 4px; border-radius: 10px; border: 2px solid var(--border); background: var(--surface-2); max-height: 260px; overflow-y: auto; }
+.country-suggest[hidden] { display: none; }
+.country-suggest-item { text-align: left; border: none; background: transparent; color: var(--ink); font: inherit; font-weight: 700; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+.country-suggest-item:hover, .country-suggest-item:first-child { background: color-mix(in srgb, var(--brand-1) 22%, transparent); }
+.country-suggest-none { padding: 8px 10px; color: var(--ink-muted); }

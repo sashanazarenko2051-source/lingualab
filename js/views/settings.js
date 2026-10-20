@@ -125,14 +125,14 @@ function render(root) {
   root.querySelector('#set-notify-test').addEventListener('click', () => App.notify.test().then(() => render(root)));
 
   // Search narrows the list; the choice is kept only after "Save".
-  App.regions.bindSearch(root.querySelector('#set-country-search'), root.querySelector('#set-country'));
-  root.querySelector('#set-country-save').addEventListener('click', () => {
-    const v = root.querySelector('#set-country').value;
+  const saveCountry = v => {
     if (!v) return;
     App.regions.setCountry(v);
     root.querySelector('#set-country-current').textContent = '✅ ' + App.regions.countryName(v);
     App.effects.toast('✅ ' + App.regions.countryName(v));
-  });
+  };
+  App.regions.bindSearch(root.querySelector('#set-country-search'), root.querySelector('#set-country'), saveCountry);
+  root.querySelector('#set-country-save').addEventListener('click', () => saveCountry(root.querySelector('#set-country').value));
   bindVoiceCard(root);
 
   root.querySelector('#set-save-all').addEventListener('click', () => {

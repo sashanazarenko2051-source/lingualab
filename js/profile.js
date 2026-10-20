@@ -212,7 +212,11 @@ App.profile = (function () {
     });
 
     updateBgColorRowVisibility();
-    App.regions.bindSearch(overlay.querySelector('#profile-country-search'), overlay.querySelector('#profile-country'));
+    App.regions.bindSearch(overlay.querySelector('#profile-country-search'), overlay.querySelector('#profile-country'), v => {
+      draft.country = v;
+      App.regions.setCountry(v);
+      App.effects.toast('✅ ' + App.regions.countryName(v));
+    });
 
     function close() { overlay.remove(); }
     overlay.querySelector('#profile-cancel').addEventListener('click', close);

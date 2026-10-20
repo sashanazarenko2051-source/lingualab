@@ -63,22 +63,45 @@ App.regions = (function () {
     return codes.concat('OTHER').map(c => `<option value="${c}" ${c === selected ? 'selected' : ''}>${countryName(c)}</option>`).join('');
   }
 
-  // A search field that narrows a country <select> as you type; the first
-  // match gets selected (and onPick runs, if given).
+  // A search field for a country <select>: typing shows matching countries
+  // under the field; picking one (or choosing in the select) sets the select,
+  // clears the field and runs onPick.
   function searchHtml(id) {
     return `<input class="country-search" id="${id}" type="search" autocomplete="off" placeholder="${App.t('country_search')}">`;
   }
   function bindSearch(input, select, onPick) {
     const all = [...select.options].map(o => ({ value: o.value, text: o.textContent }));
+    const box = document.createElement('div');
+    box.className = 'country-suggest';
+    box.hidden = true;
+    input.insertAdjacentElement('afterend', box);
+    function choose(v) {
+      select.value = v;
+      input.value = '';
+      box.hidden = true;
+      if (onPick) onPick(v);
+    }
     input.addEventListener('input', () => {
       const q = input.value.trim().toLowerCase();
-      const keep = all.filter(o => !q || o.text.toLowerCase().includes(q) || o.value.toLowerCase() === q);
-      const current = select.value;
-      select.innerHTML = keep.map(o => `<option value="${o.value}">${o.text}</option>`).join('');
-      if (keep.some(o => o.value === current)) select.value = current;
-      else if (keep.length) select.selectedIndex = 0;
-      if (q && keep.length && onPick) onPick(select.value);
+      const keep = q ? all.filter(o => o.text.toLowerCase().includes(q) || o.value.toLowerCase() === q).slice(0, 8) : [];
+      box.innerHTML = keep.length
+        ? keep.map(o => `<button type="button" class="country-suggest-item" data-v="${o.value}">${o.text}</button>`).join('')
+        : (q ? `<div class="country-suggest-none">—</div>` : '');
+      box.hidden = !q;
     });
+    // mousedown, so the pick lands before the field loses focus.
+    box.addEventListener('mousedown', e => {
+      const b = e.target.closest('[data-v]');
+      if (!b) return;
+      e.preventDefault();
+      choose(b.dataset.v);
+    });
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { const b = box.querySelector('[data-v]'); if (b) { e.preventDefault(); choose(b.dataset.v); } }
+      if (e.key === 'Escape') { input.value = ''; box.hidden = true; }
+    });
+    input.addEventListener('blur', () => setTimeout(() => { box.hidden = true; }, 150));
+    select.addEventListener('change', () => { input.value = ''; box.hidden = true; if (onPick) onPick(select.value); });
   }
 
   // "Where are you from?" — asked once, after any first-start dialog closes.
