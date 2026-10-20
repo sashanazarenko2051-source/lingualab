@@ -198,6 +198,8 @@ App.hearts = (function () {
     if (!host) return;
     const draw = () => { host.innerHTML = pillHtml('topbar-heart-pill', 'clickable'); };
     draw();
+    if (host.dataset.bound) return;
+    host.dataset.bound = '1';
     onChange(draw);
     startRefillTimer();
     host.addEventListener('click', openPopup);

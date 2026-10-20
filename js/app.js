@@ -76,6 +76,16 @@ App.ui.langLabel = function (code) {
 // Languages available as an INTERFACE language (i.e. we have a UI string table for them).
 App.UI_LANG_ORDER = App.LANG_ORDER.slice().sort((a, b) => (a === 'ru' ? -1 : b === 'ru' ? 1 : 0));
 
+// initTopbar runs again on every interface-language change, so its buttons
+// are swapped for fresh copies first — otherwise click handlers pile up and
+// one click would toggle a dropdown open and shut again.
+function freshEl(selector) {
+  const old = document.querySelector(selector);
+  const el = old.cloneNode(true);
+  old.replaceWith(el);
+  return el;
+}
+
 function initTopbar() {
   document.title = App.t('app_title');
   document.getElementById('brand-name').textContent = App.t('brand_name');
@@ -93,18 +103,18 @@ function initTopbar() {
     btn.addEventListener('click', () => App.router.go(btn.dataset.view));
   });
 
-  const brand = document.querySelector('.brand');
+  const brand = freshEl('.brand');
   brand.style.cursor = 'pointer';
   brand.addEventListener('click', () => App.router.go('dashboard'));
 
-  const avatarBtn = document.getElementById('topbar-avatar-btn');
+  const avatarBtn = freshEl('#topbar-avatar-btn');
   avatarBtn.title = App.t('profile_edit_title');
   avatarBtn.addEventListener('click', () => App.profile.openEditor());
   App.profile.renderTopbarBadge();
   App.hearts.mountTopbar();
   App.energy.mountTopbar();
   App.shop.claimGifts();
-  const gear = document.getElementById('topbar-gear');
+  const gear = freshEl('#topbar-gear');
   gear.title = App.t('set_title');
   gear.addEventListener('click', () => App.router.go('settings'));
 
@@ -132,7 +142,7 @@ function initTopbar() {
 // elements can only show plain text and can't host the flag-chip spans.
 function initLangDropdown({ ddId, btnId, listId, ariaLabel, codes, nameFor, current, onSelect }) {
   const dd = document.getElementById(ddId);
-  const btn = document.getElementById(btnId);
+  const btn = freshEl('#' + btnId);
   const list = document.getElementById(listId);
 
   btn.setAttribute('aria-label', ariaLabel);
@@ -168,6 +178,8 @@ function initLangDropdown({ ddId, btnId, listId, ariaLabel, codes, nameFor, curr
     });
   });
 
+  if (dd.dataset.bound) return;
+  dd.dataset.bound = '1';
   document.addEventListener('click', (e) => {
     if (!dd.contains(e.target)) close();
   });

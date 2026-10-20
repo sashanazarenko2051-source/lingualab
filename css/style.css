@@ -1298,8 +1298,7 @@ button { background: none; }
 .wolf-figure.skin-arctic { --wf-b1: #f4f6f8; --wf-b2: #c4ccd6; --wf-h1: #ffffff; --wf-h2: #d3dae2; --wf-limb: #bcc5cf; --wf-paw: #9aa5b1; --wf-ear: #c4ccd6; --wf-belly: #ffffff; --wf-mask: #ffffff; }
 .wolf-figure.skin-black { --wf-b1: #50566a; --wf-b2: #262a33; --wf-h1: #5a6074; --wf-h2: #33374a; --wf-limb: #2c3039; --wf-paw: #1b1d24; --wf-ear: #33374a; --wf-belly: #8b93a5; --wf-mask: #9aa2b3; }
 .wolf-figure.skin-red { --wf-b1: #e8894a; --wf-b2: #b85a25; --wf-h1: #f09a5c; --wf-h2: #c96a33; --wf-limb: #a8501f; --wf-paw: #7a3a16; --wf-ear: #b85a25; --wf-belly: #fbe3cf; --wf-mask: #fde9d8; }
-.mascot-avatar:focus { outline: none; }
-.mascot-avatar:focus-visible { outline: 2px solid var(--brand-1); outline-offset: 4px; border-radius: 12px; }
+.mascot-avatar, .mascot-avatar:focus, .mascot-avatar:focus-visible { outline: none; box-shadow: none; -webkit-tap-highlight-color: transparent; }
 .wolf-leg-l, .wolf-leg-r, .wolf-arm-l, .wolf-arm-r, .wolf-tail-grp, .wolf-eye, .wolf-head {
   transform-box: fill-box; transform-origin: 50% 0%;
 }
@@ -1871,3 +1870,31 @@ button { background: none; }
 
 /* Family and branch labels on the home page are yellow, so they stand out. */
 .family-title, .family-note, .family-sub { color: #ffd23f; }
+
+/* More wolf moves */
+.mascot-widget.anim-flip .wolf-figure { animation: wolfFlip .9s cubic-bezier(.45,.05,.35,1); }
+@keyframes wolfFlip { 0% { transform: translateY(0) rotate(0); } 15% { transform: translateY(2px) scaleY(.88); } 50% { transform: translateY(-34px) rotate(-180deg); } 85% { transform: translateY(0) rotate(-360deg) scaleY(.92); } 100% { transform: rotate(-360deg); } }
+.mascot-widget.anim-wiggle .wolf-figure { animation: wolfWiggle .18s ease-in-out 8; }
+@keyframes wolfWiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-6deg); } 75% { transform: rotate(6deg); } }
+.mascot-widget.anim-wiggle .wolf-tail-grp { animation-duration: .3s; }
+.mascot-widget.anim-shiver .wolf-figure { animation: wolfShiver .08s linear 18; }
+@keyframes wolfShiver { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(2px); } }
+.mascot-widget.anim-hop .wolf-figure { animation: wolfHop 1.4s ease-in-out; }
+@keyframes wolfHop { 0%, 100% { transform: translate(0, 0); } 20% { transform: translate(-10px, -14px) rotate(-6deg); } 40% { transform: translate(-16px, 0); } 60% { transform: translate(-6px, -14px) rotate(6deg); } 80% { transform: translate(0, 0); } }
+.mascot-widget.anim-stretch .wolf-figure { animation: wolfStretch 1.4s ease-in-out; }
+@keyframes wolfStretch { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.12, .84); } 60% { transform: scale(.9, 1.15) translateY(-4px); } }
+.mascot-widget.anim-stretch .wolf-arm-l { animation: wolfArmUpL 1.4s ease-in-out; transform-origin: 50% 10%; }
+.mascot-widget.anim-stretch .wolf-arm-r { animation: wolfArmUpR 1.4s ease-in-out; transform-origin: 50% 10%; }
+@keyframes wolfArmUpL { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(150deg); } }
+@keyframes wolfArmUpR { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-150deg); } }
+.mascot-widget.anim-run .wolf-figure { animation: wolfRun 1.6s ease-in-out; }
+@keyframes wolfRun { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-22px) translateY(-3px); } 50% { transform: translateX(-22px) scaleX(-1); } 75% { transform: translateX(0) scaleX(-1) translateY(-3px); } }
+.mascot-widget.anim-run .wolf-leg-l, .mascot-widget.anim-run .wolf-leg-r { animation-duration: .25s; }
+.mascot-widget.anim-run .wolf-arm-l, .mascot-widget.anim-run .wolf-arm-r { animation-duration: .3s; }
+.mascot-widget.anim-howl .wolf-head { animation: wolfHowl 1.8s ease-in-out; transform-origin: 50% 80%; }
+@keyframes wolfHowl { 0%, 100% { transform: rotate(0); } 25%, 75% { transform: rotate(-22deg) translateY(-3px); } }
+.mascot-widget.anim-howl .wolf-figure .mouth-o { display: inline; }
+.mascot-widget.anim-howl .wolf-figure .mouth-smile { display: none; }
+.mascot-widget.anim-peek .wolf-figure { animation: wolfPeek 1.8s ease-in-out; }
+@keyframes wolfPeek { 0%, 100% { transform: translateY(0); } 30%, 60% { transform: translateY(46px) scaleY(.9); } 75% { transform: translateY(-8px); } }
+.reduce-motion .mascot-widget .wolf-figure { animation: none !important; }

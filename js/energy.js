@@ -103,6 +103,8 @@ App.energy = (function () {
     const draw = () => { host.innerHTML = pillHtml('topbar-energy-pill', 'clickable'); };
     regen();
     draw();
+    if (host.dataset.bound) return;
+    host.dataset.bound = '1';
     onChange(draw);
     setInterval(regen, 60 * 1000);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) regen(); });

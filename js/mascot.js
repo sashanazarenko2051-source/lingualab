@@ -70,10 +70,7 @@ App.mascot = (function () {
     </svg>
   `;
 
-  const TIP_KEYS = [
-    'mascot_tip_1', 'mascot_tip_2', 'mascot_tip_3', 'mascot_tip_4', 'mascot_tip_5', 'mascot_tip_6', 'mascot_tip_7',
-    'mascot_tip_8', 'mascot_tip_9', 'mascot_tip_10', 'mascot_tip_11', 'mascot_tip_12', 'mascot_tip_13', 'mascot_tip_14'
-  ];
+  const TIP_KEYS = Array.from({ length: 30 }, (_, i) => 'mascot_tip_' + (i + 1));
   // Looks for plain tips: expression, accessory, animation, floating effect.
   const TIP_LOOKS = [
     { mood: 'wink', acc: 'shades', anim: 'spin', fx: '✨' },
@@ -82,8 +79,18 @@ App.mascot = (function () {
     { mood: 'surprised', acc: '', anim: 'jump', fx: '❗' },
     { mood: 'grin', acc: 'phones', anim: 'dance', fx: '🎵' },
     { mood: 'happy', acc: 'grad', anim: 'nod', fx: '📚' },
-    { mood: 'wink', acc: '', anim: 'wave', fx: '👋' }
+    { mood: 'wink', acc: '', anim: 'wave', fx: '👋' },
+    { mood: 'grin', acc: 'party', anim: 'flip', fx: '🤸' },
+    { mood: 'happy', acc: '', anim: 'wiggle', fx: '🎈' },
+    { mood: 'surprised', acc: '', anim: 'shiver', fx: '❄️' },
+    { mood: 'grin', acc: 'shades', anim: 'hop', fx: '🐾' },
+    { mood: 'love', acc: '', anim: 'stretch', fx: '🌟' },
+    { mood: 'happy', acc: 'phones', anim: 'run', fx: '💨' },
+    { mood: 'wink', acc: 'grad', anim: 'flip', fx: '🎓' },
+    { mood: 'grin', acc: '', anim: 'howl', fx: '🌕' }
   ];
+  // Little moves the wolf makes on its own now and then.
+  const IDLE_ANIMS = ['wave', 'wiggle', 'hop', 'nod', 'stretch', 'jump', 'howl', 'flip', 'peek'];
 
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -200,6 +207,14 @@ App.mascot = (function () {
       skin = SKINS[(SKINS.indexOf(skin) + 1) % SKINS.length];
       show(nextScene());
     });
+
+    // Every so often the wolf moves by itself, without changing the bubble.
+    const idle = setInterval(() => {
+      if (!document.body.contains(el)) { clearInterval(idle); return; }
+      if (document.hidden || document.documentElement.classList.contains('reduce-motion')) return;
+      el.className = 'mascot-widget'; void el.offsetWidth;
+      el.classList.add('anim-' + pick(IDLE_ANIMS));
+    }, 14000);
 
     const first = contextScenes()[0];
     show(first ? Object.assign({ kind: 'context' }, first) : nextScene());
