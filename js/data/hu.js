@@ -7833,7 +7833,27 @@ App.data.hu = {
         { w: 'a madárvonulás', t: 'миграция птиц', ex: 'A madárvonulás szeptemberben kezdődik.', tex: 'Миграция птиц начинается в сентябре.' },
         { w: 'az állatjólét', t: 'благополучие животных', ex: 'Az állatjólét sok vásárlónak fontos.', tex: 'Благополучие животных важно для многих покупателей.' },
         { w: 'a növényi alapú étrend', t: 'растительная диета', ex: 'A növényi alapú étrend jobb az éghajlatnak.', tex: 'Растительная диета лучше для климата.' },
-        { w: 'az élelmiszer-pazarlás', t: 'пищевые отходы', ex: 'Az élelmiszerek harmada pazarlásra kerül.', tex: 'Треть всей еды становится пищевыми отходами.' }
+        { w: 'az élelmiszer-pazarlás', t: 'пищевые отходы', ex: 'Az élelmiszerek harmada pazarlásra kerül.', tex: 'Треть всей еды становится пищевыми отходами.' },
+        { w: 'a helyi termékek', t: 'местные продукты', ex: 'A piacon helyi termékeket veszünk.', tex: 'Мы покупаем местные продукты на рынке.' },
+        { w: 'a hulladékmentes életmód', t: 'ноль отходов', ex: 'Hulladékmentes életmódot folytat.', tex: 'Она живёт по принципу «ноль отходов».' },
+        { w: 'használt', t: 'подержанный', ex: 'A ruháim nagy részét használtan veszem.', tex: 'Большую часть одежды я покупаю подержанной.' },
+        { w: 'megjavítani', t: 'ремонтировать', ex: 'Jobb megjavítani a dolgokat, mint kidobni őket.', tex: 'Лучше ремонтировать вещи, чем выбрасывать.' },
+        { w: 'tartós', t: 'долговечный', ex: 'A tartós termékek sok évig kitartanak.', tex: 'Долговечные товары служат много лет.' },
+        { w: 'eldobható', t: 'одноразовый', ex: 'Az eldobható evőeszközök sok szemetet termelnek.', tex: 'Одноразовые приборы создают много мусора.' },
+        { w: 'mérgező', t: 'токсичный', ex: 'Ezek a vegyszerek mérgezőek a halakra.', tex: 'Эти химикаты токсичны для рыбы.' },
+        { w: 'káros', t: 'вредный', ex: 'A dohányzás káros az egészségre.', tex: 'Курение вредно для здоровья.' },
+        { w: 'a tiszta levegő', t: 'чистый воздух', ex: 'A hegyekben tiszta a levegő.', tex: 'В горах чистый воздух.' },
+        { w: 'az édesvíz', t: 'пресная вода', ex: 'A Föld vizének csak kis része édesvíz.', tex: 'Лишь малая часть воды на Земле — пресная.' },
+        { w: 'a sós víz', t: 'солёная вода', ex: 'A legtöbb édesvízi hal nem él sós vízben.', tex: 'Большинство пресноводных рыб не живёт в солёной воде.' },
+        { w: 'a víz körforgása', t: 'круговорот воды', ex: 'Az eső a víz körforgásának része.', tex: 'Дождь — часть круговорота воды.' },
+        { w: 'a fotoszintézis', t: 'фотосинтез', ex: 'A növények fotoszintézissel cukrot állítanak elő.', tex: 'Растения вырабатывают сахар путём фотосинтеза.' },
+        { w: 'a lebomlás', t: 'разложение', ex: 'A lehullott levelek lebomlásukkal táplálják a talajt.', tex: 'Благодаря разложению опавшие листья питают почву.' },
+        { w: 'a gombák', t: 'грибы', ex: 'A gombák segítik a fákat a tápanyagfelvételben.', tex: 'Грибы помогают деревьям получать питательные вещества.' },
+        { w: 'a plankton', t: 'планктон', ex: 'A bálnák planktonnal táplálkoznak.', tex: 'Киты питаются планктоном.' },
+        { w: 'a tengeri élővilág', t: 'морская жизнь', ex: 'A műanyag veszélyezteti a tengeri élővilágot.', tex: 'Пластик угрожает морской жизни.' },
+        { w: 'a tengeráramlat', t: 'океанское течение', ex: 'A tengeráramlat meleg vizet hoz Európába.', tex: 'Океанское течение приносит тёплую воду в Европу.' },
+        { w: 'a monszun', t: 'муссон', ex: 'A monszun heves esőket hoz Indiába.', tex: 'Муссон приносит в Индию сильные дожди.' },
+        { w: 'a földcsuszamlás', t: 'оползень', ex: 'A földcsuszamlás elzárta az utat.', tex: 'Оползень перекрыл дорогу.' }
       ]
     },
     {

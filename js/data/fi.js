@@ -7833,7 +7833,27 @@ App.data.fi = {
         { w: 'lintujen muutto', t: 'миграция птиц', ex: 'Lintujen muutto alkaa syyskuussa.', tex: 'Миграция птиц начинается в сентябре.' },
         { w: 'eläinten hyvinvointi', t: 'благополучие животных', ex: 'Eläinten hyvinvointi on monelle kuluttajalle tärkeää.', tex: 'Благополучие животных важно для многих покупателей.' },
         { w: 'kasvipohjainen ruokavalio', t: 'растительная диета', ex: 'Kasvipohjainen ruokavalio on parempi ilmastolle.', tex: 'Растительная диета лучше для климата.' },
-        { w: 'ruokahävikki', t: 'пищевые отходы', ex: 'Kolmannes kaikesta ruoasta päätyy ruokahävikiksi.', tex: 'Треть всей еды становится пищевыми отходами.' }
+        { w: 'ruokahävikki', t: 'пищевые отходы', ex: 'Kolmannes kaikesta ruoasta päätyy ruokahävikiksi.', tex: 'Треть всей еды становится пищевыми отходами.' },
+        { w: 'lähiruoka', t: 'местные продукты', ex: 'Ostamme lähiruokaa torilta.', tex: 'Мы покупаем местные продукты на рынке.' },
+        { w: 'nollajäte', t: 'ноль отходов', ex: 'Hän elää nollajätteen periaatteella.', tex: 'Она живёт по принципу «ноль отходов».' },
+        { w: 'käytetty', t: 'подержанный', ex: 'Ostan suurimman osan vaatteistani käytettyinä.', tex: 'Большую часть одежды я покупаю подержанной.' },
+        { w: 'korjata', t: 'ремонтировать', ex: 'On parempi korjata tavaroita kuin heittää ne pois.', tex: 'Лучше ремонтировать вещи, чем выбрасывать.' },
+        { w: 'kestävä (pitkäikäinen)', t: 'долговечный', ex: 'Kestävät tuotteet kestävät monta vuotta.', tex: 'Долговечные товары служат много лет.' },
+        { w: 'kertakäyttöinen', t: 'одноразовый', ex: 'Kertakäyttöiset aterimet tuottavat paljon jätettä.', tex: 'Одноразовые приборы создают много мусора.' },
+        { w: 'myrkyllinen', t: 'токсичный', ex: 'Nämä kemikaalit ovat myrkyllisiä kaloille.', tex: 'Эти химикаты токсичны для рыбы.' },
+        { w: 'haitallinen', t: 'вредный', ex: 'Tupakointi on terveydelle haitallista.', tex: 'Курение вредно для здоровья.' },
+        { w: 'puhdas ilma', t: 'чистый воздух', ex: 'Vuoristossa ilma on puhdasta.', tex: 'В горах чистый воздух.' },
+        { w: 'makea vesi', t: 'пресная вода', ex: 'Vain pieni osa maapallon vedestä on makeaa.', tex: 'Лишь малая часть воды на Земле — пресная.' },
+        { w: 'suolainen vesi', t: 'солёная вода', ex: 'Useimmat makean veden kalat eivät elä suolaisessa vedessä.', tex: 'Большинство пресноводных рыб не живёт в солёной воде.' },
+        { w: 'veden kiertokulku', t: 'круговорот воды', ex: 'Sade on osa veden kiertokulkua.', tex: 'Дождь — часть круговорота воды.' },
+        { w: 'yhteyttäminen', t: 'фотосинтез', ex: 'Kasvit tuottavat sokeria yhteyttämällä.', tex: 'Растения вырабатывают сахар путём фотосинтеза.' },
+        { w: 'hajoaminen', t: 'разложение', ex: 'Hajotessaan pudonneet lehdet ravitsevat maaperää.', tex: 'Благодаря разложению опавшие листья питают почву.' },
+        { w: 'sienet', t: 'грибы', ex: 'Sienet auttavat puita saamaan ravinteita.', tex: 'Грибы помогают деревьям получать питательные вещества.' },
+        { w: 'plankton', t: 'планктон', ex: 'Valaat syövät planktonia.', tex: 'Киты питаются планктоном.' },
+        { w: 'meren eliöstö', t: 'морская жизнь', ex: 'Muovi uhkaa meren eliöstöä.', tex: 'Пластик угрожает морской жизни.' },
+        { w: 'merivirta', t: 'океанское течение', ex: 'Merivirta tuo lämmintä vettä Eurooppaan.', tex: 'Океанское течение приносит тёплую воду в Европу.' },
+        { w: 'monsuuni', t: 'муссон', ex: 'Monsuuni tuo Intiaan rankkasateita.', tex: 'Муссон приносит в Индию сильные дожди.' },
+        { w: 'maanvyöry', t: 'оползень', ex: 'Maanvyöry tukki tien.', tex: 'Оползень перекрыл дорогу.' }
       ]
     },
     {

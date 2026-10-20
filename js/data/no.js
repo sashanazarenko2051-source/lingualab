@@ -7869,7 +7869,27 @@ App.data.no = {
         { w: 'fugletrekket', t: 'миграция птиц', ex: 'Fugletrekket begynner i september.', tex: 'Миграция птиц начинается в сентябре.' },
         { w: 'dyrevelferden', t: 'благополучие животных', ex: 'Dyrevelferd er viktig for mange forbrukere.', tex: 'Благополучие животных важно для многих покупателей.' },
         { w: 'det plantebaserte kostholdet', t: 'растительная диета', ex: 'Et plantebasert kosthold er bedre for klimaet.', tex: 'Растительная диета лучше для климата.' },
-        { w: 'matsvinnet', t: 'пищевые отходы', ex: 'En tredjedel av all mat blir matsvinn.', tex: 'Треть всей еды становится пищевыми отходами.' }
+        { w: 'matsvinnet', t: 'пищевые отходы', ex: 'En tredjedel av all mat blir matsvinn.', tex: 'Треть всей еды становится пищевыми отходами.' },
+        { w: 'de lokale produktene', t: 'местные продукты', ex: 'Vi kjøper lokale produkter på markedet.', tex: 'Мы покупаем местные продукты на рынке.' },
+        { w: 'null avfall', t: 'ноль отходов', ex: 'Hun lever et liv med null avfall.', tex: 'Она живёт по принципу «ноль отходов».' },
+        { w: 'brukt', t: 'подержанный', ex: 'Jeg kjøper de fleste klærne brukt.', tex: 'Большую часть одежды я покупаю подержанной.' },
+        { w: 'reparere', t: 'ремонтировать', ex: 'Det er bedre å reparere ting enn å kaste dem.', tex: 'Лучше ремонтировать вещи, чем выбрасывать.' },
+        { w: 'holdbar', t: 'долговечный', ex: 'Holdbare produkter varer i mange år.', tex: 'Долговечные товары служат много лет.' },
+        { w: 'engangs-', t: 'одноразовый', ex: 'Engangsbestikk skaper mye avfall.', tex: 'Одноразовые приборы создают много мусора.' },
+        { w: 'giftig', t: 'токсичный', ex: 'Disse kjemikaliene er giftige for fisk.', tex: 'Эти химикаты токсичны для рыбы.' },
+        { w: 'skadelig', t: 'вредный', ex: 'Røyking er skadelig for helsen.', tex: 'Курение вредно для здоровья.' },
+        { w: 'den rene luften', t: 'чистый воздух', ex: 'I fjellet er luften ren.', tex: 'В горах чистый воздух.' },
+        { w: 'ferskvannet', t: 'пресная вода', ex: 'Bare en liten del av jordens vann er ferskvann.', tex: 'Лишь малая часть воды на Земле — пресная.' },
+        { w: 'saltvannet', t: 'солёная вода', ex: 'De fleste ferskvannsfisker kan ikke leve i saltvann.', tex: 'Большинство пресноводных рыб не живёт в солёной воде.' },
+        { w: 'vannets kretsløp', t: 'круговорот воды', ex: 'Regn er en del av vannets kretsløp.', tex: 'Дождь — часть круговорота воды.' },
+        { w: 'fotosyntesen', t: 'фотосинтез', ex: 'Planter lager sukker gjennom fotosyntese.', tex: 'Растения вырабатывают сахар путём фотосинтеза.' },
+        { w: 'nedbrytningen', t: 'разложение', ex: 'Gjennom nedbrytning gir nedfalne blader næring til jorda.', tex: 'Благодаря разложению опавшие листья питают почву.' },
+        { w: 'soppene', t: 'грибы', ex: 'Sopp hjelper trærne med å ta opp næring.', tex: 'Грибы помогают деревьям получать питательные вещества.' },
+        { w: 'planktonet', t: 'планктон', ex: 'Hvaler spiser plankton.', tex: 'Киты питаются планктоном.' },
+        { w: 'livet i havet', t: 'морская жизнь', ex: 'Plast truer livet i havet.', tex: 'Пластик угрожает морской жизни.' },
+        { w: 'havstrømmen', t: 'океанское течение', ex: 'Havstrømmen bringer varmt vann til Europa.', tex: 'Океанское течение приносит тёплую воду в Европу.' },
+        { w: 'monsunen', t: 'муссон', ex: 'Monsunen gir India kraftig regn.', tex: 'Муссон приносит в Индию сильные дожди.' },
+        { w: 'jordskredet', t: 'оползень', ex: 'Jordskredet sperret veien.', tex: 'Оползень перекрыл дорогу.' }
       ]
     },
     {

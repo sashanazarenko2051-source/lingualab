@@ -7835,7 +7835,27 @@ App.data.nl = {
         { w: 'de vogeltrek', t: 'миграция птиц', ex: 'De vogeltrek begint in september.', tex: 'Миграция птиц начинается в сентябре.' },
         { w: 'het dierenwelzijn', t: 'благополучие животных', ex: 'Dierenwelzijn is belangrijk voor veel consumenten.', tex: 'Благополучие животных важно для многих покупателей.' },
         { w: 'het plantaardige dieet', t: 'растительная диета', ex: 'Een plantaardig dieet is beter voor het klimaat.', tex: 'Растительная диета лучше для климата.' },
-        { w: 'de voedselverspilling', t: 'пищевые отходы', ex: 'Een derde van al het voedsel wordt verspild.', tex: 'Треть всей еды становится пищевыми отходами.' }
+        { w: 'de voedselverspilling', t: 'пищевые отходы', ex: 'Een derde van al het voedsel wordt verspild.', tex: 'Треть всей еды становится пищевыми отходами.' },
+        { w: 'de lokale producten', t: 'местные продукты', ex: 'We kopen lokale producten op de markt.', tex: 'Мы покупаем местные продукты на рынке.' },
+        { w: 'zero waste', t: 'ноль отходов', ex: 'Ze leeft volgens het zero-wasteprincipe.', tex: 'Она живёт по принципу «ноль отходов».' },
+        { w: 'tweedehands', t: 'подержанный', ex: 'Ik koop de meeste kleren tweedehands.', tex: 'Большую часть одежды я покупаю подержанной.' },
+        { w: 'repareren', t: 'ремонтировать', ex: 'Het is beter dingen te repareren dan ze weg te gooien.', tex: 'Лучше ремонтировать вещи, чем выбрасывать.' },
+        { w: 'duurzaam (lang meegaand)', t: 'долговечный', ex: 'Lang meegaande producten gaan vele jaren mee.', tex: 'Долговечные товары служат много лет.' },
+        { w: 'wegwerp-', t: 'одноразовый', ex: 'Wegwerpbestek veroorzaakt veel afval.', tex: 'Одноразовые приборы создают много мусора.' },
+        { w: 'giftig', t: 'токсичный', ex: 'Deze chemicaliën zijn giftig voor vissen.', tex: 'Эти химикаты токсичны для рыбы.' },
+        { w: 'schadelijk', t: 'вредный', ex: 'Roken is schadelijk voor de gezondheid.', tex: 'Курение вредно для здоровья.' },
+        { w: 'de schone lucht', t: 'чистый воздух', ex: 'In de bergen is de lucht schoon.', tex: 'В горах чистый воздух.' },
+        { w: 'het zoet water', t: 'пресная вода', ex: 'Maar een klein deel van het water op aarde is zoet water.', tex: 'Лишь малая часть воды на Земле — пресная.' },
+        { w: 'het zoute water', t: 'солёная вода', ex: 'De meeste zoetwatervissen kunnen niet in zout water leven.', tex: 'Большинство пресноводных рыб не живёт в солёной воде.' },
+        { w: 'de waterkringloop', t: 'круговорот воды', ex: 'Regen is een deel van de waterkringloop.', tex: 'Дождь — часть круговорота воды.' },
+        { w: 'de fotosynthese', t: 'фотосинтез', ex: 'Planten maken suiker door fotosynthese.', tex: 'Растения вырабатывают сахар путём фотосинтеза.' },
+        { w: 'de afbraak', t: 'разложение', ex: 'Door afbraak voeden gevallen bladeren de bodem.', tex: 'Благодаря разложению опавшие листья питают почву.' },
+        { w: 'de schimmels', t: 'грибы', ex: 'Schimmels helpen bomen voedingsstoffen op te nemen.', tex: 'Грибы помогают деревьям получать питательные вещества.' },
+        { w: 'het plankton', t: 'планктон', ex: 'Walvissen eten plankton.', tex: 'Киты питаются планктоном.' },
+        { w: 'het zeeleven', t: 'морская жизнь', ex: 'Plastic bedreigt het leven in zee.', tex: 'Пластик угрожает морской жизни.' },
+        { w: 'de zeestroming', t: 'океанское течение', ex: 'De zeestroming brengt warm water naar Europa.', tex: 'Океанское течение приносит тёплую воду в Европу.' },
+        { w: 'de moesson', t: 'муссон', ex: 'De moesson brengt veel regen naar India.', tex: 'Муссон приносит в Индию сильные дожди.' },
+        { w: 'de aardverschuiving', t: 'оползень', ex: 'De aardverschuiving blokkeerde de weg.', tex: 'Оползень перекрыл дорогу.' }
       ]
     },
     {

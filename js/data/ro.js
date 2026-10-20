@@ -7833,7 +7833,27 @@ App.data.ro = {
         { w: 'migrația păsărilor', t: 'миграция птиц', ex: 'Migrația păsărilor începe în septembrie.', tex: 'Миграция птиц начинается в сентябре.' },
         { w: 'bunăstarea animalelor', t: 'благополучие животных', ex: 'Bunăstarea animalelor contează pentru mulți consumatori.', tex: 'Благополучие животных важно для многих покупателей.' },
         { w: 'dieta pe bază de plante', t: 'растительная диета', ex: 'O dietă pe bază de plante e mai bună pentru climă.', tex: 'Растительная диета лучше для климата.' },
-        { w: 'risipa alimentară', t: 'пищевые отходы', ex: 'O treime din alimente ajunge risipă.', tex: 'Треть всей еды становится пищевыми отходами.' }
+        { w: 'risipa alimentară', t: 'пищевые отходы', ex: 'O treime din alimente ajunge risipă.', tex: 'Треть всей еды становится пищевыми отходами.' },
+        { w: 'produsele locale', t: 'местные продукты', ex: 'Cumpărăm produse locale de la piață.', tex: 'Мы покупаем местные продукты на рынке.' },
+        { w: 'zero deșeuri', t: 'ноль отходов', ex: 'Ea trăiește după principiul zero deșeuri.', tex: 'Она живёт по принципу «ноль отходов».' },
+        { w: 'second-hand', t: 'подержанный', ex: 'Îmi cumpăr majoritatea hainelor second-hand.', tex: 'Большую часть одежды я покупаю подержанной.' },
+        { w: 'a repara', t: 'ремонтировать', ex: 'E mai bine să repari lucrurile decât să le arunci.', tex: 'Лучше ремонтировать вещи, чем выбрасывать.' },
+        { w: 'durabil', t: 'долговечный', ex: 'Produsele durabile țin mulți ani.', tex: 'Долговечные товары служат много лет.' },
+        { w: 'de unică folosință', t: 'одноразовый', ex: 'Tacâmurile de unică folosință produc multe deșeuri.', tex: 'Одноразовые приборы создают много мусора.' },
+        { w: 'toxic', t: 'токсичный', ex: 'Aceste substanțe chimice sunt toxice pentru pești.', tex: 'Эти химикаты токсичны для рыбы.' },
+        { w: 'dăunător', t: 'вредный', ex: 'Fumatul este dăunător sănătății.', tex: 'Курение вредно для здоровья.' },
+        { w: 'aerul curat', t: 'чистый воздух', ex: 'La munte aerul este curat.', tex: 'В горах чистый воздух.' },
+        { w: 'apa dulce', t: 'пресная вода', ex: 'Doar o mică parte din apa Pământului este apă dulce.', tex: 'Лишь малая часть воды на Земле — пресная.' },
+        { w: 'apa sărată', t: 'солёная вода', ex: 'Majoritatea peștilor de râu nu pot trăi în apă sărată.', tex: 'Большинство пресноводных рыб не живёт в солёной воде.' },
+        { w: 'circuitul apei', t: 'круговорот воды', ex: 'Ploaia face parte din circuitul apei.', tex: 'Дождь — часть круговорота воды.' },
+        { w: 'fotosinteza', t: 'фотосинтез', ex: 'Plantele produc zahăr prin fotosinteză.', tex: 'Растения вырабатывают сахар путём фотосинтеза.' },
+        { w: 'descompunerea', t: 'разложение', ex: 'Prin descompunere, frunzele căzute hrănesc solul.', tex: 'Благодаря разложению опавшие листья питают почву.' },
+        { w: 'ciupercile', t: 'грибы', ex: 'Ciupercile ajută copacii să absoarbă nutrienți.', tex: 'Грибы помогают деревьям получать питательные вещества.' },
+        { w: 'planctonul', t: 'планктон', ex: 'Balenele mănâncă plancton.', tex: 'Киты питаются планктоном.' },
+        { w: 'viața marină', t: 'морская жизнь', ex: 'Plasticul amenință viața marină.', tex: 'Пластик угрожает морской жизни.' },
+        { w: 'curentul oceanic', t: 'океанское течение', ex: 'Curentul oceanic aduce apă caldă în Europa.', tex: 'Океанское течение приносит тёплую воду в Европу.' },
+        { w: 'musonul', t: 'муссон', ex: 'Musonul aduce ploi puternice în India.', tex: 'Муссон приносит в Индию сильные дожди.' },
+        { w: 'alunecarea de teren', t: 'оползень', ex: 'Alunecarea de teren a blocat drumul.', tex: 'Оползень перекрыл дорогу.' }
       ]
     },
     {

@@ -7833,7 +7833,27 @@ App.data.pl = {
         { w: 'migracja ptaków', t: 'миграция птиц', ex: 'Migracja ptaków zaczyna się we wrześniu.', tex: 'Миграция птиц начинается в сентябре.' },
         { w: 'dobrostan zwierząt', t: 'благополучие животных', ex: 'Dobrostan zwierząt jest ważny dla wielu konsumentów.', tex: 'Благополучие животных важно для многих покупателей.' },
         { w: 'dieta roślinna', t: 'растительная диета', ex: 'Dieta roślinna jest lepsza dla klimatu.', tex: 'Растительная диета лучше для климата.' },
-        { w: 'marnowanie żywności', t: 'пищевые отходы', ex: 'Jedna trzecia żywności jest marnowana.', tex: 'Треть всей еды становится пищевыми отходами.' }
+        { w: 'marnowanie żywności', t: 'пищевые отходы', ex: 'Jedna trzecia żywności jest marnowana.', tex: 'Треть всей еды становится пищевыми отходами.' },
+        { w: 'produkty lokalne', t: 'местные продукты', ex: 'Kupujemy lokalne produkty na targu.', tex: 'Мы покупаем местные продукты на рынке.' },
+        { w: 'zero waste', t: 'ноль отходов', ex: 'Żyje zgodnie z zasadą zero waste.', tex: 'Она живёт по принципу «ноль отходов».' },
+        { w: 'używany', t: 'подержанный', ex: 'Większość ubrań kupuję używanych.', tex: 'Большую часть одежды я покупаю подержанной.' },
+        { w: 'naprawiać', t: 'ремонтировать', ex: 'Lepiej naprawiać rzeczy, niż je wyrzucać.', tex: 'Лучше ремонтировать вещи, чем выбрасывать.' },
+        { w: 'trwały', t: 'долговечный', ex: 'Trwałe produkty służą przez wiele lat.', tex: 'Долговечные товары служат много лет.' },
+        { w: 'jednorazowy', t: 'одноразовый', ex: 'Jednorazowe sztućce tworzą dużo odpadów.', tex: 'Одноразовые приборы создают много мусора.' },
+        { w: 'toksyczny', t: 'токсичный', ex: 'Te chemikalia są toksyczne dla ryb.', tex: 'Эти химикаты токсичны для рыбы.' },
+        { w: 'szkodliwy', t: 'вредный', ex: 'Palenie jest szkodliwe dla zdrowia.', tex: 'Курение вредно для здоровья.' },
+        { w: 'czyste powietrze', t: 'чистый воздух', ex: 'W górach jest czyste powietrze.', tex: 'В горах чистый воздух.' },
+        { w: 'woda słodka', t: 'пресная вода', ex: 'Tylko niewielka część wody na Ziemi to woda słodka.', tex: 'Лишь малая часть воды на Земле — пресная.' },
+        { w: 'woda słona', t: 'солёная вода', ex: 'Większość ryb słodkowodnych nie żyje w słonej wodzie.', tex: 'Большинство пресноводных рыб не живёт в солёной воде.' },
+        { w: 'obieg wody', t: 'круговорот воды', ex: 'Deszcz jest częścią obiegu wody.', tex: 'Дождь — часть круговорота воды.' },
+        { w: 'fotosynteza', t: 'фотосинтез', ex: 'Rośliny wytwarzają cukier w procesie fotosyntezy.', tex: 'Растения вырабатывают сахар путём фотосинтеза.' },
+        { w: 'rozkład', t: 'разложение', ex: 'Dzięki rozkładowi opadłe liście użyźniają glebę.', tex: 'Благодаря разложению опавшие листья питают почву.' },
+        { w: 'grzyby', t: 'грибы', ex: 'Grzyby pomagają drzewom pobierać składniki odżywcze.', tex: 'Грибы помогают деревьям получать питательные вещества.' },
+        { w: 'plankton', t: 'планктон', ex: 'Wieloryby jedzą plankton.', tex: 'Киты питаются планктоном.' },
+        { w: 'życie morskie', t: 'морская жизнь', ex: 'Plastik zagraża życiu w morzu.', tex: 'Пластик угрожает морской жизни.' },
+        { w: 'prąd morski', t: 'океанское течение', ex: 'Prąd morski przynosi ciepłą wodę do Europy.', tex: 'Океанское течение приносит тёплую воду в Европу.' },
+        { w: 'monsun', t: 'муссон', ex: 'Monsun przynosi Indiom ulewne deszcze.', tex: 'Муссон приносит в Индию сильные дожди.' },
+        { w: 'osuwisko', t: 'оползень', ex: 'Osuwisko zablokowało drogę.', tex: 'Оползень перекрыл дорогу.' }
       ]
     },
     {

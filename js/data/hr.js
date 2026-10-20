@@ -7835,7 +7835,27 @@ App.data.hr = {
         { w: 'seoba ptica', t: 'миграция птиц', ex: 'Seoba ptica počinje u rujnu.', tex: 'Миграция птиц начинается в сентябре.' },
         { w: 'dobrobit životinja', t: 'благополучие животных', ex: 'Dobrobit životinja važna je mnogim potrošačima.', tex: 'Благополучие животных важно для многих покупателей.' },
         { w: 'biljna prehrana', t: 'растительная диета', ex: 'Biljna prehrana bolja je za klimu.', tex: 'Растительная диета лучше для климата.' },
-        { w: 'bacanje hrane', t: 'пищевые отходы', ex: 'Trećina sve hrane završi bačena.', tex: 'Треть всей еды становится пищевыми отходами.' }
+        { w: 'bacanje hrane', t: 'пищевые отходы', ex: 'Trećina sve hrane završi bačena.', tex: 'Треть всей еды становится пищевыми отходами.' },
+        { w: 'domaći proizvodi', t: 'местные продукты', ex: 'Na tržnici kupujemo domaće proizvode.', tex: 'Мы покупаем местные продукты на рынке.' },
+        { w: 'nula otpada', t: 'ноль отходов', ex: 'Živi po načelu nula otpada.', tex: 'Она живёт по принципу «ноль отходов».' },
+        { w: 'rabljen', t: 'подержанный', ex: 'Većinu odjeće kupujem rabljenu.', tex: 'Большую часть одежды я покупаю подержанной.' },
+        { w: 'popravljati', t: 'ремонтировать', ex: 'Bolje je popravljati stvari nego ih bacati.', tex: 'Лучше ремонтировать вещи, чем выбрасывать.' },
+        { w: 'dugotrajan', t: 'долговечный', ex: 'Dugotrajni proizvodi traju mnogo godina.', tex: 'Долговечные товары служат много лет.' },
+        { w: 'jednokratan', t: 'одноразовый', ex: 'Jednokratan pribor za jelo stvara mnogo otpada.', tex: 'Одноразовые приборы создают много мусора.' },
+        { w: 'otrovan', t: 'токсичный', ex: 'Te su kemikalije otrovne za ribe.', tex: 'Эти химикаты токсичны для рыбы.' },
+        { w: 'štetan', t: 'вредный', ex: 'Pušenje je štetno za zdravlje.', tex: 'Курение вредно для здоровья.' },
+        { w: 'čisti zrak', t: 'чистый воздух', ex: 'U planinama je zrak čist.', tex: 'В горах чистый воздух.' },
+        { w: 'slatka voda', t: 'пресная вода', ex: 'Samo je mali dio vode na Zemlji slatka voda.', tex: 'Лишь малая часть воды на Земле — пресная.' },
+        { w: 'slana voda', t: 'солёная вода', ex: 'Većina slatkovodnih riba ne može živjeti u slanoj vodi.', tex: 'Большинство пресноводных рыб не живёт в солёной воде.' },
+        { w: 'kruženje vode', t: 'круговорот воды', ex: 'Kiša je dio kruženja vode.', tex: 'Дождь — часть круговорота воды.' },
+        { w: 'fotosinteza', t: 'фотосинтез', ex: 'Biljke stvaraju šećer fotosintezom.', tex: 'Растения вырабатывают сахар путём фотосинтеза.' },
+        { w: 'razgradnja', t: 'разложение', ex: 'Razgradnjom otpalo lišće hrani tlo.', tex: 'Благодаря разложению опавшие листья питают почву.' },
+        { w: 'gljive', t: 'грибы', ex: 'Gljive pomažu drveću da dobije hranjive tvari.', tex: 'Грибы помогают деревьям получать питательные вещества.' },
+        { w: 'plankton', t: 'планктон', ex: 'Kitovi jedu plankton.', tex: 'Киты питаются планктоном.' },
+        { w: 'morski svijet', t: 'морская жизнь', ex: 'Plastika ugrožava morski svijet.', tex: 'Пластик угрожает морской жизни.' },
+        { w: 'morska struja', t: 'океанское течение', ex: 'Morska struja donosi toplu vodu u Europu.', tex: 'Океанское течение приносит тёплую воду в Европу.' },
+        { w: 'monsun', t: 'муссон', ex: 'Monsun donosi jake kiše u Indiju.', tex: 'Муссон приносит в Индию сильные дожди.' },
+        { w: 'klizište', t: 'оползень', ex: 'Klizište je zatvorilo cestu.', tex: 'Оползень перекрыл дорогу.' }
       ]
     },
     {
