@@ -1573,6 +1573,7 @@ button { background: none; }
 .topbar-hearts + .topbar-hearts { margin-left: 8px; }
 .ex-energy { margin-right: 6px; }
 .energy-big .energy-ico { font-size: 44px; }
+.energy-unlimited-until { text-align: center; margin-top: 4px; color: #ffd23f; font-weight: 700; font-size: 13px; }
 .energy-out-icon { font-size: 72px; line-height: 1; filter: drop-shadow(0 0 12px rgba(255,201,60,.6)); }
 .energy-packs { display: flex; flex-wrap: wrap; gap: 14px 10px; justify-content: center; margin-top: 14px; padding-bottom: 4px; }
 .energy-pack { display: inline-flex; border-color: #ffd23f; color: #ffd23f; padding: 8px 14px; }

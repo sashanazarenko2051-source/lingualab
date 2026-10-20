@@ -4,6 +4,7 @@ window.App = window.App || {};
 // COST_EVERY finished exercises cost COST energy; mistakes cost hearts, not
 // energy. It refills by REGEN per hour up to CAP. Rewarded ads (+AD_GIFT) and
 // support packs can raise it above CAP, up to MAX; the unlimited pack turns
+// the cost off for UNLIMITED_DAYS.
 // the cost off. At zero energy a lesson can't go on.
 App.energy = (function () {
   const CAP = 50;
@@ -14,15 +15,16 @@ App.energy = (function () {
   const COST_EVERY = 15;
   const AD_GIFT = 10;
   const PACKS = [100, 200, 'unlimited'];
+  const UNLIMITED_DAYS = 30;
   const listeners = [];
 
   function st() {
     const s = App.storage.state;
-    if (!s.energy || typeof s.energy.count !== 'number') s.energy = { count: CAP, steps: 0, tickAt: Date.now(), unlimited: false };
+    if (!s.energy || typeof s.energy.count !== 'number') s.energy = { count: CAP, steps: 0, tickAt: Date.now(), unlimitedUntil: 0 };
     return s.energy;
   }
   function count() { return st().count; }
-  function unlimited() { return !!st().unlimited; }
+  function unlimited() { return Date.now() < (st().unlimitedUntil || 0); }
   function emit() { listeners.forEach(fn => fn(count())); }
   function onChange(fn) { listeners.push(fn); }
 
@@ -85,7 +87,13 @@ App.energy = (function () {
   function buy(pack) {
     return purchase(pack).then(ok => {
       if (!ok) { App.effects.toast('💎 ' + App.t('lock_unlock_soon')); return false; }
-      if (pack === 'unlimited') { st().unlimited = true; App.storage.save(); emit(); }
+      if (pack === 'unlimited') {
+        // A second purchase extends the running period.
+        const e = st();
+        e.unlimitedUntil = Math.max(Date.now(), e.unlimitedUntil || 0) + UNLIMITED_DAYS * 24 * HOUR;
+        App.storage.save();
+        emit();
+      }
       else add(pack);
       return true;
     });
@@ -152,6 +160,12 @@ App.energy = (function () {
     }));
   }
 
+  // What the count is out of: ∞ during unlimited, MAX once above CAP.
+  function limitLabel() {
+    if (unlimited()) return '∞';
+    return count() > CAP ? MAX : CAP;
+  }
+
   function openPopup() {
     closePopup();
     const wrap = document.createElement('div');
@@ -161,7 +175,8 @@ App.energy = (function () {
       wrap.innerHTML = `
         <div class="heart-popup" role="dialog">
           <button class="heart-popup-close" id="energy-popup-close">✕</button>
-          <div class="heart-popup-big energy-big"><span class="energy-ico">⚡</span><b>${unlimited() ? '∞' : count()}</b>${unlimited() || count() > CAP ? '' : `<span>/ ${CAP}</span>`}</div>
+          <div class="heart-popup-big energy-big"><span class="energy-ico">⚡</span><b>${count()}</b><span>/ ${limitLabel()}</span></div>
+          ${unlimited() ? `<div class="energy-unlimited-until">∞ ${App.t('energy_unlimited_until', { date: new Date(st().unlimitedUntil).toLocaleDateString() })}</div>` : ''}
           ${rulesHtml()}
           ${adButton()}
           ${packsHtml()}
