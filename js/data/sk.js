@@ -211,7 +211,7 @@ App.data.sk = {
       { w: 'Máš chvíľku?', t: 'У тебя есть минутка?', ex: 'Máš chvíľku? Potrebujem sa s tebou porozprávať.', tex: 'У тебя есть минутка? Мне нужно с тобой поговорить.' },
       { w: 'Kľudne (len do toho)', t: 'Пожалуйста, давай (можно)', ex: '„Môžem si požičať pero?" – „Kľudne."', tex: '— Можно взять твою ручку? — Пожалуйста, бери.' },
       { w: 'Nechcel som', t: 'Я не хотел(а) (нечаянно)', ex: 'Prepáč, nechcel som ti ublížiť.', tex: 'Прости, я не хотел тебя обидеть.' },
-      { w: 'Prepáčte mi moju slovenčinu', t: 'Простите мой английский', ex: 'Prepáčte mi moju slovenčinu, ešte sa učím.', tex: 'Простите мой английский, я только учусь.' },
+      { w: 'Prepáčte mi moju slovenčinu', t: 'Простите мой словацкий', ex: 'Prepáčte mi moju slovenčinu, ešte sa učím.', tex: 'Простите мой словацкий, я только учусь.' },
       { w: 'Čo to znamená?', t: 'Что это значит?', ex: 'Čo znamená toto slovo?', tex: 'Что значит это слово?' },
       { w: 'Ako sa povie…?', t: 'Как сказать по-…?', ex: 'Ako sa povie „ďakujem" po grécky?', tex: 'Как сказать «спасибо» по-гречески?' },
       { w: 'Mohli by ste to napísať?', t: 'Не могли бы вы записать?', ex: 'Mohli by ste mi napísať adresu?', tex: 'Не могли бы вы записать адрес?' },
@@ -239,7 +239,7 @@ App.data.sk = {
       { w: 'Drž mi palce!', t: 'Пожелай мне удачи!', ex: 'Zajtra je skúška. Drž mi palce!', tex: 'Завтра экзамен. Пожелай мне удачи!' },
       { w: 'Máš dnes večer čas?', t: 'Ты свободен / свободна сегодня вечером?', ex: 'Máš dnes večer čas? Poďme do kina.', tex: 'Ты свободен сегодня вечером? Пойдём в кино.' },
       { w: 'Stretnime sa!', t: 'Давай встретимся!', ex: 'Stretnime sa tento týždeň na kávu!', tex: 'Давай встретимся на неделе и выпьем кофе!' },
-      { w: 'Ja tiež', t: 'У меня тоже', ex: '„Som taký unavený!" – „Ja tiež."', tex: '— Я так устал! — У меня тоже.' },
+      { w: 'Ja tiež', t: 'Я тоже', ex: '„Som taký unavený!" – „Ja tiež."', tex: '— Я так устал! — Я тоже.' },
       { w: 'Rád som pomohol', t: 'Рад(а) помочь', ex: '„Veľmi pekne ďakujem!" – „Rád som pomohol."', tex: '— Спасибо большое! — Рад помочь.' }
     ] },
     { id: 'numbers', name: 'Числа', words: [
@@ -4930,7 +4930,7 @@ App.data.sk = {
       { w: 'zisk', t: 'прибыль', ex: 'Firma dosiahla veľký zisk.', tex: 'Компания получила большую прибыль.' },
       { w: 'hodnota', t: 'стоимость', ex: 'Hodnota domu sa zvýšila.', tex: 'Стоимость дома выросла.' },
       { w: 'náklad', t: 'стоимость', ex: 'Náklad je príliš vysoký.', tex: 'Стоимость слишком высокая.' },
-      { w: 'skrachovať', t: 'банкрот', ex: 'Firma skrachovala.', tex: 'Компания обанкротилась.' },
+      { w: 'skrachovať', t: 'обанкротиться', ex: 'Firma skrachovala.', tex: 'Компания обанкротилась.' },
       { w: 'poistenie', t: 'страховка', ex: 'Máš zdravotné poistenie?', tex: 'У тебя есть медицинская страховка?' },
       { w: 'hypotéka', t: 'ипотека', ex: 'Zobrali si hypotéku.', tex: 'Они взяли ипотеку.' },
       { w: 'akcia', t: 'акция (финансы)', ex: 'Investoval do akcií.', tex: 'Он инвестировал в акции.' },
