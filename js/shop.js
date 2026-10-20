@@ -7,14 +7,16 @@ window.App = window.App || {};
 // (Firestore "gifts"), and the friend's app claims them on start.
 App.shop = (function () {
   const DAY = 24 * 60 * 60 * 1000;
-  // Terms for the unlimited hearts / energy cards, with their prices.
+  // Terms for the unlimited hearts / energy / hints cards, shortest first.
   const TERMS = [
+    { id: '3d', days: 3, price: 1.99 },
     { id: '7d', days: 7, price: 3.99 },
     { id: '1m', days: 30, price: 7.99 },
-    { id: '3d', days: 3, price: 1.99 },
     { id: '3m', days: 90, price: 17.99 },
     { id: '1y', days: 365, price: 49.99 }
   ];
+  // Picked when a term card is shown.
+  const DEFAULT_TERM = '7d';
   // Base prices in euros (placeholders to set before payments go live);
   // App.regions turns them into local prices.
   const ITEMS = {
@@ -38,7 +40,9 @@ App.shop = (function () {
     hat:         { section: 'hats', icon: '🎩', price: 1.49, gift: true },
     hints_10:    { section: 'hints', icon: '💡', price: 0.99, gift: true },
     hints_30:    { section: 'hints', icon: '💡', price: 2.49, gift: true },
-    hints_100:   { section: 'hints', icon: '🔦', price: 5.99, gift: true }
+    hints_100:   { section: 'hints', icon: '🔦', price: 5.99, gift: true },
+    hints_unl:   { section: 'hints', icon: '♾️', term: true, gift: true },
+    hints_forever: { section: 'hints', icon: '🌟', price: 19.99, gift: true }
   };
 
   // Small packs can also be bought with coins earned in the app.
@@ -57,7 +61,7 @@ App.shop = (function () {
 
   function price(itemId, opts) {
     const it = ITEMS[itemId];
-    if (it.term) return (TERMS.find(t => t.id === (opts && opts.term)) || TERMS[0]).price;
+    if (it.term) return (TERMS.find(t => t.id === (opts && opts.term)) || TERMS.find(t => t.id === DEFAULT_TERM)).price;
     return it.price;
   }
   // Prices are set in euros and shown in the learner's local currency.
@@ -93,6 +97,8 @@ App.shop = (function () {
       case 'theme': return App.t('theme_' + opts.theme);
       case 'hat': return (App.profile.HATS[opts.hat] || '🎩') + ' ' + App.t('shop_hat');
       case 'hints_10': case 'hints_30': case 'hints_100': return App.t('shop_hints_n', { n: itemId.split('_')[1] });
+      case 'hints_unl': return App.t('shop_hints_unl') + term;
+      case 'hints_forever': return App.t('shop_hints_forever');
     }
     return itemId;
   }
@@ -118,6 +124,8 @@ App.shop = (function () {
       case 'theme': sh.themes[opts.theme] = true; break;
       case 'hat': sh.hats[opts.hat] = true; break;
       case 'hints_10': case 'hints_30': case 'hints_100': App.hints.add(Number(itemId.split('_')[1])); break;
+      case 'hints_unl': App.hints.extendUnlimited(days); break;
+      case 'hints_forever': App.hints.makeForever(); break;
     }
     App.storage.save();
   }
@@ -171,5 +179,5 @@ App.shop = (function () {
     });
   }
 
-  return { TERMS, ITEMS, COIN_PRICES, buyWithCoins, price, priceLabel, itemName, ownsTopics, ownsHalf, ownsAllTopics, ownsTheme, heartsUnlimited, grant, buy, claimGifts, state: st };
+  return { TERMS, DEFAULT_TERM, ITEMS, COIN_PRICES, buyWithCoins, price, priceLabel, itemName, ownsTopics, ownsHalf, ownsAllTopics, ownsTheme, heartsUnlimited, grant, buy, claimGifts, state: st };
 })();

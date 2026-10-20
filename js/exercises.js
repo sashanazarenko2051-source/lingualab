@@ -514,7 +514,7 @@ App.exercises = (function () {
       // Each letter hint costs one daily hint, at most a third of the word.
       let hintsLeft = Math.max(1, Math.floor(Array.from(target.replace(/\s/g, '')).length / 3));
       const paintHint = () => {
-        hintBtn.querySelector('.ex-hint-left').textContent = '×' + App.hints.left();
+        hintBtn.querySelector('.ex-hint-left').textContent = '×' + App.hints.leftLabel();
         hintBtn.disabled = done || hintsLeft <= 0;
       };
       input.focus();

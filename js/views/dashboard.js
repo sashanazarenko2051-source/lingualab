@@ -384,7 +384,7 @@ function renderYear(root) {
       const lvl = n ? Math.min(4, 1 + Math.floor((n / max) * 3.999)) : 0;
       const cls = 'yv-day mv-l' + lvl + (date.toDateString() === now.toDateString() ? ' yv-today' : '') + (date > now ? ' yv-future' : '');
       const tip = d + ' ' + monthName(m) + ': ' + App.t('tooltip_reviews_correct', { reviews: n, correct: e.correct || 0 });
-      cells += `<i class="${cls}" title="${tip}"></i>`;
+      cells += `<i class="${cls}" title="${tip}">${d}</i>`;
     }
     months.push(`<button type="button" class="yv-month" data-m="${m}">
       <span class="yv-head"><span class="yv-name">${monthName(m)}</span><span class="yv-sum">${sum || ''}</span></span>

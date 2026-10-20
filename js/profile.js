@@ -256,6 +256,14 @@ App.profile = (function () {
     `;
     document.body.appendChild(overlay);
 
+    // Gender and hat are kept at once, even if the window is closed
+    // without pressing Save.
+    function keep(fields) {
+      App.storage.setProfile(fields);
+      renderTopbarBadge();
+      if (App.cloud && App.cloud.scheduleSync) App.cloud.scheduleSync();
+    }
+
     function updateBgColorRowVisibility() {
       const isSolid = draft.bgPattern === 'solid';
       overlay.querySelector('#profile-bg-color-label').style.display = isSolid ? '' : 'none';
@@ -292,6 +300,7 @@ App.profile = (function () {
     overlay.querySelectorAll('[data-gender]').forEach(btn => btn.addEventListener('click', () => {
       draft.gender = btn.dataset.gender || null;
       overlay.querySelectorAll('[data-gender]').forEach(b => b.classList.toggle('active', b === btn));
+      keep({ gender: draft.gender });
     }));
     overlay.querySelectorAll('.profile-hat-opt').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -305,6 +314,7 @@ App.profile = (function () {
         }
         draft.hat = h || null;
         refreshPreview();
+        keep({ hat: draft.hat });
       });
     });
     overlay.querySelectorAll('.profile-flag-opt').forEach(btn => {

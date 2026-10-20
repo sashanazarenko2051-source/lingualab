@@ -176,6 +176,7 @@ App.theme = (function () {
     el.classList.toggle('no-bg-anim', !st.bgAnim);
     el.classList.toggle('reduce-motion', !st.motion);
     el.style.zoom = st.scale === 1 ? '' : String(st.scale);
+    fitHeight();
     if (FONTS[st.font]) el.style.setProperty('--font-body', FONTS[st.font]); else el.style.removeProperty('--font-body');
     // Fewer accents: the unused ones repeat the last chosen accent.
     if (st.accents < 3) el.style.setProperty('--brand-3', value(st.accents === 1 ? 'brand-1' : 'brand-2'));
@@ -184,6 +185,14 @@ App.theme = (function () {
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', value('surface'));
   }
+
+  // With the interface zoomed, 100vh inside the page is taller than the
+  // window, so windows (modals) use the real visible height instead.
+  function fitHeight() {
+    const zoom = settings().scale || 1;
+    document.documentElement.style.setProperty('--app-vh', (window.innerHeight / zoom) + 'px');
+  }
+  window.addEventListener('resize', fitHeight);
 
   // Shows a theme for a few seconds without choosing it (also locked ones).
   let previewTimer = null;

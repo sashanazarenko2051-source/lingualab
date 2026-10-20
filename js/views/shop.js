@@ -44,7 +44,7 @@ function render(root) {
 
 function termSelect(itemId) {
   return `<select class="shop-term" data-term-for="${itemId}">${App.shop.TERMS.map(t =>
-    `<option value="${t.id}">${App.t('term_' + t.id)} — ${App.shop.priceLabel(t.price)}</option>`).join('')}</select>`;
+    `<option value="${t.id}" ${t.id === App.shop.DEFAULT_TERM ? 'selected' : ''}>${App.t('term_' + t.id)} — ${App.shop.priceLabel(t.price)}</option>`).join('')}</select>`;
 }
 
 // One card. opts are fixed options (lang, id, theme); owned shows a badge.
@@ -108,7 +108,12 @@ function sectionHtml(id) {
     title: App.t('theme_' + name), icon: themeSwatch(name), opts: { theme: name },
     extra: `<button class="action-card shop-apply" data-preview-theme="${name}">👁 ${App.t('theme_preview')}</button>`
   })).join('');
-  if (id === 'hints') return [10, 30, 100].map(n => card('hints_' + n, { title: App.t('shop_hints_n', { n }) })).join('');
+  if (id === 'hints') {
+    const h = App.storage.state.hints || {};
+    return [10, 30, 100].map(n => card('hints_' + n, { title: App.t('shop_hints_n', { n }) })).join('')
+      + (h.forever ? '' : card('hints_unl', { title: App.t('shop_hints_unl'), note: untilNote(h.unlimitedUntil || 0) })
+        + card('hints_forever', { title: App.t('shop_hints_forever') }));
+  }
   if (id === 'hats') return App.profile.SHOP_HATS.filter(h => !App.profile.ownsHat(h)).map(h => card('hat', {
     title: App.t('shop_hat'), icon: `<span class="shop-hat-icon">${App.profile.HATS[h]}</span>`, opts: { hat: h }
   })).join('');
@@ -138,6 +143,9 @@ function ownedHtml() {
   if (hearts) out.push(tile('💖', App.t('shop_hearts_unl'), `<div class="shop-card-note">${hearts}</div>`));
   const energy = untilNote((App.storage.state.energy || {}).unlimitedUntil || 0);
   if (energy) out.push(tile('🔋', App.t('shop_energy_unl'), `<div class="shop-card-note">${energy}</div>`));
+  const hs = App.storage.state.hints || {};
+  if (hs.forever) out.push(tile('🌟', App.t('shop_hints_forever')));
+  else if (untilNote(hs.unlimitedUntil || 0)) out.push(tile('♾️', App.t('shop_hints_unl'), `<div class="shop-card-note">${untilNote(hs.unlimitedUntil)}</div>`));
   const current = App.theme.settings().theme;
   App.theme.PREMIUM.filter(name => App.shop.ownsTheme(name)).forEach(name => out.push(tile(themeSwatch(name), App.t('theme_' + name),
     name === current ? `<span class="shop-owned">✅ ${App.t('shop_owned')}</span>`
