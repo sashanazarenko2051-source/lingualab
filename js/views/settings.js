@@ -67,6 +67,7 @@ function render(root) {
       <section class="settings-card">
         <h2>🌍 ${App.t('set_country')}</h2>
         <p class="settings-hint">${App.t('country_hint')}</p>
+        ${App.regions.searchHtml('set-country-search')}
         <select class="shop-term" id="set-country">${App.regions.optionsHtml(App.regions.country() || 'OTHER')}</select>
       </section>
 
@@ -98,6 +99,7 @@ function render(root) {
   root.querySelector('#set-notify-test').addEventListener('click', () => App.notify.test().then(() => render(root)));
 
   root.querySelector('#set-country').addEventListener('change', e => App.regions.setCountry(e.target.value));
+  App.regions.bindSearch(root.querySelector('#set-country-search'), root.querySelector('#set-country'), v => App.regions.setCountry(v));
   bindVoiceCard(root);
 }
 

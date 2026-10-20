@@ -1845,3 +1845,5 @@ button { background: none; }
 .help-lang span { font-size: 13px; color: var(--ink-2); }
 .country-card { max-width: 380px; text-align: center; }
 .country-card select { margin: 8px 0 4px; }
+.country-search { width: 100%; box-sizing: border-box; padding: 8px 10px; margin: 6px 0; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); color: var(--ink); font: inherit; font-weight: 600; }
+.country-search:focus { outline: none; border-color: var(--brand-1); }

@@ -63,6 +63,23 @@ App.regions = (function () {
     return codes.concat('OTHER').map(c => `<option value="${c}" ${c === selected ? 'selected' : ''}>${countryName(c)}</option>`).join('');
   }
 
+  // A search field that narrows a country <select> as you type; the first
+  // match gets selected (and onPick runs, if given).
+  function searchHtml(id) {
+    return `<input class="country-search" id="${id}" type="search" autocomplete="off" placeholder="${App.t('country_search')}">`;
+  }
+  function bindSearch(input, select, onPick) {
+    const all = [...select.options].map(o => ({ value: o.value, text: o.textContent }));
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      const keep = all.filter(o => !q || o.text.toLowerCase().includes(q) || o.value.toLowerCase() === q);
+      const current = select.value;
+      select.innerHTML = keep.map(o => `<option value="${o.value}">${o.text}</option>`).join('');
+      if (keep.some(o => o.value === current) && !q) select.value = current;
+      else if (keep.length && onPick) onPick(select.value);
+    });
+  }
+
   // "Where are you from?" — asked once, after any first-start dialog closes.
   function askIfNeeded() {
     if (country()) return;
@@ -74,18 +91,23 @@ App.regions = (function () {
         <div class="restart-icon">🌍</div>
         <h3>${App.t('country_title')}</h3>
         <p>${App.t('country_hint')}</p>
+        ${searchHtml('country-search')}
         <select class="shop-term" id="country-pick">${optionsHtml(guess() || 'OTHER')}</select>
         <div class="profile-modal-actions">
           <button class="quiz-next" id="country-ok">${App.t('shop_confirm')}</button>
         </div>
       </div>`;
     document.body.appendChild(overlay);
+    bindSearch(overlay.querySelector('#country-search'), overlay.querySelector('#country-pick'));
+    overlay.querySelector('#country-search').focus();
     overlay.querySelector('#country-ok').addEventListener('click', () => {
-      setCountry(overlay.querySelector('#country-pick').value);
+      const v = overlay.querySelector('#country-pick').value;
+      if (!v) return;
+      setCountry(v);
       overlay.remove();
       if (location.hash === '#shop') App.router.go('shop');
     });
   }
 
-  return { COUNTRIES, country, setCountry, countryName, price, optionsHtml, askIfNeeded };
+  return { COUNTRIES, country, setCountry, countryName, price, optionsHtml, searchHtml, bindSearch, askIfNeeded };
 })();
