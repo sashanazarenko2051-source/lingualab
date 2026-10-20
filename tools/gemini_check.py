@@ -100,7 +100,12 @@ Entries:
 {items}"""
 
 
+class Split(Exception):
+    pass
+
+
 def ask(key, lang, cat, chunk):
+    bad = [0]
     items = json.dumps([{'i': i, 'w': w['w'], 't': w['t'], 'ex': w['ex'], 'tex': w['tex']} for i, w in chunk],
                        ensure_ascii=False)
     body = {
@@ -120,6 +125,8 @@ def ask(key, lang, cat, chunk):
             time.sleep(max(60, wake - now))
             continue
         busy = 0
+        if bad[0] >= 2 and len(chunk) > 20:
+            raise Split()
         for model in live:
             url = 'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent' % model
             req = urllib.request.Request(url, data, {'Content-Type': 'application/json', 'x-goog-api-key': key})
@@ -142,12 +149,25 @@ def ask(key, lang, cat, chunk):
                 else:
                     busy += 1
                     print('  %s: HTTP %s' % (model, e.code), flush=True)
+            except (ValueError, KeyError, IndexError) as e:
+                bad[0] += 1  # a broken answer: after two the batch is halved
+                busy += 1
+                print('  %s: bad answer (%s)' % (model, str(e)[:60]), flush=True)
             except Exception as e:
                 busy += 1
                 print('  %s: %s' % (model, e), flush=True)
         if busy:
             print('  models busy, retry in 60s', flush=True)
             time.sleep(60)
+
+
+def ask_split(key, lang, chunk):
+    try:
+        return ask(key, lang, chunk[0][1]['cat'], chunk)
+    except Split:
+        half = len(chunk) // 2
+        print('  answers keep breaking, checking %d + %d words' % (half, len(chunk) - half), flush=True)
+        return ask_split(key, lang, chunk[:half]) + ask_split(key, lang, chunk[half:])
 
 
 def cache_path(lang):
@@ -184,7 +204,7 @@ def check(lang):
         if LIMIT and sent >= LIMIT:
             break
         sent += 1
-        out = ask(key, lang, chunk[0][1]['cat'], chunk)
+        out = ask_split(key, lang, chunk)
         valid = {i for i, _ in chunk}
         for fix in out:
             i = fix.get('i')
