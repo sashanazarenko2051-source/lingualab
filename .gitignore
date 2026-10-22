@@ -1,3 +1,6 @@
 dist/
 tools/.gemini_key
 tools/gemini_cache*/
+tools/.groq_key
+tools/.openrouter_key
+tools/.mistral_key
