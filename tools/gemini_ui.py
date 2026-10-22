@@ -16,7 +16,7 @@ import gemini_check as g
 
 ROOT = g.ROOT
 I18N = os.path.join(ROOT, 'js', 'i18n.js')
-CACHE = os.path.join(g.HERE, 'gemini_cache_ui')
+CACHE = os.path.join(g.HERE, os.environ.get('UI_CACHE', 'gemini_cache_ui'))
 CHUNK = 190
 NAMES = dict(g.LANGS, ru='Russian')
 STR = r"""('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")"""

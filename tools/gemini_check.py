@@ -118,19 +118,28 @@ def ask(key, lang, cat, chunk):
     return gen(key, text, list, len(chunk) > 20)
 
 
-def groq_key():
-    p = os.path.join(HERE, '.groq_key')
+def file_key(name):
+    p = os.path.join(HERE, name)
     return open(p, encoding='utf8').read().strip() if os.path.exists(p) else None
 
 
+# Other free services with an OpenAI-style API: prefix -> (url, key file).
+OPENAI_STYLE = {
+    'groq:': ('https://api.groq.com/openai/v1/chat/completions', '.groq_key'),
+    'or:': ('https://openrouter.ai/api/v1/chat/completions', '.openrouter_key'),
+    'mi:': ('https://api.mistral.ai/v1/chat/completions', '.mistral_key'),
+}
+
+
 def provider_request(model, key, text, data):
-    """A request to Gemini, or to Groq for models named 'groq:<model>'."""
-    if model.startswith('groq:'):
-        body = {'model': model[5:], 'temperature': 0, 'response_format': {'type': 'json_object'},
-                'messages': [{'role': 'user', 'content': text + '\n\nAnswer with a JSON object {"items": [...]} holding that array.'}]}
-        return urllib.request.Request('https://api.groq.com/openai/v1/chat/completions', json.dumps(body).encode('utf8'),
-                                      {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + groq_key(),
-                                       'User-Agent': 'lingualab-check'})
+    """A request to Gemini, or to Groq / OpenRouter for models named 'groq:…' / 'or:…'."""
+    for prefix, (url, keyfile) in OPENAI_STYLE.items():
+        if model.startswith(prefix):
+            body = {'model': model[len(prefix):], 'temperature': 0, 'response_format': {'type': 'json_object'},
+                    'messages': [{'role': 'user', 'content': text + '\n\nAnswer with a JSON object {"items": [...]} holding that array.'}]}
+            return urllib.request.Request(url, json.dumps(body).encode('utf8'),
+                                          {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + file_key(keyfile),
+                                           'User-Agent': 'lingualab-check', 'X-Title': 'WO Lingua Lab word check'})
     url = 'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent' % model
     return urllib.request.Request(url, data, {'Content-Type': 'application/json', 'x-goog-api-key': key})
 
@@ -162,7 +171,7 @@ def gen(key, text, kind=list, can_split=False):
             try:
                 with urllib.request.urlopen(req, timeout=300) as r:
                     resp = json.loads(r.read().decode('utf8'))
-                if model.startswith('groq:'):
+                if model.startswith(tuple(OPENAI_STYLE)):
                     out = json.loads(resp['choices'][0]['message']['content'])
                     if isinstance(out, dict) and kind is list:
                         out = next((v for v in out.values() if isinstance(v, list)), [])
