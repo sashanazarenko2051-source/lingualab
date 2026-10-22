@@ -20,8 +20,10 @@ import json, os, re, sys, time, urllib.request, urllib.error
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HERE = os.path.join(ROOT, 'tools')
-CACHE = os.path.join(HERE, 'gemini_cache')
-BATCH = 220  # a whole topic per request: the free tier counts requests, not words
+# GEMINI_PASS=2 is a second, closer look with its own cache and smaller batches.
+PASS = os.environ.get('GEMINI_PASS', '1')
+CACHE = os.path.join(HERE, 'gemini_cache' if PASS == '1' else 'gemini_cache' + PASS)
+BATCH = int(os.environ.get('GEMINI_BATCH', '220'))  # the free tier counts requests, not words
 # Tried in this order; an overloaded one passes the batch to the next.
 MODELS = os.environ.get('GEMINI_MODEL', 'gemini-3.5-flash,gemini-3.8-flash,gemini-3.7-flash,gemini-3.6-flash,'
                         'gemini-3-flash-preview,gemini-flash-latest,gemini-3.5-flash-lite,gemini-flash-lite-latest,'
@@ -91,6 +93,10 @@ Check every entry and fix real problems only:
 - tex not matching ex.
 Never replace w with a different concept: the list is aligned with other languages by meaning.
 Do not touch entries that are already correct. Do not change punctuation or capitalization style only.
+Keep: explanations in brackets in w and t (they tell similar words apart); whether w has an article or not
+(do not add or remove articles); the regional standard already used (e.g. European Portuguese, Croatian
+vs Serbian, Bokmål); verb aspect and the gender of people in examples. t must stay in Russian.
+Read every entry carefully: spelling, accents, grammar of the example, and whether t really matches w.
 
 Return a JSON array (possibly empty) of corrected entries only:
 [{{"i": <index>, "w": "...", "t": "...", "ex": "...", "tex": "...", "why": "<short reason in Russian>"}}]
@@ -105,11 +111,18 @@ class Split(Exception):
 
 
 def ask(key, lang, cat, chunk):
-    bad = [0]
     items = json.dumps([{'i': i, 'w': w['w'], 't': w['t'], 'ex': w['ex'], 'tex': w['tex']} for i, w in chunk],
                        ensure_ascii=False)
+    # the Russian course is translated into Ukrainian, every other one into Russian
+    text = (PROMPT.replace('Russian', 'Ukrainian') if lang == 'ru' else PROMPT).format(lang=LANGS[lang], cat=cat, items=items)
+    return gen(key, text, list, len(chunk) > 20)
+
+
+def gen(key, text, kind=list, can_split=False):
+    """Sends one prompt and returns the parsed JSON answer (a list or a dict)."""
+    bad = [0]
     body = {
-        'contents': [{'role': 'user', 'parts': [{'text': PROMPT.format(lang=LANGS[lang], cat=cat, items=items)}]}],
+        'contents': [{'role': 'user', 'parts': [{'text': text}]}],
         'generationConfig': {'temperature': 0, 'responseMimeType': 'application/json'},
     }
     data = json.dumps(body).encode('utf8')
@@ -125,7 +138,7 @@ def ask(key, lang, cat, chunk):
             time.sleep(max(60, wake - now))
             continue
         busy = 0
-        if bad[0] >= 2 and len(chunk) > 20:
+        if bad[0] >= 2 and can_split:
             raise Split()
         for model in live:
             url = 'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent' % model
@@ -135,8 +148,8 @@ def ask(key, lang, cat, chunk):
                     resp = json.loads(r.read().decode('utf8'))
                 parts = [x.get('text', '') for x in resp['candidates'][0]['content']['parts'] if not x.get('thought')]
                 out = json.loads(parts[-1])
-                if not isinstance(out, list):
-                    raise ValueError('not a list')
+                if not isinstance(out, kind):
+                    raise ValueError('not a %s' % kind.__name__)
                 print('  answered by %s' % model, flush=True)
                 return out
             except urllib.error.HTTPError as e:
@@ -159,6 +172,8 @@ def ask(key, lang, cat, chunk):
         if busy:
             print('  models busy, retry in 60s', flush=True)
             time.sleep(60)
+        if bad[0] >= 6:
+            raise ValueError('the answers keep breaking')
 
 
 def ask_split(key, lang, chunk):

@@ -743,18 +743,11 @@ button { background: none; }
 .lesson-badge-new { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
 .lesson-badge-mistake { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--bad); }
 .lesson-badge-due { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
-.flashcard-word { font-size: 30px; font-weight: 800; line-height: 1.15; }
-.flashcard-meaning { font-size: 17px; font-weight: 700; color: var(--ink); }
-.flashcard-example-tr { opacity: .75; }
-.intro-actions { display: flex; justify-content: center; margin-top: 14px; }
-.intro-actions .quiz-next { padding: 14px 40px; font-size: 16px; }
 .lesson-summary { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
 .lesson-summary span {
   background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px;
   padding: 6px 12px; font-size: 13px; font-weight: 700;
 }
-.action-card-mistakes { border-color: color-mix(in srgb, var(--bad) 60%, var(--border)); }
-.action-card-mistakes .action-title { color: var(--bad); }
 /* Text word icons ("17", "½", "×2") drawn as a numeral badge. */
 .icon-text {
   display: inline-flex; align-items: center; justify-content: center; min-width: 1.6em; padding: 0 .25em;
@@ -1145,13 +1138,6 @@ button { background: none; }
   background-size: 200% 100%; animation: shimmer 2.4s linear infinite;
 }
 @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
-.course-step { display: flex; gap: 14px; margin-top: 18px; }
-.course-step-num {
-  flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--brand-2); color: #fff;
-  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;
-}
-.course-step-body { flex: 1; }
-.course-step-title { font-weight: 800; margin-bottom: 8px; }
 .note-card {
   background: var(--surface-2); border: 2px solid var(--border); border-radius: 12px;
   padding: 10px 14px; margin-bottom: 8px;
@@ -1232,17 +1218,8 @@ button { background: none; }
 .restart-card .profile-modal-actions { justify-content: center; }
 .restart-icon { font-size: 44px; font-weight: 800; color: var(--warn); }
 .restart-yes { border-color: var(--bad) !important; color: var(--bad); }
-
-.topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
 .topic-card { background: var(--surface); border: 2px solid var(--border); border-radius: 12px; padding: 12px; }
-.topic-card-title { font-weight: 800; margin-bottom: 4px; }
 .topic-card-meta { font-size: 11px; color: var(--ink-muted); margin-bottom: 8px; }
-.topic-card-actions { display: flex; gap: 6px; }
-.topic-card-actions button {
-  flex: 1; border: 2px solid var(--border); background: var(--surface-2); color: var(--ink);
-  border-radius: 8px; padding: 6px 4px; cursor: pointer; font-size: 12px; font-weight: 700;
-}
-.topic-card-actions button:hover { border-color: var(--brand-1); }
 
 .dialogue-list { display: flex; flex-direction: column; gap: 6px; }
 .dialogue-item {
@@ -1256,24 +1233,6 @@ button { background: none; }
 /* Flashcards */
 .session-empty { text-align: center; padding: 60px 20px; color: var(--ink-muted); }
 .session-empty-icon { font-size: 48px; margin-bottom: 12px; }
-.flashcard-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 10px 0 24px; }
-.flashcard-topbar { width: 100%; max-width: 460px; display: flex; align-items: center; gap: 10px; }
-.back-btn {
-  flex: none; border: 2px solid var(--border); background: var(--surface); color: var(--ink-2);
-  border-radius: 10px; padding: 6px 14px; cursor: pointer; font-weight: 700; font-size: 12px;
-  box-shadow: 0 3px 0 var(--border); transition: transform .08s ease, box-shadow .08s ease;
-}
-.back-btn:hover { border-color: var(--brand-1); color: var(--ink); }
-.back-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--border); }
-.flashcard-progress-track { flex: 1; height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
-.flashcard-progress-fill { height: 100%; border-radius: 4px; transition: width .25s ease; }
-.flashcard-progress-num { font-size: 12px; color: var(--ink-2); font-weight: 700; white-space: nowrap; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
-
-.hearts-row {
-  width: 100%; max-width: 460px; margin: 6px 0 2px; display: flex; align-items: center; gap: 6px;
-  font-size: 15px; letter-spacing: 2px;
-}
-.hearts-row.shake, .ex-hearts.shake { animation: heartShake .4s ease; }
 @keyframes heartShake {
   0%, 100% { transform: translateX(0); }
   20% { transform: translateX(-4px); }
@@ -1286,17 +1245,6 @@ button { background: none; }
   background: color-mix(in srgb, var(--brand-3) 16%, var(--surface)); border: 1px solid var(--brand-3);
   border-radius: 999px; padding: 1px 8px; margin-left: 4px; animation: popIn .3s cubic-bezier(.34,1.56,.64,1) both;
 }
-
-.flashcard-stage { width: 100%; max-width: 660px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-.flashcard-peek {
-  flex: 1; min-width: 0; max-width: 92px; border: 2px solid var(--border); background: var(--surface);
-  border-radius: 16px; padding: 10px 6px; display: flex; flex-direction: column;
-  align-items: center; gap: 4px; opacity: .55; box-shadow: 0 3px 0 var(--border);
-  transition: transform .08s ease, box-shadow .08s ease, opacity .15s ease;
-}
-.flashcard-peek-empty { visibility: hidden; }
-.peek-icon { font-size: 22px; line-height: 1; }
-.peek-word { font-size: 11px; font-weight: 700; color: var(--ink-2); text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
 
 .mascot-widget {
   position: fixed; right: 20px; bottom: 20px; z-index: 60;
@@ -1372,7 +1320,6 @@ button { background: none; }
 .mw-text { display: flex; flex-direction: column; gap: 2px; }
 .mw-q { font-size: 11px; color: var(--ink-2); font-weight: 700; }
 .mw-word { font-size: 16px; font-weight: 800; color: var(--brand-1); display: flex; align-items: center; gap: 6px; }
-.mw-say { border: 1px solid var(--border); background: var(--surface-2); border-radius: 8px; cursor: pointer; font-size: 12px; padding: 1px 5px; }
 .mw-tr { font-size: 14px; font-weight: 800; color: var(--warn); animation: popIn .3s ease both; }
 .mw-hint { font-size: 11px; color: var(--ink-muted); }
 .mascot-bubble.pop { animation: popIn .3s ease both; }
@@ -1438,50 +1385,6 @@ button { background: none; }
   background-image: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--accent, var(--slot-1)) 12%, transparent), transparent 70%);
   animation: popIn .3s ease both;
 }
-.flashcard-icon { animation: popIn .4s .05s cubic-bezier(.34,1.56,.64,1) both; }
-.flashcard-category { font-size: 11px; color: var(--ink-muted); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
-.flashcard-icon { font-size: 54px; line-height: 1; margin: 2px 0; filter: drop-shadow(0 4px 10px rgba(0,0,0,.14)); }
-.flashcard-icon-row { display: flex; align-items: center; gap: 8px; }
-.flashcard-word-row { display: flex; align-items: center; gap: 10px; }
-.flashcard-word { font-size: 32px; font-weight: 800; }
-.speak-btn {
-  border: none; background: none; font-size: 20px; cursor: pointer; line-height: 1;
-  padding: 5px; border-radius: 50%; transition: background .15s ease, transform .1s ease;
-}
-.speak-btn:hover { background: var(--surface-2); transform: scale(1.1); }
-.flashcard-example { color: var(--ink-2); font-style: italic; font-size: 13px; }
-.flashcard-translation { font-size: 25px; font-weight: 800; }
-.flashcard-hint { color: var(--ink-muted); font-size: 12px; font-weight: 600; margin: 2px 0; }
-
-.grade-row { display: flex; gap: 8px; width: 100%; max-width: 460px; }
-.grade-row button {
-  flex: 1; border: none; border-radius: 16px; padding: 12px 4px; color: #fff; font-weight: 800; cursor: pointer;
-  display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 20px;
-  transition: transform .08s ease, box-shadow .08s ease;
-}
-.grade-row button:hover { transform: translateY(-2px); }
-.grade-row button:active { transform: translateY(3px); box-shadow: none !important; }
-.grade-row button span { font-size: 11px; font-weight: 700; }
-.grade-again { background: var(--bad); box-shadow: 0 4px 0 var(--bad-dark); }
-.grade-hard { background: var(--warn); box-shadow: 0 4px 0 var(--warn-dark); }
-.grade-good { background: var(--brand-1); box-shadow: 0 4px 0 color-mix(in srgb, var(--brand-1) 70%, #000 20%); }
-.grade-easy { background: var(--good); box-shadow: 0 4px 0 var(--good-dark); }
-
-/* Quiz */
-.quiz-progress { color: var(--ink-2); text-shadow: 0 1px 3px rgba(0,0,0,.6); font-size: 12px; font-weight: 700; margin-bottom: 8px; }
-.quiz-question { font-size: 23px; font-weight: 800; margin-bottom: 4px; }
-.quiz-question-sub { color: var(--ink-2); font-weight: 600; margin-bottom: 16px; }
-.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 560px; }
-.quiz-option {
-  border: 2px solid var(--border); background: var(--surface); border-radius: 14px;
-  padding: 14px; text-align: left; cursor: pointer; font-weight: 700;
-  box-shadow: 0 4px 0 var(--border);
-  transition: transform .08s ease, border-color .1s ease, box-shadow .08s ease, background .15s ease;
-}
-.quiz-option:hover:not(:disabled) { border-color: var(--brand-1); transform: translateY(-1px); }
-.quiz-option:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 var(--border); }
-.quiz-option.correct { border-color: var(--good); background: color-mix(in srgb, var(--good) 15%, var(--surface)); box-shadow: 0 4px 0 var(--good-dark); animation: popIn .25s ease; }
-.quiz-option.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 15%, var(--surface)); box-shadow: 0 4px 0 var(--bad-dark); }
 .quiz-next {
   margin-top: 16px; border: none; background: var(--good); color: #fff;
   border-radius: 10px; padding: 13px 26px; cursor: pointer; font-weight: 800;
@@ -1508,9 +1411,6 @@ button { background: none; }
 .dialogue-line-text { flex: 1; }
 .dialogue-line-orig { font-weight: 700; }
 .dialogue-line-trans { color: var(--ink-muted); font-size: 12px; margin-top: 2px; }
-
-/* Stats */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
 .cat-bar-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
 .cat-bar-label { width: 140px; font-size: 12px; color: var(--ink-2); font-weight: 600; flex: none; }
 .cat-bar-track { flex: 1; min-width: 60px; height: 10px; border-radius: 5px; background: var(--surface-2); overflow: hidden; display: flex; }
@@ -1547,16 +1447,7 @@ button { background: none; }
   .skill-node-icon { font-size: 24px; }
   .skill-node-row { max-width: 100%; gap: 10px; }
   .skill-node-label { font-size: 11px; }
-
-  .quiz-options { grid-template-columns: 1fr; max-width: 100%; }
-  .quiz-question { font-size: 19px; }
   .flashcard { padding: 16px; }
-  .flashcard-icon { font-size: 44px; }
-  .flashcard-translation { font-size: 20px; }
-  .flashcard-stage { gap: 4px; }
-  .flashcard-peek { max-width: 56px; padding: 6px 4px; }
-  .peek-icon { font-size: 16px; }
-  .peek-word { font-size: 9px; }
 
   .cat-bar-label { width: 90px; }
 }
@@ -1566,7 +1457,6 @@ button { background: none; }
   .lang-grid { grid-template-columns: repeat(auto-fill, minmax(114px, 1fr)); }
   .skill-node { width: 56px; height: 56px; }
   .skill-node-icon { font-size: 22px; }
-  .grade-row button { font-size: 16px; padding: 10px 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1727,7 +1617,6 @@ button { background: none; }
 .settings-toggle input:focus-visible + .switch { outline: 2px solid var(--brand-1); outline-offset: 2px; }
 .settings-status { font-size: 12px; color: var(--ink-muted); }
 .settings-card .action-card { display: inline-flex; align-self: flex-start; }
-.settings-hearts { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .settings-card .heart-ad-btn { align-self: flex-start; }
 
 /* ---- Reminder banner ---------------------------------------------------- */
@@ -1736,7 +1625,6 @@ button { background: none; }
   background: linear-gradient(100deg, color-mix(in srgb, var(--brand-2) 22%, var(--surface)), var(--surface));
   border: 2px solid color-mix(in srgb, var(--brand-2) 45%, var(--border)); animation: fadeSlideUp .4s ease both;
 }
-.notify-streak { background: linear-gradient(100deg, color-mix(in srgb, var(--warn) 22%, var(--surface)), var(--surface)); border-color: color-mix(in srgb, var(--warn) 45%, var(--border)); }
 .notify-banner-ico { font-size: 28px; flex: none; animation: brandWolfBob 2.4s ease-in-out infinite; }
 .notify-banner-text { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .notify-banner-text span { color: var(--ink-2); font-size: 13px; }
@@ -1820,8 +1708,6 @@ button { background: none; }
 .help-body b { color: var(--ink); }
 .help-tip { margin-bottom: 10px; padding: 10px 14px; border-radius: 12px; color: var(--ink);
   background: color-mix(in srgb, var(--good) 14%, var(--surface)); border: 2px solid color-mix(in srgb, var(--good) 45%, var(--border)); }
-.settings-help { display: flex !important; align-items: center; gap: 10px; align-self: stretch; font-weight: 800; }
-.settings-help span { color: var(--ink-muted); font-weight: 600; font-size: 12px; }
 .heart-popup-more { margin-top: 10px; background: none; border: none; color: var(--brand-1); font-weight: 700; cursor: pointer; }
 
 /* ---- Shop ---------------------------------------------------------------- */
@@ -1978,13 +1864,6 @@ button { background: none; }
 .seg-btn { border: none; background: transparent; color: var(--ink-2); font: inherit; font-weight: 800; min-width: 40px; padding: 6px 10px; border-radius: 9px; cursor: pointer; }
 .seg-btn.active { background: var(--brand-1); color: #fff; }
 .accent-count-row { margin-bottom: 10px; }
-
-/* Country in Settings: a short list + Save */
-.country-list { height: auto; padding: 4px; }
-.country-list option { padding: 6px 8px; border-radius: 6px; }
-.country-list option:checked { background: var(--brand-1); color: #fff; }
-.country-save-row { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
-.country-save-row .country-save { margin: 0 0 0 auto; padding: 9px 20px; }
 .country-current { font-weight: 700; color: var(--ink-2); }
 
 .settings-bottom { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 6px 0 24px; }
