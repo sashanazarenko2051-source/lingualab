@@ -118,6 +118,23 @@ def ask(key, lang, cat, chunk):
     return gen(key, text, list, len(chunk) > 20)
 
 
+def groq_key():
+    p = os.path.join(HERE, '.groq_key')
+    return open(p, encoding='utf8').read().strip() if os.path.exists(p) else None
+
+
+def provider_request(model, key, text, data):
+    """A request to Gemini, or to Groq for models named 'groq:<model>'."""
+    if model.startswith('groq:'):
+        body = {'model': model[5:], 'temperature': 0, 'response_format': {'type': 'json_object'},
+                'messages': [{'role': 'user', 'content': text + '\n\nAnswer with a JSON object {"items": [...]} holding that array.'}]}
+        return urllib.request.Request('https://api.groq.com/openai/v1/chat/completions', json.dumps(body).encode('utf8'),
+                                      {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + groq_key(),
+                                       'User-Agent': 'lingualab-check'})
+    url = 'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent' % model
+    return urllib.request.Request(url, data, {'Content-Type': 'application/json', 'x-goog-api-key': key})
+
+
 def gen(key, text, kind=list, can_split=False):
     """Sends one prompt and returns the parsed JSON answer (a list or a dict)."""
     bad = [0]
@@ -141,13 +158,17 @@ def gen(key, text, kind=list, can_split=False):
         if bad[0] >= 2 and can_split:
             raise Split()
         for model in live:
-            url = 'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent' % model
-            req = urllib.request.Request(url, data, {'Content-Type': 'application/json', 'x-goog-api-key': key})
+            req = provider_request(model, key, text, data)
             try:
                 with urllib.request.urlopen(req, timeout=300) as r:
                     resp = json.loads(r.read().decode('utf8'))
-                parts = [x.get('text', '') for x in resp['candidates'][0]['content']['parts'] if not x.get('thought')]
-                out = json.loads(parts[-1])
+                if model.startswith('groq:'):
+                    out = json.loads(resp['choices'][0]['message']['content'])
+                    if isinstance(out, dict) and kind is list:
+                        out = next((v for v in out.values() if isinstance(v, list)), [])
+                else:
+                    parts = [x.get('text', '') for x in resp['candidates'][0]['content']['parts'] if not x.get('thought')]
+                    out = json.loads(parts[-1])
                 if not isinstance(out, kind):
                     raise ValueError('not a %s' % kind.__name__)
                 print('  answered by %s' % model, flush=True)
@@ -156,7 +177,7 @@ def gen(key, text, kind=list, can_split=False):
                 msg = e.read().decode('utf8', 'replace')
                 if e.code in (400, 401, 403):
                     sys.exit('Gemini error %s: %s' % (e.code, msg[:300]))
-                if e.code == 404 or (e.code == 429 and ('PerDay' in msg or 'limit: 0' in msg)):
+                if e.code == 404 or (e.code == 429 and ('PerDay' in msg or 'limit: 0' in msg or 'per day' in msg)):
                     exhausted[model] = time.time() + (365 * 86400 if e.code == 404 or 'limit: 0' in msg else RESET)
                     print('  %s: out for today' % model, flush=True)
                 else:
