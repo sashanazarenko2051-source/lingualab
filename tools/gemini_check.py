@@ -184,6 +184,11 @@ def gen(key, text, kind=list, can_split=False):
                 return out
             except urllib.error.HTTPError as e:
                 msg = e.read().decode('utf8', 'replace')
+                if e.code == 400 and ('json_validate_failed' in msg or 'too large' in msg.lower()):
+                    bad[0] += 1  # the model could not build valid JSON: like a broken answer
+                    busy += 1
+                    print('  %s: bad answer (HTTP 400)' % model, flush=True)
+                    continue
                 if e.code in (400, 401, 403):
                     sys.exit('Gemini error %s: %s' % (e.code, msg[:300]))
                 if e.code == 404 or (e.code == 429 and ('PerDay' in msg or 'limit: 0' in msg or 'per day' in msg)):
