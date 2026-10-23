@@ -735,6 +735,606 @@ const HELP = {
         "\n        <p>I <b>⚙️ Inställningar</b> kan du välja ett tema eller egna färger, ändra gränssnittets storlek och slå på eller av påminnelser som ”du har inte övat på ett tag”.</p>"
       ]
     ]
+  },
+  bg: {
+    "title": "Как работи",
+    "intro": "Кратко ръководство: как е устроен курсът, колко да учите на ден и за какво служат сърцата.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "Курсът",
+        "\n        <p>Всеки език има <b>36 теми</b> — общо <b>8000 думи</b>. Темите следват нивата <b>A0 → A1 → A2 → B1 → B2</b>: от поздрави и числа до работа, здраве, общество и наука.</p>\n        <ul>\n          <li><b>A0</b> — първи стъпки: около 150 думи.</li>\n          <li><b>A1</b> — до 1500 думи: прости фрази за себе си и ежедневието.</li>\n          <li><b>A2</b> — 1500–2500 думи: ежедневни ситуации.</li>\n          <li><b>B1</b> — 2700–4500 думи: работа, учене, пътуване.</li>\n          <li><b>B2</b> — 5000–8000 думи: <b>свободен разговор</b> на всякакви теми.</li>\n        </ul>\n        <p>Започнете със <b>„Започни урок“</b> на началната страница — приложението ще избере следващата тема за вас. Целият път е на страницата на курса. Следващата тема се отключва, след като научите всяка дума от предишната или преминете успешно изпита за нея.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "Урок",
+        "\n        <p>Всеки урок започва със <b>загрявка</b>: сгрешени думи и думи, които е време да преговорите.</p>\n        <p>След това следват <b>8 нови думи</b> в групи по 4: първо въведение (картинка, дума, произношение), а след това упражнения — избор на картинка, свързване на двойки, разпознаване по слух, превод, съставяне на изречение, изписване на думата.</p>\n        <p>Затруднявате се? В „Напиши думата“ имате <b>💡 Подсказка</b> (показва следващата буква) и <b>👁 Покажи думата</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Преговор",
+        "\n        <p>Приложението използва <b>интервално повторение</b>: дадена дума се връща точно когато започвате да я забравяте — след 1 ден, след това след 6 дни, а след това все по-рядко. Сгрешите ли я, тя се връща отново утре.</p>\n        <p>Всички грешки отиват в <b>„Поправи грешките“</b>. Думата излиза оттам, след като отговорите правилно в два поредни урока.</p>\n        <p>Звездата <b>☆</b> добавя дума в „Моите думи“, за да можете да я преговаряте отделно.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Колко да учите на ден",
+        "\n        <div class=\"help-tip\">Препоръчваме <b>10–15 нови думи на ден</b> (1–2 урока) <b>+ преговор всеки ден</b>.</div>\n        <ul>\n          <li><b>10 минути всеки ден е по-добре от час веднъж седмично.</b> Паметта затвърждава думите по време на сън, а кратките редовни сесии дават много по-добър резултат от редките и дълги занимания.</li>\n          <li><b>Не гонете бройки.</b> 15 думи на ден са ~450 думи на месец. Ако учите по 50, повечето бързо ще се забравят.</li>\n          <li><b>Преговорът е по-важен от новите думи.</b> Ако се натрупат грешки, отделете един ден за „Поправи грешките“, без да учите нови думи.</li>\n          <li><b>Дневната цел е 30 отговора</b> — приблизително един урок заедно със загрявката.</li>\n          <li><b>Изговаряйте думите на глас</b> и съчинявайте свои собствени изречения с тях — така се запомнят много по-бързо.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Сърца, енергия и подсказки",
+        "\n        <ul>\n          <li>Имате <b>25 сърца</b>, които се запазват между уроците. Грешка или „👁 Покажи думата“ струва <b>1 сърце</b>.</li>\n          <li><b>1 реклама = +1 сърце</b>, колкото пожелаете — сърцата могат да надхвърлят 25.</li>\n          <li><b>16 часа</b> след първото загубено сърце се възстановява <b>половината (+13)</b>; след <b>24 часа</b> отново имате <b>25</b>.</li>\n          <li><b>⚡ Енергия:</b> всеки <b>10 думи</b> струват <b>5 енергия</b>. Получавате <b>+5</b> на всеки час до <b>200</b>; след 24 часа отново имате <b>200</b>.</li>\n          <li><b>1 реклама = +15 енергия</b>, без ограничение.</li>\n          <li><b>💡 Подсказки:</b> <b>5 на ден</b>, обновяват се ежедневно. Още можете да получите срещу реклама или в магазина.</li>\n          <li>Изпитите за ниво не изразходват сърца или енергия.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Серия, XP и нива",
+        "\n        <p>Вашата <b>серия</b> расте всеки ден, в който завършите поне един урок. Пламъкът в началото е <b>обикновен</b>, става <b>син</b> след седмица, <b>лилав</b> след 3 седмици и <b>сив</b>, когато е пропуснат ден. Пропуснахте 1–2 дни? Възстановете серията си с реклама.</p>\n        <p><b>XP</b> се печели само от верни отговори и преговори: <b>+10 XP</b> за верен отговор, <b>+5 XP</b> за всеки 3 поредни, <b>+25 XP</b> за урок без грешки. Урок от нова тема носи около <b>250–350 XP</b>.</p>\n        <p>Класации за <b>деня, седмицата и месеца</b>. Вашето ниво (A0 → B2) расте заедно с научените думи.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Монети и мисии",
+        "\n        <ul>\n          <li><b>Монетите 🪙</b> са валутата в приложението за купуване на сърца, енергия и подсказки в магазина.</li>\n          <li><b>Дневна цел</b> (30 отговора): <b>+10 🪙</b>. <b>Препоръчителна цел</b> (60): <b>+25 🪙 и +30 XP</b>. <b>Всяко ново ниво</b>: <b>+50 🪙</b>.</li>\n          <li><b>🎯 Мисиите</b> се обновяват всеки понеделник: лесна <b>+15 🪙</b>, средна <b>+40 🪙</b>, трудна <b>+100 🪙</b>.</li>\n          <li><b>📝 Седмичен изпит за преговор</b>: 20 научени думи; 80% или повече носи <b>+60 🪙 и +100 XP</b>.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Значки под знамето",
+        "\n        <ul>\n          <li><b>✅</b> — думи от този език, на които вече сте отговорили правилно.</li>\n          <li><b>📚</b> — общ брой думи в курса (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 думи ви осигуряват B2: свободен разговор. Това е целта на целия курс.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Настройки",
+        "\n        <p>В <b>⚙️ Настройки</b> можете да изберете тема или собствени цветове, да промените размера на интерфейса и да включвате или изключвате напомняния от типа „не сте учили от известно време“.</p>"
+      ]
+    ]
+  },
+  el: {
+    "title": "Πώς λειτουργεί",
+    "intro": "Ένας σύντομος οδηγός: πώς είναι δομημένο το μάθημα, πόσο να μαθαίνετε την ημέρα και σε τι χρησιμεύουν οι καρδιές.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "Το μάθημα",
+        "\n        <p>Κάθε γλώσσα περιλαμβάνει <b>36 ενότητες</b> — <b>8000 λέξεις</b> συνολικά. Οι ενότητες ακολουθούν τα επίπεδα <b>A0 → A1 → A2 → B1 → B2</b>: από χαιρετισμούς και αριθμούς μέχρι εργασία, υγεία, κοινωνία και επιστήμη.</p>\n        <ul>\n          <li><b>A0</b> — πρώτα βήματα: περίπου 150 λέξεις.</li>\n          <li><b>A1</b> — έως 1500 λέξεις: απλές φράσεις για τον εαυτό σας και την καθημερινή ζωή.</li>\n          <li><b>A2</b> — 1500–2500 λέξεις: καθημερινές καταστάσεις.</li>\n          <li><b>B1</b> — 2700–4500 λέξεις: εργασία, σπουδές, ταξίδια.</li>\n          <li><b>B2</b> — 5000–8000 λέξεις: <b>άνετη συνομιλία</b> για οποιοδήποτε θέμα.</li>\n        </ul>\n        <p>Ξεκινήστε με το <b>«Έναρξη μαθήματος»</b> στην αρχική σελίδα — η εφαρμογή επιλέγει την επόμενη ενότητα για εσάς. Ολόκληρη η διαδρομή βρίσκεται στη σελίδα του μαθήματος. Η επόμενη ενότητα ξεκλειδώνει μόλις μελετηθεί κάθε λέξη της προηγούμενης ή περάσετε το τεστ της.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "Ένα μάθημα",
+        "\n        <p>Κάθε μάθημα ξεκινά με μια <b>προθέρμανση</b>: λέξεις στις οποίες κάνατε λάθος και λέξεις που είναι έτοιμες για επανάληψη.</p>\n        <p>Στη συνέχεια ακολουθούν <b>8 νέες λέξεις</b> σε ομάδες των 4: πρώτα μια παρουσίαση (εικόνα, λέξη, προφορά), και μετά ασκήσεις — επιλογή εικόνας, αντιστοίχιση ζευγών, αναγνώριση με την ακοή, μετάφραση, σχηματισμός φράσης, πληκτρολόγηση της λέξης.</p>\n        <p>Κολλήσατε; Στο «Πληκτρολογήστε τη λέξη» υπάρχει η <b>💡 Υπόδειξη</b> (αποκαλύπτει το επόμενο γράμμα) και η <b>👁 Εμφάνιση λέξης</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Επανάληψη",
+        "\n        <p>Η εφαρμογή χρησιμοποιεί <b>διαλειμματική επανάληψη</b>: μια λέξη επανέρχεται ακριβώς τη στιγμή που αρχίζετε να την ξεχνάτε — μετά από 1 ημέρα, μετά από 6 ημέρες, και στη συνέχεια όλο και πιο σπάνια. Κάντε λάθος, και θα επιστρέψει αύριο.</p>\n        <p>Όλα τα λάθη πηγαίνουν στη <b>«Διόρθωση λαθών»</b>. Μια λέξη απομακρύνεται από εκεί αφού απαντήσετε σωστά σε δύο συνεχόμενα μαθήματα.</p>\n        <p>Το αστέρι <b>☆</b> προσθέτει μια λέξη στις «Λέξεις μου», ώστε να μπορείτε να την επαναλάβετε ξεχωριστά.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Πόσο να μαθαίνετε την ημέρα",
+        "\n        <div class=\"help-tip\">Προτείνουμε <b>10–15 νέες λέξεις την ημέρα</b> (1–2 μαθήματα) <b>+ καθημερινή επανάληψη</b>.</div>\n        <ul>\n          <li><b>10 λεπτά κάθε μέρα είναι καλύτερα από μία ώρα μία φορά την εβδομάδα.</b> Η μνήμη εδραιώνει τις λέξεις κατά τη διάρκεια του ύπνου, και οι σύντομες, συχνές συνεδρίες αποδίδουν καλύτερα από τις σπάνιες και μεγάλες.</li>\n          <li><b>Μην κυνηγάτε τους αριθμούς.</b> 15 λέξεις την ημέρα είναι ~450 λέξεις τον μήνα. Αν δοκιμάσετε 50, οι περισσότερες θα ξεχαστούν.</li>\n          <li><b>Η επανάληψη έχει μεγαλύτερη σημασία από τις νέες λέξεις.</b> Αν συσσωρευτούν λάθη, αφιερώστε μια μέρα στη «Διόρθωση λαθών» χωρίς νέες λέξεις.</li>\n          <li><b>Ο ημερήσιος στόχος είναι 30 απαντήσεις</b> — περίπου ένα μάθημα μαζί με την προθέρμανσή του.</li>\n          <li><b>Λέτε τις λέξεις δυνατά</b> και φτιάξτε δικές σας προτάσεις με αυτές — έτσι αποτυπώνονται γρηγορότερα.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Καρδιές, ενέργεια και υποδείξεις",
+        "\n        <ul>\n          <li>Έχετε <b>25 καρδιές</b>, οι οποίες διατηρούνται μεταξύ των μαθημάτων. Ένα λάθος ή η «👁 Εμφάνιση λέξης» κοστίζει <b>1 καρδιά</b>.</li>\n          <li><b>1 διαφήμιση = +1 καρδιά</b>, όσες φορές θέλετε — οι καρδιές μπορούν να ξεπεράσουν τις 25.</li>\n          <li><b>16 ώρες</b> μετά την πρώτη χαμένη καρδιά, επιστρέφουν <b>οι μισές (+13)</b>· μετά από <b>24 ώρες</b> έχετε πάλι <b>25</b>.</li>\n          <li><b>⚡ Ενέργεια:</b> κάθε <b>10 λέξεις</b> κοστίζουν <b>5 ενέργεια</b>. <b>+5</b> κάθε ώρα έως τις <b>200</b>· μετά από 24 ώρες γεμίζει ξανά στις <b>200</b>.</li>\n          <li><b>1 διαφήμιση = +15 ενέργεια</b>, χωρίς όριο.</li>\n          <li><b>💡 Υποδείξεις:</b> <b>5 την ημέρα</b>, ανανεώνονται καθημερινά. Περισσότερες με διαφήμιση ή στο κατάστημα.</li>\n          <li>Τα τεστ επιπέδου δεν καταναλώνουν καρδιές ή ενέργεια.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Σερί, XP και επίπεδα",
+        "\n        <p>Το <b>σερί</b> σας μεγαλώνει κάθε μέρα που ολοκληρώνετε τουλάχιστον ένα μάθημα. Η φλόγα είναι <b>κανονική</b> στην αρχή, <b>μπλε</b> μετά από μία εβδομάδα, <b>μωβ</b> μετά από 3 εβδομάδες και <b>γκρι</b> όταν χάνεται μια ημέρα. Χάσατε 1–2 ημέρες; Επαναφέρετε το σερί παρακολουθώντας μια διαφήμιση.</p>\n        <p>Τα <b>XP</b> κερδίζονται μόνο από σωστές απαντήσεις και επαναλήψεις: <b>+10 XP</b> για κάθε σωστή απάντηση, <b>+5 XP</b> για κάθε 3 συνεχόμενες σωστές, <b>+25 XP</b> για ένα μάθημα χωρίς λάθη. Ένα μάθημα νέας ενότητας δίνει περίπου <b>250–350 XP</b>.</p>\n        <p>Πίνακες κατάταξης για την <b>ημέρα, την εβδομάδα και τον μήνα</b>. Το επίπεδό σας (A0 → B2) ανεβαίνει μαζί με τις λέξεις που μαθαίνετε.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Νομίσματα και αποστολές",
+        "\n        <ul>\n          <li>Τα <b>νομίσματα 🪙</b> είναι το νόμισμα της εφαρμογής για καρδιές, ενέργεια και υποδείξεις στο κατάστημα.</li>\n          <li><b>Ημερήσιος στόχος</b> (30 απαντήσεις): <b>+10 🪙</b>. <b>Προτεινόμενος στόχος</b> (60): <b>+25 🪙 και +30 XP</b>. <b>Κάθε νέο επίπεδο</b>: <b>+50 🪙</b>.</li>\n          <li>Οι <b>🎯 Αποστολές</b> ανανεώνονται κάθε Δευτέρα: εύκολη <b>+15 🪙</b>, μεσαία <b>+40 🪙</b>, δύσκολη <b>+100 🪙</b>.</li>\n          <li><b>📝 Εβδομαδιαίο τεστ επανάληψης</b>: 20 λέξεις που έχετε μάθει· με 80% ή περισσότερο κερδίζετε <b>+60 🪙 και +100 XP</b>.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Εμβλήματα κάτω από τη σημαία",
+        "\n        <ul>\n          <li><b>✅</b> — λέξεις αυτής της γλώσσας που έχετε ήδη απαντήσει σωστά.</li>\n          <li><b>📚</b> — συνολικές λέξεις στο μάθημα (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 λέξεις σάς δίνουν το B2: άνετη συνομιλία. Αυτός είναι ο στόχος ολόκληρου του μαθήματος.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Ρυθμίσεις",
+        "\n        <p>Στις <b>⚙️ Ρυθμίσεις</b> μπορείτε να επιλέξετε ένα θέμα εμφάνισης ή τα δικά σας χρώματα, να αλλάξετε το μέγεθος του περιβάλλοντος χρήστη και να ενεργοποιήσετε ή να απενεργοποιήσετε υπενθυμίσεις όπως «έχετε καιρό να μελετήσετε».</p>"
+      ]
+    ]
+  },
+  fi: {
+    "title": "Miten se toimii",
+    "intro": "Pikaopas: miten kurssi on rakennettu, kuinka paljon kannattaa opiskella päivässä ja mihin sydämiä tarvitaan.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "Kurssi",
+        "\n        <p>Jokaisessa kielessä on <b>36 aihetta</b> — yhteensä <b>8000 sanaa</b>. Aiheet etenevät tasojen mukaan <b>A0 → A1 → A2 → B1 → B2</b>: tervehdyksistä ja numeroista aina työhön, terveyteen, yhteiskuntaan ja tieteeseen.</p>\n        <ul>\n          <li><b>A0</b> — ensiaskeleet: noin 150 sanaa.</li>\n          <li><b>A1</b> — enintään 1500 sanaa: yksinkertaisia lauseita itsestäsi ja arjesta.</li>\n          <li><b>A2</b> — 1500–2500 sanaa: jokapäiväisiä tilanteita.</li>\n          <li><b>B1</b> — 2700–4500 sanaa: työ, opiskelu, matkustaminen.</li>\n          <li><b>B2</b> — 5000–8000 sanaa: <b>sujuva keskustelu</b> mistä tahansa aiheesta.</li>\n        </ul>\n        <p>Aloita napauttamalla <b>”Aloita oppitunti”</b> kotisivulla — sovellus valitsee seuraavan aiheen puolestasi. Koko opintopolku löytyy kurssisivulta. Seuraava aihe avautuu, kun edellisen aiheen jokainen sana on opiskeltu tai sen koe on suoritettu.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "Oppitunti",
+        "\n        <p>Jokainen oppitunti alkaa <b>lämmittelyllä</b>: sanoilla, joissa teit aiemmin virheen, sekä kertausta odottavilla sanoilla.</p>\n        <p>Sitten opit <b>8 uutta sanaa</b> neljän sanan ryhmissä: ensin esittely (kuva, sana, ääntäminen) ja sen jälkeen harjoitukset — valitse kuva, yhdistä parit, tunnista kuuntelemalla, käännä, muodosta lause, kirjoita sana.</p>\n        <p>Juutuitko jumiin? ”Kirjoita sana” -tehtävässä on <b>💡 Vihje</b> (paljastaa seuraavan kirjaimen) ja <b>👁 Näytä sana</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Kertaus",
+        "\n        <p>Sovellus hyödyntää <b>jaksotettua kertausta</b>: sana palaa harjoituksiin juuri silloin, kun olet un 서htamassa sen — 1 päivän kuluttua, sitten 6 päivän päästä ja sen jälkeen yhä harvemmin. Jos vastaat väärin, sana palaa harjoiteltavaksi heti huomenna.</p>\n        <p>Kaikki virheet kertyvät osioon <b>”Korjaa virheet”</b>. Sana poistuu sieltä, kun vastaat siihen oikein kahdella peräkkäisellä oppitunnilla.</p>\n        <p><b>☆</b>-tähdellä voit lisätä sanan osioon ”Omat sanat” kerrataksesi sitä erikseen.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Kuinka paljon kannattaa opiskella päivässä",
+        "\n        <div class=\"help-tip\">Suosittelemme opiskelemaan <b>10–15 uutta sanaa päivässä</b> (1–2 oppituntia) <b>+ päivittäistä kertausta</b>.</div>\n        <ul>\n          <li><b>10 minuuttia joka päivä on parempi kuin tunti kerran viikossa.</b> Muisti painaa sanat mieleen unen aikana, ja lyhyet, säännölliset harjoitukset toimivat paremmin kuin harvat ja pitkät kerrat.</li>\n          <li><b>Älä tuijota pelkkiä määriä.</b> 15 sanaa päivässä tekee n. 450 sanaa kuukaudessa. Jos otat kerralla 50, suurin osa unohtuu.</li>\n          <li><b>Kertaus on tärkeämpää kuin uudet sanat.</b> Jos virheitä kertyy liikaa, käytä yksi päivä osioon ”Korjaa virheet” opiskelematta uusia sanoja.</li>\n          <li><b>Päivätavoite on 30 vastausta</b> — eli noin yksi oppitunti lämmittelyineen.</li>\n          <li><b>Lausu sanat ääneen</b> ja keksii niistä omia lauseita — niin ne painuvat mieleen nopeammin.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Sydämet, energia ja vihjeet",
+        "\n        <ul>\n          <li>Sinulla on <b>25 sydäntä</b>, jotka säilyvät oppituntien välillä. Virhe tai ”👁 Näytä sana” maksaa <b>1 sydämen</b>.</li>\n          <li><b>1 mainos = +1 sydän</b>, niin monta kuin haluat — sydämiä voi kertyä yli 25.</li>\n          <li>Kun ensimmäisen menetetyn sydämen kulumisesta on kulunut <b>16 tuntia</b>, <b>puolet (+13)</b> palautuu; <b>24 tunnin</b> kuluttua sinulla on taas täydet <b>25</b>.</li>\n          <li><b>⚡ Energia:</b> jokaista <b>10 sanaa</b> kohden kuluu <b>5 energiaa</b>. Saat <b>+5</b> joka tunti aina <b>200</b> asti; 24 tunnin kuluttua energiasi on taas <b>200</b>.</li>\n          <li><b>1 mainos = +15 energiaa</b>, ei ylärajaa.</li>\n          <li><b>💡 Vihjeet:</b> <b>5 päivässä</b>, uusiutuvat päivittäin. Lisää saat katsomalla mainoksen tai kaupasta.</li>\n          <li>Tasokokeissa ei kulu sydämiä eikä energiaa.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Putki, XP ja tasot",
+        "\n        <p><b>Putkesi</b> kasvaa joka päivä, kun suoritat vähintään yhden oppitunnin. Liekki on aluksi <b>tavallinen</b>, viikon jälkeen <b>sininen</b>, 3 viikon jälkeen <b>violetti</b> ja <b>harmaa</b>, jos päivä jäi välistä. Jäikö 1–2 päivää väliin? Palauta putki katsomalla mainos.</p>\n        <p><b>XP:tä</b> kertyy vain oikeista vastauksista ja kertauksesta: <b>+10 XP</b> jokaisesta oikeasta vastauksesta, <b>+5 XP</b> jokaisesta kolmesta peräkkäisestä oikeasta vastauksesta ja <b>+25 XP</b> virheettömästä oppitunnista. Uuden aiheen oppitunti antaa noin <b>250–350 XP</b>.</p>\n        <p>Tulostaulukot löytyvät <b>päivälle, viikolle ja kuukaudelle</b>. Tasosi (A0 → B2) kehittyy oppimiesi sanojen myötä.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Kolikot ja tehtävät",
+        "\n        <ul>\n          <li><b>Kolikot 🪙</b> ovat sovelluksen valuuttaa, jolla voit hankkia kaupasta sydämiä, energiaa ja vihjeitä.</li>\n          <li><b>Päivätavoite</b> (30 vastausta): <b>+10 🪙</b>. <b>Suositeltu tavoite</b> (60): <b>+25 🪙 ja +30 XP</b>. <b>Jokainen uusi taso</b>: <b>+50 🪙</b>.</li>\n          <li><b>🎯 Tehtävät</b> uusiutuvat joka maanantai: helppo <b>+15 🪙</b>, keskivaikea <b>+40 🪙</b>, vaikea <b>+100 🪙</b>.</li>\n          <li><b>📝 Viikoittainen kertauskoe</b>: 20 opittua sanaa; vähintään 80 % oikein antaa <b>+60 🪙 ja +100 XP</b>.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Lipukkeet lipun alla",
+        "\n        <ul>\n          <li><b>✅</b> — tämän kielen sanat, joihin olet jo vastannut oikein.</li>\n          <li><b>📚</b> — kurssin kaikkien sanojen määrä (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 sanaa vie tasolle B2: sujuvaan keskusteluun. Se on koko kurssin tavoite.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Asetukset",
+        "\n        <p>Kohdassa <b>⚙️ Asetukset</b> voit valita teeman tai omat värit, muuttaa käyttöliittymän kokoa sekä ottaa käyttöön tai poistaa käytöstä muistutukset, kuten ”et ole opiskellut vähään aikaan”.</p>"
+      ]
+    ]
+  },
+  hr: {
+    "title": "Kako funkcionira",
+    "intro": "Kratki vodič: kako je tečaj osmišljen, koliko učiti dnevno i čemu služe srca.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "Tečaj",
+        "\n        <p>Svaki jezik ima <b>36 tema</b> — ukupno <b>8000 riječi</b>. Teme prate razine <b>A0 → A1 → A2 → B1 → B2</b>: od pozdrava i brojeva do posla, zdravlja, društva i znanosti.</p>\n        <ul>\n          <li><b>A0</b> — prvi koraci: oko 150 riječi.</li>\n          <li><b>A1</b> — do 1500 riječi: jednostavne fraze o sebi i svakodnevnom životu.</li>\n          <li><b>A2</b> — 1500–2500 riječi: svakodnevne situacije.</li>\n          <li><b>B1</b> — 2700–4500 riječi: posao, studij, putovanja.</li>\n          <li><b>B2</b> — 5000–8000 riječi: <b>slobodan razgovor</b> o bilo kojoj temi.</li>\n        </ul>\n        <p>Započni s <b>„Započni lekciju”</b> na početnoj stranici — aplikacija bira sljedeću temu za tebe. Cijeli put nalazi se na stranici tečaja. Sljedeća se tema otvara kada se nauči svaka riječ iz prethodne ili položi njezin ispit.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "Lekcija",
+        "\n        <p>Svaka lekcija počinje <b>zagrijavanjem</b>: riječima koje si pogrešno odgovorio/la i riječima koje su spremne za ponavljanje.</p>\n        <p>Zatim slijedi <b>8 novih riječi</b> u grupama po 4: prvo uvod (slika, riječ, izgovor), a zatim vježbe — odaberi sliku, spoji parove, prepoznaj po sluhu, prevedi, sastavi frazu, upiši riječ.</p>\n        <p>Zapelo je? „Upiši riječ” ima <b>💡 Savjet</b> (otkriva sljedeće slovo) i <b>👁 Prikaži riječ</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Ponavljanje",
+        "\n        <p>Aplikacija koristi <b>razmaknuto ponavljanje</b>: riječ se vraća točno kada je počneš zaboravljati — nakon 1 dana, zatim 6 dana, pa sve rjeđe. Ako pogriješiš, vraća se sutra.</p>\n        <p>Sve pogreške idu u <b>„Ispravi pogreške”</b>. Riječ izlazi odande nakon što točno odgovoriš u dvije lekcije zaredom.</p>\n        <p>Zvijezda <b>☆</b> dodaje riječ u „Moje riječi” kako bi je mogao/la ponavljati odvojeno.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Koliko učiti dnevno",
+        "\n        <div class=\"help-tip\">Preporučujemo <b>10–15 novih riječi dnevno</b> (1–2 lekcije) <b>+ ponavljanje svaki dan</b>.</div>\n        <ul>\n          <li><b>10 minuta svaki dan bolje je od sat vremena jednom tjedno.</b> Pamćenje utvrđuje riječi tijekom spavanja, a kratke i česte sesije djeluju bolje od rijetkih i dugih.</li>\n          <li><b>Nemoj loviti brojke.</b> 15 riječi dnevno je ~450 riječi mjesečno. Uzmeš li 50, većina će se zaboraviti.</li>\n          <li><b>Ponavljanje je važnije od novih riječi.</b> Ako se pogreške nagomilaju, provedi dan na „Ispravi pogreške” bez novih riječi.</li>\n          <li><b>Dnevni cilj je 30 odgovora</b> — otprilike jedna lekcija sa svojim zagrijavanjem.</li>\n          <li><b>Izgovaraj riječi naglas</b> i smišljaj vlastite rečenice s njima — brže se pamte.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Srca, energija i savjeti",
+        "\n        <ul>\n          <li>Imaš <b>25 srca</b> koja se čuvaju između lekcija. Pogreška ili „👁 Prikaži riječ” košta <b>1 srce</b>.</li>\n          <li><b>1 oglas = +1 srce</b>, koliko god želiš — srca mogu ići i preko 25.</li>\n          <li><b>16 sati</b> nakon prvog izgubljenog srca vraća se <b>polovica (+13)</b>; nakon <b>24 sata</b> opet imaš <b>25</b>.</li>\n          <li><b>⚡ Energija:</b> svakih <b>10 riječi</b> košta <b>5 energije</b>. <b>+5</b> svakog sata do <b>200</b>; nakon 24 sata opet je <b>200</b>.</li>\n          <li><b>1 oglas = +15 energije</b>, bez ograničenja.</li>\n          <li><b>💡 Savjeti:</b> <b>5 dnevno</b>, obnavljaju se svakodnevno. Više za oglas ili u trgovini.</li>\n          <li>Ispiti razina ne troše srca ni energiju.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Niz, XP i razine",
+        "\n        <p>Tvoj <b>niz</b> raste svakog dana kada završiš barem jednu lekciju. Plamen je isprva <b>običan</b>, <b>plav</b> nakon tjedan dana, <b>ljubičast</b> nakon 3 tjedna i <b>siv</b> kada propustiš dan. Propustio/la si 1–2 dana? Obnovi niz pomoću oglasa.</p>\n        <p><b>XP</b> dolazi samo od točnih odgovora i ponavljanja: <b>+10 XP</b> po točnom odgovoru, <b>+5 XP</b> za svakih 3 zaredom, <b>+25 XP</b> za lekciju bez pogrešaka. Lekcija s novom temom donosi oko <b>250–350 XP</b>.</p>\n        <p>Ljestvice poretka za <b>dan, tjedan i mjesec</b>. Tvoja razina (A0 → B2) raste s riječima koje naučiš.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Kovanice i zadaci",
+        "\n        <ul>\n          <li><b>Kovanice 🪙</b> su valuta u aplikaciji za srca, energiju i savjete u trgovini.</li>\n          <li><b>Dnevni cilj</b> (30 odgovora): <b>+10 🪙</b>. <b>Preporučeni cilj</b> (60): <b>+25 🪙 i +30 XP</b>. <b>Svaka nova razina</b>: <b>+50 🪙</b>.</li>\n          <li><b>🎯 Zadaci</b> se obnavljaju svakog ponedjeljka: lak <b>+15 🪙</b>, srednji <b>+40 🪙</b>, težak <b>+100 🪙</b>.</li>\n          <li><b>📝 Tjedni ispit ponavljanja</b>: 20 naučenih riječi; 80% ili više donosi <b>+60 🪙 i +100 XP</b>.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Značke ispod zastave",
+        "\n        <ul>\n          <li><b>✅</b> — riječi ovog jezika na koje si već točno odgovorio/la.</li>\n          <li><b>📚</b> — ukupno riječi u tečaju (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 riječi daje ti B2: slobodan razgovor. To je cilj cijelog tečaja.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Postavke",
+        "\n        <p>U <b>⚙️ Postavkama</b> možeš odabrati temu ili vlastite boje, promijeniti veličinu sučelja te uključiti ili isključiti podsjetnike poput „već dugo nisi učio/la”.</p>"
+      ]
+    ]
+  },
+  hu: {
+    "title": "Hogyan működik",
+    "intro": "Egy gyors útmutató: hogyan épül fel a tanfolyam, mennyit érdemes tanulni naponta, és mire valók a szívek.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "A tanfolyam",
+        "\n        <p>Minden nyelv <b>36 témakörből</b> áll — összesen <b>8000 szóból</b>. A témakörök az <b>A0 → A1 → A2 → B1 → B2</b> szinteket követik: az üdvözlésektől és számoktól kezdve a munkán, egészségen és társadalmon át a tudományig.</p>\n        <ul>\n          <li><b>A0</b> — az első lépések: körülbelül 150 szó.</li>\n          <li><b>A1</b> — legfeljebb 1500 szó: egyszerű kifejezések önmagadról és a mindennapi életről.</li>\n          <li><b>A2</b> — 1500–2500 szó: hétköznapi helyzetek.</li>\n          <li><b>B1</b> — 2700–4500 szó: munka, tanulás, utazás.</li>\n          <li><b>B2</b> — 5000–8000 szó: <b>szabad társalgás</b> bármilyen témában.</li>\n        </ul>\n        <p>Kezdd a kezdőlapon a <b>„Lecke indítása”</b> gombbal — az app automatikusan kiválasztja neked a következő témakört. A teljes útvonalat a tanfolyam oldalán találod. A következő témakör akkor nyílik meg, ha az előző minden szavát elsajátítottad, vagy sikeresen letetted a vizsgáját.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "Egy lecke",
+        "\n        <p>Minden lecke egy <b>bemelegítéssel</b> indul: olyan szavakkal, amelyeket elrontottál, vagy amelyeket épp ideje átismételni.</p>\n        <p>Ezután <b>8 új szó</b> következik 4-es csoportokban: először egy bemutatás (kép, szó, kiejtés), majd feladatok — válaszd ki a képet, párosíts, ismerd fel hallás után, fordíts, rakj össze egy kifejezést, gépeld be a szót.</p>\n        <p>Elakadtál? A „Gépeld be a szót” feladatnál segítségedre van a <b>💡 Tipp</b> (felfedi a következő betűt) és a <b>👁 Szó felfedése</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Ismétlés",
+        "\n        <p>Az app <b>időzített ismétlést</b> használ: egy-egy szó pont akkor tér vissza, amikor épp kezdenéd elfelejteni — 1 nap, majd 6 nap múlva, aztán egyre ritkábban. Ha elrontod, már másnap újra előkerül.</p>\n        <p>Minden hiba a <b>„Hibák javítása”</b> menübe kerül. Egy szó akkor kerül ki innen, ha két egymást követő leckében is helyesen válaszolsz rá.</p>\n        <p>A <b>☆</b> csillaggal hozzáadhatsz egy szót a „Saját szavakhoz”, így külön is átismételheted.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Mennyit tanulj naponta",
+        "\n        <div class=\"help-tip\">Napi <b>10–15 új szót</b> javasolunk (1–2 lecke) <b>+ mindennapos ismétlést</b>.</div>\n        <ul>\n          <li><b>Napi 10 perc többet ér, mint heti egyszer egy óra.</b> Az agy alvás közben rögzíti a szavakat, így a rövid, de rendszeres alkalmak sokkal hatékonyabbak, mint a ritka, hosszú tanulás.</li>\n          <li><b>Ne hajszold a számokat.</b> Napi 15 szó havonta kb. 450 szó. Ha 50-et veszel előre, a legtöbbet el fogod felejteni.</li>\n          <li><b>Az ismétlés fontosabb az új szavaknál.</b> Ha felhalmozódnak a hibák, szánj egy napot a „Hibák javítására”, új szavak nélkül.</li>\n          <li><b>A napi cél 30 válasz</b> — ez nagyjából egy leckének felel meg a bemelegítéssel együtt.</li>\n          <li><b>Mondd ki a szavakat hangosan</b>, és alkoss velük saját mondatokat — így sokkal gyorsabban megragadnak.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Szívek, energia és tippek",
+        "\n        <ul>\n          <li><b>25 szíved</b> van, amelyek megmaradnak a leckék között. Egy hiba vagy a „👁 Szó felfedése” <b>1 szívbe</b> kerül.</li>\n          <li><b>1 reklám = +1 szív</b>, korlátlanul — a szívek száma 25 fölé is mehet.</li>\n          <li>Az első elveszített szív után <b>16 órával</b> a szíveid <b>fele (+13)</b> visszatér; <b>24 óra</b> elteltével pedig újra <b>25</b> szíved lesz.</li>\n          <li><b>⚡ Energia:</b> minden <b>10 szó</b> <b>5 energiába</b> kerül. Óránként <b>+5</b> energia töltődik vissza egészen <b>200-ig</b>; 24 óra elteltével újra <b>200</b> lesz.</li>\n          <li><b>1 reklám = +15 energia</b>, korlátlanul.</li>\n          <li><b>💡 Tippek:</b> <b>napi 5</b>, amely minden nap újratöltődik. További tippeket reklámokért vagy a boltban szerezhetsz.</li>\n          <li>A szintvizsgák nem fogyasztanak se szívet, se energiát.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Sorozat, XP és szintek",
+        "\n        <p>A <b>sorozatod</b> minden egyes nappal nő, amikor befejezel legalább egy leckét. A láng eleinte <b>hagyományos</b>, egy hét után <b>kék</b>, 3 hét után <b>lila</b>, és <b>szürke</b>, ha kihagytál egy napot. Kihagytál 1–2 napot? Állítsd vissza a sorozatot egy reklámmal!</p>\n        <p><b>XP</b>-t kizárólag helyes válaszokért és ismétlésekért kapsz: <b>+10 XP</b> minden jó válaszért, <b>+5 XP</b> minden 3 egymást követő helyes válaszért, <b>+25 XP</b> egy hiba nélküli leckével. Egy új témájú lecke nagyjából <b>250–350 XP</b>-t ad.</p>\n        <p>Ranglisták a <b>napra, hétre és hónapra</b>. A szinted (A0 → B2) a megtanult szavakkal együtt emelkedik.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Érmék és küldetések",
+        "\n        <ul>\n          <li>Az <b>érmék 🪙</b> az appon belüli fizetőeszközök, amelyekért szíveket, energiát és tippeket vásárolhatsz a boltban.</li>\n          <li><b>Napi cél</b> (30 válasz): <b>+10 🪙</b>. <b>Ajánlott cél</b> (60): <b>+25 🪙 és +30 XP</b>. <b>Minden új szint</b>: <b>+50 🪙</b>.</li>\n          <li>A <b>🎯 küldetések</b> minden hétfőn megújulnak: könnyű <b>+15 🪙</b>, közepes <b>+40 🪙</b>, nehéz <b>+100 🪙</b>.</li>\n          <li><b>📝 Heti ismétlő vizsga</b>: 20 megtanult szó; 80% vagy jobb eredmény esetén <b>+60 🪙 és +100 XP</b> jár.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Jelvények a zászló alatt",
+        "\n        <ul>\n          <li><b>✅</b> — az adott nyelvből már sikeresen megválaszolt szavak.</li>\n          <li><b>📚</b> — a tanfolyam teljes szókincse (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 szóval eléred a B2 szintet: a kötetlen társalgást. Ez a teljes tanfolyam célja.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Beállítások",
+        "\n        <p>A <b>⚙️ Beállítások</b> menüben választhatsz témát vagy egyedi színeket, módosíthatod a felület méretét, és be- vagy kikapcsolhatod az emlékeztetőket (mint például: „már régen nem tanultál”).</p>"
+      ]
+    ]
+  },
+  it: {
+    "title": "Come funziona",
+    "intro": "Una guida rapida: come è strutturato il corso, quanto studiare al giorno e a cosa servono i cuori.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "Il corso",
+        "\n        <p>Ogni lingua ha <b>36 argomenti</b> — <b>8000 parole</b> in totale. Gli argomenti seguono i livelli <b>A0 → A1 → A2 → B1 → B2</b>: dai saluti e i numeri fino al lavoro, la salute, la società e la scienza.</p>\n        <ul>\n          <li><b>A0</b> — primi passi: circa 150 parole.</li>\n          <li><b>A1</b> — fino a 1500 parole: frasi semplici su di te e sulla vita quotidiana.</li>\n          <li><b>A2</b> — 1500–2500 parole: situazioni quotidiane.</li>\n          <li><b>B1</b> — 2700–4500 parole: lavoro, studio, viaggi.</li>\n          <li><b>B2</b> — 5000–8000 parole: <b>conversazione fluente</b> su qualsiasi argomento.</li>\n        </ul>\n        <p>Inizia con <b>“Inizia lezione”</b> nella home page — l'app sceglierà il prossimo argomento per te. L'intero percorso si trova nella pagina del corso. L'argomento successivo si sblocca non appena tutte le parole di quello precedente sono state studiate o se ne supera l'esame.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "La lezione",
+        "\n        <p>Ogni lezione inizia con un <b>riscaldamento</b>: le parole che hai sbagliato e quelle che è ora di ripassare.</p>\n        <p>Poi ci sono <b>8 parole nuove</b> in gruppi di 4: prima un'introduzione (immagine, parola, pronuncia), poi gli esercizi — scegli l'immagine, abbina le coppie, riconosci a orecchio, traduci, componi la frase, scrivi la parola.</p>\n        <p>Ti sei bloccato? In “Scrivi la parola” trovi <b>💡 Suggerimento</b> (rivela la lettera successiva) e <b>👁 Mostra parola</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Ripasso",
+        "\n        <p>L'app usa la <b>ripetizione spaziata</b>: una parola ricompare proprio quando stai per dimenticarla — dopo 1 giorno, poi 6 giorni, e poi sempre più raramente. Se sbagli, ricompare l'indomani.</p>\n        <p>Tutti gli errori finiscono in <b>“Correggi gli errori”</b>. Una parola scompare da lì dopo che hai risposto correttamente in due lezioni di fila.</p>\n        <p>La stella <b>☆</b> aggiunge una parola a “Le mie parole” per poterla ripassare a parte.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Quanto studiare al giorno",
+        "\n        <div class=\"help-tip\">Consigliamo <b>10–15 parole nuove al giorno</b> (1–2 lezioni) <b>+ ripasso quotidiano</b>.</div>\n        <ul>\n          <li><b>10 minuti ogni giorno battono un'ora una volta alla settimana.</b> La memoria consolida le parole durante il sonno, e sessioni brevi e frequenti funzionano meglio di sessioni rare e lunghe.</li>\n          <li><b>Non inseguire i numeri.</b> 15 parole al giorno fanno ~450 parole al mese. Studiandone 50, la maggior parte verrà dimenticata.</li>\n          <li><b>Il ripasso conta più delle parole nuove.</b> Se gli errori si accumulano, dedica una giornata a “Correggi gli errori” senza parole nuove.</li>\n          <li><b>L'obiettivo giornaliero è di 30 risposte</b> — circa una lezione con il suo riscaldamento.</li>\n          <li><b>Pronuncia le parole ad alta voce</b> e crea frasi tue: si fisseranno più in fretta.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Cuori, energia e suggerimenti",
+        "\n        <ul>\n          <li>Hai <b>25 cuori</b>, conservati tra una lezione e l'altra. Un errore o “👁 Mostra parola” costa <b>1 cuore</b>.</li>\n          <li><b>1 annuncio = +1 cuore</b>, quanti ne vuoi — i cuori possono superare quota 25.</li>\n          <li><b>16 ore</b> dopo il primo cuore perso ne recuperi <b>la metà (+13)</b>; dopo <b>24 ore</b> ne avrai di nuovo <b>25</b>.</li>\n          <li><b>⚡ Energia:</b> ogni <b>10 parole</b> costano <b>5 di energia</b>. <b>+5</b> ogni ora fino a <b>200</b>; dopo 24 ore torna a <b>200</b>.</li>\n          <li><b>1 annuncio = +15 di energia</b>, senza limiti.</li>\n          <li><b>💡 Suggerimenti:</b> <b>5 al giorno</b>, rinnovati quotidianamente. Di più guardando un annuncio o nel negozio.</li>\n          <li>Gli esami di livello non consumano né cuori né energia.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Serie, XP e livelli",
+        "\n        <p>La tua <b>serie</b> cresce ogni giorno in cui completi almeno una lezione. La fiamma è <b>normale</b> all'inizio, <b>blu</b> dopo una settimana, <b>viola</b> dopo 3 settimane e <b>grigia</b> quando hai saltato un giorno. Hai perso 1–2 giorni? Recupera la serie con un annuncio.</p>\n        <p>Gli <b>XP</b> arrivano solo da risposte corrette e ripassi: <b>+10 XP</b> per ogni risposta corretta, <b>+5 XP</b> ogni 3 risposte corrette consecutive, <b>+25 XP</b> per una lezione senza errori. Una lezione su un nuovo argomento dà circa <b>250–350 XP</b>.</p>\n        <p>Classifiche per <b>giorno, settimana e mese</b>. Il tuo livello (A0 → B2) cresce con le parole che impari.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Monete e missioni",
+        "\n        <ul>\n          <li>Le <b>Monete 🪙</b> sono la valuta dell'app per cuori, energia e suggerimenti nel negozio.</li>\n          <li><b>Obiettivo giornaliero</b> (30 risposte): <b>+10 🪙</b>. <b>Obiettivo consigliato</b> (60): <b>+25 🪙 e +30 XP</b>. <b>Ogni nuovo livello</b>: <b>+50 🪙</b>.</li>\n          <li>Le <b>🎯 Missioni</b> si rinnovano ogni lunedì: facile <b>+15 🪙</b>, media <b>+40 🪙</b>, difficile <b>+100 🪙</b>.</li>\n          <li><b>📝 Esame di ripasso settimanale</b>: 20 parole imparate; l'80% o più dà <b>+60 🪙 e +100 XP</b>.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Distintivi sotto la bandiera",
+        "\n        <ul>\n          <li><b>✅</b> — parole di questa lingua a cui hai già risposto correttamente.</li>\n          <li><b>📚</b> — parole totali nel corso (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 parole ti portano a B2: conversazione fluente. Questo è l'obiettivo dell'intero corso.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Impostazioni",
+        "\n        <p>Nelle <b>⚙️ Impostazioni</b> puoi scegliere un tema o i tuoi colori personalizzati, modificare le dimensioni dell'interfaccia e attivare o disattivare promemoria come “è da un po' che non studi”.</p>"
+      ]
+    ]
+  },
+  pl: {
+    "title": "Jak to działa",
+    "intro": "Krótki przewodnik: jak zbudowany jest kurs, ile uczyć się dziennie i do czego służą serca.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "Kurs",
+        "\n        <p>Każdy język ma <b>36 tematów</b> — łącznie <b>8000 słów</b>. Tematy odpowiadają poziomom <b>A0 → A1 → A2 → B1 → B2</b>: od powitań i liczb po pracę, zdrowie, społeczeństwo i naukę.</p>\n        <ul>\n          <li><b>A0</b> — pierwsze kroki: około 150 słów.</li>\n          <li><b>A1</b> — do 1500 słów: proste zwroty o sobie i życiu codziennym.</li>\n          <li><b>A2</b> — 1500–2500 słów: sytuacje dnia codziennego.</li>\n          <li><b>B1</b> — 2700–4500 słów: praca, nauka, podróże.</li>\n          <li><b>B2</b> — 5000–8000 słów: <b>swobodna rozmowa</b> na dowolny temat.</li>\n        </ul>\n        <p>Zacznij od <b>„Rozpocznij lekcję”</b> na stronie głównej — aplikacja wybierze dla Ciebie kolejny temat. Cała ścieżka znajduje się na stronie kursu. Następny temat otwiera się, gdy nauczysz się wszystkich słów z poprzedniego lub zdasz z niego egzamin.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "Lekcja",
+        "\n        <p>Każda lekcja zaczyna się od <b>rozgrzewki</b>: słów, w których popełniono błędy, oraz tych, które wymagają powtórki.</p>\n        <p>Następnie <b>8 nowych słów</b> w grupach po 4: najpierw wprowadzenie (obrazek, słowo, wymowa), potem ćwiczenia — wybierz obrazek, połącz w pary, rozpoznaj ze słuchu, przetłumacz, ułóż frazę, wpisz słowo.</p>\n        <p>Utknąłeś? W zadaniu „Wpisz słowo” masz do dyspozycji <b>💡 Podpowiedź</b> (odsłania kolejną literę) oraz <b>👁 Pokaż słowo</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Powtórki",
+        "\n        <p>Aplikacja korzysta z <b>metody powtórek w odstępach</b> (spaced repetition): słowo wraca dokładnie wtedy, gdy zaczynasz je zapominać — po 1 dniu, potem po 6 dniach, a następnie coraz rzadziej. Jeśli się pomylisz, słowo wróci jutro.</p>\n        <p>Wszystkie błędy trafiają do sekcji <b>„Napraw błędy”</b>. Słowo znika z niej, gdy odpowiesz poprawnie w dwóch lekcjach z rzędu.</p>\n        <p>Gwiazdka <b>☆</b> dodaje słowo do „Moich słów”, dzięki czemu możesz powtarzać je osobno.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Ile uczyć się dziennie",
+        "\n        <div class=\"help-tip\">Zalecamy <b>10–15 nowych słów dziennie</b> (1–2 lekcje) <b>+ codzienne powtórki</b>.</div>\n        <ul>\n          <li><b>10 minut każdego dnia jest lepsze niż godzina raz w tygodniu.</b> Pamięć utrwala słowa podczas snu, a krótkie, częste sesje działają lepiej niż rzadkie i długie.</li>\n          <li><b>Nie goń za liczbami.</b> 15 słów dziennie to ~450 słów miesięcznie. Jeśli weźmiesz 50, większość zostanie zapomniana.</li>\n          <li><b>Powtórki są ważniejsze niż nowe słowa.</b> Jeśli błędy się nagromadzą, poświęć dzień na „Napraw błędy” bez wprowadzania nowych słówek.</li>\n          <li><b>Dzienny cel to 30 odpowiedzi</b> — mniej więcej jedna lekcja wraz z rozgrzewką.</li>\n          <li><b>Wypowiadaj słowa na głos</b> i układaj z nimi własne zdania — szybciej zapadną w pamięć.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Serca, energia i podpowiedzi",
+        "\n        <ul>\n          <li>Masz <b>25 serc</b>, które zachowują się między lekcjami. Błąd lub „👁 Pokaż słowo” kosztuje <b>1 serce</b>.</li>\n          <li><b>1 reklama = +1 serce</b>, bez limitu — liczba serc może przekroczyć 25.</li>\n          <li><b>16 godzin</b> po utracie pierwszego serca <b>połowa (+13)</b> wraca; po <b>24 godzinach</b> znów masz <b>25</b>.</li>\n          <li><b>⚡ Energia:</b> każde <b>10 słów</b> kosztuje <b>5 energii</b>. <b>+5</b> co godzinę, maksymalnie do <b>200</b>; po 24 godzinach znów jest <b>200</b>.</li>\n          <li><b>1 reklama = +15 energii</b>, bez limitu.</li>\n          <li><b>💡 Podpowiedzi:</b> <b>5 dziennie</b>, odnawiane każdego dnia. Więcej za reklamę lub w sklepie.</li>\n          <li>Egzaminy poziomujące nie zużywają serc ani energii.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Seria, XP i poziomy",
+        "\n        <p>Twoja <b>seria</b> (streak) rośnie każdego dnia, w którym ukończysz przynajmniej jedną lekcję. Płomień jest <b>zwykły</b> na początku, <b>niebieski</b> po tygodniu, <b>fioletowy</b> po 3 tygodniach i <b>szary</b>, gdy pominiesz dzień. Ominąłeś 1–2 dni? Przywróć serię za pomocą reklamy.</p>\n        <p><b>XP</b> (punkty doświadczenia) zdobywasz tylko za poprawne odpowiedzi i powtórki: <b>+10 XP</b> za poprawną odpowiedź, <b>+5 XP</b> za każde 3 z rzędu, <b>+25 XP</b> za lekcję bez błędów. Lekcja z nowym tematem daje około <b>250–350 XP</b>.</p>\n        <p>Rankingi: <b>dzienny, tygodniowy i miesięczny</b>. Twój poziom (A0 → B2) rośnie wraz z liczbą poznanych słów.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Monety i zadania",
+        "\n        <ul>\n          <li><b>Monety 🪙</b> to waluta w aplikacji, za którą kupisz serca, energię i podpowiedzi w sklepie.</li>\n          <li><b>Cel dzienny</b> (30 odpowiedzi): <b>+10 🪙</b>. <b>Zalecany cel</b> (60): <b>+25 🪙 i +30 XP</b>. <b>Każdy nowy poziom</b>: <b>+50 🪙</b>.</li>\n          <li><b>🎯 Zadania</b> odnawiają się w każdy poniedziałek: łatwe <b>+15 🪙</b>, średnie <b>+40 🪙</b>, trudne <b>+100 🪙</b>.</li>\n          <li><b>📝 Tygodniowy egzamin powtórkowy</b>: 20 nauczonych słów; wynik 80% lub wyższy daje <b>+60 🪙 i +100 XP</b>.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Odznaki pod flagą",
+        "\n        <ul>\n          <li><b>✅</b> — słowa w tym języku, na które odpowiedziałeś już poprawnie.</li>\n          <li><b>📚</b> — całkowita liczba słów w kursie (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 słów daje poziom B2: swobodna rozmowa. To jest cel całego kursu.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Ustawienia",
+        "\n        <p>W <b>⚙️ Ustawieniach</b> możesz wybrać motyw lub własne kolory, zmienić rozmiar interfejsu oraz włączyć lub wyłączyć przypomnienia typu „dawno się nie uczyłeś”.</p>"
+      ]
+    ]
+  },
+  pt: {
+    "title": "Como funciona",
+    "intro": "Um guia rápido: como o curso é estruturado, quanto estudar por dia e para que servem os corações.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "O curso",
+        "\n        <p>Cada idioma conta com <b>36 tópicos</b> — <b>8000 palavras</b> no total. Os tópicos seguem os níveis <b>A0 → A1 → A2 → B1 → B2</b>: desde saudações e números até trabalho, saúde, sociedade e ciência.</p>\n        <ul>\n          <li><b>A0</b> — primeiros passos: cerca de 150 palavras.</li>\n          <li><b>A1</b> — até 1500 palavras: frases simples sobre si e o dia a dia.</li>\n          <li><b>A2</b> — 1500–2500 palavras: situações cotidianas.</li>\n          <li><b>B1</b> — 2700–4500 palavras: trabalho, estudo, viagens.</li>\n          <li><b>B2</b> — 5000–8000 palavras: <b>conversa fluente</b> sobre qualquer tema.</li>\n        </ul>\n        <p>Comece com <b>“Iniciar lição”</b> na página inicial — o app escolhe o próximo tópico para você. Toda a sua jornada está na página do curso. O próximo tópico é desbloqueado assim que todas as palavras do anterior forem aprendidas ou o exame for concluído.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "Uma lição",
+        "\n        <p>Cada lição começa com um <b>aquecimento</b>: palavras que você errou e palavras que precisam ser revisadas.</p>\n        <p>Depois, <b>8 novas palavras</b> em grupos de 4: primeiro uma introdução (imagem, palavra, pronúncia), seguida de exercícios — escolha a imagem, combine os pares, reconheça pelo som, traduza, monte uma frase e digite a palavra.</p>\n        <p>Travou? O exercício “digite a palavra” conta com <b>💡 Dica</b> (mostra a próxima letra) e <b>👁 Mostrar palavra</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Revisão",
+        "\n        <p>O app utiliza a <b>repetição espaçada</b>: a palavra reaparece bem no momento em que você começa a esquecê-la — após 1 dia, depois 6 dias, e a intervalos cada vez maiores. Se errar, ela volta no dia seguinte.</p>\n        <p>Todos os erros vão para <b>“Corrigir erros”</b>. A palavra sai de lá quando você acertá-la em duas lições seguidas.</p>\n        <p>A estrela <b>☆</b> adiciona a palavra a “Minhas palavras” para que você possa revisá-la separadamente.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Quanto estudar por dia",
+        "\n        <div class=\"help-tip\">Recomendamos <b>10–15 novas palavras por dia</b> (1–2 lições) <b>+ revisão diária</b>.</div>\n        <ul>\n          <li><b>10 minutos todo dia valem mais que uma hora uma vez por semana.</b> A memória consolida as palavras durante o sono, e sessões curtas e frequentes funcionam muito melhor do que estudos longos e raros.</li>\n          <li><b>Não corra atrás de quantidade.</b> 15 palavras por dia somam ~450 palavras no mês. Tentar aprender 50 fará com que a maioria seja esquecida.</li>\n          <li><b>Revisar é mais importante do que ver palavras novas.</b> Se os erros acumularem, tire um dia para “Corrigir erros” sem adicionar nada novo.</li>\n          <li><b>A meta diária é de 30 respostas</b> — aproximadamente uma lição completa com o aquecimento.</li>\n          <li><b>Fale as palavras em voz alta</b> e crie frases próprias com elas — assim elas fixam muito mais rápido.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Corações, energia e dicas",
+        "\n        <ul>\n          <li>Você tem <b>25 corações</b>, mantidos entre as lições. Um erro ou usar “👁 Mostrar palavra” custa <b>1 coração</b>.</li>\n          <li><b>1 anúncio = +1 coração</b>, quantos você quiser — é possível ultrapassar os 25.</li>\n          <li><b>16 horas</b> após o primeiro coração perdido, <b>metade (+13)</b> é recuperada; após <b>24 horas</b> você volta a ter <b>25</b>.</li>\n          <li><b>⚡ Energia:</b> cada <b>10 palavras</b> custam <b>5 de energia</b>. <b>+5</b> a cada hora até o limite de <b>200</b>; após 24 horas ela volta para <b>200</b>.</li>\n          <li><b>1 anúncio = +15 de energia</b>, sem limites.</li>\n          <li><b>💡 Dicas:</b> <b>5 por dia</b>, renovadas diariamente. Obtenha mais assistindo a um anúncio ou na loja.</li>\n          <li>Os exames de nível não consomem corações nem energia.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Ofensiva, XP e níveis",
+        "\n        <p>Sua <b>ofensiva</b> aumenta a cada dia que você completa pelo menos uma lição. A chama começa <b>normal</b>, fica <b>azul</b> após uma semana, <b>roxa</b> após 3 semanas e <b>cinza</b> se perder um dia. Perdeu 1–2 dias? Recupere sua ofensiva assistindo a um anúncio.</p>\n        <p>O <b>XP</b> vem apenas de respostas corretas e revisões: <b>+10 XP</b> por acerto, <b>+5 XP</b> a cada 3 acertos seguidos e <b>+25 XP</b> por lição sem erros. Uma lição com novo tópico rende cerca de <b>250–350 XP</b>.</p>\n        <p>Placares de líderes por <b>dia, semana e mês</b>. Seu nível (A0 → B2) evolui conforme você aprende novas palavras.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Moedas e missões",
+        "\n        <ul>\n          <li>As <b>Moedas 🪙</b> são a moeda do app para comprar corações, energia e dicas na loja.</li>\n          <li><b>Meta diária</b> (30 respostas): <b>+10 🪙</b>. <b>Meta recomendada</b> (60): <b>+25 🪙 e +30 XP</b>. <b>Cada novo nível</b>: <b>+50 🪙</b>.</li>\n          <li>As <b>🎯 Missões</b> renovam toda segunda-feira: fácil <b>+15 🪙</b>, média <b>+40 🪙</b>, difícil <b>+100 🪙</b>.</li>\n          <li><b>📝 Exame de revisão semanal</b>: 20 palavras aprendidas; acertar 80% ou mais garante <b>+60 🪙 e +100 XP</b>.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Emblemas sob a bandeira",
+        "\n        <ul>\n          <li><b>✅</b> — palavras deste idioma que você já respondeu corretamente.</li>\n          <li><b>📚</b> — total de palavras no curso (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 palavras garantem a você o B2: conversação fluente. Essa é a grande meta de todo o curso.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Configurações",
+        "\n        <p>Em <b>⚙️ Configurações</b> você pode escolher um tema ou definir suas próprias cores, ajustar o tamanho da interface e ativar ou desativar lembretes como “faz tempo que você não estuda”.</p>"
+      ]
+    ]
+  },
+  ro: {
+    "title": "Cum funcționează",
+    "intro": "Ghid rapid: cum este construit cursul, cât să înveți pe zi și la ce folosesc inimile.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "Cursul",
+        "\n        <p>Fiecare limbă are <b>36 de teme</b> — <b>8000 de cuvinte</b> în total. Temele urmează nivelurile <b>A0 → A1 → A2 → B1 → B2</b>: de la saluturi și numere până la muncă, sănătate, societate și știință.</p>\n        <ul>\n          <li><b>A0</b> — primii pași: aproximativ 150 de cuvinte.</li>\n          <li><b>A1</b> — până la 1500 de cuvinte: fraze simple despre tine și viața de zi cu zi.</li>\n          <li><b>A2</b> — 1500–2500 de cuvinte: situații de zi cu zi.</li>\n          <li><b>B1</b> — 2700–4500 de cuvinte: muncă, studiu, călătorii.</li>\n          <li><b>B2</b> — 5000–8000 de cuvinte: <b>conversație liberă</b> pe orice temă.</li>\n        </ul>\n        <p>Începe cu <b>„Începe lecția”</b> de pe pagina principală — aplicația alege următoarea temă pentru tine. Întregul traseu este pe pagina cursului. Următoarea temă se deschide odată ce fiecare cuvânt din cea anterioară este învățat sau examenul acesteia este trecut.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "O lecție",
+        "\n        <p>Fiecare lecție începe cu o <b>încălzire</b>: cuvinte la care ai greșit și cuvinte care trebuie recapitulate.</p>\n        <p>Apoi <b>8 cuvinte noi</b> în grupuri de câte 4: mai întâi o introducere (imagine, cuvânt, pronunție), apoi exerciții — alege imaginea, potrivește perechile, recunoaște după auz, tradu, construiește o frază, scrie cuvântul.</p>\n        <p>Te-ai blocat? Exercițiul „Scrie cuvântul” are <b>💡 Indiciu</b> (dezvăluie următoarea literă) și <b>👁 Arată cuvântul</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Recapitulare",
+        "\n        <p>Aplicația folosește <b>repetiția spațiată</b>: un cuvânt revine exact când începi să-l uiți — după 1 zi, apoi 6 zile, apoi din ce în ce mai rar. Dacă greșești, revine mâine.</p>\n        <p>Toate greșelile merg la <b>„Corectează greșelile”</b>. Un cuvânt dispare de acolo după ce răspunzi corect la el în două lecții la rând.</p>\n        <p>Steaua <b>☆</b> adaugă un cuvânt la „Cuvintele mele”, astfel încât să-l poți recapitula separat.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Cât să înveți pe zi",
+        "\n        <div class=\"help-tip\">Recomandăm <b>10–15 cuvinte noi pe zi</b> (1–2 lecții) <b>+ recapitulare în fiecare zi</b>.</div>\n        <ul>\n          <li><b>10 minute în fiecare zi sunt mai bune decât o oră o dată pe săptămână.</b> Memoria consolidează cuvintele în timpul somnului, iar sesiunile scurte și frecvente funcționează mai bine decât cele rare și lungi.</li>\n          <li><b>Nu alerga după numere.</b> 15 cuvinte pe zi înseamnă ~450 de cuvinte pe lună. Dacă iei 50, cele mai multe vor fi uitate.</li>\n          <li><b>Recapitularea contează mai mult decât cuvintele noi.</b> Dacă se adună greșeli, petrece o zi la „Corectează greșelile” fără cuvinte noi.</li>\n          <li><b>Obiectivul zilnic este de 30 de răspunsuri</b> — aproximativ o lecție cu tot cu încălzire.</li>\n          <li><b>Rostește cuvintele cu voce tare</b> și creează propriile propoziții cu ele — se fixează mai repede.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Inimi, energie și indicii",
+        "\n        <ul>\n          <li>Ai <b>25 de inimi</b>, păstrate între lecții. O greșeală sau „👁 Arată cuvântul” costă <b>1 inimă</b>.</li>\n          <li><b>1 reclamă = +1 inimă</b>, oricâte dorești — inimile pot depăși 25.</li>\n          <li>La <b>16 ore</b> după prima inimă pierdută, <b>jumătate (+13)</b> revine; după <b>24 de ore</b> ai din nou <b>25</b>.</li>\n          <li><b>⚡ Energie:</b> fiecare <b>10 cuvinte</b> costă <b>5 energie</b>. <b>+5</b> în fiecare oră până la <b>200</b>; după 24 de ore este din nou <b>200</b>.</li>\n          <li><b>1 reclamă = +15 energie</b>, fără limită.</li>\n          <li><b>💡 Indicii:</b> <b>5 pe zi</b>, reînnoite zilnic. Mai multe pentru o reclamă sau din magazin.</li>\n          <li>Examenele de nivel nu consumă inimi sau energie.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Serie, XP și niveluri",
+        "\n        <p><b>Seria</b> ta crește în fiecare zi în care termini cel puțin o lecție. Flacăra este <b>normală</b> la început, <b>albastră</b> după o săptămână, <b>violet</b> după 3 săptămâni și <b>gri</b> când ai ratat o zi. Ai pierdut 1–2 zile? Recuperează seria cu o reclamă.</p>\n        <p><b>XP</b> vine doar din răspunsuri corecte și recapitulări: <b>+10 XP</b> per răspuns corect, <b>+5 XP</b> pentru fiecare 3 la rând, <b>+25 XP</b> pentru o lecție fără greșeli. O lecție cu o temă nouă oferă aproximativ <b>250–350 XP</b>.</p>\n        <p>Clasamente pentru <b>zi, săptămână și lună</b>. Nivelul tău (A0 → B2) crește odată cu cuvintele pe care le înveți.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Monede și misiuni",
+        "\n        <ul>\n          <li><b>Monedele 🪙</b> sunt moneda din aplicație pentru inimi, energie și indicii din magazin.</li>\n          <li><b>Obiectiv zilnic</b> (30 de răspunsuri): <b>+10 🪙</b>. <b>Obiectiv recomandat</b> (60): <b>+25 🪙 și +30 XP</b>. <b>Fiecare nivel nou</b>: <b>+50 🪙</b>.</li>\n          <li><b>🎯 Misiunile</b> se reînnoiesc în fiecare luni: ușoară <b>+15 🪙</b>, medie <b>+40 🪙</b>, grea <b>+100 🪙</b>.</li>\n          <li><b>📝 Examen de recapitulare săptămânală</b>: 20 de cuvinte învățate; 80% sau mai mult îți oferă <b>+60 🪙 și +100 XP</b>.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Insigne sub steag",
+        "\n        <ul>\n          <li><b>✅</b> — cuvinte din această limbă la care ai răspuns deja corect.</li>\n          <li><b>📚</b> — totalul cuvintelor din curs (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 de cuvinte îți oferă B2: conversație liberă. Acesta este obiectivul întregului curs.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Setări",
+        "\n        <p>În <b>⚙️ Setări</b> poți alege o temă sau propriile culori, poți modifica dimensiunea interfeței și poți activa sau dezactiva mementouri precum „nu ai mai învățat de ceva timp”.</p>"
+      ]
+    ]
+  },
+  sr: {
+    "title": "Како апликација ради",
+    "intro": "Кратак водич: како је курс осмишљен, колико учити дневно и чему служе срца.",
+    "sections": [
+      [
+        "course",
+        "🎓",
+        "Курс",
+        "\n        <p>Сваки језик садржи <b>36 тема</b> — укупно <b>8000 речи</b>. Теме прате нивое <b>A0 → A1 → A2 → B1 → B2</b>: од поздрава и бројева до посла, здравља, друштва и науке.</p>\n        <ul>\n          <li><b>A0</b> — први кораци: око 150 речи.</li>\n          <li><b>A1</b> — до 1500 речи: једноставне фразе о себи и свакодневном животу.</li>\n          <li><b>A2</b> — 1500–2500 речи: свакодневне ситуације.</li>\n          <li><b>B1</b> — 2700–4500 речи: посао, студирање, путовања.</li>\n          <li><b>B2</b> — 5000–8000 речи: <b>слободан разговор</b> на било коју тему.</li>\n        </ul>\n        <p>Почните кликом на <b>„Започни лекцију”</b> на почетној страници — апликација сама бира следећу тему за вас. Цео пут се налази на страници курса. Следећа тема се откључава када се научи свака реч из претходне или положи њен испит.</p>"
+      ],
+      [
+        "lesson",
+        "📝",
+        "Лекција",
+        "\n        <p>Свака лекција почиње <b>загревањем</b>: речима у којима сте грешили и речима које су стигле на понављање.</p>\n        <p>Затим следи <b>8 нових речи</b> у групама од по 4: прво упознавање (слика, реч, изговор), а онда вежбе — одаберите слику, спојте парове, препознајте на слух, преведите, саставите фразу, укуцајте реч.</p>\n        <p>Запели сте? Вежба „Укуцајте реч” нуди опције <b>💡 Помоћ</b> (открива следеће слово) и <b>👁 Прикажи реч</b>.</p>"
+      ],
+      [
+        "review",
+        "🔁",
+        "Понављање",
+        "\n        <p>Апликација користи <b>технику размакнутог понављања</b>: реч се враћа управо када почнете да је заборављате — након 1 дана, затим 6 дана, па све ређе и ређе. Погрешите ли, враћа се већ сутрадан.</p>\n        <p>Све грешке одлазе у <b>„Поправи грешке”</b>. Реч одатле одлази тек када тачно одговорите у две лекције заредом.</p>\n        <p>Звездица <b>☆</b> додаје реч у „Моје речи” како бисте могли да је понављате засебно.</p>"
+      ],
+      [
+        "daily",
+        "📅",
+        "Колико учити дневно",
+        "\n        <div class=\"help-tip\">Препоручујемо <b>10–15 нових речи дневно</b> (1–2 лекције) <b>+ понављање сваког дана</b>.</div>\n        <ul>\n          <li><b>10 минута сваког дана вреди више од сат времена једном недељно.</b> Мозак учвршћује памћење речи током сна, па краће и чешће сесије делују много боље од ретких и дугих.</li>\n          <li><b>Не јурите бројке.</b> 15 речи дневно је око 450 речи месечно. Ако узмете 50, већину ћете брзо заборавити.</li>\n          <li><b>Понављање је важније од нових речи.</b> Ако се нагомилају грешке, посветите дан одељку „Поправи грешке”, без нових речи.</li>\n          <li><b>Дневни циљ је 30 одговора</b> — отприлике једна лекција са загревањем.</li>\n          <li><b>Изговарајте речи наглас</b> и смишљајте сопствене реченице са њима — тако ћете их брже упамтити.</li>\n        </ul>"
+      ],
+      [
+        "hearts",
+        "❤️",
+        "Срца, енергија и помоћ",
+        "\n        <ul>\n          <li>Имате <b>25 срца</b>, која се чувају између лекција. Грешка или опција „👁 Прикажи реч” коштају <b>1 срце</b>.</li>\n          <li><b>1 реклама = +1 срце</b>, колико год желите — број срца може прећи 25.</li>\n          <li><b>16 сати</b> након првог изгубљеног срца враћа се <b>половина (+13)</b>; након <b>24 сата</b> поново имате <b>25</b>.</li>\n          <li><b>⚡ Енергија:</b> сваких <b>10 речи</b> кошта <b>5 енергије</b>. Добијате <b>+5</b> сваког сата, све до <b>200</b>; након 24 сата поново је на <b>200</b>.</li>\n          <li><b>1 реклама = +15 енергије</b>, без ограничења.</li>\n          <li><b>💡 Помоћ:</b> <b>5 дневно</b>, обнавља се сваког дана. Више можете добити гледањем рекламе или у продавници.</li>\n          <li>Испити за нивое не троше ни срца ни енергију.</li>\n        </ul>"
+      ],
+      [
+        "streak",
+        "🔥",
+        "Низ, XP и нивои",
+        "\n        <p>Ваш <b>низ</b> расте сваког дана када завршите барем једну лекцију. Пламен је у почетку <b>обичан</b>, <b>плав</b> након недељу дана, <b>љубичаст</b> након 3 недеље и <b>сив</b> када пропустите дан. Пропустили сте 1–2 дана? Обновите низ гледањем рекламе.</p>\n        <p><b>XP</b> се добија само за тачне одговоре и понављања: <b>+10 XP</b> по тачном одговору, <b>+5 XP</b> за свака 3 заредом, <b>+25 XP</b> за лекцију без грешака. Лекција из нове теме доноси око <b>250–350 XP</b>.</p>\n        <p>Табеле рангирања за <b>дан, недељу и месец</b>. Ваш ниво (A0 → B2) расте са речима које научите.</p>"
+      ],
+      [
+        "coins",
+        "🪙",
+        "Новчићи и задаци",
+        "\n        <ul>\n          <li><b>Новчићи 🪙</b> су валута у апликацији за срца, енергију и помоћ у продавници.</li>\n          <li><b>Дневни циљ</b> (30 одговора): <b>+10 🪙</b>. <b>Препоручени циљ</b> (60): <b>+25 🪙 и +30 XP</b>. <b>Сваки нови ниво</b>: <b>+50 🪙</b>.</li>\n          <li><b>🎯 Задаци</b> се обнављају сваког понедељка: лаки <b>+15 🪙</b>, средњи <b>+40 🪙</b>, тешки <b>+100 🪙</b>.</li>\n          <li><b>📝 Недељни тест понављања</b>: 20 научених речи; 80% или више доноси <b>+60 🪙 и +100 XP</b>.</li>\n        </ul>"
+      ],
+      [
+        "badges",
+        "🏷️",
+        "Значке испод заставе",
+        "\n        <ul>\n          <li><b>✅</b> — речи овог језика на које сте већ тачно одговорили.</li>\n          <li><b>📚</b> — укупан број речи у курсу (8000).</li>\n          <li><b>🎓 B2 · 8k</b> — 8000 речи вам доноси B2: слободан разговор. То је циљ целог курса.</li>\n        </ul>"
+      ],
+      [
+        "settings",
+        "⚙️",
+        "Подешавања",
+        "\n        <p>У одељку <b>⚙️ Подешавања</b> можете изабрати тему или сопствене боје, променити величину интерфејса и укључити или искључити подсетнике попут „нисте учили неко време”.</p>"
+      ]
+    ]
   }
 };
 
@@ -1051,8 +1651,268 @@ const LANG_HISTORY = {
   "el": "En egen indoeuropeisk gren. Källor från 1300–1200-talet f.Kr.; alfabetet sedan 700-talet f.Kr. Ett av de äldsta skriftspråken.",
   "fi": "Finsk-ugriskt (uralisk språkfamilj). Skrivet sedan 1500-talet; Mikael Agricolas första bok utkom 1543. Dess närmaste släkting är estniska.",
   "hu": "Finsk-ugriskt. Ungrarna nådde Donau omkring 896; den första sammanhängande texten, Begravningstalet, härstammar från cirka 1195."
+ },
+ "bg": {
+  "title": "За страната",
+  "intro": "Откъде произлиза всеки език от курса и кога се е появил.",
+  "en": "Западногермански език. Пренесен във Великобритания от англите, саксите и ютите през 5. век; първите текстове са от 7. век. След 1066 г. приема хиляди френски думи.",
+  "de": "Западногермански език. Първи текстове от 8. век (старовисоконемски). Общ книжовен стандарт се формира след превода на Библията от Мартин Лутер през 16. век.",
+  "nl": "Западногермански език, развил се от франкските диалекти. Най-известното му ранно изречение е записано около 1100 г.",
+  "sv": "Северногермански език, произлязъл от староскандинавския от епохата на викингите (8.–11. век). Обособен език от 13. век.",
+  "no": "Северногермански език, произлязъл от староскандинавския. Днес има два писмени стандарта: букмол (Bokmål) и нюнорск (Nynorsk) (19.–20. век).",
+  "da": "Северногермански език, произлязъл от староскандинавския; обособява се около 12. век. Най-близките му родственици са шведският и норвежкият.",
+  "fr": "Романски език, произлязъл от вунгарния латински в Галия. Първият писмен паметник са Страсбургските клетви от 842 г.",
+  "es": "Романски език, произлязъл от вунгарния латински в Кастилия. Ранни свидетелства от 10.–11. век; крал Алфонсо X установява стандарта през 13. век.",
+  "it": "Романски език, основан на флорентинския (тоскански) диалект. Литературен език от времето на Данте през 14. век.",
+  "pt": "Романски език, произлязъл от галисийско-португалския. Първи документи от 12.–13. век.",
+  "ro": "Романски език, произлязъл от латинския на римската провинция Дакия (2.–3. век). Най-старият известен текст е писмото на Няку от 1521 г.; използва кирилица чак до 19. век.",
+  "pl": "Западнославянски език. Първото записано изречение датира от 1270 г. Използва латинската азбука.",
+  "cs": "Западнославянски език. Има писменост от 13. век; Ян Хус въвежда знаците над буквите (хачек) през 15. век.",
+  "sk": "Западнославянски език, изключително близък до чешкия. Людовит Щур създава книжовния стандарт през 1843 г.",
+  "uk": "Източнославянски език, произлязъл от староисточнославянския език на Киевска Рус. Съвременният литературен език води началото си от „Енеида“ на Котляревски (1798 г.).",
+  "ru": "Източнославянски език, произлязъл от староисточнославянския. Използва кирилица от 10. век; съвременният стандарт се оформя през 18.–19. век.",
+  "bg": "Южнославянски език. Тук през 9. век учениците на Кирил и Методий създават славянската книжовност, а след това и кирилицата.",
+  "hr": "Южнославянски език. Ранните текстове са писани на глаголица (Башчанската плоча, около 1100 г.); днес използва латиница.",
+  "sr": "Южнославянски език. Има писменост от 12. век; през 19. век Вук Караджич въвежда правилото „пиши както говориш“. Използва кирилица и латиница.",
+  "el": "Самостоятелен клон на индоевропейското семейство. Писмени паметници от 14.–13. век пр.н.е.; азбуката се използва от 8. век пр.н.е. Един от най-древните писмени езици.",
+  "fi": "Фино-угорски език (уралско езиково семейство). Има писменост от 16. век; първата книга на Микаел Агрикола излиза през 1543 г. Най-близкият му родственик е естонският.",
+  "hu": "Фино-угорски език. Унгарците достигат Дунав около 896 г.; първият цялостен текст, „Надгробна реч и молитва“, датира от около 1195 г."
+ },
+ "el": {
+  "title": "Σχετικά με τη χώρα",
+  "intro": "Από πού προέρχεται κάθε γλώσσα του μαθήματος και πότε πρωτοεμφανίστηκε.",
+  "en": "Δυτικογερμανική. Μεταφέρθηκε στη Βρετανία από τους Άγγλους, τους Σάξονες και τους Ιούτες τον 5ο αιώνα· τα πρώτα κείμενα χρονολογούνται από τον 7ο αιώνα. Μετά το 1066 ενσωμάτωσε χιλιάδες γαλλικές λέξεις.",
+  "de": "Δυτικογερμανική. Τα πρώτα κείμενα χρονολογούνται από τον 8ο αιώνα (Παλαιά Άνω Γερμανική). Ένα κοινό γραπτό πρότυπο διαμορφώθηκε μετά τη μετάφραση της Βίβλου από τον Λούθηρο τον 16ο αιώνα.",
+  "nl": "Δυτικογερμανική, αναπτύχθηκε από φραγκικές διαλέκτους. Η πιο γνωστή πρώιμη πρότασή της γράφτηκε γύρω στο 1100.",
+  "sv": "Βορειογερμανική, προερχόμενη από την Παλαιά Σκανδιναβική γλώσσα της Εποχής των Βίκινγκ (8ος–11ος αιώνας). Αποτελεί ξεχωριστή γλώσσα από τον 13ο αιώνα.",
+  "no": "Βορειογερμανική, από την Παλαιά Σκανδιναβική. Σήμερα έχει δύο γραπτά πρότυπα, το Μποκμάλ και το Νινόρσκ (19ος–20ός αιώνας).",
+  "da": "Βορειογερμανική, από την Παλαιά Σκανδιναβική· αποσχίστηκε γύρω στον 12ο αιώνα. Οι στενότεροι συγγενείς της είναι τα σουηδικά και τα νορβηγικά.",
+  "fr": "Ρωμανική, από τη Λαϊκή Λατινική της Γαλατίας. Το πρώτο γραπτό μνημείο είναι οι Όρκοι του Στρασβούργου, το 842.",
+  "es": "Ρωμανική, από τη Λαϊκή Λατινική της Καστίλης. Πρώιμες καταγραφές από τον 10ο–11ο αιώνα· ο βασιλιάς Αλφόνσος Ι' καθόρισε το πρότυπο τον 13ο αιώνα.",
+  "it": "Ρωμανική, βασισμένη στη φλωρεντινή (τοσκανική) διάλεκτο. Λογοτεχνική γλώσσα ήδη από την εποχή του Δάντη, τον 14ο αιώνα.",
+  "pt": "Ρωμανική, από τη γαλικιανή-πορτογαλική. Τα πρώτα έγγραφα χρονολογούνται από τον 12ο–13ο αιώνα.",
+  "ro": "Ρωμανική, από τα λατινικά της ρωμαϊκής επαρχίας της Δακίας (2ος–3ος αιώνας). Το παλαιότερο γνωστό κείμενο είναι η επιστολή του Neacșu, το 1521· γραφόταν με κυριλλικό αλφάβητο μέχρι τον 19ο αιώνα.",
+  "pl": "Δυτικοσλαβική. Η πρώτη καταγεγραμμένη πρόταση χρονολογείται από το 1270. Γράφεται με το λατινικό αλφάβητο.",
+  "cs": "Δυτικοσλαβική. Γραπτή γλώσσα από τον 13ο αιώνα· ο Γιαν Χους εισήγαγε τα διακριτικά σημεία πάνω από τα γράμματα (háček) τον 15ο αιώνα.",
+  "sk": "Δυτικοσλαβική, πολύ κοντινή στα τσεχικά. Ο Ľudovít Štúr δημιούργησε το λογοτεχνικό πρότυπο το 1843.",
+  "uk": "Ανατολικοσλαβική, από την Παλαιά Ανατολικοσλαβική του Ρως του Κιέβου. Η σύγχρονη λογοτεχνική γλώσσα ξεκινά από την «Αινειάδα» του Κοτλιαρέφσκι (1798).",
+  "ru": "Ανατολικοσλαβική, από την Παλαιά Ανατολικοσλαβική. Χρησιμοποιεί το κυριλλικό αλφάβητο από τον 10ο αιώνα· το σύγχρονο πρότυπο διαμορφώθηκε τον 18ο–19ο αιώνα.",
+  "bg": "Νοτιοσλαβική. Εδώ, τον 9ο αιώνα, οι μαθητές των Κυρίλλου και Μεθοδίου δημιούργησαν τη σλαβική γραφή και στη συνέχεια το κυριλλικό αλφάβητο.",
+  "hr": "Νοτιοσλαβική. Τα πρώιμα κείμενα γράφτηκαν στη γλαγολιτική γραφή (η πλάκα της Baška, γύρω στο 1100)· σήμερα χρησιμοποιεί το λατινικό αλφάβητο.",
+  "sr": "Νοτιοσλαβική. Γραπτή γλώσσα από τον 12ο αιώνα· τον 19ο αιώνα ο Βουκ Καράτζιτς θέσπισε τον κανόνα «γράψε όπως μιλάς». Χρησιμοποιεί το κυριλλικό και το λατινικό αλφάβητο.",
+  "el": "Αποτελεί ξεχωριστό κλάδο της ινδοευρωπαϊκής οικογένειας. Γραπτές μαρτυρίες από τον 14ο–13ο αιώνα π.Χ.· το αλφάβητο χρησιμοποιείται από τον 8ο αιώνα π.Χ. Μία από τις αρχαιότερες γραπτές γλώσσες του κόσμου.",
+  "fi": "Φιννοουγγρική (ουραλική οικογένεια). Γραπτή γλώσσα από τον 16ο αιώνα· το πρώτο βιβλίο του Μίκαελ Αγκρίκολα εκδόθηκε το 1543. Ο στενότερος συγγενής της είναι τα εσθονικά.",
+  "hu": "Φιννοουγγρική. Οι Ούγγροι έφτασαν στον Δούναβη γύρω στο 896· το πρώτο συνεχές κείμενο, ο Επικήδειος Λόγος, χρονολογείται περίπου από το 1195."
+ },
+ "fi": {
+  "title": "Tietoa maasta",
+  "intro": "Mistä kurssin kielet ovat peräisin ja milloin ne syntyivät.",
+  "en": "Länsigermaaninen kieli. Anglit, saksit ja juutit toivat sen Britanniaan 400-luvulla; ensimmäiset tekstit ovat 600-luvulta. Vuoden 1066 jälkeen siihen omaksuttiin tuhansia ranskalaisia sanoja.",
+  "de": "Länsigermaaninen kieli. Ensimmäiset tekstit ovat 700-luvulta (muinaisyläsaksa). Yhteinen kirjakieli alkoi vakiintua Lutherin raamatunkäännöksen myötä 1500-luvulla.",
+  "nl": "Länsigermaaninen kieli, joka kehittyi frankin murteista. Sen tunnetuin varhainen virke on kirjoitettu noin vuonna 1100.",
+  "sv": "Pohjoisgermaaninen kieli, joka periytyy viikinkiajan (700–1000-luvuilla) muinaisnorjasta. Itsenäinen kieli 1200-luvulta lähtien.",
+  "no": "Pohjoisgermaaninen kieli, joka polveutuu muinaisnorjasta. Nykyään kielellä on kaksi kirjakieltä: bokmål ja nynorsk (1800–1900-luvuilta).",
+  "da": "Pohjoisgermaaninen kieli, joka periytyy muinaisnorjasta; se eriytyi omakseen 1100-luvun tienoilla. Sen lähimmät sukulaiset ovat ruotsi ja norja.",
+  "fr": "Romaaninen kieli, joka kehittyi Gallian kansanlatinasta. Ensimmäinen kirjallinen lähde on Strasbourgin valat vuodelta 842.",
+  "es": "Romaaninen kieli, joka kehittyi Kastilian kansanlatinasta. Varhaiset merkinnät ovat 900–1000-luvuilta; kuningas Alfonso X vakiinnutti kielen normit 1200-luvulla.",
+  "it": "Romaaninen kieli, joka pohjautuu Firenzen (Toscanan) murteeseen. Kirjakieli Dantesta lähtien, 1300-luvulta.",
+  "pt": "Romaaninen kieli, joka kehittyi galego-portugalista. Ensimmäiset asiakirjat ovat 1100–1200-luvuilta.",
+  "ro": "Romaaninen kieli, joka polveutuu Rooman Dacian provinssin latinasta (100–200-luvuilta). Vanhin tunnettu teksti on Neacșun kirje vuodelta 1521; sitä kirjoitettiin kyrillisin aakkosin 1800-luvulle asti.",
+  "pl": "Länsislaavilainen kieli. Ensimmäinen kirjoitettu lause on peräisin vuodelta 1270. Kirjoitetaan latinalaisilla aakkosilla.",
+  "cs": "Länsislaavilainen kieli. Kirjoitettu 1200-luvulta lähtien; Jan Hus otti käyttöön kirjainten tarkkeet (háček) 1400-luvulla.",
+  "sk": "Länsislaavilainen kieli, hyvin lähellä tšekkiä. Ľudovít Štúr loi kirjakielen vuonna 1843.",
+  "uk": "Itäslaavilainen kieli, joka periytyy Kiovan Rusin muinaisitäslaavista. Nykyinen kirjakieli alkoi Kotljarevskyin Eneida-teoksesta (1798).",
+  "ru": "Itäslaavilainen kieli, joka polveutuu muinaisitäslaavista. Kyrillisiä aakkosia on käytetty 900-luvulta lähtien; nykymuotoinen kirjakieli vakiintui 1700–1800-luvuilla.",
+  "bg": "Eteläslaavilainen kieli. Täällä Kyrilloksen ja Methodioksen oppilaat loivat 800-luvulla slaavilaisen kirjoitusjärjestelmän ja myöhemmin kyrilliset aakkoset.",
+  "hr": "Eteläslaavilainen kieli. Varhaiset tekstit kirjoitettiin glagoliittisilla aakkosilla (Baškan taulu, noin vuodelta 1100); nykyään käytetään latinalaisia aakkosia.",
+  "sr": "Eteläslaavilainen kieli. Kirjoitettu 1100-luvulta lähtien; 1800-luvulla Vuk Karadžić loi säännön ”kirjoita niin kuin puhut”. Käyttää kyrillisiä ja latinalaisia aakkosia.",
+  "el": "Oma indoeurooppalainen haaransa. Kirjallisia merkintöjä on jo 1300–1200-luvuilta eaa.; aakkosto on ollut käytössä 700-luvulta eaa. Yksi maailman vanhimmista kirjakielistä.",
+  "fi": "Suomalais-ugrilainen kieli (uralilainen kielikunta). Kirjoitettu 1500-luvulta lähtien; Mikael Agricolan ensimmäinen kirja ilmestyi vuonna 1543. Sen lähin sukulainen on viro.",
+  "hu": "Suomalais-ugrilainen kieli. Unkarilaiset saapuivat Tonavan varrelle noin vuonna 896; ensimmäinen yhtenäinen teksti, Hautapuhe, on peräisin noin vuodelta 1195."
+ },
+ "hr": {
+  "title": "O zemlji",
+  "intro": "Odakle dolazi svaki jezik tečaja i kada se pojavio.",
+  "en": "Zapadnogermanski. Na Britaniju su ga donijeli Kutovi, Sasi i Juti u 5. stoljeću; prvi tekstovi potječu iz 7. stoljeća. Nakon 1066. preuzeo je tisuće francuskih riječi.",
+  "de": "Zapadnogermanski. Prvi tekstovi potječu iz 8. stoljeća (starovisokonjemački). Zajednički pisani standard oblikovao se nakon Lutherova prijevoda Biblije u 16. stoljeću.",
+  "nl": "Zapadnogermanski, izrastao iz franačkih dijalekata. Njegova najpoznatija rana rečenica zapisana je oko 1100. godine.",
+  "sv": "Sjevernogermanski, iz staronordijskog jezika iz doba Vikinga (8. – 11. stoljeće). Zaseban jezik od 13. stoljeća.",
+  "no": "Sjevernogermanski, iz staronordijskog jezika. Danas ima dva pisana standarda, Bokmål i Nynorsk (19. – 20. stoljeće).",
+  "da": "Sjevernogermanski, iz staronordijskog jezika; odvojio se oko 12. stoljeća. Njegovi su najbliži srodnici švedski i norveški.",
+  "fr": "Romanski, iz vulgarnog latinskog u Galiji. Prvi pisani trag su Zakletve iz Strasbourga iz 842. godine.",
+  "es": "Romanski, iz vulgarnog latinskog u Kastilji. Rani zapisi potječu iz 10. – 11. stoljeća; kralj Alfonso X. postavio je standard u 13. stoljeću.",
+  "it": "Romanski, temelji se na firentinskom (toskanskom) dijalektu. Književni jezik od Dantea u 14. stoljeću.",
+  "pt": "Romanski, iz galicijsko-portugalskog jezika. Prvi dokumenti potječu iz 12. – 13. stoljeća.",
+  "ro": "Romanski, iz latinskog rimske provincije Dakije (2. – 3. stoljeće). Najstariji poznati tekst je Neacșuovo pismo iz 1521. godine; pisao se ćirilicom do 19. stoljeća.",
+  "pl": "Zapadnoslavenski. Prva zapisana rečenica datira iz 1270. godine. Piše se latinicom.",
+  "cs": "Zapadnoslavenski. Piše se od 13. stoljeća; Jan Hus uveo je dijakritičke znakove na slovima (háček) u 15. stoljeću.",
+  "sk": "Zapadnoslavenski, vrlo blizak češkom. Ľudovít Štúr stvorio je književni standard 1843. godine.",
+  "uk": "Istočnoslavenski, iz staroistočnoslavenskog jezika Kijevske Rusije. Suvremeni književni jezik datira od Kotljarevskijevog djela Eneida (1798.).",
+  "ru": "Istočnoslavenski, iz staroistočnoslavenskog jezika. Ćirilica od 10. stoljeća; suvremeni standard oblikovao se u 18. – 19. stoljeću.",
+  "bg": "Južnoslavenski. Ovdje su u 9. stoljeću učenici Ćirila i Metoda stvorili slavensko pismo, a zatim i ćirilicu.",
+  "hr": "Južnoslavenski. Rani tekstovi pisani su glagoljicom (Bašćanska ploča, oko 1100. godine); danas se koristi latinica.",
+  "sr": "Južnoslavenski. Piše se od 12. stoljeća; u 19. stoljeću Vuk Karadžić postavio je pravilo „piši kako govoriš”. Koristi ćirilicu i latinicu.",
+  "el": "Vlastita indoeuropska grana. Zapisi iz 14. – 13. stoljeća pr. n. e.; abeceda od 8. stoljeća pr. n. e. Jedan od najstarijih pisanih jezika.",
+  "fi": "Finsko-ugrski (uralačka porodica). Piše se od 16. stoljeća; prva knjiga Mikaela Agricole pojavila se 1543. godine. Najbliži srodnik mu je estonski.",
+  "hu": "Finsko-ugrski. Mađari su stigli do Dunava oko 896. godine; prvi povezani tekst, Pogrebni govor, datira iz oko 1195. godine."
+ },
+ "hu": {
+  "title": "Az országról",
+  "intro": "Honnan származnak és mikor alakultak ki a kurzus nyelvei.",
+  "en": "Nyugati germán nyelv. Az 5. században juttatták el Britanniába az angolok, szászok és jütök; az első szövegek a 7. századból származnak. 1066 után több ezer francia szót vett át.",
+  "de": "Nyugati germán nyelv. Az első szövegek a 8. századból származnak (ófelnémet). A közös írott norma Luther 16. századi bibliafordítása után alakult ki.",
+  "nl": "Nyugati germán nyelv, amely a frank dialektusokból fejlődött ki. Legismertebb korai mondata 1100 körül íródott.",
+  "sv": "Északi germán nyelv, amely a viking kor (8–11. század) óészaki nyelvéből származik. A 13. század óta önálló nyelv.",
+  "no": "Északi germán nyelv, az óészakiból ered. Ma két hivatalos írott változata létezik: a bokmål és a nynorsk (19–20. század).",
+  "da": "Északi germán nyelv, az óészakiból vált ki a 12. század körül. Legközelebbi rokonai a svéd és a norvég.",
+  "fr": "Újlatin nyelv, amely Gallia vulgáris latin nyelvéből fejlődött ki. Az első írásos emléke a Strasbourgi eskü (842).",
+  "es": "Újlatin nyelv, Kasztília vulgáris latin nyelvéből. Korai emlékei a 10–11. századból maradtak fenn; a normát X. Alfonz király rögzítette a 13. században.",
+  "it": "Újlatin nyelv, amely a firenzei (toszkán) dialektuson alapul. A 14. század, azaz Dante óta irodalmi nyelv.",
+  "pt": "Újlatin nyelv, a galiciai-portugálból ered. Az első dokumentumok a 12–13. századból származnak.",
+  "ro": "Újlatin nyelv, a római Dacia provincia (2–3. század) latin nyelvéből. A legrégebbi ismert szöveg Neacșu levele (1521); a 19. századig cirill betűkkel írták.",
+  "pl": "Nyugati szláv nyelv. Az első lejegyzett mondat 1270-ből származik. Latin ábécével írják.",
+  "cs": "Nyugati szláv nyelv. A 13. század óta írott nyelv; a betűk fölötti mellékjeleket (háček) Husz János vezette be a 15. században.",
+  "sk": "Nyugati szláv nyelv, nagyon közel áll a csehhez. Az irodalmi nyelvi normát Ľudovít Štúr hozta létre 1843-ban.",
+  "uk": "Keleti szláv nyelv, a Kijevi Rusz ókeleti szláv nyelvéből ered. A modern irodalmi nyelv Kotljarevszkij Eneidájától (1798) eredeztethető.",
+  "ru": "Keleti szláv nyelv, az ókeleti szlávból. A 10. század óta cirill írású; a modern norma a 18–19. században alakult ki.",
+  "bg": "Déli szláv nyelv. Itt alkották meg a 9. században Cirill és Metód tanítványai a szláv írást, majd a cirill ábécét.",
+  "hr": "Déli szláv nyelv. A korai szövegek glagolita írással születtek (baskai kőtábla, 1100 körül); ma latin ábécét használ.",
+  "sr": "Déli szláv nyelv. A 12. század óta írott nyelv; a 19. században Vuk Karadžić határozta meg az „írj úgy, ahogy beszélsz” szabályt. Cirill és latin betűkkel is írják.",
+  "el": "Az indoeurópai nyelvcsalád önálló ága. Írásos emlékei már a Kr. e. 14–13. századból ismertek; az ábécét a Kr. e. 8. század óta használja. Az egyik legrégebbi írott nyelv.",
+  "fi": "Finnugor nyelv (uráli nyelvcsalád). A 16. század óta írott nyelv; Mikael Agricola első könyve 1543-ban jelent meg. Legközelebbi rokona az észt.",
+  "hu": "Finnugor nyelv. A magyarok 896 körül érték el a Dunát; az első összefüggő szövegemlék, a Halotti beszéd 1195 körül született."
+ },
+ "it": {
+  "title": "Sul paese",
+  "intro": "Da dove proviene ogni lingua del corso e quando è comparsa.",
+  "en": "Germanica occidentale. Portata in Gran Bretagna da Angli, Sassoni e Juti nel 5° secolo; primi testi dal 7° secolo. Dopo il 1066 ha accolto migliaia di parole francesi.",
+  "de": "Germanica occidentale. Primi testi dall'8° secolo (antico alto tedesco). Uno standard scritto comune si è formato dopo la traduzione della Bibbia di Lutero nel 16° secolo.",
+  "nl": "Germanica occidentale, sviluppatasi dai dialetti franchi. La sua frase più antica e nota è stata scritta intorno al 1100.",
+  "sv": "Germanica settentrionale, dall'antico norreno dell'epoca vichinga (8°–11° secolo). Lingua distinta a partire dal 13° secolo.",
+  "no": "Germanica settentrionale, dall'antico norreno. Oggi ha due standard scritti, Bokmål e Nynorsk (19°–20° secolo).",
+  "da": "Germanica settentrionale, dall'antico norreno; si è separata intorno al 12° secolo. I suoi parenti più stretti sono lo svedese e il norvegese.",
+  "fr": "Romanza, dal latino volgare della Gallia. La prima testimonianza scritta sono i Giuramenti di Strasburgo, 842.",
+  "es": "Romanza, dal latino volgare di Castiglia. Prime attestazioni dal 10°–11° secolo; re Alfonso X ne ha fissato lo standard nel 13° secolo.",
+  "it": "Romanza, basata sul dialetto fiorentino (toscano). Lingua letteraria dai tempi di Dante, 14° secolo.",
+  "pt": "Romanza, dal galego-portoghese. Primi documenti dal 12°–13° secolo.",
+  "ro": "Romanza, dal latino della provincia romana della Dacia (2°–3° secolo). Il testo più antico conosciuto è la lettera di Neacșu, 1521; è stata scritta in cirillico fino al 19° secolo.",
+  "pl": "Slava occidentale. La prima frase scritta risale al 1270. Si scrive con l'alfabeto latino.",
+  "cs": "Slava occidentale. Scritta a partire dal 13° secolo; Jan Hus ha introdotto i segni diacritici sopra le lettere (háček) nel 15° secolo.",
+  "sk": "Slava occidentale, molto vicina al ceco. Ľudovít Štúr ne ha creato lo standard letterario nel 1843.",
+  "uk": "Slava orientale, dall'antico slavo orientale della Rus' di Kiev. La lingua letteraria moderna risale all'Eneide di Kotljarevs'kyj (1798).",
+  "ru": "Slava orientale, dall'antico slavo orientale. Scritta in cirillico dal 10° secolo; lo standard moderno si è formato nel 18°–19° secolo.",
+  "bg": "Slava meridionale. Qui, nel 9° secolo, i discepoli di Cirillo e Metodio hanno creato la scrittura slava e successivamente l'alfabeto cirillico.",
+  "hr": "Slava meridionale. I primi testi erano scritti in glagolitico (la lapide di Baška, intorno al 1100); oggi usa l'alfabeto latino.",
+  "sr": "Slava meridionale. Scritta a partire dal 12° secolo; nel 19° secolo Vuk Karadžić stabilì la regola “scrivi come parli”. Usa il cirillico e il latino.",
+  "el": "Un ramo a sé stante della famiglia indoeuropea. Testimonianze dal 14°–13° secolo a.C.; l'alfabeto dall'8° secolo a.C. Una delle lingue scritte più antiche.",
+  "fi": "Ugofinnica (famiglia uralica). Scritta dal 16° secolo; il primo libro di Mikael Agricola è apparso nel 1543. La sua parente più stretta è l'estone.",
+  "hu": "Ugofinnica. Gli ungheresi raggiunsero il Danubio intorno all'896; il primo testo organico, il Discorso funebre, risale a circa il 1195."
+ },
+ "pl": {
+  "title": "O kraju",
+  "intro": "Skąd pochodzą języki dostępne w kursie i kiedy się pojawiły.",
+  "en": "Zachodniogermański. Przyniesiony do Brytanii przez Anglów, Sasów i Jutów w V wieku; pierwsze teksty z VII wieku. Po 1066 roku przyjął tysiące francuskich słów.",
+  "de": "Zachodniogermański. Pierwsze teksty z VIII wieku (staro-wysoko-niemiecki). Wspólny standard pisany ukształtował się po przekładzie Biblii przez Lutra w XVI wieku.",
+  "nl": "Zachodniogermański, wywodzący się z dialektów frankońskich. Jego najsłynniejsze wczesne zdanie zapisano około 1100 roku.",
+  "sv": "Północnogermański, wywodzący się ze staronordyckiego z epoki wikingów (VIII–XI wiek). Odrębny język od XIII wieku.",
+  "no": "Północnogermański, ze staronordyckiego. Dziś posiada dwa standardy pisane: Bokmål i Nynorsk (XIX–XX wiek).",
+  "da": "Północnogermański, ze staronordyckiego; wyodrębnił się około XII wieku. Jego najbliższymi krewnymi są szwedzki i norweski.",
+  "fr": "Romański, z łaciny ludowej Galii. Pierwszym zapisem są Przysięgi strasburskie z 842 roku.",
+  "es": "Romański, z łaciny ludowej Kastylii. Wczesne zapisy z X–XI wieku; król Alfons X ustanowił standard w XIII wieku.",
+  "it": "Romański, oparty na dialekcie florenckim (toskańskim). Język literacki od czasów Dantego, XIV wiek.",
+  "pt": "Romański, z galicyjsko-portugalskiego. Pierwsze dokumenty z XII–XIII wieku.",
+  "ro": "Romański, z łaciny rzymskiej prowincji Dacji (II–III wiek). Najstarszy znany tekst to list Neacșu z 1521 roku; do XIX wieku był pisany cyrylicą.",
+  "pl": "Zachodniosłowiański. Pierwsze zapisane zdanie pochodzi z 1270 roku. Pisany alfabetem łacińskim.",
+  "cs": "Zachodniosłowiański. Pisany od XIII wieku; Jan Hus wprowadził znaki nad literami (háček) w XV wieku.",
+  "sk": "Zachodniosłowiański, bardzo bliski czeskiemu. Ľudovít Štúr stworzył standard literacki w 1843 roku.",
+  "uk": "Wschodniosłowiański, ze staroruskiego Rusi Kijowskiej. Współczesny język literacki datuje się od „Eneidy” Kotlarewskiego (1798).",
+  "ru": "Wschodniosłowiański, ze staroruskiego. Cyrylica od X wieku; współczesny standard ukształtował się w XVIII–XIX wieku.",
+  "bg": "Południowosłowiański. To tutaj w IX wieku uczniowie Cyryla i Metodego stworzyli piśmiennictwo słowiańskie, a następnie cyrylicę.",
+  "hr": "Południowosłowiański. Wczesne teksty pisano głagolicą (płyta z Baški, około 1100 r.); dziś używa alfabetu łacińskiego.",
+  "sr": "Południowosłowiański. Pisany od XII wieku; w XIX wieku Vuk Karadžić ustanowił zasadę „pisz tak, jak mówisz”. Używa cyrylicy i alfabetu łacińskiego.",
+  "el": "Własna gałąź indoeuropejska. Zapisy z XIV–XIII wieku p.n.e.; alfabet od VIII wieku p.n.e. Jeden z najstarszych języków pisanych.",
+  "fi": "Fińsko-ugryjski (rodzina uralska). Pisany od XVI wieku; pierwsza książka Mikaela Agricoli ukazała się w 1543 roku. Jego najbliższym krewnym jest estoński.",
+  "hu": "Fińsko-ugryjski. Węgrzy dotarli nad Dunaj około 896 roku; pierwszy spójny tekst, Kazanie pogrzebowe, pochodzi z około 1195 roku."
+ },
+ "pt": {
+  "title": "Sobre o país",
+  "intro": "De onde vem cada idioma do curso e quando ele surgiu.",
+  "en": "Germânica ocidental. Levada para a Grã-Bretanha pelos anglos, saxões e jutos no século V; primeiros textos do século VII. Após 1066, absorveu milhares de palavras do francês.",
+  "de": "Germânica ocidental. Primeiros textos do século VIII (alto-alemão antigo). Um padrão escrito comum se formou após a tradução da Bíblia por Lutero no século XVI.",
+  "nl": "Germânica ocidental, originada dos dialetos francos. Sua frase antiga mais famosa foi escrita por volta de 1100.",
+  "sv": "Germânica setentrional, derivada do nórdico antigo da Era Viking (séculos VIII–XI). Um idioma independente desde o século XIII.",
+  "no": "Germânica setentrional, derivada do nórdico antigo. Hoje conta com dois padrões escritos, bokmål e nynorsk (séculos XIX–XX).",
+  "da": "Germânica setentrional, vinda do nórdico antigo; separou-se por volta do século XII. Seus parentes mais próximos são o sueco e o norueguês.",
+  "fr": "Românica, vinda do latim vulgar da Gália. O primeiro registro escrito são os Juramentos de Estrasburgo, de 842.",
+  "es": "Românica, vinda do latim vulgar de Castela. Registros antigos dos séculos X–XI; o rei Afonso X estabeleceu a norma no século XIII.",
+  "it": "Românica, baseada no dialeto florentino (toscano). Língua literária desde Dante, no século XIV.",
+  "pt": "Românica, derivada do galego-português. Primeiros documentos dos séculos XII–XIII.",
+  "ro": "Românica, derivada do latim da província romana da Dácia (séculos II–III). O texto mais antigo conhecido é a Carta de Neacșu, de 1521; foi escrita em cirílico até o século XIX.",
+  "pl": "Eslava ocidental. A primeira frase escrita data de 1270. Utiliza o alfabeto latino.",
+  "cs": "Eslava ocidental. Escrita desde o século XIII; Jan Hus introduziu os sinais sobre as letras (háček) no século XV.",
+  "sk": "Eslava ocidental, muito próxima do tcheco. Ľudovít Štúr estabeleceu o padrão literário em 1843.",
+  "uk": "Eslava oriental, originada do eslavo oriental antigo da Rus de Kiev. A língua literária moderna tem início com o poema Eneida de Kotliarevsky (1798).",
+  "ru": "Eslava oriental, vinda do eslavo oriental antigo. Usa o cirílico desde o século X; o padrão moderno se consolidou nos séculos XVIII–XIX.",
+  "bg": "Eslava meridional. Foi aqui que, no século IX, os discípulos de Cirilo e Metódio desenvolveram a escrita eslava e criaram o alfabeto cirílico.",
+  "hr": "Eslava meridional. Os primeiros textos foram escritos em glagolítico (a Placa de Baška, cerca de 1100); hoje utiliza o alfabeto latino.",
+  "sr": "Eslava meridional. Escrita desde o século XII; no século XIX, Vuk Karadžić definiu a regra “escreva como se fala”. Usa o cirílico e o latino.",
+  "el": "Ramo próprio da família indo-europeia. Registros dos séculos XIV–XIII a.C.; o alfabeto existe desde o século VIII a.C. Uma das línguas escritas mais antigas do mundo.",
+  "fi": "Fino-úgrica (família urálica). Escrita desde o século XVI; o primeiro livro de Mikael Agricola foi publicado em 1543. Seu parente mais próximo é o estoniano.",
+  "hu": "Fino-úgrica. Os húngaros chegaram ao Danúbio por volta de 896; o primeiro texto contínuo, o Sermão Fúnebre, data de cerca de 1195."
+ },
+ "ro": {
+  "title": "Despre țară",
+  "intro": "De unde provine fiecare limbă din curs și când a apărut.",
+  "en": "Germanică de vest. Adusă în Marea Britanie de angli, sași și iuți în secolul al V-lea; primele texte din secolul al VII-lea. După 1066 a preluat mii de cuvinte din franceză.",
+  "de": "Germanică de vest. Primele texte din secolul al VIII-lea (germana înaltă veche). Un standard scris comun s-a format după traducerea Bibliei de către Luther în secolul al XVI-lea.",
+  "nl": "Germanică de vest, dezvoltată din dialectele franconice. Cea mai cunoscută frază timpurie a fost scrisă în jurul anului 1100.",
+  "sv": "Germanică de nord, din nordica veche a epocii vikingilor (secolele VIII–XI). O limbă separată din secolul al XIII-lea.",
+  "no": "Germanică de nord, din nordica veche. Astăzi are două standarde scrise, Bokmål și Nynorsk (secolele XIX–XX).",
+  "da": "Germanică de nord, din nordica veche; s-a desprins în jurul secolului al XII-lea. Cele mai apropiate rude sunt suedeza și norvegiana.",
+  "fr": "Romanică, din latina vulgară din Galia. Prima atestare scrisă este Jurămintele de la Strasbourg, 842.",
+  "es": "Romanică, din latina vulgară din Castilia. Primele atestări din secolele X–XI; regele Alfonso al X-lea a stabilit standardul în secolul al XIII-lea.",
+  "it": "Romanică, bazată pe dialectul florentin (toscan). O limbă literară de la Dante, secolul al XIV-lea.",
+  "pt": "Romanică, din galiciană-portugală. Primele documente din secolele XII–XIII.",
+  "ro": "Romanică, din latina provinciei romane Dacia (secolele II–III). Cel mai vechi text cunoscut este scrisoarea lui Neacșu, 1521; a fost scrisă cu alfabet chirilic până în secolul al XIX-lea.",
+  "pl": "Slavă de vest. Prima propoziție scrisă datează din 1270. Scrisă în alfabetul latin.",
+  "cs": "Slavă de vest. Scrisă din secolul al XIII-lea; Jan Hus a introdus semnele diacritice deasupra literelor (háček) în secolul al XV-lea.",
+  "sk": "Slavă de vest, foarte apropiată de cehă. Ľudovít Štúr a creat standardul literar în 1843.",
+  "uk": "Slavă de est, din slava veche răsăriteană a Rusiei Kievene. Limba literară modernă datează din Eneida lui Kotliarevskîi (1798).",
+  "ru": "Slavă de est, din slava veche răsăriteană. Chirilică din secolul al X-lea; standardul modern s-a format în secolele XVIII–XIX.",
+  "bg": "Slavă de sud. Aici, în secolul al IX-lea, ucenicii lui Chiril și Metodiu au creat scrierea slavă și apoi alfabetul chirilic.",
+  "hr": "Slavă de sud. Primele texte au fost scrise în glagolitic (Piatra de la Baška, în jurul anului 1100); astăzi folosește alfabetul latin.",
+  "sr": "Slavă de sud. Scrisă din secolul al XII-lea; în secolul al XIX-lea Vuk Karadžić a stabilit regula „scrie cum vorbești”. Folosește alfabetul chirilic și cel latin.",
+  "el": "Ramură indo-europeană proprie. Atestări din secolele XIV–XIII î.Hr.; alfabetul din secolul al VIII-lea î.Hr. Una dintre cele mai vechi limbi scrise.",
+  "fi": "Finno-ugrică (familia uralică). Scrisă din secolul al XVI-lea; prima carte a lui Mikael Agricola a apărut în 1543. Cea mai apropiată rudă este estona.",
+  "hu": "Finno-ugrică. Ungurii au ajuns la Dunăre în jurul anului 896; primul text legat, Discursul funerar, datează din jurul anului 1195."
+ },
+ "sr": {
+  "title": "О земљи",
+  "intro": "Одакле потиче сваки од језика курса и када се појавио.",
+  "en": "Западногермански језик. На Британска острва су га донели Англи, Саси и Јити у 5. веку; први текстови потичу из 7. века. Након 1066. године примио је на хиљаде француских речи.",
+  "de": "Западногермански језик. Први текстови датирају из 8. века (старовисоконемачки). Заједнички књижевни стандард настао је након Лутеровог превода Библије у 16. веку.",
+  "nl": "Западногермански језик, настао из франачких дијалеката. Његова најпознатија рана реченица записана је око 1100. године.",
+  "sv": "Северногермански језик, потекао из старонордијског језика из доба викинга (8–11. век). Као засебан језик развија се од 13. века.",
+  "no": "Северногермански језик, настао из старонордијског. Данас има два писана стандарда: букмол и нинорск (19–20. век).",
+  "da": "Северногермански језик, настао из старонордијског; одвојио се око 12. века. Његови најближи сродници су шведски и норвешки.",
+  "fr": "Романски језик, настао из вулгарног латинског у Галији. Први писани споменик су Стразбуршке заклетве из 842. године.",
+  "es": "Романски језик, потекао из вулгарног латинског Кастиље. Рани списи датирају из 10–11. века; краљ Алфонсо X поставио је стандард у 13. веку.",
+  "it": "Романски језик, заснован на фирентинском (тосканском) дијалекту. Књижевни језик постаје још од Дантеа у 14. веку.",
+  "pt": "Романски језик, настао из галицијско-португалског. Први документи потичу из 12–13. века.",
+  "ro": "Романски језик, потекао из латинског језика римске провинције Дакије (2–3. век). Најстарији познати текст је Њакшууово писмо из 1521. године; писан је ћирилицом све до 19. века.",
+  "pl": "Западнословенски језик. Прва записана реченица потиче из 1270. године. Пише се латиницом.",
+  "cs": "Западнословенски језик. Записује се од 13. века; Јан Хус је у 15. веку увео дијакритичке знаке (квачице).",
+  "sk": "Западнословенски језик, веома близак чешком. Људовит Штур је установио књижевни стандард 1843. године.",
+  "uk": "Источнословенски језик, настао из староруског (староисточнословенског) језика Кијевске Русије. Савремени књижевни језик почиње са Котљаревсковом „Енеидом” (1798).",
+  "ru": "Источнословенски језик, настао из староруског (староисточнословенског). Користи ћирилицу од 10. века; савремени стандард обликован је у 18–19. веку.",
+  "bg": "Јужнословенски језик. Овде су у 9. веку ученици Ћирила и Методија створили словенску писменост, а потом и ћирилицу.",
+  "hr": "Јужнословенски језик. Рани текстови писани су глагољицом (Башчанска плоча, око 1100. године); данас користи латиницу.",
+  "sr": "Јужнословенски језик. Записује се од 12. века; у 19. веку Вук Караџић је увео правило „пиши као што говориш”. Користи ћирилицу и латиницу.",
+  "el": "Засебна грана индоевропских језика. Записи датирају из 14–13. века пре нове ере; алфабет се користи од 8. века пре нове ере. Један од најстаријих писаних језика на свету.",
+  "fi": "Угро-фински језик (уралска породица). Записује се од 16. века; прва књига Микаела Агриколе објављена је 1543. године. Његов најближи сродник је естонски.",
+  "hu": "Угро-фински језик. Мађари су стигли на Дунав око 896. године; први повезани текст, „Погребно слово”, датира из око 1195. године."
  }
-};;
+};;;
 
 function content() {
   const ui = (App.storage.getUILang && App.storage.getUILang()) || 'ru';
