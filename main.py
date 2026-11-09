@@ -192,8 +192,31 @@ class AppRequestHandler(http.server.SimpleHTTPRequestHandler):
             return
         super().do_GET()
 
+    # The server is open to the Wi-Fi network (phone access), so it serves only the
+    # app's own file types: no folder listings, no dot-files (.git, .claude), no
+    # scripts or build tools.
+    SERVE_EXT = {'.html', '.js', '.css', '.png', '.ico', '.webmanifest', '.json', '.svg',
+                 '.jpg', '.jpeg', '.webp', '.mp3', '.woff', '.woff2'}
+    HIDDEN_DIRS = {'tools', 'dist', 'build', '__pycache__'}
+
+    def send_head(self):
+        path = urllib.parse.unquote(urllib.parse.urlsplit(self.path).path)
+        parts = [p for p in path.replace('\\', '/').split('/') if p]
+        if (any(p.startswith('.') for p in parts) or (parts and parts[0] in self.HIDDEN_DIRS)
+                or os.path.splitext(path)[1].lower() not in self.SERVE_EXT):
+            self.send_error(404)
+            return None
+        return super().send_head()
+
+    def list_directory(self, path):
+        self.send_error(404)
+        return None
+
     def end_headers(self):
         self.send_header('Cache-Control', 'no-store')
+        self.send_header('X-Content-Type-Options', 'nosniff')
+        self.send_header('X-Frame-Options', 'SAMEORIGIN')
+        self.send_header('Referrer-Policy', 'no-referrer')
         super().end_headers()
 
     def log_message(self, format, *args):
