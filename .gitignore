@@ -4,3 +4,4 @@ tools/gemini_cache*/
 tools/.groq_key
 tools/.openrouter_key
 tools/.mistral_key
+__pycache__/
