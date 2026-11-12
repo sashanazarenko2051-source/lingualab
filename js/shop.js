@@ -105,7 +105,12 @@ App.shop = (function () {
 
   // Gives what was bought (or received as a gift).
   function grant(itemId, opts) {
-    opts = opts || {};
+    opts = (opts && typeof opts === 'object') ? opts : {};
+    // Gift options come from another user's cloud record: only plain short
+    // names may become object keys (no "__proto__" / "constructor").
+    const ok = k => typeof k === 'string' && /^[a-z0-9_-]{1,32}$/i.test(k) && !/^(__proto__|constructor|prototype)$/.test(k);
+    ['lang', 'theme', 'hat', 'id', 'term'].forEach(k => { if (opts[k] != null && !ok(opts[k])) delete opts[k]; });
+    if (opts.langs != null) opts.langs = Array.isArray(opts.langs) ? opts.langs.filter(ok).slice(0, 5) : [];
     const sh = st();
     const days = (TERMS.find(t => t.id === opts.term) || {}).days || 0;
     switch (itemId) {
@@ -174,7 +179,8 @@ App.shop = (function () {
       App.cloud.takeGifts().then(gifts => gifts.forEach(g => {
         if (!g.itemId || !ITEMS[g.itemId]) return;
         grant(g.itemId, g.opts);
-        App.effects.toast(App.t('shop_gift_got', { name: g.fromName || '🐺', item: itemName(g.itemId, g.opts) }));
+        const esc = v => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        App.effects.toast(esc(App.t('shop_gift_got', { name: String(g.fromName || '🐺').slice(0, 40), item: itemName(g.itemId, g.opts) })));
       })).catch(() => {});
     });
   }

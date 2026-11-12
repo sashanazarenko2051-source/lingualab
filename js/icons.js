@@ -1,7 +1,7 @@
 window.App = window.App || {};
 
 // Emoji shown per word during practice, indexed by position within its category.
-// Word order is identical across every language file (same 80 concepts translated),
+// Word order is identical across every language file (the same concepts translated),
 // so one icon list here covers all 22 languages.
 App.WORD_ICONS = {
   greetings: ['👋', '🌅', '🌆', '🚪', '🙏', '💐', '❓', '✅', '❌', '🤔',

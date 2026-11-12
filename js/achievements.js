@@ -4,7 +4,7 @@ window.App = window.App || {};
 // with other players (a showcased badge appears next to your name on the
 // leaderboard, synced through App.cloud).
 App.achievements = (function () {
-  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   const byId = (id) => App.gamification.ACHIEVEMENTS.find(a => a.id === id);
 
   function isUnlocked(id) {

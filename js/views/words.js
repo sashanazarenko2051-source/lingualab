@@ -12,7 +12,7 @@ App.views = App.views || {};
 let currentTab = null;
 let query = '';
 
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
 function startedLangs() {
   return App.LANG_ORDER.map(code => {

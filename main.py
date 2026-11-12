@@ -79,6 +79,26 @@ MULTILINGUAL = {'male': 'en-US-AndrewMultilingualNeural', 'female': 'en-US-AvaMu
 _tts_broken = {}
 _tts_cache = OrderedDict()
 _tts_lock = threading.Lock()
+# Other devices on the Wi-Fi may ask for speech too; cap them so one device
+# can't keep the PC busy downloading audio (the app window itself is not capped).
+_tts_hits = {}
+TTS_LAN_LIMIT = 60   # requests per minute per device
+
+
+def tts_allowed(ip):
+    if ip in ('127.0.0.1', '::1'):
+        return True
+    now = time.time()
+    with _tts_lock:
+        hits = [t for t in _tts_hits.get(ip, []) if now - t < 60]
+        if len(hits) >= TTS_LAN_LIMIT:
+            _tts_hits[ip] = hits
+            return False
+        hits.append(now)
+        _tts_hits[ip] = hits
+        if len(_tts_hits) > 200:
+            _tts_hits.clear()
+    return True
 
 
 def online_tts(lang, gender, text, rate, handler=None):
@@ -158,6 +178,11 @@ class AppRequestHandler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         if self.path.startswith('/tts?'):
+            if not tts_allowed(self.client_address[0]):
+                self.send_response(429)
+                self.send_header('Content-Length', '0')
+                self.end_headers()
+                return
             q = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
             rate = q.get('r', ['+0%'])[0]
             if not re.fullmatch(r'[+-]\d{1,2}%', rate):

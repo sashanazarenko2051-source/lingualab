@@ -155,7 +155,7 @@ App.gamification = (function () {
     const leveledUp = level > prevLevel;
 
     App.storage.addWeeklyXP(amount);
-    if (leveledUp && App.coins) setTimeout(() => App.coins.add(App.quests.LEVEL_REWARD), 600);
+    if (leveledUp && App.coins && App.quests) setTimeout(() => App.coins.add(App.quests.LEVEL_REWARD), 600);
 
     const newAchievements = [];
     ACHIEVEMENTS.forEach(a => {

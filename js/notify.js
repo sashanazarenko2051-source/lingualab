@@ -119,13 +119,15 @@ App.notify = (function () {
 
   // ---- banner ---------------------------------------------------------------
   let dismissed = null;
+  // The texts carry the profile name, so they go in as plain text.
+  const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   function bannerHtml() {
     if (!enabled()) return '';
     const r = current();
     if (!r || dismissed === r.kind + todayKey()) return '';
     return `<div class="notify-banner notify-${r.kind}" id="notify-banner">
       <span class="notify-banner-ico">${r.kind === 'streak' ? '🔥' : r.kind === 'away' ? '🐺' : '📚'}</span>
-      <div class="notify-banner-text"><b>${r.title}</b><span>${r.body}</span></div>
+      <div class="notify-banner-text"><b>${esc(r.title)}</b><span>${esc(r.body)}</span></div>
       <button class="notify-banner-go" id="notify-banner-go">${App.t('notify_go')}</button>
       <button class="notify-banner-x" id="notify-banner-x" title="${App.t('notify_dismiss')}">✕</button>
     </div>`;

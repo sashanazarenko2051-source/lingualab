@@ -5,7 +5,7 @@ App.views = App.views || {};
 
 // The shop page: cards grouped by section. Each card buys for yourself, and
 // most can be gifted to a friend (picked from the friends list).
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 // Languages picked on the "5 languages" card, kept while the page is redrawn.
 let chosen5 = [];
 const SECTIONS = [

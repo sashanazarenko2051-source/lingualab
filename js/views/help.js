@@ -876,7 +876,7 @@ const HELP = {
         "review",
         "🔁",
         "Kertaus",
-        "\n        <p>Sovellus hyödyntää <b>jaksotettua kertausta</b>: sana palaa harjoituksiin juuri silloin, kun olet un 서htamassa sen — 1 päivän kuluttua, sitten 6 päivän päästä ja sen jälkeen yhä harvemmin. Jos vastaat väärin, sana palaa harjoiteltavaksi heti huomenna.</p>\n        <p>Kaikki virheet kertyvät osioon <b>”Korjaa virheet”</b>. Sana poistuu sieltä, kun vastaat siihen oikein kahdella peräkkäisellä oppitunnilla.</p>\n        <p><b>☆</b>-tähdellä voit lisätä sanan osioon ”Omat sanat” kerrataksesi sitä erikseen.</p>"
+        "\n        <p>Sovellus hyödyntää <b>jaksotettua kertausta</b>: sana palaa harjoituksiin juuri silloin, kun olet unohtamassa sen — 1 päivän kuluttua, sitten 6 päivän päästä ja sen jälkeen yhä harvemmin. Jos vastaat väärin, sana palaa harjoiteltavaksi heti huomenna.</p>\n        <p>Kaikki virheet kertyvät osioon <b>”Korjaa virheet”</b>. Sana poistuu sieltä, kun vastaat siihen oikein kahdella peräkkäisellä oppitunnilla.</p>\n        <p><b>☆</b>-tähdellä voit lisätä sanan osioon ”Omat sanat” kerrataksesi sitä erikseen.</p>"
       ],
       [
         "daily",
@@ -1128,7 +1128,7 @@ const HELP = {
         "hearts",
         "❤️",
         "Serca, energia i podpowiedzi",
-        "\n        <ul>\n          <li>Masz <b>25 serc</b>, które zachowują się między lekcjami. Błąd lub „👁 Pokaż słowo” kosztuje <b>1 serce</b>.</li>\n          <li><b>1 reklama = +1 serce</b>, bez limitu — liczba serc może przekroczyć 25.</li>\n          <li><b>16 godzin</b> po utracie pierwszego serca <b>połowa (+13)</b> wraca; po <b>24 godzinach</b> znów masz <b>25</b>.</li>\n          <li><b>⚡ Energia:</b> każde <b>10 słów</b> kosztuje <b>5 energii</b>. <b>+5</b> co godzinę, maksymalnie do <b>200</b>; po 24 godzinach znów jest <b>200</b>.</li>\n          <li><b>1 reklama = +15 energii</b>, bez limitu.</li>\n          <li><b>💡 Podpowiedzi:</b> <b>5 dziennie</b>, odnawiane każdego dnia. Więcej za reklamę lub w sklepie.</li>\n          <li>Egzaminy poziomujące nie zużywają serc ani energii.</li>\n        </ul>"
+        "\n        <ul>\n          <li>Masz <b>25 serc</b>, które zostają z tobą między lekcjami. Błąd lub „👁 Pokaż słowo” kosztuje <b>1 serce</b>.</li>\n          <li><b>1 reklama = +1 serce</b>, bez limitu — liczba serc może przekroczyć 25.</li>\n          <li><b>16 godzin</b> po utracie pierwszego serca <b>połowa (+13)</b> wraca; po <b>24 godzinach</b> znów masz <b>25</b>.</li>\n          <li><b>⚡ Energia:</b> każde <b>10 słów</b> kosztuje <b>5 energii</b>. <b>+5</b> co godzinę, maksymalnie do <b>200</b>; po 24 godzinach znów jest <b>200</b>.</li>\n          <li><b>1 reklama = +15 energii</b>, bez limitu.</li>\n          <li><b>💡 Podpowiedzi:</b> <b>5 dziennie</b>, odnawiane każdego dnia. Więcej za reklamę lub w sklepie.</li>\n          <li>Egzaminy poziomujące nie zużywają serc ani energii.</li>\n        </ul>"
       ],
       [
         "streak",
@@ -1441,7 +1441,7 @@ const LANG_HISTORY = {
   "hr": "Jihoslovanský jazyk. Rané texty byly psány hlaholicí (Bašská deska, kolem roku 1100); dnes používá latinku.",
   "sr": "Jihoslovanský jazyk. Písemně doložen od 12. století; v 19. století stanovil Vuk Karadžić pravidlo „piš, jak mluvíš“. Používá cyrilici i latinku.",
   "el": "Samostatná větev indoevropské rodiny. Písemné památky pocházejí ze 14.–13. století př. n. l.; abeceda se používá od 8. století př. n. l. Jeden z nejstarších psaných jazyků.",
-  "fi": "Ugrofinský jazyk (uraská rodina). Písemně doložen od 16. století; první kniha Mikaela Agricoly vyšla v roce 1543. Nejbližším příbuzným je estonština.",
+  "fi": "Ugrofinský jazyk (uralská rodina). Písemně doložen od 16. století; první kniha Mikaela Agricoly vyšla v roce 1543. Nejbližším příbuzným je estonština.",
   "hu": "Ugrofinský jazyk. Maďaři dorazili k Dunaji kolem roku 896; první souvislý text, Pohřební řeč, pochází z doby kolem roku 1195."
  },
  "da": {
@@ -1546,7 +1546,7 @@ const LANG_HISTORY = {
   "sr": "Slave méridional. Écrit depuis le XIIe siècle ; au XIXe siècle, Vuk Karadžić a instauré la règle « écris comme tu parles ». Utilise le cyrillique et le latin.",
   "el": "Sa propre branche indo-européenne. Écrits des XIVe–XIIIe siècles av. J.-C. ; l'alphabet depuis le VIIIe siècle av. J.-C. L'une des plus anciennes langues écrites.",
   "fi": "Finno-ougrien (famille ouralienne). Écrit depuis le XVIe siècle ; le premier livre de Mikael Agricola est paru en 1543. Son parent le plus proche est l'estonien.",
-  "hu": "Finno-ougrien. Les Hongrois ont atteint le Danube vers 896 ; le premier texte suivi, le Sermons d'adieu, date d'environ 1195."
+  "hu": "Finno-ougrien. Les Hongrois ont atteint le Danube vers 896 ; le premier texte suivi, l'Oraison funèbre, date d'environ 1195."
  },
  "nl": {
   "title": "Over het land",
@@ -1661,11 +1661,11 @@ const LANG_HISTORY = {
   "sv": "Северногермански език, произлязъл от староскандинавския от епохата на викингите (8.–11. век). Обособен език от 13. век.",
   "no": "Северногермански език, произлязъл от староскандинавския. Днес има два писмени стандарта: букмол (Bokmål) и нюнорск (Nynorsk) (19.–20. век).",
   "da": "Северногермански език, произлязъл от староскандинавския; обособява се около 12. век. Най-близките му родственици са шведският и норвежкият.",
-  "fr": "Романски език, произлязъл от вунгарния латински в Галия. Първият писмен паметник са Страсбургските клетви от 842 г.",
-  "es": "Романски език, произлязъл от вунгарния латински в Кастилия. Ранни свидетелства от 10.–11. век; крал Алфонсо X установява стандарта през 13. век.",
+  "fr": "Романски език, произлязъл от вулгарния латински в Галия. Първият писмен паметник са Страсбургските клетви от 842 г.",
+  "es": "Романски език, произлязъл от вулгарния латински в Кастилия. Ранни свидетелства от 10.–11. век; крал Алфонсо X установява стандарта през 13. век.",
   "it": "Романски език, основан на флорентинския (тоскански) диалект. Литературен език от времето на Данте през 14. век.",
   "pt": "Романски език, произлязъл от галисийско-португалския. Първи документи от 12.–13. век.",
-  "ro": "Романски език, произлязъл от латинския на римската провинция Дакия (2.–3. век). Най-старият известен текст е писмото на Няку от 1521 г.; използва кирилица чак до 19. век.",
+  "ro": "Романски език, произлязъл от латинския на римската провинция Дакия (2.–3. век). Най-старият известен текст е писмото на Някшу от 1521 г.; използва кирилица чак до 19. век.",
   "pl": "Западнославянски език. Първото записано изречение датира от 1270 г. Използва латинската азбука.",
   "cs": "Западнославянски език. Има писменост от 13. век; Ян Хус въвежда знаците над буквите (хачек) през 15. век.",
   "sk": "Западнославянски език, изключително близък до чешкия. Людовит Щур създава книжовния стандарт през 1843 г.",
@@ -1733,7 +1733,7 @@ const LANG_HISTORY = {
  "hr": {
   "title": "O zemlji",
   "intro": "Odakle dolazi svaki jezik tečaja i kada se pojavio.",
-  "en": "Zapadnogermanski. Na Britaniju su ga donijeli Kutovi, Sasi i Juti u 5. stoljeću; prvi tekstovi potječu iz 7. stoljeća. Nakon 1066. preuzeo je tisuće francuskih riječi.",
+  "en": "Zapadnogermanski. Na Britaniju su ga donijeli Angli, Sasi i Juti u 5. stoljeću; prvi tekstovi potječu iz 7. stoljeća. Nakon 1066. preuzeo je tisuće francuskih riječi.",
   "de": "Zapadnogermanski. Prvi tekstovi potječu iz 8. stoljeća (starovisokonjemački). Zajednički pisani standard oblikovao se nakon Lutherova prijevoda Biblije u 16. stoljeću.",
   "nl": "Zapadnogermanski, izrastao iz franačkih dijalekata. Njegova najpoznatija rana rečenica zapisana je oko 1100. godine.",
   "sv": "Sjevernogermanski, iz staronordijskog jezika iz doba Vikinga (8. – 11. stoljeće). Zaseban jezik od 13. stoljeća.",

@@ -11,7 +11,7 @@ window.App = window.App || {};
 App.exercises = (function () {
   const NON_LATIN = ['el', 'ru', 'uk', 'bg', 'sr'];
   const shuffle = (a) => App.lesson.shuffle(a);
-  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
   let keyHandler = null;
   let currentStep = null;

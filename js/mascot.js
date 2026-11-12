@@ -101,7 +101,7 @@ App.mascot = (function () {
   // Little moves the wolf makes on its own now and then.
   const IDLE_ANIMS = ['wave', 'wiggle', 'hop', 'nod', 'stretch', 'jump', 'howl', 'flip', 'peek'];
 
-  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
   // A word the learner already met (to recall), or the next new one (teaser).

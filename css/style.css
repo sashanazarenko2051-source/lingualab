@@ -1487,6 +1487,7 @@ button { background: none; }
 .energy-packs { display: flex; flex-wrap: wrap; gap: 14px 10px; justify-content: center; margin-top: 14px; padding-bottom: 4px; }
 .energy-pack { display: inline-flex; border-color: #ffd23f; color: #ffd23f; padding: 8px 14px; }
 [data-theme="light"] .energy-pill { background: color-mix(in srgb, #ffc93c 18%, #fff); color: var(--ink); text-shadow: none; }
+[data-theme="light"] .energy-pill.empty { background: var(--surface-2); color: var(--ink-muted); }
 
 /* ---- Hearts wallet ------------------------------------------------------ */
 .heart-pill {

@@ -13,7 +13,7 @@ let lang = null;
 let topic = null;
 let query = '';
 
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 const icon = (id) => App.CATEGORY_ICONS[id] || '📘';
 
 App.views.browse = {
