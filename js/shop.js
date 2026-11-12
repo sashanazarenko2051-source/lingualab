@@ -144,6 +144,8 @@ App.shop = (function () {
 
   // Payment hook: resolve true once the payment went through.
   // TODO: connect a real payment service (store billing / Stripe / etc.).
+  // When it is connected: the PRICE must come from the store/server (not App.regions in the browser),
+  // and unlocked topics must be checked against the store's receipts on start (App.access trusts local data).
   function purchase(itemId, opts) {
     return Promise.resolve(false);
   }

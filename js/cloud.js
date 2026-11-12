@@ -46,7 +46,8 @@ App.cloud = (function () {
       outlineColor: profile.outlineColor, bgPattern: profile.bgPattern, flag: profile.flag || null,
       achievements: App.storage.state.stats.achievements || [], showcase: profile.showcase || null,
       level, weeklyXP, week,
-      friendCode: getFriendCode(), nameLower: String(profile.name || '').trim().toLowerCase(), owner: !!profile.owner,
+      friendCode: getFriendCode(), nameLower: String(profile.name || '').trim().toLowerCase(),
+      // no «owner» here: the crown is set only by hand in the Firebase console (firestore.rules forbid changing it)
       country: profile.country || null, gender: profile.gender || null,
       day: App.storage.state.stats.dayKey || null, dayXP: App.storage.periodXP().day,
       month: App.storage.state.stats.monthKey || null, monthXP: App.storage.periodXP().month,

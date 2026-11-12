@@ -1,0 +1,37 @@
+rules_version = '2';
+// Firestore security rules for LinguaLab. Publish them together with js/firebase-config.js:
+// Firebase console → Firestore Database → Rules → paste this file → Publish.
+// The app itself can't be trusted (anyone can edit their own browser), so the checks live here.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+
+    // XP may grow by at most this much in one save (a lesson gives ~300; offline days add up).
+    function xpOk(field) {
+      let nu = request.resource.data.get(field, 0);
+      let old = resource == null ? 0 : resource.data.get(field, 0);
+      return nu is int && nu >= 0 && nu <= 1000000 && nu - old <= 20000;
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn();
+      allow create, update: if signedIn() && request.auth.uid == uid
+        // «owner» (the crown on the leaderboard) is set only by the author in the Firebase console
+        && request.resource.data.get('owner', false) == (resource == null ? false : resource.data.get('owner', false))
+        && request.resource.data.get('name', '') is string && request.resource.data.get('name', '').size() <= 18
+        && xpOk('weeklyXP') && xpOk('dayXP') && xpOk('monthXP')
+        // one save per 10 seconds at most
+        && (resource == null || request.time > resource.data.updatedAt + duration.value(10, 's'))
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if signedIn() && request.auth.uid == uid;
+    }
+
+    match /gifts/{id} {
+      allow create: if signedIn() && request.resource.data.from == request.auth.uid
+        && request.resource.data.to is string && request.resource.data.itemId is string
+        && request.resource.data.get('fromName', '') is string && request.resource.data.get('fromName', '').size() <= 40;
+      allow read, delete: if signedIn() && resource.data.to == request.auth.uid;
+    }
+  }
+}

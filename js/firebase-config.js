@@ -5,6 +5,9 @@
 //
 // Until this has real values, App.cloud stays disabled and the app works
 // exactly as before (fully offline, local profile only, no leaderboard data).
+//
+// IMPORTANT: also publish firestore.rules (Firestore Database → Rules), otherwise anyone
+// could write fake XP or the owner crown into the leaderboard.
 window.APP_FIREBASE_CONFIG = {
   apiKey: 'YOUR_API_KEY',
   authDomain: 'YOUR_PROJECT.firebaseapp.com',
