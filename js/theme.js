@@ -151,6 +151,15 @@ App.theme = (function () {
     return sh.custom[key] || PRESETS[sh.theme].vars[key] || NEON[key];
   }
 
+  // True when white text on this #rrggbb colour would be hard to read.
+  function lightHex(hex) {
+    const m = /^#?([0-9a-f]{6})$/i.exec(String(hex || '').trim());
+    if (!m) return false;
+    const lin = i => { const c = parseInt(m[1].slice(i, i + 2), 16) / 255; return c <= .03928 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4; };
+    const L = .2126 * lin(0) + .7152 * lin(2) + .0722 * lin(4);
+    return 1.05 / (L + .05) < 3;
+  }
+
   function apply() {
     const st = settings();
     const el = document.documentElement;
@@ -181,6 +190,9 @@ App.theme = (function () {
     // Fewer accents: the unused ones repeat the last chosen accent.
     if (st.accents < 3) el.style.setProperty('--brand-3', value(st.accents === 1 ? 'brand-1' : 'brand-2'));
     if (st.accents < 2) el.style.setProperty('--brand-2', value('brand-1'));
+    // Text on the second accent (the open menu tab): white on dark accents,
+    // dark on light ones (yellow, cyan…) where white text was unreadable.
+    el.style.setProperty('--on-brand-2', lightHex(value(st.accents < 2 ? 'brand-1' : 'brand-2')) ? '#14121f' : '#fff');
     if (App.contrast) App.contrast.refresh();
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', value('surface'));

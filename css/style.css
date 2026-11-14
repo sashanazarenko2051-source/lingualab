@@ -125,7 +125,7 @@ button { background: none; }
 #nav button:hover { background: var(--surface-2); color: var(--ink); }
 #nav button:active { transform: scale(.96); }
 #nav button.active {
-  background: var(--brand-2); color: #fff;
+  background: var(--brand-2); color: var(--on-brand-2, #fff);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand-2) 50%, transparent), 0 0 14px color-mix(in srgb, var(--brand-2) 55%, transparent);
 }
 .lang-dd { position: relative; flex: none; }
